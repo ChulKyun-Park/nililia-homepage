@@ -2,10 +2,10 @@ import Section from "@/components/ui/Section";
 import SectionHeader from "@/components/ui/SectionHeader";
 import Card from "@/components/ui/Card";
 import Link from "next/link";
-import { fetchNewsList } from "@/lib/notion/client";
+import { fetchNewsPreview } from "@/lib/notion/client";
 
 export default async function News() {
-  const news = await fetchNewsList();
+  const news = await fetchNewsPreview(4);
 
   return (
     <Section id="news">
@@ -68,7 +68,7 @@ export default async function News() {
 
       <div className="mt-10 text-center">
         <Link
-          href="#"
+          href="/news"
           className="text-sm font-semibold text-primary hover:text-primary-dark transition-colors"
         >
           전체 소식 보기 &rarr;

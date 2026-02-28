@@ -21,10 +21,10 @@ export default function Hero() {
             AI 기술과 전문가의 노하우로 최상의 품질을 보장합니다.
           </p>
           <div className="mt-10 flex flex-wrap gap-4">
-            <Button href="#contact" variant="primary" className="px-8 py-4 text-base">
+            <Button href="/contact" variant="primary" className="px-8 py-4 text-base">
               무료 상담 받기
             </Button>
-            <Button href="#services" variant="outline" className="border-white/30 px-8 py-4 text-base text-white hover:bg-white/10">
+            <Button href="/services" variant="outline" className="border-white/30 px-8 py-4 text-base text-white hover:bg-white/10">
               서비스 알아보기
             </Button>
           </div>

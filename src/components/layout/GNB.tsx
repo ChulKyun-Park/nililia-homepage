@@ -7,11 +7,11 @@ import { Menu, X } from "lucide-react";
 import Button from "@/components/ui/Button";
 
 const navLinks = [
-  { label: "회사소개", href: "#about" },
-  { label: "서비스", href: "#services" },
-  { label: "성공사례", href: "#cases" },
-  { label: "소식", href: "#news" },
-  { label: "문의", href: "#contact" },
+  { label: "회사소개", href: "/about" },
+  { label: "서비스", href: "/services" },
+  { label: "성공사례", href: "/cases" },
+  { label: "소식", href: "/news" },
+  { label: "문의", href: "/contact" },
 ];
 
 export default function GNB() {
@@ -28,19 +28,19 @@ export default function GNB() {
         {/* Desktop Nav */}
         <nav className="hidden items-center gap-8 md:flex">
           {navLinks.map((link) => (
-            <a
+            <Link
               key={link.href}
               href={link.href}
               className="text-sm font-medium text-muted transition-colors hover:text-primary"
             >
               {link.label}
-            </a>
+            </Link>
           ))}
         </nav>
 
         {/* Desktop CTA */}
         <div className="hidden md:block">
-          <Button href="#contact" variant="primary" className="px-6 py-2.5">
+          <Button href="/contact" variant="primary" className="px-6 py-2.5">
             문의하기
           </Button>
         </div>
@@ -61,7 +61,7 @@ export default function GNB() {
         <div className="border-t border-border bg-white md:hidden">
           <nav className="mx-auto max-w-7xl space-y-1 px-6 py-4">
             {navLinks.map((link) => (
-              <a
+              <Link
                 key={link.href}
                 href={link.href}
                 onClick={() => setMobileOpen(false)}
@@ -70,11 +70,11 @@ export default function GNB() {
                 )}
               >
                 {link.label}
-              </a>
+              </Link>
             ))}
             <div className="pt-3">
               <Button
-                href="#contact"
+                href="/contact"
                 variant="primary"
                 className="w-full justify-center"
               >

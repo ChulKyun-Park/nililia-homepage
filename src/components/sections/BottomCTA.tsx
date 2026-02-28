@@ -3,7 +3,6 @@ import Button from "@/components/ui/Button";
 export default function BottomCTA() {
   return (
     <section
-      id="contact"
       className="bg-gradient-to-r from-primary to-primary-dark py-24"
     >
       <div className="mx-auto max-w-3xl px-6 text-center">
@@ -16,13 +15,13 @@ export default function BottomCTA() {
         </p>
         <div className="mt-10 flex flex-wrap items-center justify-center gap-4">
           <Button
-            href="mailto:hello@nililia.com"
+            href="/contact"
             className="bg-white px-8 py-4 text-base font-bold text-primary hover:bg-white/90"
           >
             무료 상담 신청
           </Button>
           <Button
-            href="#services"
+            href="/services"
             variant="outline"
             className="border-white/40 px-8 py-4 text-base text-white hover:bg-white/10"
           >

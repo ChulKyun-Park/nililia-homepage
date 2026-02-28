@@ -2,10 +2,10 @@ import Section from "@/components/ui/Section";
 import SectionHeader from "@/components/ui/SectionHeader";
 import Card from "@/components/ui/Card";
 import Link from "next/link";
-import { fetchCaseStudyList } from "@/lib/notion/client";
+import { fetchCaseStudyPreview } from "@/lib/notion/client";
 
 export default async function CaseStudy() {
-  const cases = await fetchCaseStudyList();
+  const cases = await fetchCaseStudyPreview(3);
 
   return (
     <Section id="cases" className="bg-surface">
@@ -68,7 +68,7 @@ export default async function CaseStudy() {
 
       <div className="mt-10 text-center">
         <Link
-          href="#"
+          href="/cases"
           className="text-sm font-semibold text-primary hover:text-primary-dark transition-colors"
         >
           전체 사례 보기 &rarr;

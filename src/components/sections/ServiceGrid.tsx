@@ -74,7 +74,7 @@ export default function ServiceGrid() {
 
       <div className="mt-10 text-center">
         <Link
-          href="#contact"
+          href="/services"
           className="text-sm font-semibold text-primary hover:text-primary-dark transition-colors"
         >
           전체 서비스 보기 &rarr;

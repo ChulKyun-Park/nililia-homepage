@@ -58,7 +58,7 @@ export default function SocialProof() {
       {/* Link */}
       <div className="mt-10 text-center">
         <Link
-          href="#cases"
+          href="/cases"
           className="text-sm font-semibold text-primary hover:text-primary-dark transition-colors"
         >
           성공 사례 보기 &rarr;

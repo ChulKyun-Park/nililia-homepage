@@ -5,31 +5,31 @@ const footerLinks = {
   company: {
     title: "회사정보",
     links: [
-      { label: "회사소개", href: "#about" },
-      { label: "미션", href: "#mission" },
-      { label: "채용", href: "#" },
+      { label: "회사소개", href: "/about" },
+      { label: "미션", href: "/about" },
+      { label: "채용", href: "/about" },
     ],
   },
   services: {
     title: "서비스",
     links: [
-      { label: "영상 번역", href: "#services" },
-      { label: "문서 번역", href: "#services" },
-      { label: "웹/앱 현지화", href: "#services" },
-      { label: "게임 현지화", href: "#services" },
+      { label: "영상 번역", href: "/services" },
+      { label: "문서 번역", href: "/services" },
+      { label: "웹/앱 현지화", href: "/services" },
+      { label: "게임 현지화", href: "/services" },
     ],
   },
   resources: {
     title: "소식",
     links: [
-      { label: "블로그", href: "#news" },
-      { label: "성공사례", href: "#cases" },
+      { label: "블로그", href: "/news" },
+      { label: "성공사례", href: "/cases" },
     ],
   },
   contact: {
     title: "연락처",
     links: [
-      { label: "문의하기", href: "#contact" },
+      { label: "문의하기", href: "/contact" },
       { label: "hello@nililia.com", href: "mailto:hello@nililia.com" },
     ],
   },

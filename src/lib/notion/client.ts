@@ -77,54 +77,86 @@ type NotionPage = {
   properties: Record<string, NotionProperty>;
 };
 
-export async function fetchNewsList(): Promise<NotionNewsItem[]> {
-  if (!NEWS_DB_ID) return [];
+function mapNewsPage(page: NotionPage): NotionNewsItem {
+  const props = page.properties;
+  return {
+    id: page.id,
+    title: getTitle(props.Title?.title ?? props.Name?.title),
+    description: getRichText(props.Description?.rich_text ?? props.Summary?.rich_text),
+    thumbnail: getFileThumbnail(props.Thumbnail?.files) ?? getUrl(props.Thumbnail?.url),
+    publishedAt: getDate(props.PublishedAt?.date),
+    slug: getRichText(props.Slug?.rich_text) || page.id,
+  };
+}
 
+function mapCasePage(page: NotionPage): NotionCaseStudyItem {
+  const props = page.properties;
+  return {
+    id: page.id,
+    title: getTitle(props.Title?.title ?? props.Name?.title),
+    description: getRichText(props.Description?.rich_text ?? props.Summary?.rich_text),
+    thumbnail: getFileThumbnail(props.Thumbnail?.files) ?? getUrl(props.Thumbnail?.url),
+    company: getRichText(props.Company?.rich_text) ?? props.Company?.select?.name ?? "",
+    slug: getRichText(props.Slug?.rich_text) || page.id,
+  };
+}
+
+/** Fetch latest N news items (for homepage preview) */
+export async function fetchNewsPreview(limit = 4): Promise<NotionNewsItem[]> {
+  if (!NEWS_DB_ID) return [];
   try {
     const response = await queryDatabase(NEWS_DB_ID, {
       sorts: [{ property: "PublishedAt", direction: "descending" }],
-      page_size: 4,
+      page_size: limit,
     });
-
-    return ((response.results ?? []) as NotionPage[]).map((page) => {
-      const props = page.properties;
-      return {
-        id: page.id,
-        title: getTitle(props.Title?.title ?? props.Name?.title),
-        description: getRichText(props.Description?.rich_text ?? props.Summary?.rich_text),
-        thumbnail: getFileThumbnail(props.Thumbnail?.files) ?? getUrl(props.Thumbnail?.url),
-        publishedAt: getDate(props.PublishedAt?.date),
-        slug: getRichText(props.Slug?.rich_text) || page.id,
-      };
-    });
+    return ((response.results ?? []) as NotionPage[]).map(mapNewsPage);
   } catch (error) {
     console.error("Failed to fetch news:", error);
     return [];
   }
 }
 
-export async function fetchCaseStudyList(): Promise<NotionCaseStudyItem[]> {
-  if (!CASESTUDY_DB_ID) return [];
+/** Fetch all news items (for /news page) */
+export async function fetchAllNews(): Promise<NotionNewsItem[]> {
+  if (!NEWS_DB_ID) return [];
+  try {
+    const response = await queryDatabase(NEWS_DB_ID, {
+      sorts: [{ property: "PublishedAt", direction: "descending" }],
+      page_size: 100,
+    });
+    return ((response.results ?? []) as NotionPage[]).map(mapNewsPage);
+  } catch (error) {
+    console.error("Failed to fetch all news:", error);
+    return [];
+  }
+}
 
+/** Fetch latest N case study items (for homepage preview) */
+export async function fetchCaseStudyPreview(limit = 3): Promise<NotionCaseStudyItem[]> {
+  if (!CASESTUDY_DB_ID) return [];
   try {
     const response = await queryDatabase(CASESTUDY_DB_ID, {
       sorts: [{ property: "PublishedAt", direction: "descending" }],
-      page_size: 4,
+      page_size: limit,
     });
-
-    return ((response.results ?? []) as NotionPage[]).map((page) => {
-      const props = page.properties;
-      return {
-        id: page.id,
-        title: getTitle(props.Title?.title ?? props.Name?.title),
-        description: getRichText(props.Description?.rich_text ?? props.Summary?.rich_text),
-        thumbnail: getFileThumbnail(props.Thumbnail?.files) ?? getUrl(props.Thumbnail?.url),
-        company: getRichText(props.Company?.rich_text) ?? props.Company?.select?.name ?? "",
-        slug: getRichText(props.Slug?.rich_text) || page.id,
-      };
-    });
+    return ((response.results ?? []) as NotionPage[]).map(mapCasePage);
   } catch (error) {
     console.error("Failed to fetch case studies:", error);
+    return [];
+  }
+}
+
+/** Fetch all case studies (for /cases page) */
+export async function fetchAllCaseStudies(): Promise<NotionCaseStudyItem[]> {
+  if (!CASESTUDY_DB_ID) return [];
+  try {
+    const response = await queryDatabase(CASESTUDY_DB_ID, {
+      sorts: [{ property: "PublishedAt", direction: "descending" }],
+      page_size: 100,
+    });
+    return ((response.results ?? []) as NotionPage[]).map(mapCasePage);
+  } catch (error) {
+    console.error("Failed to fetch all case studies:", error);
     return [];
   }
 }

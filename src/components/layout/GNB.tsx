@@ -8,6 +8,7 @@ import Button from "@/components/ui/Button";
 import LanguageSelector from "@/components/layout/LanguageSelector";
 
 const navLinks = [
+  { label: "홈", href: "/" },
   { label: "회사소개", href: "/about" },
   { label: "서비스", href: "/services" },
   { label: "성공사례", href: "/cases" },

@@ -15,6 +15,13 @@
   --color-border: #E5E7EB;
   --color-surface: #F9FAFB;
 
+  /* Dark mode neutrals */
+  --color-dark-bg: #0B0F1A;
+  --color-dark-surface: #141926;
+  --color-dark-card: #1A1F2E;
+  --color-dark-border: #2A2F3E;
+  --color-dark-muted: #9CA3AF;
+
   /* Font families */
   --font-sans: "Pretendard Variable", "Pretendard", -apple-system, BlinkMacSystemFont, system-ui, Roboto, "Helvetica Neue", "Segoe UI", "Apple SD Gothic Neo", "Noto Sans KR", "Malgun Gothic", sans-serif;
   --font-heading: "Inter", "Pretendard Variable", "Pretendard", sans-serif;
@@ -42,6 +49,62 @@ html {
 
 .animate-marquee {
   animation: marquee 30s linear infinite;
+}
+
+/* ── Floating animation (Hero visual) ── */
+@keyframes float {
+  0%, 100% { transform: translateY(0px); }
+  50% { transform: translateY(-20px); }
+}
+
+@keyframes float-slow {
+  0%, 100% { transform: translateY(0px); }
+  50% { transform: translateY(-12px); }
+}
+
+@keyframes float-delay {
+  0%, 100% { transform: translateY(0px); }
+  50% { transform: translateY(-16px); }
+}
+
+.animate-float {
+  animation: float 6s ease-in-out infinite;
+}
+
+.animate-float-slow {
+  animation: float-slow 8s ease-in-out infinite;
+}
+
+.animate-float-delay {
+  animation: float-delay 7s ease-in-out infinite;
+  animation-delay: 2s;
+}
+
+/* ── Pulse ring (Hero) ── */
+@keyframes pulse-ring {
+  0% { transform: scale(0.8); opacity: 0.5; }
+  50% { transform: scale(1); opacity: 0.2; }
+  100% { transform: scale(0.8); opacity: 0.5; }
+}
+
+.animate-pulse-ring {
+  animation: pulse-ring 4s ease-in-out infinite;
+}
+
+/* ── Fade in up animation ── */
+@keyframes fade-in-up {
+  from {
+    opacity: 0;
+    transform: translateY(30px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+.animate-fade-in-up {
+  animation: fade-in-up 0.8s ease-out forwards;
 }
 
 /* ── Selection color ── */

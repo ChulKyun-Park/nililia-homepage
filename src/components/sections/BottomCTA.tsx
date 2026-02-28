@@ -2,9 +2,7 @@ import Button from "@/components/ui/Button";
 
 export default function BottomCTA() {
   return (
-    <section
-      className="bg-gradient-to-r from-primary to-primary-dark py-24"
-    >
+    <section className="bg-gradient-to-r from-primary to-primary-dark py-24">
       <div className="mx-auto max-w-3xl px-6 text-center">
         <h2 className="text-3xl font-bold text-white sm:text-4xl break-keep">
           글로벌 진출, 지금 시작하세요

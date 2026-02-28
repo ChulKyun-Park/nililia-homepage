@@ -1,9 +1,7 @@
 export default function Mission() {
   return (
-    <section
-      className="relative flex min-h-[50vh] items-center bg-gradient-to-r from-primary to-primary-dark"
-    >
-      <div className="mx-auto max-w-4xl px-6 py-24 text-center">
+    <section className="relative flex items-center bg-gradient-to-r from-primary to-primary-dark py-20">
+      <div className="mx-auto max-w-4xl px-6 text-center">
         <p className="mb-4 text-sm font-semibold uppercase tracking-wider text-white/70">
           Our Mission
         </p>

@@ -9,41 +9,56 @@ import {
   BookOpen,
   Subtitles,
 } from "lucide-react";
+import type { LucideIcon } from "lucide-react";
 
-const services = [
+interface ServiceItem {
+  icon: LucideIcon;
+  title: string;
+  description: string;
+  /** Replace with actual image path when available */
+  thumbnail: string;
+}
+
+const services: ServiceItem[] = [
   {
     icon: Video,
     title: "영상 번역",
+    thumbnail: "/images/services/video-translation.jpg",
     description:
       "자막, 더빙, 보이스오버 등 모든 영상 콘텐츠의 다국어 번역 서비스를 제공합니다.",
   },
   {
     icon: FileText,
     title: "문서 번역",
+    thumbnail: "/images/services/document-translation.jpg",
     description:
       "계약서, 매뉴얼, 마케팅 자료 등 전문 문서 번역 서비스를 제공합니다.",
   },
   {
     icon: Globe,
     title: "웹/앱 현지화",
+    thumbnail: "/images/services/web-app-localization.jpg",
     description:
       "웹사이트와 모바일 앱의 현지화로 글로벌 사용자 경험을 최적화합니다.",
   },
   {
     icon: Gamepad2,
     title: "게임 현지화",
+    thumbnail: "/images/services/game-localization.jpg",
     description:
       "게임 UI, 스토리, 마케팅 자료까지 완벽한 게임 현지화를 지원합니다.",
   },
   {
     icon: BookOpen,
     title: "웹소설 번역",
+    thumbnail: "/images/services/webnovel-translation.jpg",
     description:
       "웹소설, 웹툰 등 한류 콘텐츠의 고품질 번역 서비스를 제공합니다.",
   },
   {
     icon: Subtitles,
     title: "SDH 자막",
+    thumbnail: "/images/services/sdh-subtitle.jpg",
     description:
       "청각장애인을 위한 자막(SDH) 제작으로 콘텐츠 접근성을 향상시킵니다.",
   },
@@ -67,21 +82,25 @@ export default function ServiceGrid() {
               <Card
                 key={service.title}
                 variant="dark"
-                className="group cursor-pointer transition-all hover:-translate-y-1"
+                className="group cursor-pointer overflow-hidden p-0 transition-all hover:-translate-y-1"
               >
                 {/* Thumbnail placeholder */}
-                <div className="mb-4 flex aspect-[16/10] items-center justify-center rounded-xl bg-dark-bg">
-                  <Icon className="h-10 w-10 text-primary/60" />
+                <div className="flex aspect-[16/10] items-center justify-center bg-dark-bg">
+                  <span className="text-xs text-dark-muted">
+                    [{service.title} 이미지]
+                  </span>
                 </div>
-                <div className="mb-3 inline-flex rounded-lg bg-primary/10 p-2">
-                  <Icon className="h-5 w-5 text-primary" />
+                <div className="p-5">
+                  <div className="mb-3 inline-flex rounded-lg bg-primary/10 p-2">
+                    <Icon className="h-5 w-5 text-primary" />
+                  </div>
+                  <h3 className="mb-2 text-lg font-bold text-white group-hover:text-primary transition-colors">
+                    {service.title}
+                  </h3>
+                  <p className="text-sm leading-relaxed text-dark-muted break-keep">
+                    {service.description}
+                  </p>
                 </div>
-                <h3 className="mb-2 text-lg font-bold text-white group-hover:text-primary transition-colors">
-                  {service.title}
-                </h3>
-                <p className="text-sm leading-relaxed text-dark-muted break-keep">
-                  {service.description}
-                </p>
               </Card>
             );
           })}

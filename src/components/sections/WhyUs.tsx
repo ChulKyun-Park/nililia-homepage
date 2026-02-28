@@ -33,19 +33,28 @@ const reasons = [
 export default function WhyUs() {
   const [active, setActive] = useState(0);
   const [isPaused, setIsPaused] = useState(false);
+  const [direction, setDirection] = useState<"up" | "none">("none");
+
+  const goTo = useCallback(
+    (idx: number) => {
+      if (idx === active) return;
+      setDirection("up");
+      setActive(idx);
+    },
+    [active],
+  );
 
   const nextSlide = useCallback(() => {
+    setDirection("up");
     setActive((prev) => (prev + 1) % reasons.length);
   }, []);
 
-  // Auto-advance every 5 seconds
+  // Auto-advance every 4.5 seconds
   useEffect(() => {
     if (isPaused) return;
-    const timer = setInterval(nextSlide, 5000);
+    const timer = setInterval(nextSlide, 4500);
     return () => clearInterval(timer);
   }, [isPaused, nextSlide]);
-
-  const current = reasons[active];
 
   return (
     <section
@@ -67,15 +76,15 @@ export default function WhyUs() {
         {/* Content — Left text + Right image */}
         <div className="grid items-center gap-12 lg:grid-cols-2 lg:gap-16">
           {/* Left: Text */}
-          <div className="relative min-h-[320px]">
+          <div className="relative min-h-[320px] overflow-hidden">
             {reasons.map((reason, idx) => (
               <div
                 key={reason.number}
                 className={cn(
-                  "transition-all duration-500",
+                  "transition-all duration-500 ease-out",
                   idx === active
-                    ? "relative opacity-100"
-                    : "pointer-events-none absolute inset-0 opacity-0",
+                    ? "relative translate-y-0 opacity-100"
+                    : "pointer-events-none absolute inset-0 translate-y-8 opacity-0",
                 )}
               >
                 <span className="mb-4 inline-block text-6xl font-bold text-primary/20">
@@ -102,15 +111,15 @@ export default function WhyUs() {
           </div>
 
           {/* Right: Image placeholder */}
-          <div className="relative min-h-[320px]">
+          <div className="relative min-h-[320px] overflow-hidden">
             {reasons.map((reason, idx) => (
               <div
                 key={reason.number}
                 className={cn(
-                  "transition-all duration-500",
+                  "transition-all duration-500 ease-out",
                   idx === active
-                    ? "relative opacity-100"
-                    : "pointer-events-none absolute inset-0 opacity-0",
+                    ? "relative translate-y-0 opacity-100"
+                    : "pointer-events-none absolute inset-0 translate-y-8 opacity-0",
                 )}
               >
                 <div className="flex aspect-[4/3] items-center justify-center rounded-2xl border border-dark-border bg-dark-card">
@@ -129,7 +138,7 @@ export default function WhyUs() {
             <button
               key={idx}
               type="button"
-              onClick={() => setActive(idx)}
+              onClick={() => goTo(idx)}
               aria-label={`Why Us ${idx + 1}번째 항목`}
               className={cn(
                 "h-2.5 rounded-full transition-all duration-300",

@@ -1,5 +1,22 @@
+"use client";
+
 import Button from "@/components/ui/Button";
-import { Globe, Languages, FileText, Video, Gamepad2, BookOpen } from "lucide-react";
+
+const services = [
+  "영상 번역",
+  "문서 · 카탈로그",
+  "웹소설 · 웹툰",
+  "홈페이지 · 앱",
+  "게임",
+  "SDH · 배리어프리",
+];
+
+const greetings = [
+  { text: "こんにちは", top: "20%", left: "25%", size: "text-2xl", delay: "0s" },
+  { text: "Hola", top: "55%", left: "58%", size: "text-xl", delay: "1.2s" },
+  { text: "Thank you", top: "38%", left: "12%", size: "text-lg", delay: "2.5s" },
+  { text: "你好", top: "68%", left: "35%", size: "text-2xl", delay: "0.8s" },
+];
 
 export default function Hero() {
   return (
@@ -15,12 +32,14 @@ export default function Hero() {
           {/* Left: Text */}
           <div>
             <h1 className="text-4xl font-bold leading-tight tracking-tight text-white sm:text-5xl lg:text-6xl break-keep">
-              언어의 장벽을 넘어,
+              여러분의 콘텐츠에
               <br />
-              <span className="text-primary">세계와 연결합니다</span>
+              <span className="text-primary">날개를 달아줍니다</span>
             </h1>
             <p className="mt-6 max-w-lg text-lg leading-relaxed text-white/60 break-keep">
               전문 번역과 현지화 서비스로 글로벌 시장 진출을 지원합니다.
+            </p>
+            <p className="mt-2 max-w-lg text-lg leading-relaxed text-white/60 break-keep">
               AI 기술과 전문가의 노하우로 최상의 품질을 보장합니다.
             </p>
             <div className="mt-10 flex flex-wrap gap-4">
@@ -41,55 +60,41 @@ export default function Hero() {
             </div>
           </div>
 
-          {/* Right: Animated visual */}
-          <div className="relative hidden lg:block">
-            {/* Central globe */}
-            <div className="relative mx-auto flex h-[400px] w-[400px] items-center justify-center">
-              {/* Pulsing rings */}
-              <div className="animate-pulse-ring absolute h-80 w-80 rounded-full border border-primary/20" />
-              <div className="animate-pulse-ring absolute h-64 w-64 rounded-full border border-primary/10" style={{ animationDelay: "1s" }} />
-              <div className="animate-pulse-ring absolute h-48 w-48 rounded-full border border-primary/5" style={{ animationDelay: "2s" }} />
+          {/* Right: Conveyor belt visual */}
+          <div className="relative hidden md:flex md:justify-center">
+            <div className="relative h-[350px] w-[420px] overflow-hidden rounded-2xl border border-dark-border bg-dark-card/30">
+              {/* Floating multilingual greetings */}
+              {greetings.map((g) => (
+                <span
+                  key={g.text}
+                  className={`animate-float absolute font-light text-white/[0.12] ${g.size} pointer-events-none select-none`}
+                  style={{
+                    top: g.top,
+                    left: g.left,
+                    animationDelay: g.delay,
+                    animationDuration: `${3 + Math.random() * 2}s`,
+                  }}
+                >
+                  {g.text}
+                </span>
+              ))}
 
-              {/* Center icon */}
-              <div className="relative z-10 flex h-24 w-24 items-center justify-center rounded-full bg-gradient-to-br from-primary to-primary-dark shadow-lg shadow-primary/30">
-                <Globe className="h-12 w-12 text-white" />
-              </div>
-
-              {/* Floating language badges */}
-              <div className="animate-float absolute -top-2 left-12 rounded-xl border border-dark-border bg-dark-card px-4 py-2.5 shadow-lg">
-                <div className="flex items-center gap-2">
-                  <Languages className="h-4 w-4 text-primary" />
-                  <span className="text-sm font-medium text-white">50+ 언어</span>
+              {/* Conveyor belt cards */}
+              {services.map((label, i) => (
+                <div
+                  key={label}
+                  className="conveyor-card z-10 flex items-center justify-center rounded-lg border border-white/15 bg-white/[0.07] px-5 py-3 backdrop-blur-sm"
+                  style={{
+                    animationDelay: `${i * -2}s`,
+                    width: "155px",
+                    height: "50px",
+                  }}
+                >
+                  <span className="whitespace-nowrap text-sm font-medium text-white">
+                    {label}
+                  </span>
                 </div>
-              </div>
-
-              <div className="animate-float-delay absolute -right-4 top-20 rounded-xl border border-dark-border bg-dark-card px-4 py-2.5 shadow-lg">
-                <div className="flex items-center gap-2">
-                  <Video className="h-4 w-4 text-primary" />
-                  <span className="text-sm font-medium text-white">영상 번역</span>
-                </div>
-              </div>
-
-              <div className="animate-float-slow absolute -right-6 bottom-24 rounded-xl border border-dark-border bg-dark-card px-4 py-2.5 shadow-lg">
-                <div className="flex items-center gap-2">
-                  <Gamepad2 className="h-4 w-4 text-primary" />
-                  <span className="text-sm font-medium text-white">게임 현지화</span>
-                </div>
-              </div>
-
-              <div className="animate-float absolute -left-6 bottom-16 rounded-xl border border-dark-border bg-dark-card px-4 py-2.5 shadow-lg">
-                <div className="flex items-center gap-2">
-                  <FileText className="h-4 w-4 text-primary" />
-                  <span className="text-sm font-medium text-white">문서 번역</span>
-                </div>
-              </div>
-
-              <div className="animate-float-delay absolute -left-2 top-28 rounded-xl border border-dark-border bg-dark-card px-4 py-2.5 shadow-lg">
-                <div className="flex items-center gap-2">
-                  <BookOpen className="h-4 w-4 text-primary" />
-                  <span className="text-sm font-medium text-white">웹소설</span>
-                </div>
-              </div>
+              ))}
             </div>
           </div>
         </div>

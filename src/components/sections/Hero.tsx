@@ -1,7 +1,6 @@
 "use client";
 
 import { useEffect, useRef, useCallback } from "react";
-import Button from "@/components/ui/Button";
 
 const SERVICES = [
   { icon: "▶️", title: "영상 번역", desc: "자막 & 더빙", img: "/images/영상 번역.jpg" },
@@ -308,20 +307,13 @@ export default function Hero() {
               여러분의 콘텐츠에<br />
               <span className="text-primary">날개를 달아줍니다</span>
             </h1>
-            <p className="mt-5 text-[length:var(--font-size-hero-sub)] leading-relaxed text-muted break-keep">
+            <div className="mt-10" />
+            <p className="text-[length:var(--font-size-hero-sub)] leading-relaxed text-muted break-keep">
               전문 번역과 현지화 서비스로 글로벌 시장 진출을 지원합니다.
             </p>
             <p className="mt-2 text-[length:var(--font-size-hero-sub)] leading-relaxed text-muted break-keep">
               AI 기술과 전문가의 노하우로 최상의 품질을 보장합니다.
             </p>
-            <div className="mt-8 flex flex-wrap gap-4">
-              <Button href="/contact" variant="primary" className="px-8 py-4 text-[length:var(--font-size-cta-button)]">
-                무료 상담 받기
-              </Button>
-              <Button href="/services" variant="outline" className="border-border px-8 py-4 text-[length:var(--font-size-cta-button)] text-foreground hover:bg-surface">
-                서비스 알아보기
-              </Button>
-            </div>
             </div>
           </div>
         </div>

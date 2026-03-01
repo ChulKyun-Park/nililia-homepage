@@ -44,9 +44,10 @@ const history = [
 ];
 
 const teamStats = [
-  { icon: Users, value: "100+", label: "전문 번역가" },
-  { icon: Award, value: "50+", label: "지원 언어" },
-  { icon: TrendingUp, value: "500+", label: "글로벌 파트너" },
+  { icon: Users, value: "300+", label: "전문 번역가" },
+  { icon: TrendingUp, value: "50+", label: "기업 고객" },
+  { icon: Award, value: "150M+", label: "번역 단어" },
+  { icon: Target, value: "10+", label: "지원 언어" },
 ];
 
 export default function AboutPage() {
@@ -120,7 +121,7 @@ export default function AboutPage() {
           title="글로벌 전문가 네트워크"
           description="전 세계 50개 이상의 언어를 지원하는 전문 번역가 네트워크를 보유하고 있습니다."
         />
-        <div className="grid gap-8 sm:grid-cols-3">
+        <div className="grid gap-8 sm:grid-cols-4">
           {teamStats.map((stat) => {
             const Icon = stat.icon;
             return (

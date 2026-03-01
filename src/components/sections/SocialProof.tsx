@@ -1,10 +1,10 @@
 import Link from "next/link";
 
 const stats = [
-  { value: "500+", label: "글로벌 기업 파트너" },
-  { value: "50+", label: "지원 언어" },
-  { value: "10M+", label: "번역 단어 수" },
-  { value: "99.5%", label: "고객 만족도" },
+  { value: "50+", label: "기업 고객" },
+  { value: "150M+", label: "번역 단어" },
+  { value: "10+", label: "지원 언어" },
+  { value: "90%", label: "고객 만족도" },
 ];
 
 const clients = [

@@ -3,18 +3,18 @@
 import { useState, useEffect } from "react";
 import Link from "next/link";
 import { cn } from "@/lib/utils";
-import { Menu, X, Download } from "lucide-react";
+import { Menu, X, Download, Home } from "lucide-react";
 import Button from "@/components/ui/Button";
 import LanguageSelector from "@/components/layout/LanguageSelector";
 
 const navLinks = [
-  { label: "홈", href: "/" },
+  { label: "홈", href: "/", icon: true },
   { label: "회사소개", href: "/about" },
   { label: "서비스", href: "/services" },
   { label: "성공사례", href: "/cases" },
   { label: "소식", href: "/news" },
   { label: "채용", href: "/career" },
-];
+] as const;
 
 export default function GNB() {
   const [mobileOpen, setMobileOpen] = useState(false);
@@ -51,8 +51,13 @@ export default function GNB() {
               key={link.href}
               href={link.href}
               className="text-sm font-medium text-white/60 transition-colors hover:text-white"
+              aria-label={link.label}
             >
-              {link.label}
+              {"icon" in link ? (
+                <Home className="h-[18px] w-[18px]" />
+              ) : (
+                link.label
+              )}
             </Link>
           ))}
         </nav>
@@ -102,9 +107,17 @@ export default function GNB() {
                   key={link.href}
                   href={link.href}
                   onClick={() => setMobileOpen(false)}
-                  className="block rounded-lg px-4 py-3 text-base font-medium text-white/80 transition-colors hover:bg-white/5 hover:text-primary"
+                  className="flex items-center gap-2 rounded-lg px-4 py-3 text-base font-medium text-white/80 transition-colors hover:bg-white/5 hover:text-primary"
+                  aria-label={link.label}
                 >
-                  {link.label}
+                  {"icon" in link ? (
+                    <>
+                      <Home className="h-5 w-5" />
+                      <span>{link.label}</span>
+                    </>
+                  ) : (
+                    link.label
+                  )}
                 </Link>
               ))}
             </div>

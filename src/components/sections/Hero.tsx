@@ -2,7 +2,7 @@
 
 import Button from "@/components/ui/Button";
 
-/* ── 6 services ── */
+/* ── 10 services ── */
 interface ServiceItem {
   icon: string;
   title: string;
@@ -17,96 +17,72 @@ const services: ServiceItem[] = [
   { icon: "📱", title: "홈페이지 · 앱", desc: "디지털 최적화", bg: "bg-sky-50" },
   { icon: "🎮", title: "게임", desc: "게임 현지화", bg: "bg-white" },
   { icon: "♿", title: "SDH · 배리어프리", desc: "접근성 자막", bg: "bg-sky-50" },
+  { icon: "🤖", title: "AI 번역", desc: "고속 번역", bg: "bg-white" },
+  { icon: "🎙️", title: "AI 더빙", desc: "음성 합성", bg: "bg-sky-50" },
+  { icon: "📝", title: "MTPE", desc: "기계번역 후편집", bg: "bg-white" },
+  { icon: "🌐", title: "통번역", desc: "회의·행사 통역", bg: "bg-sky-50" },
 ];
 
 /* ── Card Component ── */
-function ServiceCard({
-  service,
-  size = "lg",
-}: {
-  service: ServiceItem;
-  size?: "sm" | "lg";
-}) {
-  const isSmall = size === "sm";
+function ServiceCard({ service }: { service: ServiceItem }) {
   return (
     <div
-      className={`${service.bg} flex-shrink-0 flex flex-col justify-between rounded-2xl border border-primary/10 shadow-sm ${
-        isSmall ? "w-[140px] h-[185px] p-4" : "w-[200px] h-[265px] p-6"
-      }`}
+      className={`${service.bg} flex-shrink-0 flex flex-col justify-between rounded-2xl border border-primary/10 shadow-sm w-[130px] h-[160px] p-4`}
     >
       <div>
-        <div
-          className={`flex items-center justify-center rounded-xl bg-primary text-white shadow-lg ${
-            isSmall ? "h-9 w-9 text-base" : "h-12 w-12 text-xl"
-          }`}
-        >
+        <div className="flex h-9 w-9 items-center justify-center rounded-xl bg-primary text-white text-base shadow-lg">
           {service.icon}
         </div>
       </div>
       <div>
-        <p
-          className={`font-bold text-gray-900 ${
-            isSmall ? "text-xs" : "text-base"
-          }`}
-        >
-          {service.title}
-        </p>
-        <p
-          className={`text-gray-500 mt-1 ${
-            isSmall ? "text-[10px]" : "text-sm"
-          }`}
-        >
-          {service.desc}
-        </p>
+        <p className="text-xs font-bold text-gray-900">{service.title}</p>
+        <p className="mt-0.5 text-[10px] text-gray-500">{service.desc}</p>
       </div>
     </div>
   );
 }
 
-/* ── Infinite horizontal scroll row ── */
-function ScrollRow({
+/* ── Card Row (3 or 2 cards) ── */
+function CardRow({
   items,
-  speed,
-  size,
   className = "",
 }: {
   items: ServiceItem[];
-  speed: number;
-  size: "sm" | "lg";
   className?: string;
 }) {
-  const doubled = [...items, ...items];
-  const gap = size === "sm" ? 12 : 16;
-
   return (
-    <div className={`overflow-hidden ${className}`}>
-      <div
-        className="flex animate-scroll-left"
-        style={{ gap: `${gap}px`, animationDuration: `${speed}s` }}
-      >
-        {doubled.map((service, i) => (
-          <ServiceCard
-            key={`${service.title}-${i}`}
-            service={service}
-            size={size}
-          />
-        ))}
-      </div>
+    <div className={`flex justify-center gap-3 ${className}`}>
+      {items.map((item, i) => (
+        <ServiceCard key={`${item.title}-${i}`} service={item} />
+      ))}
     </div>
   );
 }
 
-/* ── Parallax Carousel ── */
-function ParallaxCarousel() {
+/* ── Masonry Carousel ── */
+function MasonryCarousel() {
+  // 3-2-3-2 pattern rows
+  const rows: ServiceItem[][] = [
+    services.slice(0, 3), // row 1: 3 cards
+    services.slice(3, 5), // row 2: 2 cards
+    services.slice(5, 8), // row 3: 3 cards
+    services.slice(8, 10), // row 4: 2 cards
+  ];
+
+  const doubled = [...rows, ...rows];
+
   return (
-    <div className="relative w-[480px] max-w-full">
+    <div className="relative w-[440px] max-w-full overflow-hidden" style={{ height: "500px" }}>
       <style>{`
-        @keyframes scroll-left {
-          0% { transform: translateX(0); }
-          100% { transform: translateX(-50%); }
+        @keyframes scroll-up-masonry {
+          0% { transform: translateY(0); }
+          100% { transform: translateY(-50%); }
         }
-        .animate-scroll-left {
-          animation: scroll-left linear infinite;
+        .animate-scroll-up-masonry {
+          animation: scroll-up-masonry 30s linear infinite;
+        }
+        .animate-scroll-up-masonry:hover {
+          animation-play-state: paused;
         }
         @keyframes floating-soft {
           0%, 100% { transform: translateY(0); }
@@ -116,40 +92,41 @@ function ParallaxCarousel() {
 
       {/* Floating greetings */}
       <div
-        className="absolute -top-8 left-4 z-30 pointer-events-none rounded-xl border border-primary/10 bg-white px-5 py-2.5 text-sm font-bold text-gray-500 shadow-[0_20px_40px_rgba(0,0,0,0.08)]"
+        className="absolute -top-2 left-2 z-30 pointer-events-none rounded-xl border border-primary/10 bg-white px-4 py-2 text-sm font-bold text-gray-500 shadow-[0_20px_40px_rgba(0,0,0,0.08)]"
         style={{ animation: "floating-soft 4s ease-in-out infinite 0s" }}
       >
         こんにちは
       </div>
       <div
-        className="absolute -top-6 right-8 z-30 pointer-events-none rounded-xl border border-primary/10 bg-white px-5 py-2.5 text-sm font-bold text-gray-500 shadow-[0_20px_40px_rgba(0,0,0,0.08)]"
+        className="absolute top-4 right-0 z-30 pointer-events-none rounded-xl border border-primary/10 bg-white px-4 py-2 text-sm font-bold text-gray-500 shadow-[0_20px_40px_rgba(0,0,0,0.08)]"
         style={{ animation: "floating-soft 4s ease-in-out infinite 0.5s" }}
       >
         ¡Hola!
       </div>
       <div
-        className="absolute top-1/2 -right-12 z-30 pointer-events-none rounded-xl border border-primary/10 bg-white px-5 py-2.5 text-sm font-bold text-gray-500 shadow-[0_20px_40px_rgba(0,0,0,0.08)]"
+        className="absolute top-1/2 -right-8 z-30 pointer-events-none rounded-xl border border-primary/10 bg-white px-4 py-2 text-sm font-bold text-gray-500 shadow-[0_20px_40px_rgba(0,0,0,0.08)]"
         style={{ animation: "floating-soft 4s ease-in-out infinite 1s" }}
       >
         Thank you
       </div>
       <div
-        className="absolute bottom-12 -left-14 z-30 pointer-events-none rounded-xl border border-primary/10 bg-white px-5 py-2.5 text-sm font-bold text-gray-500 shadow-[0_20px_40px_rgba(0,0,0,0.08)]"
+        className="absolute bottom-16 -left-6 z-30 pointer-events-none rounded-xl border border-primary/10 bg-white px-4 py-2 text-sm font-bold text-gray-500 shadow-[0_20px_40px_rgba(0,0,0,0.08)]"
         style={{ animation: "floating-soft 4s ease-in-out infinite 1.5s" }}
       >
         안녕하세요
       </div>
 
-      {/* Back row — small, faded, slow */}
-      <ScrollRow
-        items={services}
-        speed={35}
-        size="sm"
-        className="opacity-40 blur-[0.5px] mb-4"
-      />
+      {/* Top fade mask */}
+      <div className="pointer-events-none absolute top-0 left-0 right-0 z-20 h-16 bg-gradient-to-b from-white to-transparent" />
+      {/* Bottom fade mask */}
+      <div className="pointer-events-none absolute bottom-0 left-0 right-0 z-20 h-16 bg-gradient-to-t from-white to-transparent" />
 
-      {/* Front row — large, clear, fast */}
-      <ScrollRow items={services} speed={25} size="lg" className="" />
+      {/* Scrolling rows */}
+      <div className="animate-scroll-up-masonry flex flex-col gap-3">
+        {doubled.map((row, rowIdx) => (
+          <CardRow key={rowIdx} items={row} />
+        ))}
+      </div>
     </div>
   );
 }
@@ -197,9 +174,9 @@ export default function Hero() {
             </div>
           </div>
 
-          {/* Right: Parallax carousel */}
+          {/* Right: Masonry carousel */}
           <div className="relative hidden lg:flex lg:justify-center overflow-hidden">
-            <ParallaxCarousel />
+            <MasonryCarousel />
           </div>
         </div>
       </div>

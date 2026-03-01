@@ -258,13 +258,53 @@ export default function Hero() {
             <div className="pointer-events-none absolute z-40 rounded-xl border border-primary/10 bg-white px-3 py-1.5 text-xs font-bold text-gray-400 shadow-[0_8px_24px_rgba(0,0,0,0.05)]"
               style={{ bottom: 0, right: 0, animation: "float-s 3.6s ease-in-out infinite 1.5s" }}>안녕하세요</div>
 
-            {/* 클리핑 영역 + 4면 그라데이션 페이드 마스크 (부드러운 진입/퇴장) */}
-            <div className="absolute overflow-hidden" style={{
-              top: 10, left: 40, width: 540, height: 400, borderRadius: 20,
-              WebkitMaskImage: "linear-gradient(to bottom, transparent 0%, black 8%, black 88%, transparent 100%)",
-              maskImage: "linear-gradient(to bottom, transparent 0%, black 8%, black 88%, transparent 100%)",
-            }}>
-              <CardAnimation />
+            {/* 클리핑 영역 + 4면 그라데이션 페이드 마스크 + 가장자리 블러 */}
+            <div className="absolute" style={{ top: 10, left: 40, width: 540, height: 400, borderRadius: 20, overflow: "hidden" }}>
+              {/* 카드 레이어: 4면 페이드 마스크 */}
+              <div className="absolute inset-0" style={{
+                WebkitMaskImage: "linear-gradient(to bottom, transparent 0%, black 10%, black 86%, transparent 100%), linear-gradient(to right, transparent 0%, black 6%, black 90%, transparent 100%)",
+                maskImage: "linear-gradient(to bottom, transparent 0%, black 10%, black 86%, transparent 100%), linear-gradient(to right, transparent 0%, black 6%, black 90%, transparent 100%)",
+                WebkitMaskComposite: "destination-in",
+                maskComposite: "intersect" as unknown as string,
+              }}>
+                <CardAnimation />
+              </div>
+              {/* 상단 블러 오버레이 */}
+              <div className="pointer-events-none absolute left-0 right-0 top-0 z-30" style={{
+                height: 50,
+                backdropFilter: "blur(6px)",
+                WebkitBackdropFilter: "blur(6px)",
+                WebkitMaskImage: "linear-gradient(to bottom, black 0%, transparent 100%)",
+                maskImage: "linear-gradient(to bottom, black 0%, transparent 100%)",
+                background: "linear-gradient(to bottom, rgba(255,255,255,0.5) 0%, transparent 100%)",
+              }} />
+              {/* 하단 블러 오버레이 */}
+              <div className="pointer-events-none absolute bottom-0 left-0 right-0 z-30" style={{
+                height: 60,
+                backdropFilter: "blur(6px)",
+                WebkitBackdropFilter: "blur(6px)",
+                WebkitMaskImage: "linear-gradient(to top, black 0%, transparent 100%)",
+                maskImage: "linear-gradient(to top, black 0%, transparent 100%)",
+                background: "linear-gradient(to top, rgba(255,255,255,0.5) 0%, transparent 100%)",
+              }} />
+              {/* 좌측 블러 오버레이 */}
+              <div className="pointer-events-none absolute bottom-0 left-0 top-0 z-30" style={{
+                width: 40,
+                backdropFilter: "blur(5px)",
+                WebkitBackdropFilter: "blur(5px)",
+                WebkitMaskImage: "linear-gradient(to right, black 0%, transparent 100%)",
+                maskImage: "linear-gradient(to right, black 0%, transparent 100%)",
+                background: "linear-gradient(to right, rgba(255,255,255,0.4) 0%, transparent 100%)",
+              }} />
+              {/* 우측 블러 오버레이 */}
+              <div className="pointer-events-none absolute bottom-0 right-0 top-0 z-30" style={{
+                width: 50,
+                backdropFilter: "blur(5px)",
+                WebkitBackdropFilter: "blur(5px)",
+                WebkitMaskImage: "linear-gradient(to left, black 0%, transparent 100%)",
+                maskImage: "linear-gradient(to left, black 0%, transparent 100%)",
+                background: "linear-gradient(to left, rgba(255,255,255,0.4) 0%, transparent 100%)",
+              }} />
             </div>
           </div>
         </div>

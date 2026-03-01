@@ -74,7 +74,7 @@ export default function Footer() {
       <footer className="border-t border-border bg-surface text-foreground">
         <div className="mx-auto max-w-7xl px-6">
           {/* 4-column grid */}
-          <div className="grid grid-cols-1 gap-8 py-14 sm:grid-cols-2 lg:grid-cols-[2fr_1fr_1fr_1.8fr]">
+          <div className="grid grid-cols-1 gap-6 py-10 sm:grid-cols-2 lg:grid-cols-[2fr_1fr_1fr_1.8fr]">
             {/* Column 1: Company Info */}
             <div>
               <h3 className="mb-4 text-lg font-bold text-foreground">
@@ -199,7 +199,7 @@ export default function Footer() {
           </div>
 
           {/* 이용약관 · 개인정보처리방침 — 구분선 바로 위 */}
-          <div className="flex gap-6 pb-4 pt-8 text-sm text-muted">
+          <div className="flex gap-6 pb-5 pt-6 text-sm text-muted">
             <Link href="#" className="transition-colors hover:text-foreground">
               이용약관
             </Link>

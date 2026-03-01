@@ -5,7 +5,6 @@ interface SectionHeaderProps {
   title: string;
   description?: string;
   align?: "left" | "center";
-  variant?: "light" | "dark";
   className?: string;
 }
 
@@ -14,11 +13,8 @@ export default function SectionHeader({
   title,
   description,
   align = "center",
-  variant = "light",
   className,
 }: SectionHeaderProps) {
-  const isDark = variant === "dark";
-
   return (
     <div
       className={cn(
@@ -33,19 +29,13 @@ export default function SectionHeader({
         </span>
       )}
       <h2
-        className={cn(
-          "text-3xl font-bold tracking-tight sm:text-[length:var(--font-size-section-h2)] break-keep",
-          isDark ? "text-white" : "text-foreground",
-        )}
+        className="text-3xl font-bold tracking-tight text-foreground sm:text-[length:var(--font-size-section-h2)] break-keep"
       >
         {title}
       </h2>
       {description && (
         <p
-          className={cn(
-            "mt-4 max-w-2xl text-[length:var(--font-size-section-body)] mx-auto break-keep",
-            isDark ? "text-white/60" : "text-muted",
-          )}
+          className="mt-4 max-w-2xl text-[length:var(--font-size-section-body)] text-muted mx-auto break-keep"
         >
           {description}
         </p>

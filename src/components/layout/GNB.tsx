@@ -34,7 +34,7 @@ export default function GNB() {
       className={cn(
         "sticky top-0 z-50 transition-all duration-300",
         scrolled
-          ? "border-b border-white/10 bg-dark-bg/95 backdrop-blur supports-[backdrop-filter]:bg-dark-bg/80"
+          ? "border-b border-border bg-white/95 backdrop-blur shadow-sm supports-[backdrop-filter]:bg-white/80"
           : "border-b border-transparent bg-transparent",
       )}
     >
@@ -50,7 +50,7 @@ export default function GNB() {
             <Link
               key={link.href}
               href={link.href}
-              className="text-[length:var(--font-size-gnb)] font-medium text-white/60 transition-colors hover:text-white"
+              className="text-[length:var(--font-size-gnb)] font-medium text-muted transition-colors hover:text-foreground"
               aria-label={link.label}
             >
               {"icon" in link ? (
@@ -74,7 +74,7 @@ export default function GNB() {
           </Button>
           <a
             href="#"
-            className="inline-flex items-center gap-1.5 rounded-xl border border-white/20 px-4 py-2.5 text-sm font-medium text-white/80 transition-colors hover:border-white/40 hover:text-white"
+            className="inline-flex items-center gap-1.5 rounded-xl border border-border px-4 py-2.5 text-sm font-medium text-foreground transition-colors hover:border-muted hover:bg-surface"
           >
             <Download className="h-4 w-4" />
             회사소개서
@@ -85,7 +85,7 @@ export default function GNB() {
         <button
           type="button"
           onClick={() => setMobileOpen((v) => !v)}
-          className="inline-flex items-center justify-center rounded-lg p-2 text-white/60 hover:bg-white/10 lg:hidden"
+          className="inline-flex items-center justify-center rounded-lg p-2 text-muted hover:bg-surface lg:hidden"
           aria-label="메뉴 열기"
         >
           {mobileOpen ? (
@@ -98,7 +98,7 @@ export default function GNB() {
 
       {/* Mobile Menu */}
       {mobileOpen && (
-        <div className="border-t border-white/10 bg-dark-bg lg:hidden">
+        <div className="border-t border-border bg-white lg:hidden">
           <nav className="mx-auto max-w-7xl px-6 py-4">
             {/* Navigation Links */}
             <div className="space-y-1">
@@ -107,7 +107,7 @@ export default function GNB() {
                   key={link.href}
                   href={link.href}
                   onClick={() => setMobileOpen(false)}
-                  className="flex items-center gap-2 rounded-lg px-4 py-3 text-base font-medium text-white/80 transition-colors hover:bg-white/5 hover:text-primary"
+                  className="flex items-center gap-2 rounded-lg px-4 py-3 text-base font-medium text-foreground transition-colors hover:bg-surface hover:text-primary"
                   aria-label={link.label}
                 >
                   {"icon" in link ? (
@@ -123,18 +123,18 @@ export default function GNB() {
             </div>
 
             {/* Divider */}
-            <div className="my-4 border-t border-white/10" />
+            <div className="my-4 border-t border-border" />
 
             {/* Language Selector */}
             <div className="px-4">
-              <p className="mb-2 text-xs font-semibold uppercase tracking-wider text-white/40">
+              <p className="mb-2 text-xs font-semibold uppercase tracking-wider text-muted">
                 Language
               </p>
               <LanguageSelector variant="list" />
             </div>
 
             {/* Divider */}
-            <div className="my-4 border-t border-white/10" />
+            <div className="my-4 border-t border-border" />
 
             {/* CTA Buttons */}
             <div className="space-y-3 px-4">
@@ -147,7 +147,7 @@ export default function GNB() {
               </Button>
               <a
                 href="#"
-                className="flex w-full items-center justify-center gap-2 rounded-xl border border-white/20 px-4 py-3 text-sm font-medium text-white/80 transition-colors hover:bg-white/5"
+                className="flex w-full items-center justify-center gap-2 rounded-xl border border-border px-4 py-3 text-sm font-medium text-foreground transition-colors hover:bg-surface"
               >
                 <Download className="h-4 w-4" />
                 회사소개서 다운로드

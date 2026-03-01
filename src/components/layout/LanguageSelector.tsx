@@ -61,7 +61,7 @@ export default function LanguageSelector({
               "inline-flex items-center gap-1 rounded-lg px-3 py-1.5 text-xs font-medium transition-colors",
               selected.code === lang.code
                 ? "bg-primary text-white"
-                : "bg-white/10 text-white/60 hover:bg-white/20 hover:text-white",
+                : "bg-surface text-muted hover:bg-border hover:text-foreground",
             )}
           >
             <span>{lang.flag}</span>
@@ -78,7 +78,7 @@ export default function LanguageSelector({
       <button
         type="button"
         onClick={() => setOpen((v) => !v)}
-        className="inline-flex items-center gap-1.5 rounded-lg px-3 py-2 text-sm font-medium text-white/60 transition-colors hover:text-white"
+        className="inline-flex items-center gap-1.5 rounded-lg px-3 py-2 text-sm font-medium text-muted transition-colors hover:text-foreground"
       >
         <span className="text-base leading-none">{selected.flag}</span>
         <span>{selected.code}</span>
@@ -91,24 +91,24 @@ export default function LanguageSelector({
       </button>
 
       {open && (
-        <div className="absolute right-0 top-full z-50 mt-1 min-w-[200px] rounded-xl border border-dark-border bg-dark-card py-1 shadow-xl">
+        <div className="absolute right-0 top-full z-50 mt-1 min-w-[200px] rounded-xl border border-border bg-white py-1 shadow-xl">
           {languages.map((lang) => (
             <button
               key={lang.code}
               type="button"
               onClick={() => handleSelect(lang)}
               className={cn(
-                "flex w-full items-center justify-between px-4 py-2.5 text-sm transition-colors hover:bg-white/5",
+                "flex w-full items-center justify-between px-4 py-2.5 text-sm transition-colors hover:bg-surface",
                 selected.code === lang.code
                   ? "font-semibold text-primary"
-                  : "text-white/80",
+                  : "text-foreground",
               )}
             >
               <span className="inline-flex items-center gap-2">
                 <span className="text-base leading-none">{lang.flag}</span>
                 <span>{lang.label}</span>
               </span>
-              <span className="text-xs text-white/40">{lang.code}</span>
+              <span className="text-xs text-muted">{lang.code}</span>
             </button>
           ))}
         </div>

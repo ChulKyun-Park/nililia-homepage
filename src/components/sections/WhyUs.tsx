@@ -58,7 +58,7 @@ export default function WhyUs() {
 
   return (
     <section
-      className="bg-dark-bg py-24"
+      className="bg-white py-24"
       onMouseEnter={() => setIsPaused(true)}
       onMouseLeave={() => setIsPaused(false)}
     >
@@ -68,7 +68,7 @@ export default function WhyUs() {
           <span className="mb-3 inline-block text-sm font-semibold uppercase tracking-wider text-primary">
             Why Us
           </span>
-          <h2 className="text-3xl font-bold tracking-tight text-white sm:text-4xl break-keep">
+          <h2 className="text-3xl font-bold tracking-tight text-foreground sm:text-4xl break-keep">
             왜 Nililia를 선택해야 하나요?
           </h2>
         </div>
@@ -90,10 +90,10 @@ export default function WhyUs() {
                 <span className="mb-4 inline-block text-6xl font-bold text-primary/20">
                   {reason.number}
                 </span>
-                <h3 className="text-2xl font-bold text-white sm:text-3xl break-keep">
+                <h3 className="text-2xl font-bold text-foreground sm:text-3xl break-keep">
                   {reason.title}
                 </h3>
-                <p className="mt-4 text-base leading-relaxed text-dark-muted break-keep">
+                <p className="mt-4 text-base leading-relaxed text-muted break-keep">
                   {reason.description}
                 </p>
                 <div className="mt-6 flex flex-wrap gap-2">
@@ -122,8 +122,8 @@ export default function WhyUs() {
                     : "pointer-events-none absolute inset-0 translate-y-8 opacity-0",
                 )}
               >
-                <div className="flex aspect-[4/3] items-center justify-center rounded-2xl border border-dark-border bg-dark-card">
-                  <span className="text-sm text-dark-muted">
+                <div className="flex aspect-[4/3] items-center justify-center rounded-2xl border border-border bg-surface">
+                  <span className="text-sm text-muted">
                     {reason.imageAlt}
                   </span>
                 </div>
@@ -144,7 +144,7 @@ export default function WhyUs() {
                 "h-2.5 rounded-full transition-all duration-300",
                 idx === active
                   ? "w-8 bg-primary"
-                  : "w-2.5 bg-white/20 hover:bg-white/40",
+                  : "w-2.5 bg-border hover:bg-muted",
               )}
             />
           ))}

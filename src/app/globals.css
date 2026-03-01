@@ -15,13 +15,6 @@
   --color-border: #E5E7EB;
   --color-surface: #F9FAFB;
 
-  /* Dark mode neutrals */
-  --color-dark-bg: #0B0F1A;
-  --color-dark-surface: #141926;
-  --color-dark-card: #1A1F2E;
-  --color-dark-border: #2A2F3E;
-  --color-dark-muted: #9CA3AF;
-
   /* Font families */
   --font-sans: "Pretendard Variable", "Pretendard", -apple-system, BlinkMacSystemFont, system-ui, Roboto, "Helvetica Neue", "Segoe UI", "Apple SD Gothic Neo", "Noto Sans KR", "Malgun Gothic", sans-serif;
   --font-heading: "Inter", "Pretendard Variable", "Pretendard", sans-serif;

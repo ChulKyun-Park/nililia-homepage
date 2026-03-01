@@ -22,7 +22,7 @@ const clients = [
 
 export default function SocialProof() {
   return (
-    <section className="bg-dark-bg py-24">
+    <section className="bg-white py-24">
       <div className="mx-auto max-w-7xl px-6">
         {/* Stats */}
         <div className="grid grid-cols-2 gap-8 md:grid-cols-4">
@@ -31,14 +31,14 @@ export default function SocialProof() {
               <div className="text-3xl font-bold text-primary sm:text-4xl">
                 {stat.value}
               </div>
-              <div className="mt-2 text-sm text-dark-muted">{stat.label}</div>
+              <div className="mt-2 text-sm text-muted">{stat.label}</div>
             </div>
           ))}
         </div>
 
         {/* Client logo marquee */}
         <div className="mt-16 overflow-hidden">
-          <p className="mb-8 text-center text-sm font-medium uppercase tracking-wider text-dark-muted">
+          <p className="mb-8 text-center text-sm font-medium uppercase tracking-wider text-muted">
             국내외 선도 기업이 신뢰합니다
           </p>
           <div className="relative">
@@ -46,7 +46,7 @@ export default function SocialProof() {
               {[...clients, ...clients].map((client, i) => (
                 <span
                   key={`${client}-${i}`}
-                  className="text-lg font-semibold text-white/20 transition-colors hover:text-white/40"
+                  className="text-lg font-semibold text-foreground/20 transition-colors hover:text-foreground/40"
                 >
                   {client}
                 </span>

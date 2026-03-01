@@ -115,6 +115,7 @@ export default function Footer() {
                   </a>
                 ))}
               </div>
+
             </div>
 
             {/* Column 2: Services */}
@@ -208,8 +209,8 @@ export default function Footer() {
             </div>
           </div>
 
-          {/* 이용약관 · 개인정보처리방침 — 구분선 바로 위 */}
-          <div className="flex gap-6 pb-5 pt-12 text-sm text-muted">
+          {/* 이용약관 · 개인정보처리방침 */}
+          <div className="flex gap-6 border-t border-border py-4 text-sm text-muted">
             <Link href="#" className="transition-colors hover:text-foreground">
               이용약관
             </Link>
@@ -217,9 +218,6 @@ export default function Footer() {
               개인정보처리방침
             </Link>
           </div>
-
-          {/* 구분선 (끝) */}
-          <div className="border-t border-border" />
         </div>
       </footer>
 

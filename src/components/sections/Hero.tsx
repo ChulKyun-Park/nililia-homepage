@@ -284,7 +284,7 @@ export default function Hero() {
             <div className="pointer-events-none absolute z-40 rounded-xl border border-primary/10 bg-white px-5 py-2.5 text-sm font-bold text-gray-400 shadow-[0_8px_24px_rgba(0,0,0,0.05)]"
               style={{ bottom: 55, right: 50, animation: "float-s 3.6s ease-in-out infinite 1.5s" }}>สวัสดี</div>
 
-            <div className="absolute" style={{ top: 10, left: 30, width: 700, height: 400, borderRadius: 20, overflow: "hidden" }}>
+            <div className="absolute" style={{ top: 10, left: 30, width: 700, height: 400, overflow: "hidden" }}>
               <CardAnimation />
               {/* 상단 페이드+블러 */}
               <div className="pointer-events-none absolute inset-x-0 top-0 z-30" style={{

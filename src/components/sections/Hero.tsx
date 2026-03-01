@@ -29,7 +29,7 @@ function easeInOutCubic(t: number) {
 function lerp(a: number, b: number, t: number) { return a + (b - a) * t; }
 function cl(v: number) { return Math.max(0, Math.min(1, v)); }
 
-const STAGE_W = 540;
+const STAGE_W = 700;
 const STAGE_H = 400;
 
 interface Slot {
@@ -43,16 +43,16 @@ interface Slot {
  * Row3(bot3, z:3): 카드0,1,2 — 크고 선명
  */
 const A: Slot[] = [
-  { x: -5,  y: 190, w: 195, h: 225, op: 1.0,  z: 3 },
-  { x: 195, y: 195, w: 195, h: 225, op: 1.0,  z: 3 },
-  { x: 390, y: 188, w: 195, h: 225, op: 0.85, z: 3 },
-  { x: 95,  y: 75,  w: 175, h: 200, op: 0.75, z: 2 },
-  { x: 290, y: 80,  w: 175, h: 200, op: 0.70, z: 2 },
-  { x: 35,  y: -30, w: 145, h: 165, op: 0.45, z: 1 },
-  { x: 195, y: -25, w: 145, h: 165, op: 0.50, z: 1 },
-  { x: 355, y: -30, w: 145, h: 165, op: 0.40, z: 1 },
-  { x: 120, y: -220, w: 145, h: 165, op: 0, z: 0 },
-  { x: 290, y: -220, w: 145, h: 165, op: 0, z: 0 },
+  { x: -5,  y: 190, w: 210, h: 225, op: 1.0,  z: 3 },
+  { x: 245, y: 195, w: 210, h: 225, op: 1.0,  z: 3 },
+  { x: 500, y: 188, w: 210, h: 225, op: 0.85, z: 3 },
+  { x: 120, y: 75,  w: 190, h: 200, op: 0.75, z: 2 },
+  { x: 380, y: 80,  w: 190, h: 200, op: 0.70, z: 2 },
+  { x: 45,  y: -30, w: 160, h: 165, op: 0.45, z: 1 },
+  { x: 260, y: -25, w: 160, h: 165, op: 0.50, z: 1 },
+  { x: 470, y: -30, w: 160, h: 165, op: 0.40, z: 1 },
+  { x: 155, y: -220, w: 160, h: 165, op: 0, z: 0 },
+  { x: 380, y: -220, w: 160, h: 165, op: 0, z: 0 },
 ];
 
 /*
@@ -61,16 +61,16 @@ const A: Slot[] = [
  * Row1(top2): 카드8,9 / Row2(mid3): 카드5,6,7 / Row3(bot2): 카드3,4
  */
 const B: Slot[] = [
-  { x: -5,  y: STAGE_H + 40, w: 195, h: 225, op: 0, z: 0 },
-  { x: 195, y: STAGE_H + 40, w: 195, h: 225, op: 0, z: 0 },
-  { x: 390, y: STAGE_H + 40, w: 195, h: 225, op: 0, z: 0 },
-  { x: 80,  y: 190, w: 195, h: 225, op: 1.0, z: 3 },
-  { x: 295, y: 195, w: 195, h: 225, op: 1.0, z: 3 },
-  { x: 35,  y: 75,  w: 175, h: 200, op: 0.75, z: 2 },
-  { x: 210, y: 80,  w: 175, h: 200, op: 0.75, z: 2 },
-  { x: 385, y: 75,  w: 175, h: 200, op: 0.65, z: 2 },
-  { x: 120, y: -30, w: 145, h: 165, op: 0.45, z: 1 },
-  { x: 290, y: -25, w: 145, h: 165, op: 0.50, z: 1 },
+  { x: -5,  y: STAGE_H + 40, w: 210, h: 225, op: 0, z: 0 },
+  { x: 245, y: STAGE_H + 40, w: 210, h: 225, op: 0, z: 0 },
+  { x: 500, y: STAGE_H + 40, w: 210, h: 225, op: 0, z: 0 },
+  { x: 100, y: 190, w: 210, h: 225, op: 1.0, z: 3 },
+  { x: 385, y: 195, w: 210, h: 225, op: 1.0, z: 3 },
+  { x: 45,  y: 75,  w: 190, h: 200, op: 0.75, z: 2 },
+  { x: 275, y: 80,  w: 190, h: 200, op: 0.75, z: 2 },
+  { x: 500, y: 75,  w: 190, h: 200, op: 0.65, z: 2 },
+  { x: 155, y: -30, w: 160, h: 165, op: 0.45, z: 1 },
+  { x: 380, y: -25, w: 160, h: 165, op: 0.50, z: 1 },
 ];
 
 /*
@@ -79,19 +79,19 @@ const B: Slot[] = [
  * Row1(top3): 카드0,1,2 / Row2(mid2): 카드8,9 / Row3(bot3): 카드5,6,7
  */
 const C: Slot[] = [
-  { x: 35,  y: -30,  w: 145, h: 165, op: 0.45, z: 1 },
-  { x: 195, y: -25,  w: 145, h: 165, op: 0.50, z: 1 },
-  { x: 355, y: -30,  w: 145, h: 165, op: 0.40, z: 1 },
-  { x: 80,  y: STAGE_H + 40, w: 195, h: 225, op: 0, z: 0 },
-  { x: 295, y: STAGE_H + 40, w: 195, h: 225, op: 0, z: 0 },
-  { x: -5,  y: 190, w: 195, h: 225, op: 1.0,  z: 3 },
-  { x: 195, y: 195, w: 195, h: 225, op: 1.0,  z: 3 },
-  { x: 390, y: 188, w: 195, h: 225, op: 0.85, z: 3 },
-  { x: 95,  y: 75,  w: 175, h: 200, op: 0.75, z: 2 },
-  { x: 290, y: 80,  w: 175, h: 200, op: 0.70, z: 2 },
+  { x: 45,  y: -30,  w: 160, h: 165, op: 0.45, z: 1 },
+  { x: 260, y: -25,  w: 160, h: 165, op: 0.50, z: 1 },
+  { x: 470, y: -30,  w: 160, h: 165, op: 0.40, z: 1 },
+  { x: 100, y: STAGE_H + 40, w: 210, h: 225, op: 0, z: 0 },
+  { x: 385, y: STAGE_H + 40, w: 210, h: 225, op: 0, z: 0 },
+  { x: -5,  y: 190, w: 210, h: 225, op: 1.0,  z: 3 },
+  { x: 245, y: 195, w: 210, h: 225, op: 1.0,  z: 3 },
+  { x: 500, y: 188, w: 210, h: 225, op: 0.85, z: 3 },
+  { x: 120, y: 75,  w: 190, h: 200, op: 0.75, z: 2 },
+  { x: 380, y: 80,  w: 190, h: 200, op: 0.70, z: 2 },
 ];
 
-const CW = 210, CH = 240, CG = 14;
+const CW = 220, CH = 250, CG = 16;
 
 function CardAnimation() {
   const refs = useRef<(HTMLDivElement | null)[]>([]);
@@ -247,7 +247,7 @@ export default function Hero() {
             </div>
           </div>
 
-          <div className="relative hidden lg:block" style={{ width: 620, height: 420 }}>
+          <div className="relative hidden lg:block" style={{ width: 760, height: 420 }}>
             {/* 인삿말 */}
             <div className="pointer-events-none absolute z-40 rounded-xl border border-primary/10 bg-white px-3 py-1.5 text-xs font-bold text-gray-400 shadow-[0_8px_24px_rgba(0,0,0,0.05)]"
               style={{ top: 5, left: 0, animation: "float-s 3.5s ease-in-out infinite 0s" }}>こんにちは</div>
@@ -259,7 +259,7 @@ export default function Hero() {
               style={{ bottom: 0, right: 0, animation: "float-s 3.6s ease-in-out infinite 1.5s" }}>안녕하세요</div>
 
             {/* 클리핑 영역 + 4면 그라데이션 페이드 마스크 + 가장자리 블러 */}
-            <div className="absolute" style={{ top: 10, left: 40, width: 540, height: 400, borderRadius: 20, overflow: "hidden" }}>
+            <div className="absolute" style={{ top: 10, left: 30, width: 700, height: 400, borderRadius: 20, overflow: "hidden" }}>
               {/* 카드 레이어: 4면 페이드 마스크 */}
               <div className="absolute inset-0" style={{
                 WebkitMaskImage: "linear-gradient(to bottom, transparent 0%, black 10%, black 86%, transparent 100%), linear-gradient(to right, transparent 0%, black 6%, black 90%, transparent 100%)",

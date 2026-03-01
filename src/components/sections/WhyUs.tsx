@@ -1,7 +1,7 @@
 "use client";
 
 import { useState, useEffect, useCallback } from "react";
-import { ChevronLeft, ChevronRight } from "lucide-react";
+import { ChevronUp, ChevronDown } from "lucide-react";
 
 const reasons = [
   {
@@ -10,7 +10,7 @@ const reasons = [
     description:
       "최첨단 AI 번역 기술과 10년 이상 경력의 전문 번역가가 협업합니다. AI가 초벌 번역을 수행하고, 전문가가 문맥과 뉘앙스를 완성하여 속도와 품질 모두 잡았습니다.",
     tags: ["AI 번역 엔진", "전문가 감수", "품질 보증"],
-    imagePlaceholder: "AI + Expert",
+    imagePlaceholder: "AI와 전문가의 하이브리드 번역 시스템",
   },
   {
     number: "02",
@@ -18,7 +18,7 @@ const reasons = [
     description:
       "50개 이상의 언어를 지원하며, 각 언어권에 현지 전문가 네트워크를 보유하고 있습니다. 단순 번역이 아닌, 현지 문화와 정서에 맞는 진정한 현지화를 제공합니다.",
     tags: ["현지 전문가", "문화 적응", "글로벌 커버리지"],
-    imagePlaceholder: "Global Network",
+    imagePlaceholder: "글로벌 네트워크 맵",
   },
   {
     number: "03",
@@ -26,69 +26,107 @@ const reasons = [
     description:
       "체계적인 프로젝트 관리와 자동화된 워크플로우로 빠른 납기를 보장합니다. 실시간 진행 상황 대시보드를 통해 투명하게 프로젝트를 관리할 수 있습니다.",
     tags: ["자동 워크플로우", "실시간 대시보드", "빠른 납기"],
-    imagePlaceholder: "Fast Delivery",
+    imagePlaceholder: "프로젝트 관리 대시보드",
   },
 ];
 
 export default function WhyUs() {
   const [current, setCurrent] = useState(0);
-  const [paused, setPaused] = useState(false);
+  const [direction, setDirection] = useState<"up" | "down">("up");
+  const [isAnimating, setIsAnimating] = useState(false);
+  const [isPaused, setIsPaused] = useState(false);
   const total = reasons.length;
 
-  const goNext = useCallback(
-    () => setCurrent((prev) => (prev + 1) % total),
-    [total]
+  const goTo = useCallback(
+    (index: number, dir: "up" | "down") => {
+      if (isAnimating) return;
+      setDirection(dir);
+      setIsAnimating(true);
+      setCurrent(index);
+      setTimeout(() => setIsAnimating(false), 700);
+    },
+    [isAnimating],
   );
 
-  const goPrev = useCallback(
-    () => setCurrent((prev) => (prev - 1 + total) % total),
-    [total]
-  );
+  const goNext = useCallback(() => {
+    goTo((current + 1) % total, "up");
+  }, [current, total, goTo]);
+
+  const goPrev = useCallback(() => {
+    goTo((current - 1 + total) % total, "down");
+  }, [current, total, goTo]);
 
   // Auto-play
   useEffect(() => {
-    if (paused) return;
-    const id = setInterval(goNext, 4000);
-    return () => clearInterval(id);
-  }, [paused, goNext]);
+    if (isPaused) return;
+    const timer = setInterval(goNext, 4000);
+    return () => clearInterval(timer);
+  }, [isPaused, goNext]);
 
   const reason = reasons[current];
 
   return (
     <section
-      className="bg-slate-50 py-24"
-      onMouseEnter={() => setPaused(true)}
-      onMouseLeave={() => setPaused(false)}
+      className="bg-white py-24 overflow-hidden"
+      onMouseEnter={() => setIsPaused(true)}
+      onMouseLeave={() => setIsPaused(false)}
     >
       <style>{`
-        @keyframes slide-up-in {
-          0% { opacity: 0; transform: translateY(24px); }
-          100% { opacity: 1; transform: translateY(0); }
+        @keyframes whyus-slide-up-enter {
+          0% {
+            opacity: 0;
+            transform: translateY(80px);
+          }
+          100% {
+            opacity: 1;
+            transform: translateY(0);
+          }
         }
-        .animate-slide-up-in {
-          animation: slide-up-in 0.5s ease-out both;
+        @keyframes whyus-slide-down-enter {
+          0% {
+            opacity: 0;
+            transform: translateY(-80px);
+          }
+          100% {
+            opacity: 1;
+            transform: translateY(0);
+          }
+        }
+        .slide-enter-up {
+          animation: whyus-slide-up-enter 0.7s cubic-bezier(0.22, 1, 0.36, 1) both;
+        }
+        .slide-enter-down {
+          animation: whyus-slide-down-enter 0.7s cubic-bezier(0.22, 1, 0.36, 1) both;
         }
       `}</style>
 
       <div className="mx-auto max-w-7xl px-6">
-        {/* Header */}
-        <div className="mb-16 text-center">
-          <span className="mb-3 inline-block text-[length:var(--font-size-section-label)] font-semibold uppercase tracking-wider text-primary">
-            Why Us
+        {/* Header row: 제목 좌측, 번호 우측 */}
+        <div className="mb-16 flex items-end justify-between">
+          <div>
+            <span className="mb-3 inline-block text-[length:var(--font-size-section-label)] font-semibold uppercase tracking-wider text-primary">
+              Why Nililia
+            </span>
+            <h2 className="text-3xl font-bold tracking-tight text-foreground sm:text-[length:var(--font-size-section-h2)] break-keep">
+              왜 Nililia를 선택해야 하나요?
+            </h2>
+          </div>
+          <span className="hidden text-6xl font-bold text-primary/10 sm:block">
+            {reason.number}
           </span>
-          <h2 className="text-3xl font-bold tracking-tight text-foreground sm:text-[length:var(--font-size-section-h2)] break-keep">
-            왜 Nililia를 선택해야 하나요?
-          </h2>
         </div>
 
-        {/* Content: 2-column */}
-        <div className="relative mx-auto max-w-5xl">
-          <div className="grid items-center gap-10 lg:grid-cols-2 lg:gap-16">
-            {/* Left: Text */}
-            <div key={current} className="animate-slide-up-in">
-              <span className="mb-4 inline-block text-7xl font-extrabold text-primary/15 sm:text-8xl">
-                {reason.number}
-              </span>
+        {/* Content: 2 column + 우측 하단 컨트롤 */}
+        <div className="relative mx-auto max-w-6xl">
+          <div
+            className="grid grid-cols-1 gap-12 lg:grid-cols-2 lg:gap-16"
+            style={{ minHeight: "380px" }}
+          >
+            {/* Left: Text — key로 re-mount하여 애니메이션 트리거 */}
+            <div
+              key={`text-${current}`}
+              className={`flex flex-col justify-center ${direction === "up" ? "slide-enter-up" : "slide-enter-down"}`}
+            >
               <h3 className="text-2xl font-bold text-gray-900 sm:text-3xl break-keep">
                 {reason.title}
               </h3>
@@ -110,33 +148,34 @@ export default function WhyUs() {
             {/* Right: Image placeholder */}
             <div
               key={`img-${current}`}
-              className="animate-slide-up-in flex aspect-[4/3] items-center justify-center rounded-3xl border border-primary/10 bg-white shadow-[0_32px_64px_-16px_rgba(0,0,0,0.06)]"
+              className={`flex items-center justify-center rounded-2xl bg-surface ${direction === "up" ? "slide-enter-up" : "slide-enter-down"}`}
+              style={{ minHeight: "320px" }}
             >
-              <span className="text-lg font-semibold text-muted">
-                {reason.imagePlaceholder}
+              <span className="text-sm text-muted">
+                [{reason.imagePlaceholder}]
               </span>
             </div>
           </div>
 
-          {/* Controls: Arrows + Dots */}
-          <div className="mt-10 flex items-center justify-center gap-6">
-            {/* Prev Arrow */}
+          {/* Controls: 우측 하단에 세로 배치 */}
+          <div className="mt-10 flex items-center justify-end gap-4">
+            {/* Prev (위로) */}
             <button
               type="button"
               onClick={goPrev}
               className="flex h-10 w-10 items-center justify-center rounded-full border border-border bg-white text-muted shadow-sm transition-colors hover:border-primary hover:text-primary"
               aria-label="이전"
             >
-              <ChevronLeft className="h-5 w-5" />
+              <ChevronUp className="h-5 w-5" />
             </button>
 
-            {/* Dots */}
+            {/* Dots (가로) */}
             <div className="flex items-center gap-2">
               {reasons.map((_, i) => (
                 <button
                   key={i}
                   type="button"
-                  onClick={() => setCurrent(i)}
+                  onClick={() => goTo(i, i > current ? "up" : "down")}
                   className={`h-2.5 rounded-full transition-all duration-300 ${
                     i === current
                       ? "w-8 bg-primary"
@@ -147,14 +186,14 @@ export default function WhyUs() {
               ))}
             </div>
 
-            {/* Next Arrow */}
+            {/* Next (아래로) */}
             <button
               type="button"
               onClick={goNext}
               className="flex h-10 w-10 items-center justify-center rounded-full border border-border bg-white text-muted shadow-sm transition-colors hover:border-primary hover:text-primary"
               aria-label="다음"
             >
-              <ChevronRight className="h-5 w-5" />
+              <ChevronDown className="h-5 w-5" />
             </button>
           </div>
         </div>

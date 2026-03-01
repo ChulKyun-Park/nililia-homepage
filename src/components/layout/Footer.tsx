@@ -13,9 +13,9 @@ const serviceLinks = [
 ];
 
 const familySites = [
-  { label: "CONTENTSFLY", href: "#" },
-  { label: "CONTENTSFLYS", href: "#" },
-  { label: "CAREERS", href: "/career" },
+  { label: "CONTENTSFLY", href: "https://contentsfly.com" },
+  { label: "CONTENTSFLYS", href: "https://contentsfly-s.com" },
+  { label: "CAREERS", href: "https://nililia.ninehire.site" },
 ];
 
 /* SNS 아이콘 — 인라인 SVG */
@@ -145,12 +145,14 @@ export default function Footer() {
               <ul className="space-y-1">
                 {familySites.map((link) => (
                   <li key={link.label}>
-                    <Link
+                    <a
                       href={link.href}
+                      target="_blank"
+                      rel="noopener noreferrer"
                       className="text-sm text-muted transition-colors hover:text-primary"
                     >
                       {link.label}
-                    </Link>
+                    </a>
                   </li>
                 ))}
               </ul>

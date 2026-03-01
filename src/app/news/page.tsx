@@ -23,7 +23,7 @@ export default async function NewsPage() {
   return (
     <>
       {/* Page Hero */}
-      <section className="bg-gradient-to-br from-foreground via-gray-900 to-gray-800 py-24 sm:py-32">
+      <section className="bg-gradient-to-br from-foreground via-gray-900 to-gray-800 flex items-center min-h-[420px] py-4 lg:py-6">
         <div className="mx-auto max-w-7xl px-6">
           <p className="mb-4 text-sm font-semibold uppercase tracking-wider text-primary">
             News & Insights

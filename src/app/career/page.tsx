@@ -129,7 +129,7 @@ export default function CareerPage() {
   return (
     <>
       {/* Hero — 2-column: text + image placeholder */}
-      <section className="bg-white py-24 sm:py-32">
+      <section className="bg-white flex items-center min-h-[420px] py-4 lg:py-6">
         <div className="mx-auto max-w-7xl px-6">
           <div className="grid items-center gap-12 lg:grid-cols-2 lg:gap-16">
             {/* Left: Text */}

@@ -11,7 +11,7 @@ const SERVICES = [
   { icon: "📱", title: "앱 현지화", desc: "모바일 최적화", img: "/images/앱 현지화.png" },
   { icon: "📖", title: "웹소설 번역", desc: "콘텐츠 현지화", img: "/images/웹소설 번역.png" },
   { icon: "🖼️", title: "웹툰 번역", desc: "만화 현지화", img: "/images/웹툰 번역.jpg" },
-  { icon: "🎮", title: "게임 번역", desc: "게임 현지화", img: "/images/게임 번역.jpg" },
+  { icon: "🎮", title: "게임 번역", desc: "게임 현지화", img: "/images/게임 번역.png" },
   { icon: "✏️", title: "MTPE", desc: "기계번역 후편집", img: "/images/MTPE.png" },
   { icon: "📺", title: "SDH 자막 제작", desc: "청각장애인 자막", img: "/images/SDH 자막 제작.jpg" },
 ];

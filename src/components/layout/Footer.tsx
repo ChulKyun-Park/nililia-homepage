@@ -42,8 +42,8 @@ const socialLinks = [
     label: "네이버 블로그",
     href: "#",
     icon: (
-      <svg className="h-5 w-5" fill="currentColor" viewBox="0 0 24 24">
-        <path d="M16.273 12.845L7.376 0H0v24h7.727V11.155L16.624 24H24V0h-7.727z" />
+      <svg className="h-5 w-5" viewBox="0 0 24 24" fill="currentColor">
+        <path d="M4 2v20h4V14.4L14 22h6V2h-4v7.6L10 2H4z" />
       </svg>
     ),
   },
@@ -198,7 +198,7 @@ export default function Footer() {
           </div>
 
           {/* 이용약관 · 개인정보처리방침 — 구분선 바로 위 */}
-          <div className="flex gap-6 pb-4 pt-2 text-sm text-muted">
+          <div className="flex gap-6 py-3 text-sm text-muted">
             <Link href="#" className="transition-colors hover:text-foreground">
               이용약관
             </Link>

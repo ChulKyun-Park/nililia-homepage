@@ -179,15 +179,14 @@ function CardAnimation() {
         scroll.current += 0.55;
         const total = N * (CW + CG);
         let cx = i * (CW + CG) - scroll.current;
-        while (cx < -CW - 10) cx += total;
+        while (cx < -CW - 20) cx += total;
         x = cx; y = (STAGE_H - CH) / 2; w = CW; h = CH; z = 10;
-        /* 좌우 페이드 */
-        const fadeIn = 70, fadeOut = 90;
-        if (cx < -CW * 0.2) op = 0;
-        else if (cx < fadeIn) op = cl((cx + CW * 0.2) / (CW * 0.2 + fadeIn));
-        else if (cx + CW > STAGE_W - fadeOut) op = cl((STAGE_W - cx - CW) / fadeOut);
-        else op = 1;
-        if (op < 0) op = 0;
+        /* 프레임 끝선에서 자연스럽게 잘리도록:
+           overflow:hidden + 블러 오버레이가 클리핑 담당.
+           opacity는 완전히 화면 밖인 카드만 숨김. */
+        if (cx + CW < -5) op = 0;          // 완전히 좌측 밖
+        else if (cx > STAGE_W + 5) op = 0;  // 완전히 우측 밖
+        else op = 1;                         // 나머지는 보임 (프레임이 잘라줌)
 
       } else {
         /* Phase8: 323 재조립 (snap 기반) */

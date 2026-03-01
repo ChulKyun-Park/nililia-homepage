@@ -30,83 +30,85 @@ interface Slot {
 }
 
 /*
- * 중심점 = 300 (좌측 여유, 우측 잘림 감안)
- * gap = 20px (컨베이어 수준)
+ * 참조 영상 분석 기반 레이아웃
+ * 카드 비율 ≈ 6:7 (가로:세로, 약간 세로가 김)
+ * Row3(앞) = 1.0x: 180×210  |  Row2(중) = 0.8x: 144×168  |  Row1(뒤) = 0.64x: 115×134
+ * Row 간 y가 빽빽 — 아래 Row가 위 Row를 50%+ 덮음
+ * 각 Row 가운데 정렬, gap 12px
  *
- * Row3(1배 156x180): 3장 → 총폭508, start=46
- * Row2(0.7배 109x126): 2장 → 총폭238, start=181
- * Row1(0.5배 78x90): 3장 → 총폭274, start=163
+ * Row3: 3×180+2×12=564 → start=(700-564)/2=68
+ * Row2: 2×144+12=300 → start=(700-300)/2=200
+ * Row1: 3×115+2×10=365 → start=(700-365)/2=168
  */
-const CX = 300; // 시각적 중심
-
 const A: Slot[] = [
-  // Row3: 46, 222, 398
-  { x: 46,  y: 213, w: 156, h: 180, op: 1.0,  z: 3 },
-  { x: 222, y: 218, w: 156, h: 180, op: 1.0,  z: 3 },
-  { x: 398, y: 211, w: 156, h: 180, op: 0.90, z: 3 },
-  // Row2: 181, 310
-  { x: 181, y: 112, w: 109, h: 126, op: 0.75, z: 2 },
-  { x: 310, y: 117, w: 109, h: 126, op: 0.70, z: 2 },
-  // Row1: 163, 261, 359
-  { x: 163, y: -5,  w: 78,  h: 90,  op: 0.45, z: 1 },
-  { x: 261, y: 0,   w: 78,  h: 90,  op: 0.50, z: 1 },
-  { x: 359, y: -5,  w: 78,  h: 90,  op: 0.40, z: 1 },
-  // 숨김 (중심 부근)
-  { x: 222, y: -140, w: 78, h: 90, op: 0, z: 0 },
-  { x: 330, y: -140, w: 78, h: 90, op: 0, z: 0 },
+  // Row3 (앞, z:3, 180×210): 68, 260, 452 / y=195 (하단 잘림)
+  { x: 68,  y: 195, w: 180, h: 210, op: 1.0,  z: 3 },
+  { x: 260, y: 200, w: 180, h: 210, op: 1.0,  z: 3 },
+  { x: 452, y: 193, w: 180, h: 210, op: 0.90, z: 3 },
+  // Row2 (중, z:2, 144×168): 200, 356 / y=82
+  { x: 200, y: 82,  w: 144, h: 168, op: 0.70, z: 2 },
+  { x: 356, y: 87,  w: 144, h: 168, op: 0.65, z: 2 },
+  // Row1 (뒤, z:1, 115×134): 168, 293, 418 / y=-18 (상단 잘림)
+  { x: 168, y: -18, w: 115, h: 134, op: 0.40, z: 1 },
+  { x: 293, y: -14, w: 115, h: 134, op: 0.45, z: 1 },
+  { x: 418, y: -18, w: 115, h: 134, op: 0.35, z: 1 },
+  // 숨김 (위에서 대기)
+  { x: 230, y: -180, w: 115, h: 134, op: 0, z: 0 },
+  { x: 355, y: -180, w: 115, h: 134, op: 0, z: 0 },
 ];
 
 /*
- * B: 323→232
- * Row3(2장): 총폭332, start=134 → 134, 310
- * Row2(3장): 총폭367, start=117 → 117, 246, 375
- * Row1(2장): 총폭176, start=212 → 212, 310
+ * B: 323→232 결과
+ * Row3(2장): 2×180+12=372 → start=164 → 164, 356
+ * Row2(3장): 3×144+2×12=456 → start=122 → 122, 278, 434
+ * Row1(2장): 2×115+10=240 → start=230 → 230, 355
  */
 const B: Slot[] = [
   // 카드0,1,2 → 아래로 퇴장
-  { x: 46,  y: STAGE_H + 50, w: 156, h: 180, op: 0, z: 0 },
-  { x: 222, y: STAGE_H + 50, w: 156, h: 180, op: 0, z: 0 },
-  { x: 398, y: STAGE_H + 50, w: 156, h: 180, op: 0, z: 0 },
-  // 카드3,4 → Row3
-  { x: 134, y: 213, w: 156, h: 180, op: 1.0, z: 3 },
-  { x: 310, y: 218, w: 156, h: 180, op: 1.0, z: 3 },
-  // 카드5,6,7 → Row2
-  { x: 117, y: 112, w: 109, h: 126, op: 0.75, z: 2 },
-  { x: 246, y: 117, w: 109, h: 126, op: 0.75, z: 2 },
-  { x: 375, y: 112, w: 109, h: 126, op: 0.65, z: 2 },
-  // 카드8,9 → Row1
-  { x: 212, y: -5, w: 78, h: 90, op: 0.45, z: 1 },
-  { x: 310, y: 0,  w: 78, h: 90, op: 0.50, z: 1 },
+  { x: 68,  y: STAGE_H + 50, w: 180, h: 210, op: 0, z: 0 },
+  { x: 260, y: STAGE_H + 50, w: 180, h: 210, op: 0, z: 0 },
+  { x: 452, y: STAGE_H + 50, w: 180, h: 210, op: 0, z: 0 },
+  // 카드3,4 → Row3 (1배)
+  { x: 164, y: 195, w: 180, h: 210, op: 1.0, z: 3 },
+  { x: 356, y: 200, w: 180, h: 210, op: 1.0, z: 3 },
+  // 카드5,6,7 → Row2 (0.8배)
+  { x: 122, y: 82,  w: 144, h: 168, op: 0.70, z: 2 },
+  { x: 278, y: 87,  w: 144, h: 168, op: 0.70, z: 2 },
+  { x: 434, y: 82,  w: 144, h: 168, op: 0.60, z: 2 },
+  // 카드8,9 → Row1 (0.64배)
+  { x: 230, y: -18, w: 115, h: 134, op: 0.40, z: 1 },
+  { x: 355, y: -14, w: 115, h: 134, op: 0.45, z: 1 },
 ];
 
 /*
- * C: 232→323 (A와 동일 간격, 카드 배정만 다름)
+ * C: 232→323 결과 (A와 동일 간격, 카드 배정만 다름)
  */
 const C: Slot[] = [
   // 카드0,1,2 → Row1 (위에서 재진입)
-  { x: 163, y: -5,  w: 78,  h: 90,  op: 0.45, z: 1 },
-  { x: 261, y: 0,   w: 78,  h: 90,  op: 0.50, z: 1 },
-  { x: 359, y: -5,  w: 78,  h: 90,  op: 0.40, z: 1 },
+  { x: 168, y: -18, w: 115, h: 134, op: 0.40, z: 1 },
+  { x: 293, y: -14, w: 115, h: 134, op: 0.45, z: 1 },
+  { x: 418, y: -18, w: 115, h: 134, op: 0.35, z: 1 },
   // 카드3,4 → 아래로 퇴장
-  { x: 134, y: STAGE_H + 50, w: 156, h: 180, op: 0, z: 0 },
-  { x: 310, y: STAGE_H + 50, w: 156, h: 180, op: 0, z: 0 },
-  // 카드5,6,7 → Row3
-  { x: 46,  y: 213, w: 156, h: 180, op: 1.0,  z: 3 },
-  { x: 222, y: 218, w: 156, h: 180, op: 1.0,  z: 3 },
-  { x: 398, y: 211, w: 156, h: 180, op: 0.90, z: 3 },
-  // 카드8,9 → Row2
-  { x: 181, y: 112, w: 109, h: 126, op: 0.75, z: 2 },
-  { x: 310, y: 117, w: 109, h: 126, op: 0.70, z: 2 },
+  { x: 164, y: STAGE_H + 50, w: 180, h: 210, op: 0, z: 0 },
+  { x: 356, y: STAGE_H + 50, w: 180, h: 210, op: 0, z: 0 },
+  // 카드5,6,7 → Row3 (1배)
+  { x: 68,  y: 195, w: 180, h: 210, op: 1.0,  z: 3 },
+  { x: 260, y: 200, w: 180, h: 210, op: 1.0,  z: 3 },
+  { x: 452, y: 193, w: 180, h: 210, op: 0.90, z: 3 },
+  // 카드8,9 → Row2 (0.8배)
+  { x: 200, y: 82,  w: 144, h: 168, op: 0.70, z: 2 },
+  { x: 356, y: 87,  w: 144, h: 168, op: 0.65, z: 2 },
 ];
 
-const CW = 156, CH = 180, CG = 14;
+/* 컨베이어: 기준 크기 */
+const CW = 180, CH = 210, CG = 14;
 const N = SERVICES.length;
 
 function CardAnimation() {
   const refs = useRef<(HTMLDivElement | null)[]>([]);
   const frame = useRef(0);
   const scroll = useRef(0);
-  const snapX = useRef<number[]>(new Array(N).fill(0)); // Phase7 종료시 각 카드 x 고정
+  const snapX = useRef<number[]>(new Array(N).fill(0));
   const raf = useRef(0);
 
   const tick = useCallback(() => {
@@ -123,7 +125,6 @@ function CardAnimation() {
     const f = frame.current;
     if (f === 0) scroll.current = 0;
 
-    /* Phase7 마지막 프레임에서 각 카드 위치 스냅 */
     const justLeftConveyor = (f === Math.floor(T7) + 1);
 
     refs.current.forEach((el, i) => {
@@ -132,22 +133,26 @@ function CardAnimation() {
       let x = 0, y = 0, w = a.w, h = a.h, op = a.op, z = a.z;
 
       if (f <= T1) {
-        const drift = (f / T1) * 18;
+        /* Phase1: 323 정지 + 미세 하강 */
+        const drift = (f / T1) * 12;
         x = a.x; y = a.y + drift; w = a.w; h = a.h; op = a.op; z = a.z;
 
       } else if (f <= T2) {
+        /* Phase2: 323→232 캐스케이드 */
         const t = easeInOutCubic(cl((f - T1) / (T2 - T1)));
         x = lerp(a.x, b.x, t);
-        y = lerp(a.y + 18, b.y, t);
+        y = lerp(a.y + 12, b.y, t);
         w = lerp(a.w, b.w, t);
         h = lerp(a.h, b.h, t);
         op = lerp(a.op, b.op, t);
         z = t < 0.5 ? a.z : b.z;
 
       } else if (f <= T3) {
+        /* Phase3: 232 정지 */
         x = b.x; y = b.y; w = b.w; h = b.h; op = b.op; z = b.z;
 
       } else if (f <= T4) {
+        /* Phase4: 232→323 캐스케이드 */
         const t = easeInOutCubic(cl((f - T3) / (T4 - T3)));
         x = lerp(b.x, c.x, t);
         y = lerp(b.y, c.y, t);
@@ -157,9 +162,11 @@ function CardAnimation() {
         z = t < 0.5 ? b.z : c.z;
 
       } else if (f <= T5) {
+        /* Phase5: 323 정지 */
         x = c.x; y = c.y; w = c.w; h = c.h; op = c.op; z = c.z;
 
       } else if (f <= T6) {
+        /* Phase6: 한 줄 정렬 */
         const t = easeInOutCubic(cl((f - T5) / (T6 - T5)));
         const cx = i * (CW + CG);
         const cy = (STAGE_H - CH) / 2;
@@ -168,21 +175,22 @@ function CardAnimation() {
         op = lerp(c.op, 1, t); z = 10;
 
       } else if (f <= T7) {
-        /* 컨베이어 우→좌 */
+        /* Phase7: 우→좌 컨베이어 */
         scroll.current += 0.55;
         const total = N * (CW + CG);
         let cx = i * (CW + CG) - scroll.current;
         while (cx < -CW - 10) cx += total;
         x = cx; y = (STAGE_H - CH) / 2; w = CW; h = CH; z = 10;
-        /* 좌우 가장자리 페이드 */
-        const fadeL = 60, fadeR = 80;
-        if (cx < -CW * 0.3) op = 0;
-        else if (cx < fadeL) op = cl((cx + CW * 0.3) / (CW * 0.3 + fadeL));
-        else if (cx > STAGE_W - fadeR - CW) op = cl((STAGE_W - cx - CW) / fadeR);
+        /* 좌우 페이드 */
+        const fadeIn = 70, fadeOut = 90;
+        if (cx < -CW * 0.2) op = 0;
+        else if (cx < fadeIn) op = cl((cx + CW * 0.2) / (CW * 0.2 + fadeIn));
+        else if (cx + CW > STAGE_W - fadeOut) op = cl((STAGE_W - cx - CW) / fadeOut);
         else op = 1;
+        if (op < 0) op = 0;
 
       } else {
-        /* Phase 8: 323(A) 재조립 — 스냅된 위치에서 lerp */
+        /* Phase8: 323 재조립 (snap 기반) */
         if (justLeftConveyor) {
           const total = N * (CW + CG);
           let cx = i * (CW + CG) - scroll.current;
@@ -266,7 +274,6 @@ export default function Hero() {
           </div>
 
           <div className="relative hidden lg:block" style={{ width: 760, height: 420 }}>
-            {/* 인삿말 */}
             <div className="pointer-events-none absolute z-40 rounded-xl border border-primary/10 bg-white px-3 py-1.5 text-xs font-bold text-gray-400 shadow-[0_8px_24px_rgba(0,0,0,0.05)]"
               style={{ top: 5, left: 0, animation: "float-s 3.5s ease-in-out infinite 0s" }}>こんにちは</div>
             <div className="pointer-events-none absolute z-40 rounded-xl border border-primary/10 bg-white px-3 py-1.5 text-xs font-bold text-gray-400 shadow-[0_8px_24px_rgba(0,0,0,0.05)]"
@@ -276,7 +283,6 @@ export default function Hero() {
             <div className="pointer-events-none absolute z-40 rounded-xl border border-primary/10 bg-white px-3 py-1.5 text-xs font-bold text-gray-400 shadow-[0_8px_24px_rgba(0,0,0,0.05)]"
               style={{ bottom: 0, right: 0, animation: "float-s 3.6s ease-in-out infinite 1.5s" }}>안녕하세요</div>
 
-            {/* 스테이지 */}
             <div className="absolute" style={{ top: 10, left: 30, width: 700, height: 400, borderRadius: 20, overflow: "hidden" }}>
               <CardAnimation />
               {/* 상단 페이드+블러 */}

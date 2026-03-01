@@ -74,13 +74,13 @@ export default function Footer() {
       <footer className="border-t border-border bg-surface text-foreground">
         <div className="mx-auto max-w-7xl px-6">
           {/* 4-column grid */}
-          <div className="grid grid-cols-1 gap-5 py-8 sm:grid-cols-2 lg:grid-cols-[2fr_1fr_1fr_1.8fr]">
+          <div className="grid grid-cols-1 gap-5 py-8 sm:grid-cols-2 lg:grid-cols-[1.5fr_1fr_1fr_1.5fr]">
             {/* Column 1: Company Info */}
             <div>
-              <h3 className="mb-5 text-base font-bold text-foreground">
+              <h3 className="mb-5 text-lg font-bold text-foreground">
                 (주)닐리리아
               </h3>
-              <ul className="space-y-1 text-[length:var(--font-size-footer)] leading-relaxed text-muted">
+              <ul className="space-y-1 text-sm leading-relaxed text-muted">
                 <li>경기도 안양시 동안구 시민대로 327번길 11-41, 6층</li>
                 <li>대표자 : 박철균 | 사업자 등록번호 : 481-81-00251</li>
                 <li>
@@ -95,7 +95,7 @@ export default function Footer() {
               </ul>
 
               {/* Copyright */}
-              <p className="mt-2 text-xs text-muted">
+              <p className="mt-2 text-sm text-muted">
                 &copy; {new Date().getFullYear()} Nililia Inc. All rights
                 reserved.
               </p>
@@ -120,7 +120,7 @@ export default function Footer() {
 
             {/* Column 2: Services */}
             <div>
-              <h3 className="mb-3 text-base font-bold text-foreground">
+              <h3 className="mb-3 text-sm font-medium text-foreground">
                 Services
               </h3>
               <ul className="space-y-1">
@@ -128,7 +128,7 @@ export default function Footer() {
                   <li key={link.label}>
                     <Link
                       href={link.href}
-                      className="text-[length:var(--font-size-footer)] text-muted transition-colors hover:text-primary"
+                      className="text-sm text-muted transition-colors hover:text-primary"
                     >
                       {link.label}
                     </Link>
@@ -139,7 +139,7 @@ export default function Footer() {
 
             {/* Column 3: Family Sites */}
             <div>
-              <h3 className="mb-3 text-base font-bold text-foreground">
+              <h3 className="mb-3 text-sm font-medium text-foreground">
                 Family Sites
               </h3>
               <ul className="space-y-1">
@@ -158,7 +158,7 @@ export default function Footer() {
 
             {/* Column 4: Contact */}
             <div>
-              <h3 className="mb-3 text-base font-bold text-foreground">
+              <h3 className="mb-3 text-sm font-medium text-foreground">
                 Contact
               </h3>
               <p className="mb-2 text-sm text-muted">

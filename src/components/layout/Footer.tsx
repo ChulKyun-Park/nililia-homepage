@@ -74,10 +74,10 @@ export default function Footer() {
       <footer className="border-t border-border bg-surface text-foreground">
         <div className="mx-auto max-w-7xl px-6">
           {/* 4-column grid */}
-          <div className="grid grid-cols-1 gap-10 py-16 sm:grid-cols-2 lg:grid-cols-[2fr_1fr_1fr_1.8fr]">
+          <div className="grid grid-cols-1 gap-8 py-14 sm:grid-cols-2 lg:grid-cols-[2fr_1fr_1fr_1.8fr]">
             {/* Column 1: Company Info */}
             <div>
-              <h3 className="mb-5 text-lg font-bold text-foreground">
+              <h3 className="mb-4 text-lg font-bold text-foreground">
                 (주)닐릴리아
               </h3>
               <ul className="space-y-2 text-[length:var(--font-size-footer)] leading-relaxed text-muted">
@@ -95,13 +95,13 @@ export default function Footer() {
               </ul>
 
               {/* Copyright */}
-              <p className="mt-6 text-xs text-muted">
+              <p className="mt-4 text-xs text-muted">
                 &copy; {new Date().getFullYear()} Nililia Inc. All rights
                 reserved.
               </p>
 
               {/* SNS Icons */}
-              <div className="mt-4 flex items-center gap-3">
+              <div className="mt-3 flex items-center gap-3">
                 {socialLinks.map((social) => (
                   <a
                     key={social.label}
@@ -119,7 +119,7 @@ export default function Footer() {
 
             {/* Column 2: Services */}
             <div>
-              <h3 className="mb-5 text-sm font-semibold uppercase tracking-wider text-muted">
+              <h3 className="mb-4 text-sm font-semibold uppercase tracking-wider text-muted">
                 번역 · 현지화
               </h3>
               <ul className="space-y-2">
@@ -138,7 +138,7 @@ export default function Footer() {
 
             {/* Column 3: Family Sites */}
             <div>
-              <h3 className="mb-5 text-sm font-semibold uppercase tracking-wider text-muted">
+              <h3 className="mb-4 text-sm font-semibold uppercase tracking-wider text-muted">
                 패밀리 사이트
               </h3>
               <ul className="space-y-2.5">
@@ -157,7 +157,7 @@ export default function Footer() {
 
             {/* Column 4: Contact */}
             <div>
-              <h3 className="mb-5 text-sm font-semibold uppercase tracking-wider text-muted">
+              <h3 className="mb-4 text-sm font-semibold uppercase tracking-wider text-muted">
                 문의하기
               </h3>
               <p className="mb-4 text-xs text-muted">
@@ -199,7 +199,7 @@ export default function Footer() {
           </div>
 
           {/* 이용약관 · 개인정보처리방침 — 구분선 바로 위 */}
-          <div className="flex gap-6 py-3 text-sm text-muted">
+          <div className="flex gap-6 pb-4 pt-8 text-sm text-muted">
             <Link href="#" className="transition-colors hover:text-foreground">
               이용약관
             </Link>

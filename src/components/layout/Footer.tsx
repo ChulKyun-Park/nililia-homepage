@@ -72,9 +72,9 @@ export default function Footer() {
   return (
     <>
       <footer className="border-t border-border bg-surface text-foreground">
-        <div className="mx-auto max-w-7xl px-6">
+        <div className="mx-auto max-w-7xl px-12">
           {/* 4-column grid */}
-          <div className="grid grid-cols-1 gap-3 py-8 sm:grid-cols-2 lg:grid-cols-[2.5fr_1fr_1fr_1.2fr] lg:gap-x-6">
+          <div className="grid grid-cols-1 gap-3 py-8 sm:grid-cols-2 lg:grid-cols-[2.5fr_1fr_1fr_1.2fr] lg:gap-x-3">
             {/* Column 1: Company Info */}
             <div>
               <h3 className="mb-5 text-lg font-bold text-foreground">
@@ -95,13 +95,13 @@ export default function Footer() {
               </ul>
 
               {/* Copyright */}
-              <p className="mt-4 text-sm text-muted">
+              <p className="mt-8 text-sm text-muted">
                 &copy; {new Date().getFullYear()} Nililia Inc. All rights
                 reserved.
               </p>
 
               {/* SNS Icons */}
-              <div className="mt-4 flex items-center gap-3">
+              <div className="mt-8 flex items-center gap-3">
                 {socialLinks.map((social) => (
                   <a
                     key={social.label}

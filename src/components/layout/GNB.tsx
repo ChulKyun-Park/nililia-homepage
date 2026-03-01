@@ -44,7 +44,7 @@ export default function GNB() {
           <img
             src="/images/NILILIA.png"
             alt="NILILIA"
-            className="h-7 w-auto"
+            className="h-14 w-auto"
           />
         </Link>
 

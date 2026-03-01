@@ -253,7 +253,7 @@ export default function Hero() {
 
       <div className="relative z-10 mx-auto max-w-7xl px-6 py-4 lg:py-6">
         <div className="grid w-full items-center gap-8 lg:grid-cols-[1fr_auto] lg:gap-10">
-          <div className="max-w-xl">
+          <div className="max-w-xl lg:pl-12">
             <h1 className="text-4xl font-bold leading-tight tracking-tight text-foreground sm:text-5xl lg:text-[length:var(--font-size-hero-h1)] break-keep">
               여러분의 콘텐츠에<br />
               <span className="text-primary">날개를 달아줍니다</span>

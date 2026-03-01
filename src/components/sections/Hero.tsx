@@ -24,10 +24,10 @@ const services: ServiceItem[] = [
  * White balloon/tag style with shadow (ref: FloatingTag from nililia repo).
  */
 const greetings = [
-  { text: "こんにちは", pos: "-top-5 -left-4", delay: "0s" },
-  { text: "Hola", pos: "-top-5 -right-4", delay: "0.5s" },
-  { text: "Thank you", pos: "top-1/3 -right-28", delay: "1s" },
-  { text: "안녕하세요", pos: "top-2/3 -left-24", delay: "1.5s" },
+  { text: "こんにちは", pos: "top-[-30px] left-[-20px]", delay: "0s" },
+  { text: "¡Hola!", pos: "top-[-30px] right-[40px]", delay: "0.5s" },
+  { text: "Thank you", pos: "top-[50%] right-[-50px]", delay: "1s" },
+  { text: "안녕하세요", pos: "bottom-[40px] left-[-60px]", delay: "1.5s" },
 ];
 
 /*
@@ -48,19 +48,20 @@ const greetings = [
  */
 
 /* ── Absolute position for each slot within the container ── */
+const GAP = 12; // px
 const SLOT_POS: Record<number, { top: string; left: string }> = {
   0: { top: "0px", left: "0px" },
-  1: { top: "0px", left: "calc(50% + 6px)" },
-  2: { top: "calc(50% + 6px)", left: "calc(50% + 6px)" },
-  3: { top: "calc(50% + 6px)", left: "0px" },
+  1: { top: "0px", left: `calc(50% + ${GAP / 2}px)` },
+  2: { top: `calc(50% + ${GAP / 2}px)`, left: `calc(50% + ${GAP / 2}px)` },
+  3: { top: `calc(50% + ${GAP / 2}px)`, left: "0px" },
 };
 
 /* Exit: below bot-right (slot 2 x-position) */
-const EXIT_POS = { top: "calc(100% + 20px)", left: "calc(50% + 6px)" };
+const EXIT_POS = { top: "calc(100% + 20px)", left: `calc(50% + ${GAP / 2}px)` };
 /* Enter: below bot-left (slot 3 x-position) */
 const ENTER_POS = { top: "calc(100% + 20px)", left: "0px" };
 
-const CARD_SIZE = { width: "calc(50% - 6px)", height: "calc(50% - 6px)" };
+const CARD_SIZE = { width: `calc(50% - ${GAP / 2}px)`, height: `calc(50% - ${GAP / 2}px)` };
 const TRANSITION = "top 0.45s cubic-bezier(0.25,0.46,0.45,0.94), left 0.45s cubic-bezier(0.25,0.46,0.45,0.94), opacity 0.45s ease";
 
 interface CardState {
@@ -142,66 +143,56 @@ function ConveyorBelt() {
 
   return (
     <div className="relative">
-      {/* Floating greetings — balloon/tag style OUTSIDE the container */}
+      {/* Floating greetings — 외곽 박스 바깥에 위치 */}
       {greetings.map((g) => (
         <div
           key={g.text}
-          className={`absolute ${g.pos} z-30 pointer-events-none select-none rounded-xl border border-border bg-white px-4 py-2 text-sm font-medium text-gray-500 shadow-md`}
+          className={`absolute ${g.pos} z-30 pointer-events-none select-none rounded-xl border border-primary/10 bg-white px-6 py-3 text-sm font-bold text-gray-500 shadow-[0_20px_40px_rgba(0,0,0,0.08)]`}
           style={{ animation: `floating-soft 4s ease-in-out infinite ${g.delay}` }}
         >
           {g.text}
         </div>
       ))}
 
-      {/* Conveyor belt container */}
-      <div className="relative h-[340px] w-[400px] overflow-hidden rounded-2xl border border-border bg-surface/50">
-        {cards.map((card) => {
-          const service = services[card.serviceIdx];
-          let pos: { top: string; left: string };
-          let style: React.CSSProperties;
+      {/* 외곽 컨테이너 — 큰 흰색 박스 (원본과 동일한 구조) */}
+      <div className="relative w-full max-w-[540px] aspect-[540/430] rounded-xl bg-white shadow-[0_32px_64px_-16px_rgba(0,0,0,0.1)] border border-primary/10 p-4 sm:p-6 md:p-10">
+        {/* 내부 카드 그리드 — overflow hidden은 여기 */}
+        <div className="relative h-full w-full overflow-hidden">
+          {cards.map((card) => {
+            const service = services[card.serviceIdx];
+            let pos: { top: string; left: string };
+            let style: React.CSSProperties;
 
-          if (card.entering) {
-            // Phase 1: render at ENTER_POS with no transition
-            pos = ENTER_POS;
-            style = {
-              ...pos,
-              ...CARD_SIZE,
-              transition: "none",
-            };
-          } else if (card.sliding) {
-            // Sliding card (slot3→0 or entering→slot3): animate with transition
-            pos = SLOT_POS[card.slot];
-            style = {
-              ...pos,
-              ...CARD_SIZE,
-              transition: TRANSITION,
-            };
-          } else {
-            // All other cards: instant position (no transition)
-            pos = SLOT_POS[card.slot];
-            style = {
-              ...pos,
-              ...CARD_SIZE,
-              transition: "none",
-            };
-          }
+            if (card.entering) {
+              pos = ENTER_POS;
+              style = { ...pos, ...CARD_SIZE, transition: "none" };
+            } else if (card.sliding) {
+              pos = SLOT_POS[card.slot];
+              style = { ...pos, ...CARD_SIZE, transition: TRANSITION };
+            } else {
+              pos = SLOT_POS[card.slot];
+              style = { ...pos, ...CARD_SIZE, transition: "none" };
+            }
 
-          return (
-            <div
-              key={card.key}
-              className="absolute flex flex-col rounded-2xl border border-primary/10 bg-white p-4 shadow-sm"
-              style={style}
-            >
-              <div className="mb-3 flex h-10 w-10 items-center justify-center rounded-xl bg-primary text-lg text-white">
-                {service.icon}
+            return (
+              <div
+                key={card.key}
+                className="absolute flex flex-col rounded-2xl sm:rounded-[32px] border border-primary/10 bg-white p-3 sm:p-5 md:p-8 shadow-sm"
+                style={style}
+              >
+                <div className="mb-2 sm:mb-3 md:mb-5 flex h-8 w-8 sm:h-10 sm:w-10 md:h-12 md:w-12 items-center justify-center rounded-lg sm:rounded-xl bg-primary text-base sm:text-lg md:text-xl text-white shadow-xl">
+                  {service.icon}
+                </div>
+                <p className="text-sm sm:text-base md:text-xl font-bold text-gray-900">
+                  {service.title}
+                </p>
+                <p className="mt-1 sm:mt-2 text-xs sm:text-sm text-gray-500 leading-normal">
+                  {service.desc}
+                </p>
               </div>
-              <p className="text-sm font-bold text-gray-900">
-                {service.title}
-              </p>
-              <p className="mt-1 text-xs text-gray-500">{service.desc}</p>
-            </div>
-          );
-        })}
+            );
+          })}
+        </div>
       </div>
     </div>
   );
@@ -250,7 +241,7 @@ export default function Hero() {
           </div>
 
           {/* Right: Slot-based conveyor belt */}
-          <div className="relative hidden md:flex md:justify-center">
+          <div className="relative hidden lg:flex lg:justify-center lg:justify-end mt-0">
             <ConveyorBelt />
           </div>
         </div>

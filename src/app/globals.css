@@ -80,40 +80,9 @@ html {
   animation-delay: 1.5s;
 }
 
-/* ── Conveyor belt animation (Hero) ── */
-@keyframes conveyor-belt {
-  0% {
-    transform: translate(10px, 380px);
-  }
-  5% {
-    transform: translate(10px, 285px);
-  }
-  27% {
-    transform: translate(10px, 10px);
-  }
-  48% {
-    transform: translate(260px, 10px);
-  }
-  70% {
-    transform: translate(260px, 285px);
-  }
-  75% {
-    transform: translate(260px, 380px);
-  }
-  75.01% {
-    transform: translate(10px, 420px);
-  }
-  100% {
-    transform: translate(10px, 380px);
-  }
-}
-
-.conveyor-card {
-  position: absolute;
-  top: 0;
-  left: 0;
-  animation: conveyor-belt 12s linear infinite;
-  will-change: transform;
+/* ── Conveyor slot transition (Hero) ── */
+.conveyor-slot-card {
+  transition: all 0.45s cubic-bezier(0.25, 0.46, 0.45, 0.94);
 }
 
 /* ── Fade in up animation ── */

@@ -15,7 +15,6 @@
 | 스택 | Next.js 14+ / TypeScript / Tailwind CSS v4 / Notion API / Vercel |
 | 폰트 | Pretendard (한글) + Inter (영문) |
 | 테마 | 라이트 모드 (흰색 배경 + `#0097FE` 포인트) |
-| 벤치마킹 | [voithru.com](https://voithru.com/) — 구조(뼈대)만 참고 |
 
 ---
 

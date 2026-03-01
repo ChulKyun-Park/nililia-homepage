@@ -74,7 +74,7 @@ export default function Footer() {
       <footer className="border-t border-border bg-surface text-foreground">
         <div className="mx-auto max-w-7xl px-6">
           {/* 4-column grid */}
-          <div className="grid grid-cols-1 gap-5 py-8 sm:grid-cols-2 lg:grid-cols-[1.5fr_1fr_1fr_1.5fr]">
+          <div className="grid grid-cols-1 gap-3 py-8 sm:grid-cols-2 lg:grid-cols-[2.5fr_1fr_1fr_1.2fr] lg:gap-x-6">
             {/* Column 1: Company Info */}
             <div>
               <h3 className="mb-5 text-lg font-bold text-foreground">

@@ -77,7 +77,7 @@ export default function Footer() {
           <div className="grid grid-cols-1 gap-3 py-8 sm:grid-cols-2 lg:grid-cols-[2.5fr_1fr_1fr_1.2fr] lg:gap-x-3">
             {/* Column 1: Company Info */}
             <div>
-              <h3 className="mb-5 text-lg font-bold text-foreground">
+              <h3 className="mb-5 text-[1.25rem] font-bold tracking-[0.01em] text-foreground">
                 (주)닐리리아
               </h3>
               <ul className="space-y-1 text-sm leading-relaxed text-muted">

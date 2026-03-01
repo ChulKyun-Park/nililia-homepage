@@ -89,10 +89,11 @@ function CardAnimation() {
 
   const tick = useCallback(() => {
     const FPS = 60, CYCLE = 13 * FPS;
-    const P1  = 1.3 * FPS;   /* 3-2-3 하강 (1.5배 빠르게) */
-    const P1B = 3.5 * FPS;   /* 행 순환: 3-2-3 → 2-3-2 */
-    const P2  = 5.0 * FPS;   /* 일렬 전환 */
-    const P3  = 9.5 * FPS;   /* 컨베이어 */
+    const P1  = 0.9 * FPS;   /* 3-2-3 하강 (1.5배 빠르게) */
+    const P1B = 2.8 * FPS;   /* 행 순환: 3-2-3 → 2-3-2 */
+    const P1C = 3.8 * FPS;   /* 2-3-2 정지 유지 (1초) */
+    const P2  = 5.3 * FPS;   /* 일렬 전환 */
+    const P3  = 9.8 * FPS;   /* 컨베이어 */
 
     frame.current = (frame.current + 1) % CYCLE;
     const f = frame.current;
@@ -119,9 +120,13 @@ function CardAnimation() {
         op = lerp(s.op, s2.op, t);
         z = t < 0.5 ? s.z : s2.z;
 
+      } else if (f <= P1C) {
+        /* Phase 1c: 2-3-2 정지 유지 */
+        x = s2.x; y = s2.y; w = s2.w; h = s2.h; op = s2.op; z = s2.z;
+
       } else if (f <= P2) {
         /* Phase 2: 2-3-2 → 일렬 컨베이어 전환 */
-        const t = easeInOutCubic(cl((f - P1B) / (P2 - P1B)));
+        const t = easeInOutCubic(cl((f - P1C) / (P2 - P1C)));
         const cx = i * (CW + CG);
         const cy = (STAGE_H - CH) / 2;
         x = lerp(s2.x, cx, t);

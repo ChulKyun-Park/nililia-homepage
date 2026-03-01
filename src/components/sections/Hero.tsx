@@ -252,29 +252,9 @@ export default function Hero() {
       `}</style>
 
       <div className="relative z-10 mx-auto max-w-7xl px-6 py-4 lg:py-6">
-        <div className="grid w-full items-center gap-8 lg:grid-cols-[1fr_auto] lg:gap-10">
-          <div className="relative z-20 max-w-2xl lg:pl-12">
-            <h1 className="text-4xl font-bold leading-tight tracking-tight text-foreground sm:text-5xl lg:text-[length:var(--font-size-hero-h1)] break-keep">
-              여러분의 콘텐츠에<br />
-              <span className="text-primary">날개를 달아줍니다</span>
-            </h1>
-            <p className="mt-5 text-[length:var(--font-size-hero-sub)] leading-relaxed text-muted break-keep">
-              전문 번역과 현지화 서비스로 글로벌 시장 진출을 지원합니다.
-            </p>
-            <p className="mt-2 text-[length:var(--font-size-hero-sub)] leading-relaxed text-muted break-keep">
-              AI 기술과 전문가의 노하우로 최상의 품질을 보장합니다.
-            </p>
-            <div className="mt-8 flex flex-wrap gap-4">
-              <Button href="/contact" variant="primary" className="px-8 py-4 text-[length:var(--font-size-cta-button)]">
-                무료 상담 받기
-              </Button>
-              <Button href="/services" variant="outline" className="border-border px-8 py-4 text-[length:var(--font-size-cta-button)] text-foreground hover:bg-surface">
-                서비스 알아보기
-              </Button>
-            </div>
-          </div>
-
-          <div className="relative hidden lg:block" style={{ width: 760, height: 420 }}>
+        <div className="relative w-full" style={{ minHeight: 420 }}>
+          {/* 카드 애니메이션 — absolute, 우측 정렬 */}
+          <div className="absolute right-0 top-1/2 -translate-y-1/2 hidden lg:block" style={{ width: 760, height: 420 }}>
             <div className="pointer-events-none absolute z-40 rounded-xl border border-primary/10 bg-white px-5 py-2.5 text-sm font-bold text-gray-400 shadow-[0_8px_24px_rgba(0,0,0,0.05)]"
               style={{ top: 145, left: 8, animation: "float-s 3.5s ease-in-out infinite 0s" }}>こんにちは</div>
             <div className="pointer-events-none absolute z-40 rounded-xl border border-primary/10 bg-white px-5 py-2.5 text-sm font-bold text-gray-400 shadow-[0_8px_24px_rgba(0,0,0,0.05)]"
@@ -318,6 +298,30 @@ export default function Hero() {
                 WebkitMaskImage: "linear-gradient(to left, black 0%, black 30%, transparent 100%)",
                 background: "linear-gradient(to left, rgba(255,255,255,0.95) 0%, rgba(255,255,255,0.7) 40%, transparent 100%)",
               }} />
+            </div>
+          </div>
+
+          {/* 텍스트 — relative, 카드 위에 겹침 */}
+          <div className="relative z-20 flex min-h-[420px] items-center">
+            <div className="max-w-xl lg:pl-12">
+            <h1 className="text-4xl font-bold leading-tight tracking-tight text-foreground sm:text-5xl lg:text-[length:var(--font-size-hero-h1)] break-keep">
+              여러분의 콘텐츠에<br />
+              <span className="text-primary">날개를 달아줍니다</span>
+            </h1>
+            <p className="mt-5 text-[length:var(--font-size-hero-sub)] leading-relaxed text-muted break-keep">
+              전문 번역과 현지화 서비스로 글로벌 시장 진출을 지원합니다.
+            </p>
+            <p className="mt-2 text-[length:var(--font-size-hero-sub)] leading-relaxed text-muted break-keep">
+              AI 기술과 전문가의 노하우로 최상의 품질을 보장합니다.
+            </p>
+            <div className="mt-8 flex flex-wrap gap-4">
+              <Button href="/contact" variant="primary" className="px-8 py-4 text-[length:var(--font-size-cta-button)]">
+                무료 상담 받기
+              </Button>
+              <Button href="/services" variant="outline" className="border-border px-8 py-4 text-[length:var(--font-size-cta-button)] text-foreground hover:bg-surface">
+                서비스 알아보기
+              </Button>
+            </div>
             </div>
           </div>
         </div>

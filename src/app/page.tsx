@@ -3,8 +3,7 @@ import SocialProof from "@/components/sections/SocialProof";
 import Mission from "@/components/sections/Mission";
 import ServiceGrid from "@/components/sections/ServiceGrid";
 import WhyUs from "@/components/sections/WhyUs";
-import News from "@/components/sections/News";
-import CaseStudy from "@/components/sections/CaseStudy";
+import NewsCaseStudy from "@/components/sections/NewsCaseStudy";
 import BottomCTA from "@/components/sections/BottomCTA";
 
 export const revalidate = 3600;
@@ -17,8 +16,7 @@ export default function Home() {
       <Mission />
       <ServiceGrid />
       <WhyUs />
-      <News />
-      <CaseStudy />
+      <NewsCaseStudy />
       <BottomCTA />
     </>
   );

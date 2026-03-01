@@ -59,6 +59,25 @@ const GRID: Slot[] = [
 const HIDDEN: Slot = { x: 270, y: STAGE_H + 40, w: 195, h: 225, op: 0, z: 0 };
 function g(i: number): Slot { return i < GRID.length ? GRID[i] : HIDDEN; }
 
+/* 순환 후 2-3-2 그리드 (카드별 목적지) */
+const GRID2: (Slot | null)[] = [
+  /* 카드 0,1,2: 위로 퇴장 */
+  { x: 35,  y: -220, w: 145, h: 165, op: 0, z: 0 },
+  { x: 195, y: -220, w: 145, h: 165, op: 0, z: 0 },
+  { x: 355, y: -220, w: 145, h: 165, op: 0, z: 0 },
+  /* 카드 3,4: Row2 → 새 Row1 (2장, 작고 흐릿) */
+  { x: 120, y: -30,  w: 145, h: 165, op: 0.45, z: 1 },
+  { x: 290, y: -25,  w: 145, h: 165, op: 0.50, z: 1 },
+  /* 카드 5,6,7: Row3 → 새 Row2 (3장, 중간) */
+  { x: 35,  y: 75,   w: 175, h: 200, op: 0.75, z: 2 },
+  { x: 210, y: 80,   w: 175, h: 200, op: 0.75, z: 2 },
+  { x: 385, y: 75,   w: 175, h: 200, op: 0.65, z: 2 },
+  /* 카드 8,9: 아래서 등장 → 새 Row3 (2장, 크고 선명) */
+  { x: 80,  y: 190,  w: 195, h: 225, op: 1.0,  z: 3 },
+  { x: 295, y: 195,  w: 195, h: 225, op: 1.0,  z: 3 },
+];
+function g2(i: number): Slot { return GRID2[i] || HIDDEN; }
+
 /* 컨베이어: 정사각형에 가까운 카드 */
 const CW = 210, CH = 240, CG = 14;
 
@@ -69,10 +88,11 @@ function CardAnimation() {
   const raf = useRef(0);
 
   const tick = useCallback(() => {
-    const FPS = 60, CYCLE = 12 * FPS;
-    const P1 = 2.0 * FPS;   /* 그리드 정지 (짧게) */
-    const P2 = 4.0 * FPS;   /* 전환 */
-    const P3 = 9.0 * FPS;   /* 컨베이어 */
+    const FPS = 60, CYCLE = 13 * FPS;
+    const P1  = 1.3 * FPS;   /* 3-2-3 하강 (1.5배 빠르게) */
+    const P1B = 3.5 * FPS;   /* 행 순환: 3-2-3 → 2-3-2 */
+    const P2  = 5.0 * FPS;   /* 일렬 전환 */
+    const P3  = 9.5 * FPS;   /* 컨베이어 */
 
     frame.current = (frame.current + 1) % CYCLE;
     const f = frame.current;
@@ -81,23 +101,34 @@ function CardAnimation() {
     refs.current.forEach((el, i) => {
       if (!el) return;
       const s = g(i);
+      const s2 = g2(i);
       let x = 0, y = 0, w = s.w, h = s.h, op = s.op, z = s.z;
 
       if (f <= P1) {
-        /* Phase 1: 겹침 그리드 + 미세 하강 */
-        const d = (f / P1) * 12;
+        /* Phase 1: 3-2-3 겹침 그리드 + 하강 */
+        const d = (f / P1) * 18;
         x = s.x; y = s.y + d; w = s.w; h = s.h; op = s.op; z = s.z;
 
+      } else if (f <= P1B) {
+        /* Phase 1.5: 행 순환 3-2-3 → 2-3-2 */
+        const t = easeInOutCubic(cl((f - P1) / (P1B - P1)));
+        x = lerp(s.x, s2.x, t);
+        y = lerp(s.y + 18, s2.y, t);
+        w = lerp(s.w, s2.w, t);
+        h = lerp(s.h, s2.h, t);
+        op = lerp(s.op, s2.op, t);
+        z = t < 0.5 ? s.z : s2.z;
+
       } else if (f <= P2) {
-        /* Phase 2: → 일렬 컨베이어 전환 */
-        const t = easeInOutCubic(cl((f - P1) / (P2 - P1)));
+        /* Phase 2: 2-3-2 → 일렬 컨베이어 전환 */
+        const t = easeInOutCubic(cl((f - P1B) / (P2 - P1B)));
         const cx = i * (CW + CG);
         const cy = (STAGE_H - CH) / 2;
-        x = lerp(s.x, cx, t);
-        y = lerp(s.y + 12, cy, t);
-        w = lerp(s.w, CW, t);
-        h = lerp(s.h, CH, t);
-        op = lerp(s.op, 1, t);
+        x = lerp(s2.x, cx, t);
+        y = lerp(s2.y, cy, t);
+        w = lerp(s2.w, CW, t);
+        h = lerp(s2.h, CH, t);
+        op = lerp(s2.op, 1, t);
         z = 10;
 
       } else if (f <= P3) {
@@ -114,7 +145,7 @@ function CardAnimation() {
         else op = 1;
 
       } else {
-        /* Phase 4: 복귀 */
+        /* Phase 4: 복귀 → 3-2-3 */
         const t = easeInOutCubic(cl((f - P3) / (CYCLE - P3)));
         const total = SERVICES.length * (CW + CG);
         let cx = i * (CW + CG) - scroll.current;

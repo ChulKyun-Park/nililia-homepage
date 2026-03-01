@@ -42,7 +42,7 @@ export default function GNB() {
         {/* Left: Logo */}
         <Link href="/" className="shrink-0">
           <img
-            src="/images/NILILIA_LOGO.svg"
+            src="/images/NILILIA.png"
             alt="NILILIA"
             className="h-7 w-auto"
           />

@@ -50,7 +50,7 @@ export default function GNB() {
             <Link
               key={link.href}
               href={link.href}
-              className="text-sm font-medium text-white/60 transition-colors hover:text-white"
+              className="text-[length:var(--font-size-gnb)] font-medium text-white/60 transition-colors hover:text-white"
               aria-label={link.label}
             >
               {"icon" in link ? (

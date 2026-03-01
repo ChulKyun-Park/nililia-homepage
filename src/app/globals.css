@@ -25,6 +25,21 @@
   /* Font families */
   --font-sans: "Pretendard Variable", "Pretendard", -apple-system, BlinkMacSystemFont, system-ui, Roboto, "Helvetica Neue", "Segoe UI", "Apple SD Gothic Neo", "Noto Sans KR", "Malgun Gothic", sans-serif;
   --font-heading: "Inter", "Pretendard Variable", "Pretendard", sans-serif;
+
+  /* Typography scale (voithru.com 참고) */
+  --font-size-hero-h1: 3.25rem;         /* 52px */
+  --font-size-hero-sub: 1.175rem;       /* ~19px */
+  --font-size-section-label: 0.9375rem; /* 15px */
+  --font-size-section-h2: 2.375rem;     /* 38px */
+  --font-size-section-body: 1.0625rem;  /* 17px */
+  --font-size-number-highlight: 3.5rem; /* 56px */
+  --font-size-card-title: 1.25rem;      /* 20px */
+  --font-size-card-desc: 0.9375rem;     /* 15px */
+  --font-size-whyus-number: 5.25rem;    /* 84px */
+  --font-size-whyus-title: 2rem;        /* 32px */
+  --font-size-cta-button: 1.0625rem;    /* 17px */
+  --font-size-footer: 0.8125rem;        /* 13px */
+  --font-size-gnb: 1rem;                /* 16px */
 }
 
 /* ── Base styles ── */

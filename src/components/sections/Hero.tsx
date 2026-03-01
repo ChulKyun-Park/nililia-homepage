@@ -157,29 +157,29 @@ export default function Hero() {
         <div className="grid w-full items-center gap-12 lg:grid-cols-2 lg:gap-16">
           {/* Left: Text */}
           <div>
-            <h1 className="text-4xl font-bold leading-tight tracking-tight text-white sm:text-5xl lg:text-6xl break-keep">
+            <h1 className="text-4xl font-bold leading-tight tracking-tight text-white sm:text-5xl lg:text-[length:var(--font-size-hero-h1)] break-keep">
               여러분의 콘텐츠에
               <br />
               <span className="text-primary">날개를 달아줍니다</span>
             </h1>
-            <p className="mt-6 max-w-lg text-lg leading-relaxed text-white/60 break-keep">
+            <p className="mt-6 max-w-lg text-[length:var(--font-size-hero-sub)] leading-relaxed text-white/60 break-keep">
               전문 번역과 현지화 서비스로 글로벌 시장 진출을 지원합니다.
             </p>
-            <p className="mt-2 max-w-lg text-lg leading-relaxed text-white/60 break-keep">
+            <p className="mt-2 max-w-lg text-[length:var(--font-size-hero-sub)] leading-relaxed text-white/60 break-keep">
               AI 기술과 전문가의 노하우로 최상의 품질을 보장합니다.
             </p>
             <div className="mt-10 flex flex-wrap gap-4">
               <Button
                 href="/contact"
                 variant="primary"
-                className="px-8 py-4 text-base"
+                className="px-8 py-4 text-[length:var(--font-size-cta-button)]"
               >
                 무료 상담 받기
               </Button>
               <Button
                 href="/services"
                 variant="outline"
-                className="border-white/20 px-8 py-4 text-base text-white hover:bg-white/10"
+                className="border-white/20 px-8 py-4 text-[length:var(--font-size-cta-button)] text-white hover:bg-white/10"
               >
                 서비스 알아보기
               </Button>

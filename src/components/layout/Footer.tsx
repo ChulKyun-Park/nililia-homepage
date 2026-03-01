@@ -27,7 +27,7 @@ export default function Footer() {
               <h3 className="mb-5 text-lg font-bold text-white">
                 (주)닐리리아
               </h3>
-              <ul className="space-y-2.5 text-sm leading-relaxed text-white/50">
+              <ul className="space-y-2.5 text-[length:var(--font-size-footer)] leading-relaxed text-white/50">
                 <li>서울특별시 강남구 테헤란로 123, 4층</li>
                 <li>대표자: 홍길동</li>
                 <li>사업자등록번호: 000-00-00000</li>

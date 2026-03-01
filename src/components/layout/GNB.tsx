@@ -41,11 +41,29 @@ export default function GNB() {
       <div className="mx-auto flex h-16 max-w-7xl items-center justify-between px-6 lg:h-20">
         {/* Left: Logo */}
         <Link href="/" className="shrink-0">
-          <img
-            src="/images/NILILIA_LOGO.svg"
-            alt="NILILIA"
+          <svg
+            width="120"
+            height="36"
+            viewBox="0 0 320 96"
+            fill="none"
+            xmlns="http://www.w3.org/2000/svg"
+            role="img"
+            aria-label="NILILIA"
             className="h-7 w-auto"
-          />
+          >
+            <text
+              x="160"
+              y="62"
+              textAnchor="middle"
+              fontFamily="var(--font-inter), 'Inter', 'Helvetica Neue', Arial, sans-serif"
+              fontSize="40"
+              fontWeight="800"
+              fill="#0097FE"
+              letterSpacing="4"
+            >
+              NILILIA
+            </text>
+          </svg>
         </Link>
 
         {/* Center: Navigation */}

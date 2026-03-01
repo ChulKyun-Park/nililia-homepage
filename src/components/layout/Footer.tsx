@@ -42,9 +42,9 @@ const socialLinks = [
     label: "네이버 블로그",
     href: "#",
     icon: (
-      <svg className="h-5 w-5" viewBox="0 0 24 24" fill="none">
-        <circle cx="12" cy="12" r="12" fill="#03C75A" />
-        <path d="M6.5 7v10h3v-4.8L13.5 17h4V7h-3v4.8L10.5 7H6.5z" fill="white" />
+      <svg className="h-5 w-5" viewBox="0 0 20 20" fill="currentColor">
+        <path d="M3 1.5h2.2v5.2h.1C6 5.6 7.2 5 8.5 5c2.6 0 4.5 2 4.5 5s-1.9 5-4.5 5c-1.3 0-2.5-.6-3.2-1.7h-.1V14H3V1.5zm5 12c1.6 0 2.8-1.2 2.8-3.5S9.6 6.5 8 6.5 5.2 7.7 5.2 10s1.2 3.5 2.8 3.5z" />
+        <rect x="15.5" y="5" width="1.8" height="9" rx=".9" />
       </svg>
     ),
   },

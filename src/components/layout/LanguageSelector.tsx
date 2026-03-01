@@ -5,16 +5,16 @@ import { ChevronDown } from "lucide-react";
 import { cn } from "@/lib/utils";
 
 const languages = [
-  { code: "KR", label: "한국어", flag: "🇰🇷" },
-  { code: "EN", label: "English", flag: "🇺🇸" },
-  { code: "CN", label: "中文(简体)", flag: "🇨🇳" },
-  { code: "TW", label: "中文(繁體)", flag: "🇹🇼" },
-  { code: "JP", label: "日本語", flag: "🇯🇵" },
-  { code: "VN", label: "Tiếng Việt", flag: "🇻🇳" },
-  { code: "ES", label: "Español", flag: "🇪🇸" },
-  { code: "ID", label: "Bahasa Indonesia", flag: "🇮🇩" },
-  { code: "TH", label: "ภาษาไทย", flag: "🇹🇭" },
-  { code: "RU", label: "Русский", flag: "🇷🇺" },
+  { code: "KR", label: "한국어", flag: "https://flagcdn.com/w40/kr.png" },
+  { code: "EN", label: "English", flag: "https://flagcdn.com/w40/us.png" },
+  { code: "CN", label: "中文(简体)", flag: "https://flagcdn.com/w40/cn.png" },
+  { code: "TW", label: "中文(繁體)", flag: "https://flagcdn.com/w40/tw.png" },
+  { code: "JP", label: "日本語", flag: "https://flagcdn.com/w40/jp.png" },
+  { code: "VN", label: "Tiếng Việt", flag: "https://flagcdn.com/w40/vn.png" },
+  { code: "ES", label: "Español", flag: "https://flagcdn.com/w40/es.png" },
+  { code: "ID", label: "Bahasa Indonesia", flag: "https://flagcdn.com/w40/id.png" },
+  { code: "TH", label: "ภาษาไทย", flag: "https://flagcdn.com/w40/th.png" },
+  { code: "RU", label: "Русский", flag: "https://flagcdn.com/w40/ru.png" },
 ];
 
 interface LanguageSelectorProps {
@@ -64,7 +64,7 @@ export default function LanguageSelector({
                 : "bg-surface text-muted hover:bg-border hover:text-foreground",
             )}
           >
-            <span className="text-base leading-none">{lang.flag}</span>
+            <img src={lang.flag} alt={lang.code} className="h-4 w-6 rounded-sm object-cover" loading="eager" />
           </button>
         ))}
       </div>
@@ -79,7 +79,7 @@ export default function LanguageSelector({
         onClick={() => setOpen((v) => !v)}
         className="inline-flex items-center gap-1.5 rounded-lg px-3 py-2 text-sm font-medium text-muted transition-colors hover:text-foreground"
       >
-        <span className="text-base leading-none">{selected.flag}</span>
+        <img src={selected.flag} alt={selected.code} className="h-4 w-6 rounded-sm object-cover" loading="eager" />
         <ChevronDown
           className={cn(
             "h-3.5 w-3.5 transition-transform",
@@ -103,7 +103,7 @@ export default function LanguageSelector({
               )}
             >
               <span className="inline-flex items-center gap-2">
-                <span className="text-base leading-none">{lang.flag}</span>
+                <img src={lang.flag} alt={lang.code} className="h-4 w-6 rounded-sm object-cover" loading="eager" />
                 <span>{lang.label}</span>
               </span>
               <span className="text-xs text-muted">{lang.code}</span>

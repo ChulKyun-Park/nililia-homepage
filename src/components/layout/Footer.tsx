@@ -1,12 +1,17 @@
 import Link from "next/link";
 import { Phone, Mail, MessageSquare } from "lucide-react";
 
-const serviceLinks = [
-  { label: "번역 및 로컬리제이션", href: "/services" },
+const translationLinks = [
   { label: "영상 번역", href: "/services" },
   { label: "문서 번역", href: "/services" },
-  { label: "웹/앱 현지화", href: "/services" },
-  { label: "게임 현지화", href: "/services" },
+  { label: "웹소설 · 웹툰 번역", href: "/services" },
+  { label: "게임 번역", href: "/services" },
+  { label: "SDH 자막 제작", href: "/services" },
+];
+
+const techLinks = [
+  { label: "TMS", href: "/services" },
+  { label: "MTPE", href: "/services" },
 ];
 
 const familySites = [
@@ -35,17 +40,32 @@ export default function Footer() {
               </ul>
             </div>
 
-            {/* Column 2: Services */}
+            {/* Column 2: Services (번역 + 기술 분리) */}
             <div>
-              <h3 className="mb-5 text-sm font-semibold uppercase tracking-wider text-white/40">
-                서비스
-              </h3>
-              <ul className="space-y-2.5">
-                {serviceLinks.map((link) => (
+              <h4 className="mb-3 text-xs font-semibold uppercase tracking-wider text-white/40">
+                번역 · 현지화
+              </h4>
+              <ul className="space-y-2">
+                {translationLinks.map((link) => (
                   <li key={link.label}>
                     <Link
                       href={link.href}
-                      className="text-sm text-white/60 transition-colors hover:text-primary"
+                      className="text-[length:var(--font-size-footer)] text-white/60 transition-colors hover:text-primary"
+                    >
+                      {link.label}
+                    </Link>
+                  </li>
+                ))}
+              </ul>
+              <h4 className="mb-3 mt-5 text-xs font-semibold uppercase tracking-wider text-white/40">
+                기술
+              </h4>
+              <ul className="space-y-2">
+                {techLinks.map((link) => (
+                  <li key={link.label}>
+                    <Link
+                      href={link.href}
+                      className="text-[length:var(--font-size-footer)] text-white/60 transition-colors hover:text-primary"
                     >
                       {link.label}
                     </Link>

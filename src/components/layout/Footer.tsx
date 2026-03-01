@@ -9,11 +9,6 @@ const translationLinks = [
   { label: "SDH 자막 제작", href: "/services" },
 ];
 
-const techLinks = [
-  { label: "TMS", href: "/services" },
-  { label: "MTPE", href: "/services" },
-];
-
 const familySites = [
   { label: "CONTENTSFLY", href: "#" },
   { label: "CONTENTSFLYS", href: "#" },
@@ -26,7 +21,7 @@ export default function Footer() {
       <footer className="border-t border-border bg-surface text-foreground">
         <div className="mx-auto max-w-7xl px-6">
           {/* 4-column grid */}
-          <div className="grid grid-cols-1 gap-10 py-16 sm:grid-cols-2 lg:grid-cols-4">
+          <div className="grid grid-cols-1 gap-10 py-16 sm:grid-cols-2 lg:grid-cols-[2fr_1fr_1fr_1.8fr]">
             {/* Column 1: Company Info */}
             <div>
               <h3 className="mb-5 text-lg font-bold text-foreground">
@@ -40,28 +35,13 @@ export default function Footer() {
               </ul>
             </div>
 
-            {/* Column 2: Services (번역 + 기술 분리) */}
+            {/* Column 2: Services */}
             <div>
-              <h4 className="mb-3 text-xs font-semibold uppercase tracking-wider text-muted">
+              <h3 className="mb-5 text-sm font-semibold uppercase tracking-wider text-muted">
                 번역 · 현지화
-              </h4>
+              </h3>
               <ul className="space-y-2">
                 {translationLinks.map((link) => (
-                  <li key={link.label}>
-                    <Link
-                      href={link.href}
-                      className="text-[length:var(--font-size-footer)] text-muted transition-colors hover:text-primary"
-                    >
-                      {link.label}
-                    </Link>
-                  </li>
-                ))}
-              </ul>
-              <h4 className="mb-3 mt-5 text-xs font-semibold uppercase tracking-wider text-muted">
-                기술
-              </h4>
-              <ul className="space-y-2">
-                {techLinks.map((link) => (
                   <li key={link.label}>
                     <Link
                       href={link.href}

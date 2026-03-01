@@ -276,13 +276,13 @@ export default function Hero() {
 
           <div className="relative hidden lg:block" style={{ width: 760, height: 420 }}>
             <div className="pointer-events-none absolute z-40 rounded-xl border border-primary/10 bg-white px-5 py-2.5 text-sm font-bold text-gray-400 shadow-[0_8px_24px_rgba(0,0,0,0.05)]"
-              style={{ top: 75, left: 42, animation: "float-s 3.5s ease-in-out infinite 0s" }}>こんにちは</div>
+              style={{ top: 130, left: 32, animation: "float-s 3.5s ease-in-out infinite 0s" }}>こんにちは</div>
             <div className="pointer-events-none absolute z-40 rounded-xl border border-primary/10 bg-white px-5 py-2.5 text-sm font-bold text-gray-400 shadow-[0_8px_24px_rgba(0,0,0,0.05)]"
               style={{ bottom: 35, left: 42, animation: "float-s 3.8s ease-in-out infinite 0.5s" }}>¡Hola!</div>
             <div className="pointer-events-none absolute z-40 rounded-xl border border-primary/10 bg-white px-5 py-2.5 text-sm font-bold text-gray-400 shadow-[0_8px_24px_rgba(0,0,0,0.05)]"
               style={{ top: 68, right: 22, animation: "float-s 4s ease-in-out infinite 1s" }}>Thank you</div>
             <div className="pointer-events-none absolute z-40 rounded-xl border border-primary/10 bg-white px-5 py-2.5 text-sm font-bold text-gray-400 shadow-[0_8px_24px_rgba(0,0,0,0.05)]"
-              style={{ bottom: 30, right: 22, animation: "float-s 3.6s ease-in-out infinite 1.5s" }}>สวัสดี</div>
+              style={{ bottom: 55, right: 50, animation: "float-s 3.6s ease-in-out infinite 1.5s" }}>สวัสดี</div>
 
             <div className="absolute" style={{ top: 10, left: 30, width: 700, height: 400, borderRadius: 20, overflow: "hidden" }}>
               <CardAnimation />

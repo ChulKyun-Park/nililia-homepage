@@ -21,36 +21,30 @@ const services: ServiceItem[] = [
 
 /*
  * Greetings positioned OUTSIDE the conveyor container.
- * The container has overflow:hidden, so these go on the parent wrapper.
- *
- * こんにちは — top-left outside
- * Hola       — top-right outside
- * Thank you  — right outside
- * 올라       — left outside
+ * White balloon/tag style with shadow (ref: FloatingTag from nililia repo).
  */
 const greetings = [
-  { text: "こんにちは", className: "-top-7 -left-2 text-lg" },
-  { text: "Hola", className: "-top-7 -right-2 text-base" },
-  { text: "Thank you", className: "top-1/3 -right-24 text-sm" },
-  { text: "안녕하세요", className: "top-2/3 -left-20 text-sm" },
+  { text: "こんにちは", pos: "-top-5 -left-4", delay: "0s" },
+  { text: "Hola", pos: "-top-5 -right-4", delay: "0.5s" },
+  { text: "Thank you", pos: "top-1/3 -right-28", delay: "1s" },
+  { text: "안녕하세요", pos: "top-2/3 -left-24", delay: "1.5s" },
 ];
 
 /*
- * Slot-based conveyor belt — clockwise, one slot per tick
+ * Slot-based conveyor belt — "bottom-to-top" visible motion
  *
  * 2×2 grid (clockwise order):
  *   [0] top-left   [1] top-right
  *   [3] bot-left   [2] bot-right
  *
  * Every 2.8s one tick fires:
- *   slot 0 → slot 1  (slide right)
- *   slot 1 → slot 2  (slide down)
- *   slot 2 → exits   (slide down out of view)
- *   slot 3 → slot 0  (slide up)
- *   new card → slot 3 (enters from below)
+ *   slot 3 → slot 0  (SLIDE UP — visible transition)
+ *   new card → slot 3 (SLIDE IN from below — visible transition)
+ *   slot 0 → slot 1  (INSTANT — no transition)
+ *   slot 1 → slot 2  (INSTANT — no transition)
+ *   slot 2 → exits   (INSTANT — removed immediately)
  *
- * ⚠️ This is NOT all-4-swap. All cards physically slide one position
- *    clockwise simultaneously with 0.45s CSS transition.
+ * The user only sees cards sliding upward from bottom-left.
  */
 
 /* ── Absolute position for each slot within the container ── */
@@ -75,6 +69,7 @@ interface CardState {
   slot: number;
   exiting: boolean;
   entering: boolean; // true = placed at ENTER_POS with no transition, then animated in
+  sliding: boolean; // true = this card slides with CSS transition (slot3→0)
 }
 
 function ConveyorBelt() {
@@ -82,27 +77,28 @@ function ConveyorBelt() {
   const nextRef = useRef(4 % services.length);
 
   const [cards, setCards] = useState<CardState[]>([
-    { key: 0, serviceIdx: 0, slot: 0, exiting: false, entering: false },
-    { key: 1, serviceIdx: 1, slot: 1, exiting: false, entering: false },
-    { key: 2, serviceIdx: 2, slot: 2, exiting: false, entering: false },
-    { key: 3, serviceIdx: 3, slot: 3, exiting: false, entering: false },
+    { key: 0, serviceIdx: 0, slot: 0, exiting: false, entering: false, sliding: false },
+    { key: 1, serviceIdx: 1, slot: 1, exiting: false, entering: false, sliding: false },
+    { key: 2, serviceIdx: 2, slot: 2, exiting: false, entering: false, sliding: false },
+    { key: 3, serviceIdx: 3, slot: 3, exiting: false, entering: false, sliding: false },
   ]);
 
   /* Two-phase entering animation:
    * 1. Card renders at ENTER_POS with transition:none (invisible below)
-   * 2. After browser paints, entering=false → card animates to slot 3 */
+   * 2. After browser paints, entering=false + sliding=true → card animates to slot 3 */
   useEffect(() => {
     const hasEntering = cards.some((c) => c.entering);
     if (!hasEntering) return;
 
     // Double rAF ensures the browser has painted the initial position
     const raf1 = requestAnimationFrame(() => {
-      const raf2 = requestAnimationFrame(() => {
+      requestAnimationFrame(() => {
         setCards((prev) =>
-          prev.map((c) => (c.entering ? { ...c, entering: false } : c)),
+          prev.map((c) =>
+            c.entering ? { ...c, entering: false, sliding: true } : c,
+          ),
         );
       });
-      // Clean up inner rAF is not needed as it fires synchronously in paint cycle
     });
 
     return () => cancelAnimationFrame(raf1);
@@ -123,24 +119,20 @@ function ConveyorBelt() {
       const s3 = atSlot(3);
 
       return [
-        { ...s3, slot: 0 }, // slot 3 → 0 (up)
-        { ...s0, slot: 1 }, // slot 0 → 1 (right)
-        { ...s1, slot: 2 }, // slot 1 → 2 (down)
-        { ...s2, exiting: true }, // slot 2 → exits
+        { ...s3, slot: 0, sliding: true }, // slot 3 → 0 (SLIDE UP)
+        { ...s0, slot: 1, sliding: false }, // slot 0 → 1 (instant)
+        { ...s1, slot: 2, sliding: false }, // slot 1 → 2 (instant)
+        // slot 2 removed instantly (no exit animation)
         {
           key: newKey,
           serviceIdx: nextIdx,
           slot: 3,
           exiting: false,
           entering: true,
-        }, // new → slot 3
+          sliding: false,
+        }, // new → slot 3 (SLIDE IN via entering two-phase)
       ];
     });
-
-    // Remove exiting card after transition completes
-    setTimeout(() => {
-      setCards((prev) => prev.filter((c) => !c.exiting));
-    }, 500);
   }, []);
 
   useEffect(() => {
@@ -150,14 +142,15 @@ function ConveyorBelt() {
 
   return (
     <div className="relative">
-      {/* Floating greetings — OUTSIDE the overflow:hidden container */}
+      {/* Floating greetings — balloon/tag style OUTSIDE the container */}
       {greetings.map((g) => (
-        <span
+        <div
           key={g.text}
-          className={`animate-float-slow absolute pointer-events-none select-none font-light text-primary/30 ${g.className}`}
+          className={`absolute ${g.pos} z-30 pointer-events-none select-none rounded-xl border border-border bg-white px-4 py-2 text-sm font-medium text-gray-500 shadow-md`}
+          style={{ animation: `floating-soft 4s ease-in-out infinite ${g.delay}` }}
         >
           {g.text}
-        </span>
+        </div>
       ))}
 
       {/* Conveyor belt container */}
@@ -167,27 +160,29 @@ function ConveyorBelt() {
           let pos: { top: string; left: string };
           let style: React.CSSProperties;
 
-          if (card.exiting) {
-            pos = EXIT_POS;
-            style = {
-              ...pos,
-              ...CARD_SIZE,
-              transition: TRANSITION,
-              opacity: 0,
-            };
-          } else if (card.entering) {
+          if (card.entering) {
+            // Phase 1: render at ENTER_POS with no transition
             pos = ENTER_POS;
             style = {
               ...pos,
               ...CARD_SIZE,
               transition: "none",
             };
-          } else {
+          } else if (card.sliding) {
+            // Sliding card (slot3→0 or entering→slot3): animate with transition
             pos = SLOT_POS[card.slot];
             style = {
               ...pos,
               ...CARD_SIZE,
               transition: TRANSITION,
+            };
+          } else {
+            // All other cards: instant position (no transition)
+            pos = SLOT_POS[card.slot];
+            style = {
+              ...pos,
+              ...CARD_SIZE,
+              transition: "none",
             };
           }
 

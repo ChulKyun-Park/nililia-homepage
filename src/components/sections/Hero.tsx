@@ -3,7 +3,7 @@
 import { useState, useEffect, useCallback, useRef } from "react";
 import Button from "@/components/ui/Button";
 
-/* ── Service card data ── */
+/* ── 6 services (no Chinese) ── */
 interface ServiceItem {
   icon: string;
   title: string;
@@ -11,131 +11,199 @@ interface ServiceItem {
 }
 
 const services: ServiceItem[] = [
-  { icon: "\uD83C\uDDE8\uD83C\uDDF3", title: "中文翻译", desc: "중국어 번역" },
-  { icon: "\u25B6", title: "영상 번역", desc: "자막 & 번역" },
-  { icon: "\uD83D\uDCC4", title: "문서 · 카탈로그", desc: "전문 번역" },
-  { icon: "\uD83D\uDCD6", title: "웹소설 · 웹툰", desc: "현지화" },
-  { icon: "\uD83D\uDCF1", title: "홈페이지 · 앱", desc: "디지털 최적화" },
-  { icon: "\uD83C\uDFAE", title: "게임", desc: "게임 현지화" },
-  { icon: "\u267F", title: "SDH · 배리어프리", desc: "접근성 자막" },
-];
-
-/* ── Floating greetings (background decoration) ── */
-const greetings = [
-  { text: "こんにちは", top: "15%", left: "20%", size: "text-xl", delay: "0s" },
-  { text: "Hola", top: "60%", left: "62%", size: "text-lg", delay: "1.2s" },
-  { text: "Thank you", top: "35%", left: "8%", size: "text-base", delay: "2.5s" },
-  { text: "你好", top: "72%", left: "38%", size: "text-xl", delay: "0.8s" },
+  { icon: "▶", title: "영상 번역", desc: "자막 & 번역" },
+  { icon: "📄", title: "문서 · 카탈로그", desc: "전문 번역" },
+  { icon: "📖", title: "웹소설 · 웹툰", desc: "현지화" },
+  { icon: "📱", title: "홈페이지 · 앱", desc: "디지털 최적화" },
+  { icon: "🎮", title: "게임", desc: "게임 현지화" },
+  { icon: "♿", title: "SDH · 배리어프리", desc: "접근성 자막" },
 ];
 
 /*
- * Slot-based conveyor belt animation
+ * Greetings positioned OUTSIDE the conveyor container.
+ * The container has overflow:hidden, so these go on the parent wrapper.
  *
- * 4 visible slots arranged in a 2×2 grid:
+ * こんにちは — top-left outside
+ * Hola       — top-right outside
+ * Thank you  — right outside
+ * 올라       — left outside
+ */
+const greetings = [
+  { text: "こんにちは", className: "-top-7 -left-2 text-lg" },
+  { text: "Hola", className: "-top-7 -right-2 text-base" },
+  { text: "Thank you", className: "top-1/3 -right-24 text-sm" },
+  { text: "안녕하세요", className: "top-2/3 -left-20 text-sm" },
+];
+
+/*
+ * Slot-based conveyor belt — clockwise, one slot per tick
+ *
+ * 2×2 grid (clockwise order):
  *   [0] top-left   [1] top-right
  *   [3] bot-left   [2] bot-right
  *
- * Every ~2.5s all cards shift one slot clockwise:
- *   Slot 0 → 1, Slot 1 → 2, Slot 2 → 3, Slot 3 → 0
- * The card leaving slot 2→3 actually exits downward,
- * and a new card enters from below into slot 3's position.
+ * Every 2.8s one tick fires:
+ *   slot 0 → slot 1  (slide right)
+ *   slot 1 → slot 2  (slide down)
+ *   slot 2 → exits   (slide down out of view)
+ *   slot 3 → slot 0  (slide up)
+ *   new card → slot 3 (enters from below)
  *
- * We use CSS grid + translate for the snap animation.
+ * ⚠️ This is NOT all-4-swap. All cards physically slide one position
+ *    clockwise simultaneously with 0.45s CSS transition.
  */
 
-/* Grid slot positions (row, col) for a 2-col layout */
-const SLOT_POSITIONS = [
-  { row: 0, col: 0 }, // 0: top-left
-  { row: 0, col: 1 }, // 1: top-right
-  { row: 1, col: 1 }, // 2: bot-right
-  { row: 1, col: 0 }, // 3: bot-left
-];
+/* ── Absolute position for each slot within the container ── */
+const SLOT_POS: Record<number, { top: string; left: string }> = {
+  0: { top: "0px", left: "0px" },
+  1: { top: "0px", left: "calc(50% + 6px)" },
+  2: { top: "calc(50% + 6px)", left: "calc(50% + 6px)" },
+  3: { top: "calc(50% + 6px)", left: "0px" },
+};
+
+/* Exit: below bot-right (slot 2 x-position) */
+const EXIT_POS = { top: "calc(100% + 20px)", left: "calc(50% + 6px)" };
+/* Enter: below bot-left (slot 3 x-position) */
+const ENTER_POS = { top: "calc(100% + 20px)", left: "0px" };
+
+const CARD_SIZE = { width: "calc(50% - 6px)", height: "calc(50% - 6px)" };
+const TRANSITION = "top 0.45s cubic-bezier(0.25,0.46,0.45,0.94), left 0.45s cubic-bezier(0.25,0.46,0.45,0.94), opacity 0.45s ease";
+
+interface CardState {
+  key: number;
+  serviceIdx: number;
+  slot: number;
+  exiting: boolean;
+  entering: boolean; // true = placed at ENTER_POS with no transition, then animated in
+}
 
 function ConveyorBelt() {
-  // Track which 4 services are currently visible (by index into services[])
-  const [visibleIndices, setVisibleIndices] = useState([0, 1, 2, 3]);
-  // Track slot assignments: slotCards[slotIndex] = serviceIndex
-  const [slotCards, setSlotCards] = useState([0, 1, 2, 3]);
-  // For enter/exit animation states
-  const [transitioning, setTransitioning] = useState(false);
-  // Track the next service to bring in
-  const nextServiceRef = useRef(4);
-  // Track exiting card info
-  const [exitingCard, setExitingCard] = useState<{ serviceIdx: number; fromSlot: number } | null>(null);
-  const [enteringCard, setEnteringCard] = useState<{ serviceIdx: number; toSlot: number } | null>(null);
+  const keyRef = useRef(4);
+  const nextRef = useRef(4 % services.length);
 
-  const advanceSlot = useCallback(() => {
-    setTransitioning(true);
+  const [cards, setCards] = useState<CardState[]>([
+    { key: 0, serviceIdx: 0, slot: 0, exiting: false, entering: false },
+    { key: 1, serviceIdx: 1, slot: 1, exiting: false, entering: false },
+    { key: 2, serviceIdx: 2, slot: 2, exiting: false, entering: false },
+    { key: 3, serviceIdx: 3, slot: 3, exiting: false, entering: false },
+  ]);
 
-    const nextIdx = nextServiceRef.current % services.length;
-    nextServiceRef.current = (nextServiceRef.current + 1) % services.length;
+  /* Two-phase entering animation:
+   * 1. Card renders at ENTER_POS with transition:none (invisible below)
+   * 2. After browser paints, entering=false → card animates to slot 3 */
+  useEffect(() => {
+    const hasEntering = cards.some((c) => c.entering);
+    if (!hasEntering) return;
 
-    setSlotCards((prev) => {
-      // Current mapping: slot0=A, slot1=B, slot2=C, slot3=D
-      // After clockwise shift: slot0=D(from3), slot1=A(from0), slot2=B(from1), slot3=new
-      // Card in slot2 exits, new card enters at slot3
-      const exiting = prev[2]; // card currently at bot-right exits
-      setExitingCard({ serviceIdx: exiting, fromSlot: 2 });
-      setEnteringCard({ serviceIdx: nextIdx, toSlot: 3 });
+    // Double rAF ensures the browser has painted the initial position
+    const raf1 = requestAnimationFrame(() => {
+      const raf2 = requestAnimationFrame(() => {
+        setCards((prev) =>
+          prev.map((c) => (c.entering ? { ...c, entering: false } : c)),
+        );
+      });
+      // Clean up inner rAF is not needed as it fires synchronously in paint cycle
+    });
+
+    return () => cancelAnimationFrame(raf1);
+  }, [cards]);
+
+  const advance = useCallback(() => {
+    const nextIdx = nextRef.current;
+    nextRef.current = (nextRef.current + 1) % services.length;
+    const newKey = keyRef.current++;
+
+    setCards((prev) => {
+      const atSlot = (s: number) =>
+        prev.find((c) => c.slot === s && !c.exiting)!;
+
+      const s0 = atSlot(0);
+      const s1 = atSlot(1);
+      const s2 = atSlot(2);
+      const s3 = atSlot(3);
 
       return [
-        prev[3], // slot 0 ← was slot 3
-        prev[0], // slot 1 ← was slot 0
-        prev[1], // slot 2 ← was slot 1
-        nextIdx,  // slot 3 ← new card
+        { ...s3, slot: 0 }, // slot 3 → 0 (up)
+        { ...s0, slot: 1 }, // slot 0 → 1 (right)
+        { ...s1, slot: 2 }, // slot 1 → 2 (down)
+        { ...s2, exiting: true }, // slot 2 → exits
+        {
+          key: newKey,
+          serviceIdx: nextIdx,
+          slot: 3,
+          exiting: false,
+          entering: true,
+        }, // new → slot 3
       ];
     });
 
-    // Clear transition state after animation completes
+    // Remove exiting card after transition completes
     setTimeout(() => {
-      setTransitioning(false);
-      setExitingCard(null);
-      setEnteringCard(null);
+      setCards((prev) => prev.filter((c) => !c.exiting));
     }, 500);
   }, []);
 
   useEffect(() => {
-    const interval = setInterval(advanceSlot, 2800);
+    const interval = setInterval(advance, 2800);
     return () => clearInterval(interval);
-  }, [advanceSlot]);
+  }, [advance]);
 
   return (
-    <div className="relative h-[340px] w-[400px] overflow-hidden rounded-2xl border border-dark-border bg-dark-card/30 p-4">
-      {/* Background floating greetings */}
+    <div className="relative">
+      {/* Floating greetings — OUTSIDE the overflow:hidden container */}
       {greetings.map((g) => (
         <span
           key={g.text}
-          className={`animate-float absolute font-light text-white/[0.08] ${g.size} pointer-events-none select-none`}
-          style={{
-            top: g.top,
-            left: g.left,
-            animationDelay: g.delay,
-            animationDuration: `${3 + Math.random() * 2}s`,
-          }}
+          className={`animate-float-slow absolute pointer-events-none select-none font-light text-primary/30 ${g.className}`}
         >
           {g.text}
         </span>
       ))}
 
-      {/* 2×2 grid of service cards */}
-      <div className="relative grid h-full grid-cols-2 grid-rows-2 gap-3">
-        {SLOT_POSITIONS.map((pos, slotIdx) => {
-          const serviceIdx = slotCards[slotIdx];
-          const service = services[serviceIdx];
+      {/* Conveyor belt container */}
+      <div className="relative h-[340px] w-[400px] overflow-hidden rounded-2xl border border-border bg-surface/50">
+        {cards.map((card) => {
+          const service = services[card.serviceIdx];
+          let pos: { top: string; left: string };
+          let style: React.CSSProperties;
+
+          if (card.exiting) {
+            pos = EXIT_POS;
+            style = {
+              ...pos,
+              ...CARD_SIZE,
+              transition: TRANSITION,
+              opacity: 0,
+            };
+          } else if (card.entering) {
+            pos = ENTER_POS;
+            style = {
+              ...pos,
+              ...CARD_SIZE,
+              transition: "none",
+            };
+          } else {
+            pos = SLOT_POS[card.slot];
+            style = {
+              ...pos,
+              ...CARD_SIZE,
+              transition: TRANSITION,
+            };
+          }
+
           return (
             <div
-              key={`slot-${slotIdx}-${serviceIdx}`}
-              className="conveyor-slot-card z-10 flex flex-col rounded-2xl border border-white/15 bg-white/[0.07] p-4 backdrop-blur-sm"
-              style={{
-                gridRow: pos.row + 1,
-                gridColumn: pos.col + 1,
-              }}
+              key={card.key}
+              className="absolute flex flex-col rounded-2xl border border-primary/10 bg-white p-4 shadow-sm"
+              style={style}
             >
-              <div className="mb-3 flex h-10 w-10 items-center justify-center rounded-lg bg-primary text-lg text-white shadow-lg">
+              <div className="mb-3 flex h-10 w-10 items-center justify-center rounded-xl bg-primary text-lg text-white">
                 {service.icon}
               </div>
-              <p className="text-sm font-bold text-white">{service.title}</p>
-              <p className="mt-1 text-xs text-white/50">{service.desc}</p>
+              <p className="text-sm font-bold text-gray-900">
+                {service.title}
+              </p>
+              <p className="mt-1 text-xs text-gray-500">{service.desc}</p>
             </div>
           );
         })}
@@ -146,26 +214,26 @@ function ConveyorBelt() {
 
 export default function Hero() {
   return (
-    <section className="relative flex min-h-[70vh] items-center overflow-hidden bg-dark-bg">
-      {/* Background effects */}
+    <section className="relative flex min-h-[70vh] items-center bg-white">
+      {/* Subtle background gradient */}
       <div className="absolute inset-0">
-        <div className="absolute inset-0 bg-[radial-gradient(ellipse_at_20%_50%,_rgba(0,151,254,0.12)_0%,_transparent_60%)]" />
-        <div className="absolute inset-0 bg-[radial-gradient(ellipse_at_80%_20%,_rgba(0,151,254,0.08)_0%,_transparent_50%)]" />
+        <div className="absolute inset-0 bg-[radial-gradient(ellipse_at_20%_50%,_rgba(0,151,254,0.06)_0%,_transparent_60%)]" />
+        <div className="absolute inset-0 bg-[radial-gradient(ellipse_at_80%_20%,_rgba(0,151,254,0.04)_0%,_transparent_50%)]" />
       </div>
 
       <div className="relative mx-auto flex max-w-7xl items-center px-6 py-20 lg:py-24">
         <div className="grid w-full items-center gap-12 lg:grid-cols-2 lg:gap-16">
           {/* Left: Text */}
           <div>
-            <h1 className="text-4xl font-bold leading-tight tracking-tight text-white sm:text-5xl lg:text-[length:var(--font-size-hero-h1)] break-keep">
+            <h1 className="text-4xl font-bold leading-tight tracking-tight text-foreground sm:text-5xl lg:text-[length:var(--font-size-hero-h1)] break-keep">
               여러분의 콘텐츠에
               <br />
               <span className="text-primary">날개를 달아줍니다</span>
             </h1>
-            <p className="mt-6 max-w-lg text-[length:var(--font-size-hero-sub)] leading-relaxed text-white/60 break-keep">
+            <p className="mt-6 max-w-lg text-[length:var(--font-size-hero-sub)] leading-relaxed text-muted break-keep">
               전문 번역과 현지화 서비스로 글로벌 시장 진출을 지원합니다.
             </p>
-            <p className="mt-2 max-w-lg text-[length:var(--font-size-hero-sub)] leading-relaxed text-white/60 break-keep">
+            <p className="mt-2 max-w-lg text-[length:var(--font-size-hero-sub)] leading-relaxed text-muted break-keep">
               AI 기술과 전문가의 노하우로 최상의 품질을 보장합니다.
             </p>
             <div className="mt-10 flex flex-wrap gap-4">
@@ -179,7 +247,7 @@ export default function Hero() {
               <Button
                 href="/services"
                 variant="outline"
-                className="border-white/20 px-8 py-4 text-[length:var(--font-size-cta-button)] text-white hover:bg-white/10"
+                className="border-border px-8 py-4 text-[length:var(--font-size-cta-button)] text-foreground hover:bg-surface"
               >
                 서비스 알아보기
               </Button>

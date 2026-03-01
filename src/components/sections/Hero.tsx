@@ -276,13 +276,13 @@ export default function Hero() {
 
           <div className="relative hidden lg:block" style={{ width: 760, height: 420 }}>
             <div className="pointer-events-none absolute z-40 rounded-xl border border-primary/10 bg-white px-3 py-1.5 text-xs font-bold text-gray-400 shadow-[0_8px_24px_rgba(0,0,0,0.05)]"
-              style={{ top: 5, left: 0, animation: "float-s 3.5s ease-in-out infinite 0s" }}>こんにちは</div>
+              style={{ top: 18, left: 40, animation: "float-s 3.5s ease-in-out infinite 0s" }}>こんにちは</div>
             <div className="pointer-events-none absolute z-40 rounded-xl border border-primary/10 bg-white px-3 py-1.5 text-xs font-bold text-gray-400 shadow-[0_8px_24px_rgba(0,0,0,0.05)]"
-              style={{ bottom: 0, left: 0, animation: "float-s 3.8s ease-in-out infinite 0.5s" }}>¡Hola!</div>
+              style={{ bottom: 18, left: 40, animation: "float-s 3.8s ease-in-out infinite 0.5s" }}>¡Hola!</div>
             <div className="pointer-events-none absolute z-40 rounded-xl border border-primary/10 bg-white px-3 py-1.5 text-xs font-bold text-gray-400 shadow-[0_8px_24px_rgba(0,0,0,0.05)]"
-              style={{ top: 5, right: 0, animation: "float-s 4s ease-in-out infinite 1s" }}>Thank you</div>
+              style={{ top: 18, right: 18, animation: "float-s 4s ease-in-out infinite 1s" }}>Thank you</div>
             <div className="pointer-events-none absolute z-40 rounded-xl border border-primary/10 bg-white px-3 py-1.5 text-xs font-bold text-gray-400 shadow-[0_8px_24px_rgba(0,0,0,0.05)]"
-              style={{ bottom: 0, right: 0, animation: "float-s 3.6s ease-in-out infinite 1.5s" }}>안녕하세요</div>
+              style={{ bottom: 18, right: 18, animation: "float-s 3.6s ease-in-out infinite 1.5s" }}>Halo!</div>
 
             <div className="absolute" style={{ top: 10, left: 30, width: 700, height: 400, borderRadius: 20, overflow: "hidden" }}>
               <CardAnimation />

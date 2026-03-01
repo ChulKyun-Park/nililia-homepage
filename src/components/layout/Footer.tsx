@@ -77,7 +77,7 @@ export default function Footer() {
           <div className="grid grid-cols-1 gap-5 py-8 sm:grid-cols-2 lg:grid-cols-[2fr_1fr_1fr_1.8fr]">
             {/* Column 1: Company Info */}
             <div>
-              <h3 className="mb-3 text-base font-bold text-foreground">
+              <h3 className="mb-5 text-base font-bold text-foreground">
                 (주)닐리리아
               </h3>
               <ul className="space-y-1 text-[length:var(--font-size-footer)] leading-relaxed text-muted">
@@ -121,7 +121,7 @@ export default function Footer() {
             {/* Column 2: Services */}
             <div>
               <h3 className="mb-3 text-base font-bold text-foreground">
-                번역 · 현지화
+                Services
               </h3>
               <ul className="space-y-1">
                 {serviceLinks.map((link) => (
@@ -140,7 +140,7 @@ export default function Footer() {
             {/* Column 3: Family Sites */}
             <div>
               <h3 className="mb-3 text-base font-bold text-foreground">
-                패밀리 사이트
+                Family Sites
               </h3>
               <ul className="space-y-1">
                 {familySites.map((link) => (
@@ -159,9 +159,9 @@ export default function Footer() {
             {/* Column 4: Contact */}
             <div>
               <h3 className="mb-3 text-base font-bold text-foreground">
-                문의하기
+                Contact
               </h3>
-              <p className="mb-2 text-xs text-muted">
+              <p className="mb-2 text-sm text-muted">
                 문의 가능 시간 : 10:00 ~ 19:00
               </p>
               <ul className="space-y-2 text-sm">

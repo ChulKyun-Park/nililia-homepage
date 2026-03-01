@@ -5,16 +5,16 @@ import { ChevronDown } from "lucide-react";
 import { cn } from "@/lib/utils";
 
 const languages = [
-  { code: "KR", label: "한국어" },
-  { code: "EN", label: "English" },
-  { code: "CN", label: "中文(简体)" },
-  { code: "TW", label: "中文(繁體)" },
-  { code: "JP", label: "日本語" },
-  { code: "VN", label: "Tiếng Việt" },
-  { code: "ES", label: "Español" },
-  { code: "ID", label: "Bahasa Indonesia" },
-  { code: "TH", label: "ภาษาไทย" },
-  { code: "RU", label: "Русский" },
+  { code: "KR", label: "한국어", flag: "🇰🇷" },
+  { code: "EN", label: "English", flag: "🇺🇸" },
+  { code: "CN", label: "中文(简体)", flag: "🇨🇳" },
+  { code: "TW", label: "中文(繁體)", flag: "🇹🇼" },
+  { code: "JP", label: "日本語", flag: "🇯🇵" },
+  { code: "VN", label: "Tiếng Việt", flag: "🇻🇳" },
+  { code: "ES", label: "Español", flag: "🇪🇸" },
+  { code: "ID", label: "Bahasa Indonesia", flag: "🇮🇩" },
+  { code: "TH", label: "ภาษาไทย", flag: "🇹🇭" },
+  { code: "RU", label: "Русский", flag: "🇷🇺" },
 ];
 
 interface LanguageSelectorProps {
@@ -64,9 +64,7 @@ export default function LanguageSelector({
                 : "bg-surface text-muted hover:bg-border hover:text-foreground",
             )}
           >
-            <span className="flex h-5 w-5 items-center justify-center rounded-full bg-primary/10 text-[10px] font-bold text-primary">
-              {lang.code}
-            </span>
+            <span className="text-base leading-none">{lang.flag}</span>
           </button>
         ))}
       </div>
@@ -81,9 +79,7 @@ export default function LanguageSelector({
         onClick={() => setOpen((v) => !v)}
         className="inline-flex items-center gap-1.5 rounded-lg px-3 py-2 text-sm font-medium text-muted transition-colors hover:text-foreground"
       >
-        <span className="flex h-5 w-5 items-center justify-center rounded-full bg-primary/10 text-[10px] font-bold text-primary">
-          {selected.code}
-        </span>
+        <span className="text-base leading-none">{selected.flag}</span>
         <ChevronDown
           className={cn(
             "h-3.5 w-3.5 transition-transform",
@@ -107,9 +103,7 @@ export default function LanguageSelector({
               )}
             >
               <span className="inline-flex items-center gap-2">
-                <span className="flex h-5 w-5 items-center justify-center rounded-full bg-primary/10 text-[10px] font-bold text-primary">
-                  {lang.code}
-                </span>
+                <span className="text-base leading-none">{lang.flag}</span>
                 <span>{lang.label}</span>
               </span>
               <span className="text-xs text-muted">{lang.code}</span>

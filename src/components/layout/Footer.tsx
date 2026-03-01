@@ -74,13 +74,13 @@ export default function Footer() {
       <footer className="border-t border-border bg-surface text-foreground">
         <div className="mx-auto max-w-7xl px-6">
           {/* 4-column grid */}
-          <div className="grid grid-cols-1 gap-6 py-10 sm:grid-cols-2 lg:grid-cols-[2fr_1fr_1fr_1.8fr]">
+          <div className="grid grid-cols-1 gap-5 py-8 sm:grid-cols-2 lg:grid-cols-[2fr_1fr_1fr_1.8fr]">
             {/* Column 1: Company Info */}
             <div>
-              <h3 className="mb-4 text-lg font-bold text-foreground">
+              <h3 className="mb-2 text-lg font-bold text-foreground">
                 (주)닐릴리아
               </h3>
-              <ul className="space-y-2 text-[length:var(--font-size-footer)] leading-relaxed text-muted">
+              <ul className="space-y-1 text-[length:var(--font-size-footer)] leading-relaxed text-muted">
                 <li>경기도 안양시 동안구 시민대로 327번길 11-41, 6층</li>
                 <li>대표자 : 박철균 | 사업자 등록번호 : 481-81-00251</li>
                 <li>
@@ -95,13 +95,13 @@ export default function Footer() {
               </ul>
 
               {/* Copyright */}
-              <p className="mt-4 text-xs text-muted">
+              <p className="mt-2 text-xs text-muted">
                 &copy; {new Date().getFullYear()} Nililia Inc. All rights
                 reserved.
               </p>
 
               {/* SNS Icons */}
-              <div className="mt-3 flex items-center gap-3">
+              <div className="mt-2 flex items-center gap-3">
                 {socialLinks.map((social) => (
                   <a
                     key={social.label}
@@ -119,10 +119,10 @@ export default function Footer() {
 
             {/* Column 2: Services */}
             <div>
-              <h3 className="mb-4 text-sm font-semibold uppercase tracking-wider text-muted">
+              <h3 className="mb-2 text-sm font-semibold uppercase tracking-wider text-muted">
                 번역 · 현지화
               </h3>
-              <ul className="space-y-2">
+              <ul className="space-y-1">
                 {serviceLinks.map((link) => (
                   <li key={link.label}>
                     <Link
@@ -138,10 +138,10 @@ export default function Footer() {
 
             {/* Column 3: Family Sites */}
             <div>
-              <h3 className="mb-4 text-sm font-semibold uppercase tracking-wider text-muted">
+              <h3 className="mb-2 text-sm font-semibold uppercase tracking-wider text-muted">
                 패밀리 사이트
               </h3>
-              <ul className="space-y-2.5">
+              <ul className="space-y-1">
                 {familySites.map((link) => (
                   <li key={link.label}>
                     <Link
@@ -157,13 +157,13 @@ export default function Footer() {
 
             {/* Column 4: Contact */}
             <div>
-              <h3 className="mb-4 text-sm font-semibold uppercase tracking-wider text-muted">
+              <h3 className="mb-2 text-sm font-semibold uppercase tracking-wider text-muted">
                 문의하기
               </h3>
-              <p className="mb-4 text-xs text-muted">
+              <p className="mb-2 text-xs text-muted">
                 문의 가능 시간 : 10:00 ~ 19:00
               </p>
-              <ul className="space-y-3 text-sm">
+              <ul className="space-y-2 text-sm">
                 <li className="flex items-center gap-2 text-muted">
                   <Phone className="h-4 w-4 text-primary/60" />
                   <span>번역 문의</span>

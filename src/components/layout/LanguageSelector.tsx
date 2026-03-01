@@ -5,16 +5,16 @@ import { ChevronDown } from "lucide-react";
 import { cn } from "@/lib/utils";
 
 const languages = [
-  { code: "KR", label: "한국어", flag: "\u{1F1F0}\u{1F1F7}" },
-  { code: "EN", label: "English", flag: "\u{1F1FA}\u{1F1F8}" },
-  { code: "CN", label: "中文(简体)", flag: "\u{1F1E8}\u{1F1F3}" },
-  { code: "TW", label: "中文(繁體)", flag: "\u{1F1F9}\u{1F1FC}" },
-  { code: "JP", label: "日本語", flag: "\u{1F1EF}\u{1F1F5}" },
-  { code: "VN", label: "Tiếng Việt", flag: "\u{1F1FB}\u{1F1F3}" },
-  { code: "ES", label: "Español", flag: "\u{1F1EA}\u{1F1F8}" },
-  { code: "ID", label: "Bahasa Indonesia", flag: "\u{1F1EE}\u{1F1E9}" },
-  { code: "TH", label: "ภาษาไทย", flag: "\u{1F1F9}\u{1F1ED}" },
-  { code: "RU", label: "Русский", flag: "\u{1F1F7}\u{1F1FA}" },
+  { code: "KR", label: "한국어" },
+  { code: "EN", label: "English" },
+  { code: "CN", label: "中文(简体)" },
+  { code: "TW", label: "中文(繁體)" },
+  { code: "JP", label: "日本語" },
+  { code: "VN", label: "Tiếng Việt" },
+  { code: "ES", label: "Español" },
+  { code: "ID", label: "Bahasa Indonesia" },
+  { code: "TH", label: "ภาษาไทย" },
+  { code: "RU", label: "Русский" },
 ];
 
 interface LanguageSelectorProps {
@@ -64,8 +64,9 @@ export default function LanguageSelector({
                 : "bg-surface text-muted hover:bg-border hover:text-foreground",
             )}
           >
-            <span>{lang.flag}</span>
-            <span>{lang.code}</span>
+            <span className="flex h-5 w-5 items-center justify-center rounded-full bg-primary/10 text-[10px] font-bold text-primary">
+              {lang.code}
+            </span>
           </button>
         ))}
       </div>
@@ -80,8 +81,9 @@ export default function LanguageSelector({
         onClick={() => setOpen((v) => !v)}
         className="inline-flex items-center gap-1.5 rounded-lg px-3 py-2 text-sm font-medium text-muted transition-colors hover:text-foreground"
       >
-        <span className="text-base leading-none">{selected.flag}</span>
-        <span>{selected.code}</span>
+        <span className="flex h-5 w-5 items-center justify-center rounded-full bg-primary/10 text-[10px] font-bold text-primary">
+          {selected.code}
+        </span>
         <ChevronDown
           className={cn(
             "h-3.5 w-3.5 transition-transform",
@@ -105,7 +107,9 @@ export default function LanguageSelector({
               )}
             >
               <span className="inline-flex items-center gap-2">
-                <span className="text-base leading-none">{lang.flag}</span>
+                <span className="flex h-5 w-5 items-center justify-center rounded-full bg-primary/10 text-[10px] font-bold text-primary">
+                  {lang.code}
+                </span>
                 <span>{lang.label}</span>
               </span>
               <span className="text-xs text-muted">{lang.code}</span>

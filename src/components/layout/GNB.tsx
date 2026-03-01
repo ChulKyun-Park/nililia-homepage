@@ -38,7 +38,7 @@ export default function GNB() {
           : "border-b border-transparent bg-transparent",
       )}
     >
-      <div className="mx-auto flex h-[51px] max-w-7xl items-center justify-between px-6 lg:h-16">
+      <div className="mx-auto flex h-[52px] max-w-7xl items-center justify-between px-6 lg:h-[56px]">
         {/* Left: Logo */}
         <Link href="/" className="shrink-0">
           <img

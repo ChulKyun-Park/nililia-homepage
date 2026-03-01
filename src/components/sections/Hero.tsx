@@ -19,163 +19,139 @@ const SERVICES = [
 function easeInOutCubic(t: number) {
   return t < 0.5 ? 4 * t * t * t : 1 - Math.pow(-2 * t + 2, 3) / 2;
 }
-function lerp(a: number, b: number, t: number) {
-  return a + (b - a) * t;
-}
-function clamp01(v: number) {
-  return Math.max(0, Math.min(1, v));
-}
+function lerp(a: number, b: number, t: number) { return a + (b - a) * t; }
+function cl(v: number) { return Math.max(0, Math.min(1, v)); }
 
 /*
- * 영상 분석 결과:
- * - 카드는 가로 넓은 직사각형 (약 5:4 비율)
- * - Row 1 (위): 2장 + 우측 잘림, 상단 잘림, 작고 흐릿
- * - Row 2 (중간): 2장 + 우측 잘림, 중간 크기
- * - Row 3 (아래): 2장 + 우측 잘림, 가장 크고 선명, 하단 잘림
- * - 카드가 프레임 밖으로 잘려 꽉 찬 느낌
- * - 겹침 50% 이상
+ * 프레임 분석 결과 (840x608 영상):
+ * - 카드 비율: 약 7:8 (가로:세로) — 거의 정사각형, 약간 세로가 김
+ * - Row1(위): 3장, 상단+우측 잘림, 가장 작고 흐릿
+ * - Row2(중간): 2장+우측잘림, 중간 크기
+ * - Row3(아래): 3장, 하단+우측 잘림, 가장 크고 선명
+ * - 아래 Row가 위 Row를 50%+ 겹침
+ * - 컨베이어: 카드 동일 크기, 정사각형에 가까움
  */
 
 const STAGE_W = 540;
 const STAGE_H = 400;
 
 interface Slot {
-  x: number; y: number; w: number; h: number; opacity: number; z: number;
+  x: number; y: number; w: number; h: number; op: number; z: number;
 }
 
-/* 영상 기준 그리드: 큰 카드, 강한 겹침, 프레임 밖 잘림 */
+/* 그리드: 3-2-3 = 8개 배치, 나머지 2개 숨김 */
 const GRID: Slot[] = [
-  /* Row 1 (위): 3장 — 작고 흐릿, 상단 잘림 */
-  { x: 20,  y: -40,  w: 210, h: 170, opacity: 0.45, z: 1 },
-  { x: 200, y: -30,  w: 200, h: 160, opacity: 0.50, z: 1 },
-  { x: 380, y: -35,  w: 210, h: 170, opacity: 0.40, z: 1 },  /* 우측 잘림 */
+  /* Row 1: 3장, 상단 잘림 (y가 음수), 작고 흐릿 */
+  { x: 35,  y: -30,  w: 145, h: 165, op: 0.45, z: 1 },
+  { x: 195, y: -25,  w: 145, h: 165, op: 0.50, z: 1 },
+  { x: 355, y: -30,  w: 145, h: 165, op: 0.40, z: 1 },  /* 우측 잘림 */
 
-  /* Row 2 (중간): 2장 — 중간 크기 */
-  { x: 80,  y: 85,   w: 240, h: 195, opacity: 0.75, z: 2 },
-  { x: 310, y: 90,   w: 230, h: 190, opacity: 0.70, z: 2 },
+  /* Row 2: 2장, 중간 크기 */
+  { x: 95,  y: 75,  w: 175, h: 200, op: 0.75, z: 2 },
+  { x: 290, y: 80,  w: 175, h: 200, op: 0.70, z: 2 },
 
-  /* Row 3 (아래): 3장 — 가장 크고 선명, 하단 잘림 */
-  { x: -15, y: 220,  w: 260, h: 215, opacity: 1.0,  z: 3 },
-  { x: 210, y: 225,  w: 250, h: 210, opacity: 1.0,  z: 3 },
-  { x: 430, y: 215,  w: 260, h: 220, opacity: 0.90, z: 3 },  /* 우측 잘림 */
+  /* Row 3: 3장, 하단 잘림, 가장 크고 선명 */
+  { x: -5,  y: 190, w: 195, h: 225, op: 1.0,  z: 3 },
+  { x: 195, y: 195, w: 195, h: 225, op: 1.0,  z: 3 },
+  { x: 390, y: 188, w: 195, h: 225, op: 0.85, z: 3 },  /* 우측 잘림 */
 ];
 
-/* 나머지 2장: 숨김 */
-const HIDDEN: Slot = { x: 270, y: STAGE_H + 50, w: 250, h: 210, opacity: 0, z: 0 };
+const HIDDEN: Slot = { x: 270, y: STAGE_H + 40, w: 195, h: 225, op: 0, z: 0 };
+function g(i: number): Slot { return i < GRID.length ? GRID[i] : HIDDEN; }
 
-function getSlot(i: number): Slot {
-  return i < GRID.length ? GRID[i] : HIDDEN;
-}
-
-/* 컨베이어 */
-const CONV_W = 260, CONV_H = 220, CONV_GAP = 16;
+/* 컨베이어: 정사각형에 가까운 카드 */
+const CW = 210, CH = 240, CG = 14;
 
 function CardAnimation() {
-  const cardRefs = useRef<(HTMLDivElement | null)[]>([]);
-  const frameRef = useRef(0);
-  const convScrollRef = useRef(0);
-  const rafRef = useRef(0);
+  const refs = useRef<(HTMLDivElement | null)[]>([]);
+  const frame = useRef(0);
+  const scroll = useRef(0);
+  const raf = useRef(0);
 
   const tick = useCallback(() => {
     const FPS = 60, CYCLE = 12 * FPS;
-    const P1 = 2.5 * FPS;
-    const P2 = 4.5 * FPS;
-    const P3 = 9.0 * FPS;
+    const P1 = 2.0 * FPS;   /* 그리드 정지 (짧게) */
+    const P2 = 4.0 * FPS;   /* 전환 */
+    const P3 = 9.0 * FPS;   /* 컨베이어 */
 
-    frameRef.current = (frameRef.current + 1) % CYCLE;
-    const f = frameRef.current;
-    if (f === 0) convScrollRef.current = 0;
+    frame.current = (frame.current + 1) % CYCLE;
+    const f = frame.current;
+    if (f === 0) scroll.current = 0;
 
-    cardRefs.current.forEach((el, i) => {
+    refs.current.forEach((el, i) => {
       if (!el) return;
-      const g = getSlot(i);
-      let x = 0, y = 0, w = g.w, h = g.h, op = g.opacity, zIdx = g.z;
+      const s = g(i);
+      let x = 0, y = 0, w = s.w, h = s.h, op = s.op, z = s.z;
 
       if (f <= P1) {
-        /* Phase 1: 겹침 그리드 + 느린 하강 */
-        const drift = (f / P1) * 15;
-        x = g.x; y = g.y + drift;
-        w = g.w; h = g.h;
-        op = g.opacity; zIdx = g.z;
+        /* Phase 1: 겹침 그리드 + 미세 하강 */
+        const d = (f / P1) * 12;
+        x = s.x; y = s.y + d; w = s.w; h = s.h; op = s.op; z = s.z;
 
       } else if (f <= P2) {
-        /* Phase 2: 수평 일렬 전환 */
-        const t = easeInOutCubic(clamp01((f - P1) / (P2 - P1)));
-        const cX = i * (CONV_W + CONV_GAP);
-        const cY = (STAGE_H - CONV_H) / 2;
-        x = lerp(g.x, cX, t);
-        y = lerp(g.y + 15, cY, t);
-        w = lerp(g.w, CONV_W, t);
-        h = lerp(g.h, CONV_H, t);
-        op = lerp(g.opacity, 1, t);
-        zIdx = 10;
+        /* Phase 2: → 일렬 컨베이어 전환 */
+        const t = easeInOutCubic(cl((f - P1) / (P2 - P1)));
+        const cx = i * (CW + CG);
+        const cy = (STAGE_H - CH) / 2;
+        x = lerp(s.x, cx, t);
+        y = lerp(s.y + 12, cy, t);
+        w = lerp(s.w, CW, t);
+        h = lerp(s.h, CH, t);
+        op = lerp(s.op, 1, t);
+        z = 10;
 
       } else if (f <= P3) {
         /* Phase 3: 수평 컨베이어 우→좌 */
-        convScrollRef.current += 0.6;
-        const total = SERVICES.length * (CONV_W + CONV_GAP);
-        let cx = i * (CONV_W + CONV_GAP) - convScrollRef.current;
-        while (cx < -CONV_W - 10) cx += total;
-        x = cx; y = (STAGE_H - CONV_H) / 2;
-        w = CONV_W; h = CONV_H; zIdx = 10;
-        if (cx < -CONV_W * 0.2) op = 0;
-        else if (cx < 10) op = clamp01((cx + CONV_W * 0.2) / (CONV_W * 0.2 + 10));
-        else if (cx > STAGE_W - CONV_W * 0.8) op = clamp01((STAGE_W - cx) / (CONV_W * 0.8));
+        scroll.current += 0.55;
+        const total = SERVICES.length * (CW + CG);
+        let cx = i * (CW + CG) - scroll.current;
+        while (cx < -CW - 10) cx += total;
+        x = cx; y = (STAGE_H - CH) / 2; w = CW; h = CH; z = 10;
+        /* 가장자리 페이드 */
+        if (cx < -CW * 0.15) op = 0;
+        else if (cx < 10) op = cl((cx + CW * 0.15) / (CW * 0.15 + 10));
+        else if (cx > STAGE_W - CW * 0.85) op = cl((STAGE_W - cx) / (CW * 0.85));
         else op = 1;
 
       } else {
         /* Phase 4: 복귀 */
-        const t = easeInOutCubic(clamp01((f - P3) / (CYCLE - P3)));
-        const total = SERVICES.length * (CONV_W + CONV_GAP);
-        let cx = i * (CONV_W + CONV_GAP) - convScrollRef.current;
-        while (cx < -CONV_W - 10) cx += total;
-        x = lerp(cx, g.x, t);
-        y = lerp((STAGE_H - CONV_H) / 2, g.y, t);
-        w = lerp(CONV_W, g.w, t);
-        h = lerp(CONV_H, g.h, t);
-        op = lerp(1, g.opacity, t);
-        zIdx = Math.round(lerp(10, g.z, t));
-        convScrollRef.current *= (1 - t * 0.02);
+        const t = easeInOutCubic(cl((f - P3) / (CYCLE - P3)));
+        const total = SERVICES.length * (CW + CG);
+        let cx = i * (CW + CG) - scroll.current;
+        while (cx < -CW - 10) cx += total;
+        x = lerp(cx, s.x, t);
+        y = lerp((STAGE_H - CH) / 2, s.y, t);
+        w = lerp(CW, s.w, t);
+        h = lerp(CH, s.h, t);
+        op = lerp(1, s.op, t);
+        z = Math.round(lerp(10, s.z, t));
+        scroll.current *= (1 - t * 0.02);
       }
 
-      el.style.width = w + "px";
-      el.style.height = h + "px";
-      el.style.left = x + "px";
-      el.style.top = y + "px";
-      el.style.opacity = String(clamp01(op));
-      el.style.zIndex = String(zIdx);
-      el.style.boxShadow = `0 6px ${12 + zIdx * 4}px rgba(0,0,0,${0.04 + zIdx * 0.02})`;
+      el.style.cssText = `position:absolute;left:${x}px;top:${y}px;width:${w}px;height:${h}px;opacity:${cl(op)};z-index:${z};will-change:left,top,width,height,opacity;border-radius:16px;background:#fff;border:1px solid rgba(0,151,254,0.06);display:flex;flex-direction:column;overflow:hidden;box-shadow:0 ${4+z*2}px ${8+z*4}px rgba(0,0,0,${0.03+z*0.015})`;
     });
 
-    rafRef.current = requestAnimationFrame(tick);
+    raf.current = requestAnimationFrame(tick);
   }, []);
 
   useEffect(() => {
-    rafRef.current = requestAnimationFrame(tick);
-    return () => cancelAnimationFrame(rafRef.current);
+    raf.current = requestAnimationFrame(tick);
+    return () => cancelAnimationFrame(raf.current);
   }, [tick]);
 
   return (
     <>
-      {SERVICES.map((s, i) => (
-        <div
-          key={s.title}
-          ref={(el) => { cardRefs.current[i] = el; }}
-          className="absolute rounded-2xl bg-white border border-gray-100 flex flex-col overflow-hidden"
-          style={{ willChange: "left, top, width, height, opacity" }}
-        >
-          <div className="flex items-center gap-2 p-3 pb-0">
-            <div className="flex items-center justify-center bg-primary text-white shrink-0"
-              style={{ width: 32, height: 32, borderRadius: 10, fontSize: 15, boxShadow: "0 2px 8px rgba(0,151,254,0.2)" }}>
-              {s.icon}
+      {SERVICES.map((svc, i) => (
+        <div key={svc.title} ref={el => { refs.current[i] = el; }}>
+          <div style={{ display: "flex", alignItems: "center", gap: 8, padding: "10px 12px 0" }}>
+            <div style={{ width: 28, height: 28, borderRadius: 8, background: "#0097FE", color: "#fff", display: "flex", alignItems: "center", justifyContent: "center", fontSize: 13, flexShrink: 0, boxShadow: "0 2px 6px rgba(0,151,254,0.2)" }}>
+              {svc.icon}
             </div>
-            <div className="font-bold text-foreground truncate" style={{ fontSize: 13 }}>{s.title}</div>
+            <div style={{ fontSize: 12, fontWeight: 700, color: "#1a1a1a", whiteSpace: "nowrap", overflow: "hidden", textOverflow: "ellipsis" }}>{svc.title}</div>
           </div>
-          <div className="px-3 pb-3 pt-1">
-            <div className="text-muted" style={{ fontSize: 11 }}>{s.desc}</div>
-          </div>
-          {/* 카드 내부 장식 영역 */}
-          <div className="flex-1 mx-3 mb-3 rounded-lg bg-gradient-to-br from-primary/5 to-primary/10" />
+          <div style={{ fontSize: 10, color: "#888", padding: "4px 12px 8px" }}>{svc.desc}</div>
+          {/* 카드 내부 장식: 그라데이션 영역 */}
+          <div style={{ flex: 1, margin: "0 10px 10px", borderRadius: 10, background: "linear-gradient(135deg, rgba(0,151,254,0.06), rgba(0,151,254,0.12))" }} />
         </div>
       ))}
     </>
@@ -191,10 +167,7 @@ export default function Hero() {
       </div>
 
       <style>{`
-        @keyframes floating-soft {
-          0%, 100% { transform: translateY(0); }
-          50% { transform: translateY(-8px); }
-        }
+        @keyframes float-s { 0%,100%{transform:translateY(0)} 50%{transform:translateY(-8px)} }
       `}</style>
 
       <div className="relative z-10 mx-auto max-w-7xl px-6 py-4 lg:py-6">
@@ -222,17 +195,17 @@ export default function Hero() {
 
           <div className="relative hidden lg:block" style={{ width: 620, height: 420 }}>
             {/* 인삿말 */}
-            <div className="pointer-events-none absolute z-40 rounded-xl border border-primary/10 bg-white px-4 py-2 text-xs font-bold text-gray-400 shadow-[0_10px_28px_rgba(0,0,0,0.05)]"
-              style={{ top: 5, left: -5, animation: "floating-soft 3.5s ease-in-out infinite 0s" }}>こんにちは</div>
-            <div className="pointer-events-none absolute z-40 rounded-xl border border-primary/10 bg-white px-4 py-2 text-xs font-bold text-gray-400 shadow-[0_10px_28px_rgba(0,0,0,0.05)]"
-              style={{ bottom: 5, left: -5, animation: "floating-soft 3.8s ease-in-out infinite 0.5s" }}>¡Hola!</div>
-            <div className="pointer-events-none absolute z-40 rounded-xl border border-primary/10 bg-white px-4 py-2 text-xs font-bold text-gray-400 shadow-[0_10px_28px_rgba(0,0,0,0.05)]"
-              style={{ top: 5, right: -5, animation: "floating-soft 4s ease-in-out infinite 1s" }}>Thank you</div>
-            <div className="pointer-events-none absolute z-40 rounded-xl border border-primary/10 bg-white px-4 py-2 text-xs font-bold text-gray-400 shadow-[0_10px_28px_rgba(0,0,0,0.05)]"
-              style={{ bottom: 5, right: -5, animation: "floating-soft 3.6s ease-in-out infinite 1.5s" }}>안녕하세요</div>
+            <div className="pointer-events-none absolute z-40 rounded-xl border border-primary/10 bg-white px-3 py-1.5 text-xs font-bold text-gray-400 shadow-[0_8px_24px_rgba(0,0,0,0.05)]"
+              style={{ top: 5, left: 0, animation: "float-s 3.5s ease-in-out infinite 0s" }}>こんにちは</div>
+            <div className="pointer-events-none absolute z-40 rounded-xl border border-primary/10 bg-white px-3 py-1.5 text-xs font-bold text-gray-400 shadow-[0_8px_24px_rgba(0,0,0,0.05)]"
+              style={{ bottom: 0, left: 0, animation: "float-s 3.8s ease-in-out infinite 0.5s" }}>¡Hola!</div>
+            <div className="pointer-events-none absolute z-40 rounded-xl border border-primary/10 bg-white px-3 py-1.5 text-xs font-bold text-gray-400 shadow-[0_8px_24px_rgba(0,0,0,0.05)]"
+              style={{ top: 5, right: 0, animation: "float-s 4s ease-in-out infinite 1s" }}>Thank you</div>
+            <div className="pointer-events-none absolute z-40 rounded-xl border border-primary/10 bg-white px-3 py-1.5 text-xs font-bold text-gray-400 shadow-[0_8px_24px_rgba(0,0,0,0.05)]"
+              style={{ bottom: 0, right: 0, animation: "float-s 3.6s ease-in-out infinite 1.5s" }}>안녕하세요</div>
 
-            {/* overflow:hidden 클리핑 */}
-            <div className="absolute overflow-hidden rounded-2xl" style={{ top: 15, left: 40, width: 540, height: 400 }}>
+            {/* 클리핑 영역: overflow hidden */}
+            <div className="absolute overflow-hidden" style={{ top: 10, left: 40, width: 540, height: 400, borderRadius: 20 }}>
               <CardAnimation />
             </div>
           </div>

@@ -42,9 +42,9 @@ const socialLinks = [
     label: "네이버 블로그",
     href: "#",
     icon: (
-      <svg className="h-5 w-5" viewBox="0 0 24 24" fill="currentColor">
-        <rect width="24" height="24" rx="6" />
-        <path d="M6.5 6v12h3.2v-5.6L14.3 18h3.2V6h-3.2v5.6L9.7 6H6.5z" fill="white" />
+      <svg className="h-5 w-5" viewBox="0 0 24 24" fill="none">
+        <circle cx="12" cy="12" r="12" fill="#03C75A" />
+        <path d="M6.5 7v10h3v-4.8L13.5 17h4V7h-3v4.8L10.5 7H6.5z" fill="white" />
       </svg>
     ),
   },
@@ -95,13 +95,13 @@ export default function Footer() {
               </ul>
 
               {/* Copyright */}
-              <p className="mt-2 text-sm text-muted">
+              <p className="mt-4 text-sm text-muted">
                 &copy; {new Date().getFullYear()} Nililia Inc. All rights
                 reserved.
               </p>
 
               {/* SNS Icons */}
-              <div className="mt-2 flex items-center gap-3">
+              <div className="mt-4 flex items-center gap-3">
                 {socialLinks.map((social) => (
                   <a
                     key={social.label}

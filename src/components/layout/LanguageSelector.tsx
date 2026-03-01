@@ -106,7 +106,6 @@ export default function LanguageSelector({
                 <img src={lang.flag} alt={lang.code} className="h-4 w-6 rounded-sm object-cover" loading="eager" />
                 <span>{lang.label}</span>
               </span>
-              <span className="text-xs text-muted">{lang.code}</span>
             </button>
           ))}
         </div>

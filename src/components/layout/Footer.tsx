@@ -43,7 +43,8 @@ const socialLinks = [
     href: "#",
     icon: (
       <svg className="h-5 w-5" viewBox="0 0 24 24" fill="currentColor">
-        <path d="M4 2v20h4V14.4L14 22h6V2h-4v7.6L10 2H4z" />
+        <rect width="24" height="24" rx="6" />
+        <path d="M6.5 6v12h3.2v-5.6L14.3 18h3.2V6h-3.2v5.6L9.7 6H6.5z" fill="white" />
       </svg>
     ),
   },

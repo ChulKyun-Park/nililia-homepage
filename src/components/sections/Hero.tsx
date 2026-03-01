@@ -28,23 +28,23 @@ function clamp01(v: number) {
 
 /* ── 그리드 Row 정의: 각 행의 실제 카드 크기가 다름 (scale 아님) ── */
 const STAGE_W = 520;
-const STAGE_H = 340;
+const STAGE_H = 380;
 const GAP_X = 8;
 
 /* Row별 카드 실제 크기 */
 const ROWS = [
-  { count: 2, w: 140, h: 55, opacity: 0.5  },  /* 맨 위: 작고 흐릿 */
-  { count: 2, w: 165, h: 70, opacity: 0.7  },  /* 중간: 중간 */
-  { count: 3, w: 150, h: 80, opacity: 0.9  },  /* 아래: 크고 선명 */
-  { count: 3, w: 150, h: 80, opacity: 1.0  },  /* 맨 아래: 가장 크고 선명, 하단 잘림 */
+  { count: 2, w: 90, h: 115, opacity: 0.5  },  /* 맨 위: 작고 흐릿 */
+  { count: 2, w: 110, h: 140, opacity: 0.7  },  /* 중간 위 */
+  { count: 3, w: 120, h: 155, opacity: 0.9  },  /* 중간 아래 */
+  { count: 3, w: 120, h: 155, opacity: 1.0  },  /* 맨 아래: 하단 잘림 */
 ];
 
 /* Row 간 Y 간격: 겹치도록 ROW_STEP < 카드 높이 */
-const ROW_STEP = 65;
-const GRID_START_Y = 15;
+const ROW_STEP = 80;
+const GRID_START_Y = -20;
 
 /* 수평 컨베이어 상수 */
-const CONV_W = 185, CONV_H = 130, CONV_GAP = 12;
+const CONV_W = 140, CONV_H = 200, CONV_GAP = 12;
 
 interface Slot {
   x: number; y: number; w: number; h: number; opacity: number; z: number; row: number; col: number;
@@ -236,7 +236,7 @@ export default function Hero() {
           </div>
 
           {/* 우측: 인삿말 + 카드 */}
-          <div className="relative hidden lg:block" style={{ width: 620, height: 380 }}>
+          <div className="relative hidden lg:block" style={{ width: 620, height: 400 }}>
             {/* 인삿말 4개 */}
             <div className="pointer-events-none absolute z-40 rounded-xl border border-primary/10 bg-white px-4 py-2 text-xs font-bold text-gray-400 shadow-[0_10px_28px_rgba(0,0,0,0.05)]"
               style={{ top: 5, left: 0, animation: "floating-soft 3.5s ease-in-out infinite 0s" }}>こんにちは</div>
@@ -248,7 +248,7 @@ export default function Hero() {
               style={{ bottom: 5, right: 0, animation: "floating-soft 3.6s ease-in-out infinite 1.5s" }}>안녕하세요</div>
 
             {/* overflow:hidden 클리핑 — 카드가 이 영역 밖으로 나가면 잘림 */}
-            <div className="absolute overflow-hidden rounded-2xl" style={{ top: 25, left: 50, width: STAGE_W, height: STAGE_H }}>
+            <div className="absolute overflow-hidden rounded-2xl" style={{ top: 10, left: 50, width: STAGE_W, height: STAGE_H }}>
               <CardAnimation />
             </div>
           </div>

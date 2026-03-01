@@ -10,10 +10,11 @@
 | 항목 | 값 |
 |------|---|
 | 프로젝트 | 번역/로컬리제이션 서비스 회사 홈페이지 |
+| 회사명 | **(주)닐리리아** / Nililia Inc. (⚠️ 닐릴리아 아님) |
 | 레포 | https://github.com/ChulKyun-Park/nililia-homepage |
 | 배포 | https://nililia-homepage.vercel.app |
 | 스택 | Next.js 14+ / TypeScript / Tailwind CSS v4 / Notion API / Vercel |
-| 폰트 | Pretendard (한글) + Inter (영문) |
+| 폰트 | Pretendard (CDN) + Inter (next/font/google) |
 | 테마 | 라이트 모드 (흰색 배경 + `#0097FE` 포인트) |
 
 ---
@@ -140,6 +141,54 @@ bg-dark-*, text-white (CTA 제외)
 - [ ] 모바일 375px 레이아웃 정상
 - [ ] bg-dark-* 클래스 0개
 - [ ] 배포 사이트 실제 확인 (코드만 보고 판단 금지)
+- [ ] 회사명 "닐리리아" 확인 (닐릴리아 ❌)
+
+---
+
+## 9. 푸터 스펙
+
+### 레이아웃
+- 컨테이너: `mx-auto max-w-7xl px-12`
+- 그리드: `lg:grid-cols-[2.5fr_1fr_1fr_1.2fr] gap-3 lg:gap-x-3 py-8`
+
+### 컬럼 구성
+| Column | 헤더 | 스타일 |
+|--------|------|--------|
+| 1 | (주)닐리리아 | text-[1.25rem] font-bold tracking-[0.01em] |
+| 2 | Services | text-sm font-medium |
+| 3 | Family Sites | text-sm font-medium |
+| 4 | Contact | text-sm font-medium |
+
+### 본문 폰트
+- 전체 text-sm 통일 (font-size-footer CSS 변수 사용하지 않음)
+
+### 간격 규칙
+- 고객센터 → copyright: mt-8
+- copyright → SNS 아이콘: mt-8
+- 이용약관: 그리드 밖 하단, border-t py-4
+
+### SNS 아이콘
+Instagram / YouTube / 네이버블로그(b| 새 BI) / X / Facebook
+- 전체 currentColor, hover:text-primary
+
+### 이메일
+- 기업 문의: sales@nililia.com
+- 제휴 문의: partnership@nililia.com
+- 채용 문의: recruit@nililia.com
+
+---
+
+## 10. SocialProof 지표 (확정, 미반영)
+
+| 순서 | 숫자 | 라벨 |
+|------|------|------|
+| 1 | 50+ | 기업 고객 |
+| 2 | 150M+ | 번역 단어 |
+| 3 | 10+ | 지원 언어 |
+| 4 | 90% | 고객 만족도 |
+
+- 150M+ 근거: 1800만 문장 × 평균 ~11단어 ≈ 2억 → 보수적 150M+
+- 중복 미제거 (업계 표준: 총 처리량 기준)
 
 ---
 

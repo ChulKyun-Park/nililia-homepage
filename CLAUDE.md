@@ -126,7 +126,6 @@ bg-dark-*, text-white (CTA 제외)
 | 에셋 | 위치 |
 |------|------|
 | 로고 PNG | `public/images/NILILIA.png` |
-| 로고 SVG | `public/images/NILILIA_LOGO.svg` |
 | 서비스 이미지 | `public/images/{서비스명}.jpg/.png` |
 | 채용 이미지 | `public/images/careers_img.png` |
 

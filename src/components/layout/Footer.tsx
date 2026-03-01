@@ -78,7 +78,7 @@ export default function Footer() {
             {/* Column 1: Company Info */}
             <div>
               <h3 className="mb-2 text-lg font-bold text-foreground">
-                (주)닐릴리아
+                (주)닐리리아
               </h3>
               <ul className="space-y-1 text-[length:var(--font-size-footer)] leading-relaxed text-muted">
                 <li>경기도 안양시 동안구 시민대로 327번길 11-41, 6층</li>
@@ -176,7 +176,7 @@ export default function Footer() {
                 </li>
                 <li className="flex items-center gap-2 text-muted">
                   <Mail className="h-4 w-4 text-primary/60" />
-                  <span>기업 번역 문의</span>
+                  <span>기업 문의</span>
                   <a
                     href="mailto:sales@nililia.com"
                     className="font-medium text-foreground hover:text-primary transition-colors"
@@ -186,7 +186,7 @@ export default function Footer() {
                 </li>
                 <li className="flex items-center gap-2 text-muted">
                   <Mail className="h-4 w-4 text-primary/60" />
-                  <span>사업 제휴 문의</span>
+                  <span>제휴 문의</span>
                   <a
                     href="mailto:partnership@nililia.com"
                     className="font-medium text-foreground hover:text-primary transition-colors"
@@ -194,12 +194,22 @@ export default function Footer() {
                     partnership@nililia.com
                   </a>
                 </li>
+                <li className="flex items-center gap-2 text-muted">
+                  <Mail className="h-4 w-4 text-primary/60" />
+                  <span>채용 문의</span>
+                  <a
+                    href="mailto:recruit@nililia.com"
+                    className="font-medium text-foreground hover:text-primary transition-colors"
+                  >
+                    recruit@nililia.com
+                  </a>
+                </li>
               </ul>
             </div>
           </div>
 
           {/* 이용약관 · 개인정보처리방침 — 구분선 바로 위 */}
-          <div className="flex gap-6 pb-5 pt-6 text-sm text-muted">
+          <div className="flex gap-6 pb-5 pt-12 text-sm text-muted">
             <Link href="#" className="transition-colors hover:text-foreground">
               이용약관
             </Link>

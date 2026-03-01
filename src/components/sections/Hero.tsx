@@ -3,13 +3,6 @@
 import { useEffect, useRef, useCallback } from "react";
 import Button from "@/components/ui/Button";
 
-/*
-  카드 순서 (확정):
-  0: 영상 번역      1: 문서 번역      2: 기업 맞춤 번역   ← 초기 Row3 (하단, 크고 선명)
-  3: 홈페이지 현지화  4: 앱 현지화                        ← 초기 Row2 (중간)
-  5: 웹소설 번역     6: 웹툰 번역      7: 게임 번역       ← 초기 Row1 (상단, 작고 흐릿)
-  8: MTPE           9: AI 번역·더빙                      ← 숨김 (위에서 대기)
-*/
 const SERVICES = [
   { icon: "▶️", title: "영상 번역", desc: "자막 & 더빙" },
   { icon: "📄", title: "문서 번역", desc: "전문 번역" },
@@ -37,89 +30,83 @@ interface Slot {
 }
 
 /*
- * GRID A: 초기 3-2-3 (입체 겹침)
- * 각 Row 가운데 정렬, gap ~20px (컨베이어 수준)
- * Row3: 3×156 + 2×20 = 508 → margin=(700-508)/2=96
- * Row2: 2×109 + 1×20 = 238 → margin=(700-238)/2=231
- * Row1: 3×78  + 2×20 = 274 → margin=(700-274)/2=213
+ * 중심점 = 300 (좌측 여유, 우측 잘림 감안)
+ * gap = 20px (컨베이어 수준)
+ *
+ * Row3(1배 156x180): 3장 → 총폭508, start=46
+ * Row2(0.7배 109x126): 2장 → 총폭238, start=181
+ * Row1(0.5배 78x90): 3장 → 총폭274, start=163
  */
+const CX = 300; // 시각적 중심
+
 const A: Slot[] = [
-  // Row3 (1배 156x180) — 가운데 정렬
-  { x: 96,  y: 213, w: 156, h: 180, op: 1.0,  z: 3 },
-  { x: 272, y: 218, w: 156, h: 180, op: 1.0,  z: 3 },
-  { x: 448, y: 211, w: 156, h: 180, op: 0.85, z: 3 },
-  // Row2 (0.7배 109x126) — 가운데 정렬
-  { x: 231, y: 112, w: 109, h: 126, op: 0.75, z: 2 },
-  { x: 360, y: 117, w: 109, h: 126, op: 0.70, z: 2 },
-  // Row1 (0.5배 78x90) — 가운데 정렬
-  { x: 213, y: -10, w: 78,  h: 90,  op: 0.45, z: 1 },
-  { x: 311, y: -5,  w: 78,  h: 90,  op: 0.50, z: 1 },
-  { x: 409, y: -10, w: 78,  h: 90,  op: 0.40, z: 1 },
-  // 숨김
-  { x: 260, y: -150, w: 78, h: 90, op: 0, z: 0 },
-  { x: 370, y: -150, w: 78, h: 90, op: 0, z: 0 },
+  // Row3: 46, 222, 398
+  { x: 46,  y: 213, w: 156, h: 180, op: 1.0,  z: 3 },
+  { x: 222, y: 218, w: 156, h: 180, op: 1.0,  z: 3 },
+  { x: 398, y: 211, w: 156, h: 180, op: 0.90, z: 3 },
+  // Row2: 181, 310
+  { x: 181, y: 112, w: 109, h: 126, op: 0.75, z: 2 },
+  { x: 310, y: 117, w: 109, h: 126, op: 0.70, z: 2 },
+  // Row1: 163, 261, 359
+  { x: 163, y: -5,  w: 78,  h: 90,  op: 0.45, z: 1 },
+  { x: 261, y: 0,   w: 78,  h: 90,  op: 0.50, z: 1 },
+  { x: 359, y: -5,  w: 78,  h: 90,  op: 0.40, z: 1 },
+  // 숨김 (중심 부근)
+  { x: 222, y: -140, w: 78, h: 90, op: 0, z: 0 },
+  { x: 330, y: -140, w: 78, h: 90, op: 0, z: 0 },
 ];
 
 /*
- * GRID B: 323→232 결과
- * 하단3(카드0,1,2) 아래로 퇴장 / 카드8,9 위에서 진입
- * Row1(top2): 카드8,9 / Row2(mid3): 카드5,6,7 / Row3(bot2): 카드3,4
- */
-/*
- * GRID B: 323→232 결과
- * Row3: 2×156 + 1×20 = 332 → margin=184
- * Row2: 3×109 + 2×20 = 367 → margin=167
- * Row1: 2×78  + 1×20 = 176 → margin=262
+ * B: 323→232
+ * Row3(2장): 총폭332, start=134 → 134, 310
+ * Row2(3장): 총폭367, start=117 → 117, 246, 375
+ * Row1(2장): 총폭176, start=212 → 212, 310
  */
 const B: Slot[] = [
   // 카드0,1,2 → 아래로 퇴장
-  { x: 96,  y: STAGE_H + 40, w: 156, h: 180, op: 0, z: 0 },
-  { x: 272, y: STAGE_H + 40, w: 156, h: 180, op: 0, z: 0 },
-  { x: 448, y: STAGE_H + 40, w: 156, h: 180, op: 0, z: 0 },
-  // 카드3,4 → Row3 (1배)
-  { x: 184, y: 213, w: 156, h: 180, op: 1.0, z: 3 },
-  { x: 360, y: 218, w: 156, h: 180, op: 1.0, z: 3 },
-  // 카드5,6,7 → Row2 (0.7배)
-  { x: 167, y: 112, w: 109, h: 126, op: 0.75, z: 2 },
-  { x: 296, y: 117, w: 109, h: 126, op: 0.75, z: 2 },
-  { x: 425, y: 112, w: 109, h: 126, op: 0.65, z: 2 },
-  // 카드8,9 → Row1 (0.5배)
-  { x: 262, y: -10, w: 78, h: 90, op: 0.45, z: 1 },
-  { x: 360, y: -5,  w: 78, h: 90, op: 0.50, z: 1 },
+  { x: 46,  y: STAGE_H + 50, w: 156, h: 180, op: 0, z: 0 },
+  { x: 222, y: STAGE_H + 50, w: 156, h: 180, op: 0, z: 0 },
+  { x: 398, y: STAGE_H + 50, w: 156, h: 180, op: 0, z: 0 },
+  // 카드3,4 → Row3
+  { x: 134, y: 213, w: 156, h: 180, op: 1.0, z: 3 },
+  { x: 310, y: 218, w: 156, h: 180, op: 1.0, z: 3 },
+  // 카드5,6,7 → Row2
+  { x: 117, y: 112, w: 109, h: 126, op: 0.75, z: 2 },
+  { x: 246, y: 117, w: 109, h: 126, op: 0.75, z: 2 },
+  { x: 375, y: 112, w: 109, h: 126, op: 0.65, z: 2 },
+  // 카드8,9 → Row1
+  { x: 212, y: -5, w: 78, h: 90, op: 0.45, z: 1 },
+  { x: 310, y: 0,  w: 78, h: 90, op: 0.50, z: 1 },
 ];
 
 /*
- * GRID C: 232→323 결과
- * 하단2(카드3,4) 아래로 퇴장 / 카드0,1,2 위에서 재진입
- * Row1(top3): 카드0,1,2 / Row2(mid2): 카드8,9 / Row3(bot3): 카드5,6,7
- */
-/*
- * GRID C: 232→323 결과
- * Row 배치는 A와 동일 간격, 카드 배정만 다름
+ * C: 232→323 (A와 동일 간격, 카드 배정만 다름)
  */
 const C: Slot[] = [
-  // 카드0,1,2 → Row1 (0.5배, 위에서 재진입)
-  { x: 213, y: -10,  w: 78,  h: 90,  op: 0.45, z: 1 },
-  { x: 311, y: -5,   w: 78,  h: 90,  op: 0.50, z: 1 },
-  { x: 409, y: -10,  w: 78,  h: 90,  op: 0.40, z: 1 },
+  // 카드0,1,2 → Row1 (위에서 재진입)
+  { x: 163, y: -5,  w: 78,  h: 90,  op: 0.45, z: 1 },
+  { x: 261, y: 0,   w: 78,  h: 90,  op: 0.50, z: 1 },
+  { x: 359, y: -5,  w: 78,  h: 90,  op: 0.40, z: 1 },
   // 카드3,4 → 아래로 퇴장
-  { x: 184, y: STAGE_H + 40, w: 156, h: 180, op: 0, z: 0 },
-  { x: 360, y: STAGE_H + 40, w: 156, h: 180, op: 0, z: 0 },
-  // 카드5,6,7 → Row3 (1배)
-  { x: 96,  y: 213, w: 156, h: 180, op: 1.0,  z: 3 },
-  { x: 272, y: 218, w: 156, h: 180, op: 1.0,  z: 3 },
-  { x: 448, y: 211, w: 156, h: 180, op: 0.85, z: 3 },
-  // 카드8,9 → Row2 (0.7배)
-  { x: 231, y: 112, w: 109, h: 126, op: 0.75, z: 2 },
-  { x: 360, y: 117, w: 109, h: 126, op: 0.70, z: 2 },
+  { x: 134, y: STAGE_H + 50, w: 156, h: 180, op: 0, z: 0 },
+  { x: 310, y: STAGE_H + 50, w: 156, h: 180, op: 0, z: 0 },
+  // 카드5,6,7 → Row3
+  { x: 46,  y: 213, w: 156, h: 180, op: 1.0,  z: 3 },
+  { x: 222, y: 218, w: 156, h: 180, op: 1.0,  z: 3 },
+  { x: 398, y: 211, w: 156, h: 180, op: 0.90, z: 3 },
+  // 카드8,9 → Row2
+  { x: 181, y: 112, w: 109, h: 126, op: 0.75, z: 2 },
+  { x: 310, y: 117, w: 109, h: 126, op: 0.70, z: 2 },
 ];
 
 const CW = 156, CH = 180, CG = 14;
+const N = SERVICES.length;
 
 function CardAnimation() {
   const refs = useRef<(HTMLDivElement | null)[]>([]);
   const frame = useRef(0);
   const scroll = useRef(0);
+  const snapX = useRef<number[]>(new Array(N).fill(0)); // Phase7 종료시 각 카드 x 고정
   const raf = useRef(0);
 
   const tick = useCallback(() => {
@@ -135,6 +122,9 @@ function CardAnimation() {
     frame.current = (frame.current + 1) % CYCLE;
     const f = frame.current;
     if (f === 0) scroll.current = 0;
+
+    /* Phase7 마지막 프레임에서 각 카드 위치 스냅 */
+    const justLeftConveyor = (f === Math.floor(T7) + 1);
 
     refs.current.forEach((el, i) => {
       if (!el) return;
@@ -178,27 +168,33 @@ function CardAnimation() {
         op = lerp(c.op, 1, t); z = 10;
 
       } else if (f <= T7) {
+        /* 컨베이어 우→좌 */
         scroll.current += 0.55;
-        const total = SERVICES.length * (CW + CG);
+        const total = N * (CW + CG);
         let cx = i * (CW + CG) - scroll.current;
         while (cx < -CW - 10) cx += total;
         x = cx; y = (STAGE_H - CH) / 2; w = CW; h = CH; z = 10;
-        if (cx < -CW * 0.15) op = 0;
-        else if (cx < 10) op = cl((cx + CW * 0.15) / (CW * 0.15 + 10));
-        else if (cx > STAGE_W - CW * 0.85) op = cl((STAGE_W - cx) / (CW * 0.85));
+        /* 좌우 가장자리 페이드 */
+        const fadeL = 60, fadeR = 80;
+        if (cx < -CW * 0.3) op = 0;
+        else if (cx < fadeL) op = cl((cx + CW * 0.3) / (CW * 0.3 + fadeL));
+        else if (cx > STAGE_W - fadeR - CW) op = cl((STAGE_W - cx - CW) / fadeR);
         else op = 1;
 
       } else {
+        /* Phase 8: 323(A) 재조립 — 스냅된 위치에서 lerp */
+        if (justLeftConveyor) {
+          const total = N * (CW + CG);
+          let cx = i * (CW + CG) - scroll.current;
+          while (cx < -CW - 10) cx += total;
+          snapX.current[i] = cx;
+        }
         const t = easeInOutCubic(cl((f - T7) / (CYCLE - T7)));
-        const total = SERVICES.length * (CW + CG);
-        let cx = i * (CW + CG) - scroll.current;
-        while (cx < -CW - 10) cx += total;
-        x = lerp(cx, a.x, t);
+        x = lerp(snapX.current[i], a.x, t);
         y = lerp((STAGE_H - CH) / 2, a.y, t);
         w = lerp(CW, a.w, t); h = lerp(CH, a.h, t);
         op = lerp(1, a.op, t);
         z = Math.round(lerp(10, a.z, t));
-        scroll.current *= (1 - t * 0.02);
       }
 
       const sY = 4 + z * 4;
@@ -227,7 +223,6 @@ function CardAnimation() {
             <div style={{ fontSize: 12, fontWeight: 700, color: "#1a1a1a", whiteSpace: "nowrap", overflow: "hidden", textOverflow: "ellipsis" }}>{svc.title}</div>
           </div>
           <div style={{ fontSize: 10, color: "#888", padding: "4px 12px 8px" }}>{svc.desc}</div>
-          {/* 카드 이미지 영역 — 추후 public/images/cards/ 이미지로 교체 */}
           <div style={{ flex: 1, margin: "0 10px 10px", borderRadius: 10, background: "linear-gradient(135deg, rgba(0,151,254,0.06), rgba(0,151,254,0.12))", overflow: "hidden" }} />
         </div>
       ))}
@@ -281,52 +276,40 @@ export default function Hero() {
             <div className="pointer-events-none absolute z-40 rounded-xl border border-primary/10 bg-white px-3 py-1.5 text-xs font-bold text-gray-400 shadow-[0_8px_24px_rgba(0,0,0,0.05)]"
               style={{ bottom: 0, right: 0, animation: "float-s 3.6s ease-in-out infinite 1.5s" }}>안녕하세요</div>
 
-            {/* 클리핑 영역 + 4면 그라데이션 페이드 마스크 + 가장자리 블러 */}
+            {/* 스테이지 */}
             <div className="absolute" style={{ top: 10, left: 30, width: 700, height: 400, borderRadius: 20, overflow: "hidden" }}>
-              {/* 카드 레이어: 4면 페이드 마스크 */}
-              <div className="absolute inset-0" style={{
-                WebkitMaskImage: "linear-gradient(to bottom, transparent 0%, black 10%, black 86%, transparent 100%), linear-gradient(to right, transparent 0%, black 6%, black 90%, transparent 100%)",
-                maskImage: "linear-gradient(to bottom, transparent 0%, black 10%, black 86%, transparent 100%), linear-gradient(to right, transparent 0%, black 6%, black 90%, transparent 100%)",
-                WebkitMaskComposite: "destination-in",
-                maskComposite: "intersect" as unknown as string,
-              }}>
-                <CardAnimation />
-              </div>
-              {/* 상단 블러 오버레이 */}
-              <div className="pointer-events-none absolute left-0 right-0 top-0 z-30" style={{
-                height: 50,
-                backdropFilter: "blur(6px)",
-                WebkitBackdropFilter: "blur(6px)",
-                WebkitMaskImage: "linear-gradient(to bottom, black 0%, transparent 100%)",
+              <CardAnimation />
+              {/* 상단 페이드+블러 */}
+              <div className="pointer-events-none absolute inset-x-0 top-0 z-30" style={{
+                height: 55,
+                backdropFilter: "blur(6px)", WebkitBackdropFilter: "blur(6px)",
                 maskImage: "linear-gradient(to bottom, black 0%, transparent 100%)",
-                background: "linear-gradient(to bottom, rgba(255,255,255,0.5) 0%, transparent 100%)",
+                WebkitMaskImage: "linear-gradient(to bottom, black 0%, transparent 100%)",
+                background: "linear-gradient(to bottom, rgba(255,255,255,0.7) 0%, transparent 100%)",
               }} />
-              {/* 하단 블러 오버레이 */}
-              <div className="pointer-events-none absolute bottom-0 left-0 right-0 z-30" style={{
-                height: 60,
-                backdropFilter: "blur(6px)",
-                WebkitBackdropFilter: "blur(6px)",
-                WebkitMaskImage: "linear-gradient(to top, black 0%, transparent 100%)",
+              {/* 하단 페이드+블러 */}
+              <div className="pointer-events-none absolute inset-x-0 bottom-0 z-30" style={{
+                height: 65,
+                backdropFilter: "blur(6px)", WebkitBackdropFilter: "blur(6px)",
                 maskImage: "linear-gradient(to top, black 0%, transparent 100%)",
-                background: "linear-gradient(to top, rgba(255,255,255,0.5) 0%, transparent 100%)",
+                WebkitMaskImage: "linear-gradient(to top, black 0%, transparent 100%)",
+                background: "linear-gradient(to top, rgba(255,255,255,0.7) 0%, transparent 100%)",
               }} />
-              {/* 좌측 블러 오버레이 */}
-              <div className="pointer-events-none absolute bottom-0 left-0 top-0 z-30" style={{
-                width: 40,
-                backdropFilter: "blur(5px)",
-                WebkitBackdropFilter: "blur(5px)",
-                WebkitMaskImage: "linear-gradient(to right, black 0%, transparent 100%)",
+              {/* 좌측 페이드+블러 */}
+              <div className="pointer-events-none absolute inset-y-0 left-0 z-30" style={{
+                width: 55,
+                backdropFilter: "blur(5px)", WebkitBackdropFilter: "blur(5px)",
                 maskImage: "linear-gradient(to right, black 0%, transparent 100%)",
-                background: "linear-gradient(to right, rgba(255,255,255,0.4) 0%, transparent 100%)",
+                WebkitMaskImage: "linear-gradient(to right, black 0%, transparent 100%)",
+                background: "linear-gradient(to right, rgba(255,255,255,0.6) 0%, transparent 100%)",
               }} />
-              {/* 우측 블러 오버레이 */}
-              <div className="pointer-events-none absolute bottom-0 right-0 top-0 z-30" style={{
-                width: 50,
-                backdropFilter: "blur(5px)",
-                WebkitBackdropFilter: "blur(5px)",
-                WebkitMaskImage: "linear-gradient(to left, black 0%, transparent 100%)",
+              {/* 우측 페이드+블러 */}
+              <div className="pointer-events-none absolute inset-y-0 right-0 z-30" style={{
+                width: 60,
+                backdropFilter: "blur(5px)", WebkitBackdropFilter: "blur(5px)",
                 maskImage: "linear-gradient(to left, black 0%, transparent 100%)",
-                background: "linear-gradient(to left, rgba(255,255,255,0.4) 0%, transparent 100%)",
+                WebkitMaskImage: "linear-gradient(to left, black 0%, transparent 100%)",
+                background: "linear-gradient(to left, rgba(255,255,255,0.6) 0%, transparent 100%)",
               }} />
             </div>
           </div>

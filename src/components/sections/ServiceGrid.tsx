@@ -67,7 +67,7 @@ const services: ServiceItem[] = [
 export default function ServiceGrid() {
   return (
     <section className="bg-surface py-24">
-      <div className="mx-auto max-w-7xl px-12 lg:px-24">
+      <div className="mx-auto max-w-7xl px-6">
         <SectionHeader
           label="Services"
           title="글로벌 진출을 위한 맞춤 솔루션"

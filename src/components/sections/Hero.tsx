@@ -4,16 +4,16 @@ import { useEffect, useRef, useCallback } from "react";
 import Button from "@/components/ui/Button";
 
 const SERVICES = [
-  { icon: "▶️", title: "영상 번역", desc: "자막 & 더빙" },
-  { icon: "📄", title: "문서 번역", desc: "전문 번역" },
-  { icon: "🏢", title: "기업 맞춤 번역", desc: "맞춤형 솔루션" },
-  { icon: "🌐", title: "홈페이지 현지화", desc: "웹사이트 최적화" },
-  { icon: "📱", title: "앱 현지화", desc: "모바일 최적화" },
-  { icon: "📖", title: "웹소설 번역", desc: "콘텐츠 현지화" },
-  { icon: "🖼️", title: "웹툰 번역", desc: "만화 현지화" },
-  { icon: "🎮", title: "게임 번역", desc: "게임 현지화" },
-  { icon: "✏️", title: "MTPE", desc: "기계번역 후편집" },
-  { icon: "🤖", title: "AI 번역·더빙", desc: "AI 기술 활용" },
+  { icon: "▶️", title: "영상 번역", desc: "자막 & 더빙", img: "/images/영상 번역.jpg" },
+  { icon: "📄", title: "문서 번역", desc: "전문 번역", img: "/images/문서 번역.jpg" },
+  { icon: "🏢", title: "기업 맞춤 번역", desc: "맞춤형 솔루션", img: "/images/기업 맞춤 번역.png" },
+  { icon: "🌐", title: "홈페이지 현지화", desc: "웹사이트 최적화", img: "/images/홈페이지 현지화.jpg" },
+  { icon: "📱", title: "앱 현지화", desc: "모바일 최적화", img: "/images/앱 현지화.png" },
+  { icon: "📖", title: "웹소설 번역", desc: "콘텐츠 현지화", img: "/images/웹소설 번역.png" },
+  { icon: "🖼️", title: "웹툰 번역", desc: "만화 현지화", img: "/images/웹툰 번역.jpg" },
+  { icon: "🎮", title: "게임 번역", desc: "게임 현지화", img: "/images/게임 번역.jpg" },
+  { icon: "✏️", title: "MTPE", desc: "기계번역 후편집", img: "/images/MTPE.png" },
+  { icon: "📺", title: "SDH 자막 제작", desc: "청각장애인 자막", img: "/images/SDH 자막 제작.jpg" },
 ];
 
 function easeInOutCubic(t: number) {
@@ -230,7 +230,9 @@ function CardAnimation() {
             <div style={{ fontSize: 12, fontWeight: 700, color: "#1a1a1a", whiteSpace: "nowrap", overflow: "hidden", textOverflow: "ellipsis" }}>{svc.title}</div>
           </div>
           <div style={{ fontSize: 10, color: "#888", padding: "4px 12px 8px" }}>{svc.desc}</div>
-          <div style={{ flex: 1, margin: "0 10px 10px", borderRadius: 10, background: "linear-gradient(135deg, rgba(0,151,254,0.06), rgba(0,151,254,0.12))", overflow: "hidden" }} />
+          <div style={{ flex: 1, margin: "0 10px 10px", borderRadius: 10, overflow: "hidden", background: "rgba(0,151,254,0.04)" }}>
+            <img src={svc.img} alt={svc.title} style={{ width: "100%", height: "100%", objectFit: "cover", display: "block" }} />
+          </div>
         </div>
       ))}
     </>

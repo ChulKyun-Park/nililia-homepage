@@ -209,14 +209,14 @@ function ConveyorBelt() {
 
 export default function Hero() {
   return (
-    <section className="relative flex min-h-[70vh] items-center bg-white">
+    <section className="relative bg-white py-20 lg:py-32 overflow-hidden">
       {/* Subtle background gradient */}
       <div className="absolute inset-0">
         <div className="absolute inset-0 bg-[radial-gradient(ellipse_at_20%_50%,_rgba(0,151,254,0.06)_0%,_transparent_60%)]" />
         <div className="absolute inset-0 bg-[radial-gradient(ellipse_at_80%_20%,_rgba(0,151,254,0.04)_0%,_transparent_50%)]" />
       </div>
 
-      <div className="relative mx-auto flex max-w-7xl items-center px-6 py-20 lg:py-24">
+      <div className="relative mx-auto max-w-7xl px-6">
         <div className="grid w-full items-center gap-12 lg:grid-cols-2 lg:gap-16">
           {/* Left: Text */}
           <div>

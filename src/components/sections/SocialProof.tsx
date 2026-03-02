@@ -23,8 +23,8 @@ const clients = [
 export default function SocialProof() {
   return (
     <section className="bg-white py-24">
-      <div className="mx-auto max-w-7xl px-6">
-        {/* Stats */}
+      {/* Stats — 레이아웃 기준 적용 */}
+      <div className="mx-auto max-w-7xl px-6 lg:pl-12">
         <div className="grid grid-cols-2 gap-8 md:grid-cols-4">
           {stats.map((stat) => (
             <div key={stat.label} className="text-center">
@@ -35,27 +35,29 @@ export default function SocialProof() {
             </div>
           ))}
         </div>
+      </div>
 
-        {/* Client logo marquee */}
-        <div className="mt-16 overflow-hidden">
-          <p className="mb-8 text-center text-sm font-medium uppercase tracking-wider text-muted">
-            국내외 선도 기업이 신뢰합니다
-          </p>
-          <div className="relative">
-            <div className="animate-marquee flex items-center gap-16 whitespace-nowrap">
-              {[...clients, ...clients].map((client, i) => (
-                <span
-                  key={`${client}-${i}`}
-                  className="text-lg font-semibold text-foreground/20 transition-colors hover:text-foreground/40"
-                >
-                  {client}
-                </span>
-              ))}
-            </div>
+      {/* Client logo marquee — 예외: 화면 전체 무한루프 */}
+      <div className="mt-16 overflow-hidden">
+        <p className="mb-8 text-center text-sm font-medium uppercase tracking-wider text-muted">
+          국내외 선도 기업이 신뢰합니다
+        </p>
+        <div className="relative">
+          <div className="animate-marquee flex items-center gap-16 whitespace-nowrap">
+            {[...clients, ...clients].map((client, i) => (
+              <span
+                key={`${client}-${i}`}
+                className="text-lg font-semibold text-foreground/20 transition-colors hover:text-foreground/40"
+              >
+                {client}
+              </span>
+            ))}
           </div>
         </div>
+      </div>
 
-        {/* Link */}
+      {/* Link — 레이아웃 기준 적용 */}
+      <div className="mx-auto max-w-7xl px-6 lg:pl-12">
         <div className="mt-10 text-center">
           <Link
             href="/cases"

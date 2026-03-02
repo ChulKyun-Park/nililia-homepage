@@ -75,7 +75,7 @@ export default function ServicesPage() {
     <>
       {/* Page Hero */}
       <section className="bg-gradient-to-br from-foreground via-gray-900 to-gray-800 flex items-center min-h-[420px] py-4 lg:py-6">
-        <div className="mx-auto max-w-7xl px-6">
+        <div className="mx-auto max-w-7xl px-6 lg:pl-12">
           <p className="mb-4 text-sm font-semibold uppercase tracking-wider text-primary">
             Services
           </p>
@@ -93,7 +93,6 @@ export default function ServicesPage() {
 
       {/* Service Cards — 홈과 동일한 그리드 */}
       <Section>
-        <div className="mx-auto max-w-5xl">
           <div className="grid gap-5 sm:grid-cols-2 lg:grid-cols-3">
             {services.map((service) => {
               const Icon = service.icon;
@@ -122,7 +121,6 @@ export default function ServicesPage() {
               );
             })}
           </div>
-        </div>
       </Section>
 
       {/* Process */}

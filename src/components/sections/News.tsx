@@ -8,7 +8,7 @@ export default async function News() {
 
   return (
     <section className="bg-surface py-24">
-      <div className="mx-auto max-w-7xl px-6">
+      <div className="mx-auto max-w-7xl px-6 lg:pl-12">
         <SectionHeader
           label="News"
           title="최신 소식"

@@ -67,14 +67,13 @@ const services: ServiceItem[] = [
 export default function ServiceGrid() {
   return (
     <section className="bg-surface py-24">
-      <div className="mx-auto max-w-7xl px-6">
+      <div className="mx-auto max-w-7xl px-6 lg:pl-12">
         <SectionHeader
           label="Services"
           title="글로벌 진출을 위한 맞춤 솔루션"
           description="다양한 콘텐츠 유형에 최적화된 전문 번역 및 현지화 서비스를 제공합니다."
         />
 
-        <div className="mx-auto max-w-5xl">
         <div className="grid gap-5 sm:grid-cols-2 lg:grid-cols-3">
           {services.map((service) => {
             const Icon = service.icon;
@@ -103,7 +102,6 @@ export default function ServiceGrid() {
               </Card>
             );
           })}
-        </div>
         </div>
 
         <div className="mt-10 text-center">

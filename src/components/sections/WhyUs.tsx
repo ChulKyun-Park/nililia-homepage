@@ -100,7 +100,7 @@ export default function WhyUs() {
         }
       `}</style>
 
-      <div className="mx-auto max-w-7xl px-6">
+      <div className="mx-auto max-w-7xl px-6 lg:pl-12">
         {/* Header row: 제목 좌측, 번호 우측 */}
         <div className="mb-16 flex items-end justify-between">
           <div>

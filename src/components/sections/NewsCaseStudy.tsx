@@ -11,7 +11,7 @@ export default async function NewsCaseStudy() {
 
   return (
     <section className="bg-surface py-24">
-      <div className="mx-auto max-w-7xl px-6">
+      <div className="mx-auto max-w-7xl px-6 lg:pl-12">
         {/* 2-column grid */}
         <div className="grid gap-12 lg:grid-cols-2">
           {/* Left: News */}

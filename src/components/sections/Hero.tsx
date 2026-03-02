@@ -240,7 +240,7 @@ export default function Hero() {
       <div className="relative z-10 mx-auto max-w-7xl px-6 py-16">
         <div className="relative w-full" style={{ minHeight: 420 }}>
           {/* 카드 애니메이션 — absolute, 우측 정렬 */}
-          <div className="absolute right-0 top-1/2 -translate-y-1/2 hidden lg:block" style={{ width: 722, height: 399 }}>
+          <div className="absolute right-0 top-1/2 hidden lg:block" style={{ width: 722, height: 399, transform: "translateY(-50%) scale(0.95)", transformOrigin: "right center" }}>
             <div className="pointer-events-none absolute z-40 rounded-xl border border-primary/10 bg-white px-5 py-2.5 text-sm font-bold text-gray-400 shadow-[0_8px_24px_rgba(0,0,0,0.05)]"
               style={{ top: 145, left: 8, animation: "float-s 3.5s ease-in-out infinite 0s" }}>こんにちは</div>
             <div className="pointer-events-none absolute z-40 rounded-xl border border-primary/10 bg-white px-5 py-2.5 text-sm font-bold text-gray-400 shadow-[0_8px_24px_rgba(0,0,0,0.05)]"

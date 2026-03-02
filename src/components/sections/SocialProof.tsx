@@ -66,7 +66,7 @@ function CompanyLogo({ filename }: { filename: string }) {
         alt={name}
         width={120}
         height={48}
-        className="h-10 w-auto object-contain opacity-60 grayscale transition-all hover:opacity-100 hover:grayscale-0"
+        className="h-10 w-auto object-contain"
       />
     </div>
   );

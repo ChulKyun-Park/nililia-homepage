@@ -1,3 +1,4 @@
+import PageHero from "@/components/sections/PageHero";
 import type { Metadata } from "next";
 import Section from "@/components/ui/Section";
 import Card from "@/components/ui/Card";
@@ -66,21 +67,11 @@ const inquiryTypes = [
 export default function ContactPage() {
   return (
     <>
-      {/* Page Hero */}
-      <section className="bg-gradient-to-br from-foreground via-gray-900 to-gray-800 py-24 sm:py-32">
-        <div className="mx-auto max-w-7xl px-6">
-          <p className="mb-4 text-sm font-semibold uppercase tracking-wider text-primary">
-            Contact Us
-          </p>
-          <h1 className="text-4xl font-bold leading-tight text-white sm:text-5xl break-keep">
-            문의하기
-          </h1>
-          <p className="mt-6 max-w-2xl text-lg leading-relaxed text-white/70 break-keep">
-            프로젝트 상담, 견적 요청, 파트너십 등 무엇이든 문의해 주세요.
-            전문 컨설턴트가 빠르게 답변드립니다.
-          </p>
-        </div>
-      </section>
+      <PageHero
+        label="Contact Us"
+        title="문의하기"
+        description="프로젝트 상담, 견적 요청, 파트너십 등 무엇이든 문의해 주세요. 전문 컨설턴트가 빠르게 답변드립니다."
+      />
 
       {/* Contact Info Cards */}
       <Section>
@@ -105,7 +96,7 @@ export default function ContactPage() {
                 ) : (
                   <p className="mt-2 text-lg font-bold text-foreground">{info.value}</p>
                 )}
-                <p className="mt-1 text-xs text-muted">{info.description}</p>
+                <p className="mt-1 text-[length:var(--font-size-body)] text-muted">{info.description}</p>
               </Card>
             );
           })}
@@ -120,7 +111,7 @@ export default function ContactPage() {
             <h2 className="text-2xl font-bold text-foreground break-keep">
               문의 양식
             </h2>
-            <p className="mt-2 text-sm text-muted break-keep">
+            <p className="mt-2 text-[length:var(--font-size-body)] text-muted break-keep">
               아래 양식을 작성해 주시면, 영업일 기준 1일 이내에 답변드립니다.
             </p>
             <form className="mt-8 space-y-6">
@@ -188,10 +179,10 @@ export default function ContactPage() {
                   <option value="">서비스를 선택해 주세요</option>
                   <option value="video">영상 번역</option>
                   <option value="document">문서 번역</option>
-                  <option value="web-app">웹/앱 현지화</option>
+                  <option value="web-app">웹 · 앱 현지화</option>
                   <option value="game">게임 현지화</option>
                   <option value="webnovel">웹소설 번역</option>
-                  <option value="sdh">SDH 자막</option>
+                  <option value="sdh">SDH · 배리어프리 자막 제작</option>
                   <option value="other">기타</option>
                 </select>
               </div>
@@ -221,7 +212,7 @@ export default function ContactPage() {
             <h2 className="text-2xl font-bold text-foreground break-keep">
               문의 유형
             </h2>
-            <p className="mt-2 text-sm text-muted break-keep">
+            <p className="mt-2 text-[length:var(--font-size-body)] text-muted break-keep">
               어떤 종류의 문의든 환영합니다.
             </p>
             <div className="mt-8 space-y-6">
@@ -234,7 +225,7 @@ export default function ContactPage() {
                     </div>
                     <div>
                       <h3 className="font-bold text-foreground">{type.title}</h3>
-                      <p className="mt-1 text-sm text-muted break-keep">{type.description}</p>
+                      <p className="mt-1 text-[length:var(--font-size-body)] text-muted break-keep">{type.description}</p>
                     </div>
                   </Card>
                 );

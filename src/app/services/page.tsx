@@ -1,8 +1,10 @@
+import PageHero from "@/components/sections/PageHero";
 import type { Metadata } from "next";
 import Section from "@/components/ui/Section";
 import SectionHeader from "@/components/ui/SectionHeader";
 import Card from "@/components/ui/Card";
 import Button from "@/components/ui/Button";
+import Link from "next/link";
 import {
   Video,
   FileText,
@@ -10,17 +12,18 @@ import {
   Gamepad2,
   BookOpen,
   Subtitles,
-  CheckCircle,
+  ScanSearch,
+  Mic,
 } from "lucide-react";
 
 export const metadata: Metadata = {
   title: "서비스 | Nililia",
   description:
-    "영상 번역, 문서 번역, 웹/앱 현지화, 게임 현지화, 웹소설 번역, SDH 자막 등 다양한 번역 및 현지화 서비스를 제공합니다.",
+    "영상 번역, 문서 번역, 웹 · 앱 현지화, 게임 현지화, 웹소설 번역, SDH · 배리어프리 자막 제작, MTPE, AI 번역 · 더빙 등 다양한 번역 및 현지화 서비스를 제공합니다.",
   openGraph: {
     title: "서비스 | Nililia",
     description:
-      "영상 번역, 문서 번역, 웹/앱 현지화, 게임 현지화, 웹소설 번역, SDH 자막 등 다양한 번역 및 현지화 서비스를 제공합니다.",
+      "영상 번역, 문서 번역, 웹 · 앱 현지화, 게임 현지화, 웹소설 번역, SDH · 배리어프리 자막 제작, MTPE, AI 번역 · 더빙 등 다양한 번역 및 현지화 서비스를 제공합니다.",
   },
 };
 
@@ -28,74 +31,53 @@ const services = [
   {
     icon: Video,
     title: "영상 번역",
+    slug: "video-translation",
     description: "자막, 더빙, 보이스오버 등 모든 영상 콘텐츠의 다국어 번역 서비스를 제공합니다.",
-    details: [
-      "자막 번역 및 타이밍 싱크",
-      "전문 성우를 활용한 더빙 서비스",
-      "보이스오버 녹음 및 편집",
-      "넷플릭스, 유튜브 등 플랫폼 포맷 지원",
-      "실시간 스트리밍 자막 서비스",
-    ],
   },
   {
     icon: FileText,
     title: "문서 번역",
+    slug: "document-translation",
     description: "계약서, 매뉴얼, 마케팅 자료 등 전문 문서 번역 서비스를 제공합니다.",
-    details: [
-      "법률/계약서 전문 번역",
-      "기술 매뉴얼 및 사양서 번역",
-      "마케팅/광고 카피 현지화",
-      "학술 논문 및 보고서 번역",
-      "금융/의료 전문 문서 번역",
-    ],
   },
   {
     icon: Globe,
-    title: "웹/앱 현지화",
+    title: "웹 · 앱 현지화",
+    slug: "web-app-localization",
     description: "웹사이트와 모바일 앱의 현지화로 글로벌 사용자 경험을 최적화합니다.",
-    details: [
-      "UI/UX 텍스트 현지화",
-      "다국어 SEO 최적화",
-      "CMS 연동 자동 번역",
-      "A/B 테스트용 다국어 콘텐츠",
-      "RTL 언어 레이아웃 지원",
-    ],
   },
   {
     icon: Gamepad2,
     title: "게임 현지화",
+    slug: "game-localization",
     description: "게임 UI, 스토리, 마케팅 자료까지 완벽한 게임 현지화를 지원합니다.",
-    details: [
-      "게임 내 텍스트 및 UI 번역",
-      "스토리/대화 현지화",
-      "인게임 이미지 및 에셋 현지화",
-      "게임 마케팅 콘텐츠 번역",
-      "QA 테스트 및 LQA 지원",
-    ],
   },
   {
     icon: BookOpen,
     title: "웹소설 번역",
+    slug: "webnovel-translation",
     description: "웹소설, 웹툰 등 한류 콘텐츠의 고품질 번역 서비스를 제공합니다.",
-    details: [
-      "웹소설 연재 번역",
-      "웹툰 대사 번역 및 레터링",
-      "장르별 전문 번역가 매칭",
-      "대량 에피소드 일괄 처리",
-      "독자 피드백 반영 품질 관리",
-    ],
   },
   {
     icon: Subtitles,
-    title: "SDH 자막",
+    title: "SDH · 배리어프리 자막 제작",
+    slug: "sdh-subtitle",
     description: "청각장애인을 위한 자막(SDH) 제작으로 콘텐츠 접근성을 향상시킵니다.",
-    details: [
-      "SDH(Subtitles for the Deaf and Hard of Hearing) 제작",
-      "음향 효과 및 음악 설명 포함",
-      "화자 식별 자막",
-      "접근성 기준 준수",
-      "다국어 SDH 자막 제작",
-    ],
+  },
+];
+
+const comingSoonServices = [
+  {
+    icon: ScanSearch,
+    title: "MTPE",
+    slug: "mtpe",
+    description: "AI 기계 번역 결과물을 전문 번역가가 감수·교정하여 빠른 속도와 높은 품질을 동시에 달성합니다.",
+  },
+  {
+    icon: Mic,
+    title: "AI 번역 · 더빙",
+    slug: "ai-dubbing",
+    description: "AI 음성 합성과 립싱크 기술로 영상 콘텐츠를 다국어로 자연스럽게 더빙합니다.",
   },
 ];
 
@@ -109,67 +91,76 @@ const process = [
 export default function ServicesPage() {
   return (
     <>
-      {/* Page Hero */}
-      <section className="bg-gradient-to-br from-foreground via-gray-900 to-gray-800 py-24 sm:py-32">
-        <div className="mx-auto max-w-7xl px-6">
-          <p className="mb-4 text-sm font-semibold uppercase tracking-wider text-primary">
-            Services
-          </p>
-          <h1 className="text-4xl font-bold leading-tight text-white sm:text-5xl break-keep">
-            글로벌 진출을 위한
-            <br />
-            맞춤 솔루션
-          </h1>
-          <p className="mt-6 max-w-2xl text-lg leading-relaxed text-white/70 break-keep">
-            다양한 콘텐츠 유형에 최적화된 전문 번역 및 현지화 서비스를 제공합니다.
-            AI 기술과 전문가의 노하우로 최상의 품질을 보장합니다.
-          </p>
-        </div>
-      </section>
+      <PageHero
+        label="Services"
+        title={<>글로벌 진출을 위한<br />맞춤 솔루션</>}
+        description="다양한 콘텐츠 유형에 최적화된 전문 번역 및 현지화 서비스를 제공합니다. AI 기술과 전문가의 노하우로 최상의 품질을 보장합니다."
+      />
 
-      {/* Service Detail Cards */}
+      {/* Service Cards */}
       <Section>
-        <div className="space-y-16">
-          {services.map((service, idx) => {
-            const Icon = service.icon;
-            const isReversed = idx % 2 === 1;
-            return (
-              <div
-                key={service.title}
-                className={`flex flex-col gap-10 lg:flex-row lg:items-center ${
-                  isReversed ? "lg:flex-row-reverse" : ""
-                }`}
-              >
-                {/* Text */}
-                <div className="flex-1">
-                  <div className="mb-4 inline-flex rounded-xl bg-primary-light p-3">
-                    <Icon className="h-7 w-7 text-primary" />
+          <div className="grid gap-5 sm:grid-cols-2 lg:grid-cols-3">
+            {services.map((service) => {
+              const Icon = service.icon;
+              return (
+                <Link key={service.title} href={`/services/${service.slug}`}>
+                  <Card className="group cursor-pointer overflow-hidden p-0 transition-all hover:-translate-y-1 h-full">
+                    <div className="flex aspect-[16/10] items-center justify-center bg-surface">
+                      <span className="text-xs text-muted">
+                        [{service.title} 이미지]
+                      </span>
+                    </div>
+                    <div className="p-4">
+                      <div className="mb-2 inline-flex rounded-lg bg-primary/10 p-1.5">
+                        <Icon className="h-4 w-4 text-primary" />
+                      </div>
+                      <h3 className="mb-1.5 text-[length:var(--font-size-card-title)] font-bold text-foreground group-hover:text-primary transition-colors">
+                        {service.title}
+                      </h3>
+                      <p className="text-[length:var(--font-size-card-desc)] leading-relaxed text-muted break-keep">
+                        {service.description}
+                      </p>
+                    </div>
+                  </Card>
+                </Link>
+              );
+            })}
+          </div>
+
+          {/* Coming Soon divider */}
+          <div className="mt-12 flex items-center gap-4">
+            <span className="inline-flex items-center rounded-lg border border-border px-4 py-2 text-sm font-medium text-foreground">
+              coming soon
+            </span>
+            <div className="flex-1 h-px bg-border" />
+          </div>
+
+          {/* Coming soon services — 클릭 불가 */}
+          <div className="mt-8 grid gap-5 sm:grid-cols-2 lg:grid-cols-3">
+            {comingSoonServices.map((service) => {
+              const Icon = service.icon;
+              return (
+                <Card key={service.title} className="group overflow-hidden p-0 cursor-default opacity-70 h-full">
+                  <div className="flex aspect-[16/10] items-center justify-center bg-surface">
+                    <span className="text-xs text-muted">
+                      [{service.title} 이미지]
+                    </span>
                   </div>
-                  <h2 className="text-2xl font-bold text-foreground sm:text-3xl break-keep">
-                    {service.title}
-                  </h2>
-                  <p className="mt-3 text-base leading-relaxed text-muted break-keep">
-                    {service.description}
-                  </p>
-                  <ul className="mt-6 space-y-3">
-                    {service.details.map((detail) => (
-                      <li key={detail} className="flex items-start gap-3">
-                        <CheckCircle className="mt-0.5 h-5 w-5 shrink-0 text-primary" />
-                        <span className="text-sm text-foreground break-keep">{detail}</span>
-                      </li>
-                    ))}
-                  </ul>
-                </div>
-                {/* Image placeholder */}
-                <div className="flex-1">
-                  <div className="flex aspect-[4/3] items-center justify-center rounded-2xl bg-gradient-to-br from-primary/5 to-primary/10 text-sm text-muted">
-                    {service.title} 이미지
+                  <div className="p-4">
+                    <div className="mb-2 inline-flex rounded-lg bg-primary/10 p-1.5">
+                      <Icon className="h-4 w-4 text-primary" />
+                    </div>
+                    <h3 className="mb-1.5 text-[length:var(--font-size-card-title)] font-bold text-foreground transition-colors">
+                      {service.title}
+                    </h3>
+                    <p className="text-[length:var(--font-size-card-desc)] leading-relaxed text-muted break-keep">
+                      {service.description}
+                    </p>
                   </div>
-                </div>
-              </div>
-            );
-          })}
-        </div>
+                </Card>
+              );
+            })}
+          </div>
       </Section>
 
       {/* Process */}
@@ -184,7 +175,7 @@ export default function ServicesPage() {
             <Card key={item.step} className="text-center">
               <span className="text-4xl font-bold text-primary/20">{item.step}</span>
               <h3 className="mt-3 text-lg font-bold text-foreground">{item.title}</h3>
-              <p className="mt-2 text-sm text-muted break-keep">{item.description}</p>
+              <p className="mt-2 text-[length:var(--font-size-card-desc)] text-muted break-keep">{item.description}</p>
             </Card>
           ))}
         </div>

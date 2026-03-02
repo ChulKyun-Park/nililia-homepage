@@ -2,20 +2,20 @@ import Link from "next/link";
 import { Phone, Mail } from "lucide-react";
 
 const serviceLinks = [
-  { label: "영상 번역", href: "/services" },
-  { label: "문서 번역", href: "/services" },
-  { label: "웹소설 · 웹툰", href: "/services" },
-  { label: "SDH 자막 제작", href: "/services" },
-  { label: "홈페이지 · 앱 현지화", href: "/services" },
-  { label: "게임 번역", href: "/services" },
+  { label: "영상 번역", href: "/services/video-translation" },
+  { label: "문서 번역", href: "/services/document-translation" },
+  { label: "웹소설 · 웹툰", href: "/services/webnovel-translation" },
+  { label: "SDH · 배리어프리 자막", href: "/services/sdh-subtitle" },
+  { label: "홈페이지 · 앱 현지화", href: "/services/web-app-localization" },
+  { label: "게임 번역", href: "/services/game-localization" },
   { label: "MTPE", href: "/services" },
   { label: "AI 번역 · 더빙", href: "/services" },
 ];
 
 const familySites = [
-  { label: "CONTENTSFLY", href: "#" },
-  { label: "CONTENTSFLYS", href: "#" },
-  { label: "CAREERS", href: "/career" },
+  { label: "CONTENTSFLY", href: "https://contentsfly.com/cf/main" },
+  { label: "CONTENTSFLYS", href: "https://contentsfly-s.com" },
+  { label: "CAREERS", href: "https://nililia.ninehire.site" },
 ];
 
 /* SNS 아이콘 — 인라인 SVG */
@@ -39,11 +39,12 @@ const socialLinks = [
     ),
   },
   {
-    label: "Blog",
+    label: "네이버 블로그",
     href: "#",
     icon: (
-      <svg className="h-5 w-5" fill="currentColor" viewBox="0 0 24 24">
-        <path d="M12 2C6.48 2 2 6.48 2 12s4.48 10 10 10 10-4.48 10-10S17.52 2 12 2zm-1 17.93c-3.95-.49-7-3.85-7-7.93 0-.62.08-1.21.21-1.79L9 15v1c0 1.1.9 2 2 2v1.93zm6.9-2.54c-.26-.81-1-1.39-1.9-1.39h-1v-3c0-.55-.45-1-1-1H8v-2h2c.55 0 1-.45 1-1V7h2c1.1 0 2-.9 2-2v-.41c2.93 1.19 5 4.06 5 7.41 0 2.08-.8 3.97-2.1 5.39z" />
+      <svg className="h-5 w-5" viewBox="0 0 20 20" fill="currentColor">
+        <path d="M3 1.5h2.2v5.2h.1C6 5.6 7.2 5 8.5 5c2.6 0 4.5 2 4.5 5s-1.9 5-4.5 5c-1.3 0-2.5-.6-3.2-1.7h-.1V14H3V1.5zm5 12c1.6 0 2.8-1.2 2.8-3.5S9.6 6.5 8 6.5 5.2 7.7 5.2 10s1.2 3.5 2.8 3.5z" />
+        <rect x="15.5" y="5" width="1.8" height="9" rx=".9" />
       </svg>
     ),
   },
@@ -57,11 +58,11 @@ const socialLinks = [
     ),
   },
   {
-    label: "TikTok",
+    label: "Facebook",
     href: "#",
     icon: (
       <svg className="h-5 w-5" fill="currentColor" viewBox="0 0 24 24">
-        <path d="M12.525.02c1.31-.02 2.61-.01 3.91-.02.08 1.53.63 3.09 1.75 4.17 1.12 1.11 2.7 1.62 4.24 1.79v4.03c-1.44-.05-2.89-.35-4.2-.97-.57-.26-1.1-.59-1.62-.93-.01 2.92.01 5.84-.02 8.75-.08 1.4-.54 2.79-1.35 3.94-1.31 1.92-3.58 3.17-5.91 3.21-1.43.08-2.86-.31-4.08-1.03-2.02-1.19-3.44-3.37-3.65-5.71-.02-.5-.03-1-.01-1.49.18-1.9 1.12-3.72 2.58-4.96 1.66-1.44 3.98-2.13 6.15-1.72.02 1.48-.04 2.96-.04 4.44-.99-.32-2.15-.23-3.02.37-.63.41-1.11 1.04-1.36 1.75-.21.51-.15 1.07-.14 1.61.24 1.64 1.82 3.02 3.5 2.87 1.12-.01 2.19-.66 2.77-1.61.19-.33.4-.67.41-1.06.1-1.79.06-3.57.07-5.36.01-4.03-.01-8.05.02-12.07z" />
+        <path d="M24 12.073c0-6.627-5.373-12-12-12s-12 5.373-12 12c0 5.99 4.388 10.954 10.125 11.854v-8.385H7.078v-3.47h3.047V9.43c0-3.007 1.792-4.669 4.533-4.669 1.312 0 2.686.235 2.686.235v2.953H15.83c-1.491 0-1.956.925-1.956 1.874v2.25h3.328l-.532 3.47h-2.796v8.385C19.612 23.027 24 18.062 24 12.073z" />
       </svg>
     ),
   },
@@ -71,15 +72,15 @@ export default function Footer() {
   return (
     <>
       <footer className="border-t border-border bg-surface text-foreground">
-        <div className="mx-auto max-w-7xl px-6">
+        <div className="mx-auto max-w-7xl px-6 lg:pl-12">
           {/* 4-column grid */}
-          <div className="grid grid-cols-1 gap-10 py-16 sm:grid-cols-2 lg:grid-cols-[2fr_1fr_1fr_1.8fr]">
+          <div className="grid grid-cols-1 gap-3 py-8 sm:grid-cols-2 lg:grid-cols-[2.5fr_1fr_1fr_1.2fr] lg:gap-x-3">
             {/* Column 1: Company Info */}
             <div>
-              <h3 className="mb-5 text-lg font-bold text-foreground">
-                (주)닐릴리아
+              <h3 className="mb-5 text-[1.25rem] font-bold tracking-[0.01em] text-foreground">
+                (주)닐리리아
               </h3>
-              <ul className="space-y-2 text-[length:var(--font-size-footer)] leading-relaxed text-muted">
+              <ul className="space-y-1 text-sm leading-relaxed text-muted">
                 <li>경기도 안양시 동안구 시민대로 327번길 11-41, 6층</li>
                 <li>대표자 : 박철균 | 사업자 등록번호 : 481-81-00251</li>
                 <li>
@@ -94,13 +95,13 @@ export default function Footer() {
               </ul>
 
               {/* Copyright */}
-              <p className="mt-6 text-xs text-muted">
+              <p className="mt-8 text-sm text-muted">
                 &copy; {new Date().getFullYear()} Nililia Inc. All rights
                 reserved.
               </p>
 
               {/* SNS Icons */}
-              <div className="mt-4 flex items-center gap-3">
+              <div className="mt-8 flex items-center gap-3">
                 {socialLinks.map((social) => (
                   <a
                     key={social.label}
@@ -114,34 +115,16 @@ export default function Footer() {
                   </a>
                 ))}
               </div>
+
             </div>
 
             {/* Column 2: Services */}
             <div>
-              <h3 className="mb-5 text-sm font-semibold uppercase tracking-wider text-muted">
-                번역 · 현지화
+              <h3 className="mb-3 text-sm font-medium text-foreground">
+                Services
               </h3>
-              <ul className="space-y-2">
+              <ul className="space-y-1">
                 {serviceLinks.map((link) => (
-                  <li key={link.label}>
-                    <Link
-                      href={link.href}
-                      className="text-[length:var(--font-size-footer)] text-muted transition-colors hover:text-primary"
-                    >
-                      {link.label}
-                    </Link>
-                  </li>
-                ))}
-              </ul>
-            </div>
-
-            {/* Column 3: Family Sites */}
-            <div>
-              <h3 className="mb-5 text-sm font-semibold uppercase tracking-wider text-muted">
-                패밀리 사이트
-              </h3>
-              <ul className="space-y-2.5">
-                {familySites.map((link) => (
                   <li key={link.label}>
                     <Link
                       href={link.href}
@@ -154,15 +137,36 @@ export default function Footer() {
               </ul>
             </div>
 
+            {/* Column 3: Family Sites */}
+            <div>
+              <h3 className="mb-3 text-sm font-medium text-foreground">
+                Family Sites
+              </h3>
+              <ul className="space-y-1">
+                {familySites.map((link) => (
+                  <li key={link.label}>
+                    <a
+                      href={link.href}
+                      target="_blank"
+                      rel="noopener noreferrer"
+                      className="text-sm text-muted transition-colors hover:text-primary"
+                    >
+                      {link.label}
+                    </a>
+                  </li>
+                ))}
+              </ul>
+            </div>
+
             {/* Column 4: Contact */}
             <div>
-              <h3 className="mb-5 text-sm font-semibold uppercase tracking-wider text-muted">
-                문의하기
+              <h3 className="mb-3 text-sm font-medium text-foreground">
+                Contact
               </h3>
-              <p className="mb-4 text-xs text-muted">
+              <p className="mb-2 text-sm text-muted">
                 문의 가능 시간 : 10:00 ~ 19:00
               </p>
-              <ul className="space-y-3 text-sm">
+              <ul className="space-y-2 text-sm">
                 <li className="flex items-center gap-2 text-muted">
                   <Phone className="h-4 w-4 text-primary/60" />
                   <span>번역 문의</span>
@@ -175,7 +179,7 @@ export default function Footer() {
                 </li>
                 <li className="flex items-center gap-2 text-muted">
                   <Mail className="h-4 w-4 text-primary/60" />
-                  <span>기업 번역 문의</span>
+                  <span>기업 문의</span>
                   <a
                     href="mailto:sales@nililia.com"
                     className="font-medium text-foreground hover:text-primary transition-colors"
@@ -185,7 +189,7 @@ export default function Footer() {
                 </li>
                 <li className="flex items-center gap-2 text-muted">
                   <Mail className="h-4 w-4 text-primary/60" />
-                  <span>사업 제휴 문의</span>
+                  <span>제휴 문의</span>
                   <a
                     href="mailto:partnership@nililia.com"
                     className="font-medium text-foreground hover:text-primary transition-colors"
@@ -193,26 +197,28 @@ export default function Footer() {
                     partnership@nililia.com
                   </a>
                 </li>
+                <li className="flex items-center gap-2 text-muted">
+                  <Mail className="h-4 w-4 text-primary/60" />
+                  <span>채용 문의</span>
+                  <a
+                    href="mailto:recruit@nililia.com"
+                    className="font-medium text-foreground hover:text-primary transition-colors"
+                  >
+                    recruit@nililia.com
+                  </a>
+                </li>
               </ul>
             </div>
           </div>
 
-          {/* Bottom bar */}
-          <div className="flex flex-col items-center justify-between gap-4 border-t border-border py-8 text-sm text-muted md:flex-row">
-            <div className="flex gap-6">
-              <Link
-                href="#"
-                className="transition-colors hover:text-foreground"
-              >
-                이용약관
-              </Link>
-              <Link
-                href="#"
-                className="transition-colors hover:text-foreground"
-              >
-                개인정보처리방침
-              </Link>
-            </div>
+          {/* 이용약관 · 개인정보처리방침 */}
+          <div className="flex gap-6 border-t border-border py-4 text-sm text-muted">
+            <Link href="#" className="transition-colors hover:text-foreground">
+              이용약관
+            </Link>
+            <Link href="#" className="transition-colors hover:text-foreground">
+              개인정보처리방침
+            </Link>
           </div>
         </div>
       </footer>

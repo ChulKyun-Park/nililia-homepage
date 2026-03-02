@@ -1,7 +1,6 @@
 "use client";
 
 import { useState, useEffect, useCallback } from "react";
-import { ChevronUp, ChevronDown } from "lucide-react";
 
 const reasons = [
   {
@@ -52,10 +51,6 @@ export default function WhyUs() {
     goTo((current + 1) % total, "up");
   }, [current, total, goTo]);
 
-  const goPrev = useCallback(() => {
-    goTo((current - 1 + total) % total, "down");
-  }, [current, total, goTo]);
-
   // Auto-play
   useEffect(() => {
     if (isPaused) return;
@@ -73,64 +68,54 @@ export default function WhyUs() {
     >
       <style>{`
         @keyframes whyus-slide-up-enter {
-          0% {
-            opacity: 0;
-            transform: translateY(80px);
-          }
-          100% {
-            opacity: 1;
-            transform: translateY(0);
-          }
+          0% { opacity: 0; transform: translateY(120px); }
+          100% { opacity: 1; transform: translateY(0); }
         }
         @keyframes whyus-slide-down-enter {
-          0% {
-            opacity: 0;
-            transform: translateY(-80px);
-          }
-          100% {
-            opacity: 1;
-            transform: translateY(0);
-          }
+          0% { opacity: 0; transform: translateY(-120px); }
+          100% { opacity: 1; transform: translateY(0); }
         }
         .slide-enter-up {
-          animation: whyus-slide-up-enter 0.7s cubic-bezier(0.22, 1, 0.36, 1) both;
+          animation: whyus-slide-up-enter 1.2s cubic-bezier(0.22, 1, 0.36, 1) both;
         }
         .slide-enter-down {
-          animation: whyus-slide-down-enter 0.7s cubic-bezier(0.22, 1, 0.36, 1) both;
+          animation: whyus-slide-down-enter 1.2s cubic-bezier(0.22, 1, 0.36, 1) both;
+        }
+        .slide-enter-up-delayed {
+          animation: whyus-slide-up-enter 1.2s cubic-bezier(0.22, 1, 0.36, 1) 0.15s both;
+        }
+        .slide-enter-down-delayed {
+          animation: whyus-slide-down-enter 1.2s cubic-bezier(0.22, 1, 0.36, 1) 0.15s both;
         }
       `}</style>
 
-      <div className="mx-auto max-w-7xl px-6">
-        {/* Header row: 제목 좌측, 번호 우측 */}
-        <div className="mb-16 flex items-end justify-between">
-          <div>
-            <span className="mb-3 inline-block text-[length:var(--font-size-section-label)] font-semibold uppercase tracking-wider text-primary">
-              Why Nililia
-            </span>
-            <h2 className="text-3xl font-bold tracking-tight text-foreground sm:text-[length:var(--font-size-section-h2)] break-keep">
-              왜 Nililia를 선택해야 하나요?
-            </h2>
-          </div>
-          <span className="hidden text-6xl font-bold text-primary/10 sm:block">
-            {reason.number}
+      <div className="mx-auto max-w-7xl px-6 lg:pl-12">
+        {/* Header */}
+        <div className="mb-16">
+          <span className="mb-3 inline-block text-[length:var(--font-size-section-label)] font-semibold uppercase tracking-wider text-primary">
+            Why Nililia
           </span>
+          <h2 className="text-3xl font-bold tracking-tight text-foreground sm:text-[length:var(--font-size-section-h2)] break-keep">
+            왜 Nililia를 선택해야 하나요?
+          </h2>
         </div>
 
-        {/* Content: 2 column + 우측 하단 컨트롤 */}
-        <div className="relative mx-auto max-w-6xl">
-          <div
-            className="grid grid-cols-1 gap-12 lg:grid-cols-2 lg:gap-16"
-            style={{ minHeight: "380px" }}
-          >
-            {/* Left: Text — key로 re-mount하여 애니메이션 트리거 */}
+        {/* Content: 좌측 텍스트 + 우측 이미지 + 세로 토글 */}
+        <div className="relative">
+          <div className="flex gap-8 lg:gap-12">
+            {/* Left: Text */}
             <div
               key={`text-${current}`}
-              className={`flex flex-col justify-center ${direction === "up" ? "slide-enter-up" : "slide-enter-down"}`}
+              className={`flex-1 flex flex-col justify-center ${direction === "up" ? "slide-enter-up" : "slide-enter-down"}`}
+              style={{ minHeight: "320px" }}
             >
+              <span className="mb-2 text-4xl font-bold text-primary/30">
+                {reason.number}
+              </span>
               <h3 className="text-2xl font-bold text-gray-900 sm:text-3xl break-keep">
                 {reason.title}
               </h3>
-              <p className="mt-4 max-w-lg text-base leading-relaxed text-gray-500 break-keep">
+              <p className="mt-4 max-w-lg text-[length:var(--font-size-body)] leading-relaxed text-gray-500 break-keep">
                 {reason.description}
               </p>
               <div className="mt-6 flex flex-wrap gap-2">
@@ -145,56 +130,54 @@ export default function WhyUs() {
               </div>
             </div>
 
-            {/* Right: Image placeholder */}
+            {/* Right: Image placeholder — 80% 크기 */}
             <div
               key={`img-${current}`}
-              className={`flex items-center justify-center rounded-2xl bg-surface ${direction === "up" ? "slide-enter-up" : "slide-enter-down"}`}
-              style={{ minHeight: "320px" }}
+              className={`hidden lg:flex flex-1 items-center justify-center ${direction === "up" ? "slide-enter-up-delayed" : "slide-enter-down-delayed"}`}
             >
-              <span className="text-sm text-muted">
-                [{reason.imagePlaceholder}]
-              </span>
+              <div
+                className="flex items-center justify-center rounded-2xl bg-surface"
+                style={{ width: "80%", aspectRatio: "4/3" }}
+              >
+                <span className="text-sm text-muted">
+                  [{reason.imagePlaceholder}]
+                </span>
+              </div>
             </div>
-          </div>
 
-          {/* Controls: 우측 하단에 세로 배치 */}
-          <div className="mt-10 flex items-center justify-end gap-4">
-            {/* Prev (위로) */}
-            <button
-              type="button"
-              onClick={goPrev}
-              className="flex h-10 w-10 items-center justify-center rounded-full border border-border bg-white text-muted shadow-sm transition-colors hover:border-primary hover:text-primary"
-              aria-label="이전"
-            >
-              <ChevronUp className="h-5 w-5" />
-            </button>
-
-            {/* Dots (가로) */}
-            <div className="flex items-center gap-2">
+            {/* 세로 토글 (우측 끝) */}
+            <div className="hidden lg:flex flex-col items-center justify-center gap-3">
               {reasons.map((_, i) => (
                 <button
                   key={i}
                   type="button"
                   onClick={() => goTo(i, i > current ? "up" : "down")}
-                  className={`h-2.5 rounded-full transition-all duration-300 ${
+                  className={`rounded-full transition-all duration-300 ${
                     i === current
-                      ? "w-8 bg-primary"
-                      : "w-2.5 bg-gray-300 hover:bg-gray-400"
+                      ? "h-8 w-2.5 bg-primary"
+                      : "h-2.5 w-2.5 bg-gray-300 hover:bg-gray-400"
                   }`}
                   aria-label={`슬라이드 ${i + 1}`}
                 />
               ))}
             </div>
+          </div>
 
-            {/* Next (아래로) */}
-            <button
-              type="button"
-              onClick={goNext}
-              className="flex h-10 w-10 items-center justify-center rounded-full border border-border bg-white text-muted shadow-sm transition-colors hover:border-primary hover:text-primary"
-              aria-label="다음"
-            >
-              <ChevronDown className="h-5 w-5" />
-            </button>
+          {/* 모바일 토글 (하단 가로) */}
+          <div className="mt-10 flex items-center justify-center gap-2 lg:hidden">
+            {reasons.map((_, i) => (
+              <button
+                key={i}
+                type="button"
+                onClick={() => goTo(i, i > current ? "up" : "down")}
+                className={`h-2.5 rounded-full transition-all duration-300 ${
+                  i === current
+                    ? "w-8 bg-primary"
+                    : "w-2.5 bg-gray-300 hover:bg-gray-400"
+                }`}
+                aria-label={`슬라이드 ${i + 1}`}
+              />
+            ))}
           </div>
         </div>
       </div>

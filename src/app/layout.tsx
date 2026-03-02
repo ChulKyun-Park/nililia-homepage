@@ -13,7 +13,7 @@ const inter = Inter({
 export const metadata: Metadata = {
   title: "Nililia | 전문 번역 & 현지화 서비스",
   description:
-    "AI 기술과 전문가의 노하우로 최상의 품질을 보장하는 번역 및 현지화 서비스. 영상 번역, 문서 번역, 웹/앱 현지화, 게임 현지화.",
+    "AI 기술과 전문가의 노하우로 최상의 품질을 보장하는 번역 및 현지화 서비스. 영상 번역, 문서 번역, 웹 · 앱 현지화, 게임 현지화.",
   keywords: [
     "번역",
     "현지화",
@@ -45,6 +45,14 @@ export default function RootLayout({
 }>) {
   return (
     <html lang="ko">
+      <head>
+        <link
+          rel="stylesheet"
+          as="style"
+          crossOrigin="anonymous"
+          href="https://cdn.jsdelivr.net/gh/orioncactus/pretendard@v1.3.9/dist/web/variable/pretendardvariable-dynamic-subset.min.css"
+        />
+      </head>
       <body className={`${inter.variable} antialiased`}>
         <GNB />
         <main>{children}</main>

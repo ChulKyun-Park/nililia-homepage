@@ -1,3 +1,4 @@
+import PageHero from "@/components/sections/PageHero";
 import type { Metadata } from "next";
 import Section from "@/components/ui/Section";
 import SectionHeader from "@/components/ui/SectionHeader";
@@ -23,20 +24,11 @@ export default async function CasesPage() {
 
   return (
     <>
-      {/* Page Hero */}
-      <section className="bg-gradient-to-br from-foreground via-gray-900 to-gray-800 py-24 sm:py-32">
-        <div className="mx-auto max-w-7xl px-6">
-          <p className="mb-4 text-sm font-semibold uppercase tracking-wider text-primary">
-            Case Studies
-          </p>
-          <h1 className="text-4xl font-bold leading-tight text-white sm:text-5xl break-keep">
-            성공 사례
-          </h1>
-          <p className="mt-6 max-w-2xl text-lg leading-relaxed text-white/70 break-keep">
-            다양한 산업 분야의 글로벌 진출을 성공적으로 지원한 사례를 확인하세요.
-          </p>
-        </div>
-      </section>
+      <PageHero
+        label="Case Studies"
+        title="성공 사례"
+        description="다양한 산업 분야의 글로벌 진출을 성공적으로 지원한 사례를 확인하세요."
+      />
 
       {/* Cases List */}
       <Section>
@@ -67,7 +59,7 @@ export default async function CasesPage() {
                     {item.title}
                   </h3>
                   {item.description && (
-                    <p className="mt-2 text-sm leading-relaxed text-muted break-keep">
+                    <p className="mt-2 text-[length:var(--font-size-body)] leading-relaxed text-muted break-keep">
                       {item.description}
                     </p>
                   )}

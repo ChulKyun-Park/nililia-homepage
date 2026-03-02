@@ -8,7 +8,7 @@ export default async function CaseStudy() {
 
   return (
     <section className="bg-white py-24">
-      <div className="mx-auto max-w-7xl px-6">
+      <div className="mx-auto max-w-7xl px-6 lg:pl-12">
         <SectionHeader
           label="Case Studies"
           title="성공 사례"
@@ -46,7 +46,7 @@ export default async function CaseStudy() {
                     {item.title}
                   </h3>
                   {item.description && (
-                    <p className="mt-2 line-clamp-2 text-sm text-muted break-keep">
+                    <p className="mt-2 line-clamp-2 text-[length:var(--font-size-body)] text-muted break-keep">
                       {item.description}
                     </p>
                   )}

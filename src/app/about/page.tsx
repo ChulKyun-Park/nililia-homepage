@@ -1,4 +1,5 @@
 import type { Metadata } from "next";
+import PageHero from "@/components/sections/PageHero";
 import Section from "@/components/ui/Section";
 import SectionHeader from "@/components/ui/SectionHeader";
 import Button from "@/components/ui/Button";
@@ -35,40 +36,29 @@ const values = [
 
 const history = [
   { year: "2018", event: "Nililia 설립, 영상 번역 서비스 시작" },
-  { year: "2019", event: "문서 번역 및 웹/앱 현지화 서비스 론칭" },
+  { year: "2019", event: "문서 번역 및 웹 · 앱 현지화 서비스 론칭" },
   { year: "2020", event: "게임 현지화 전문팀 구성, 50+ 언어 지원 시작" },
   { year: "2021", event: "AI 번역 엔진 자체 개발 착수" },
   { year: "2022", event: "AI 하이브리드 번역 시스템 출시, 글로벌 파트너 100+ 달성" },
-  { year: "2023", event: "웹소설/웹툰 번역 서비스 시작, 파트너 300+ 돌파" },
-  { year: "2024", event: "SDH 자막 서비스 론칭, 글로벌 파트너 500+ 달성" },
+  { year: "2023", event: "웹소설 · 웹툰 번역 서비스 시작, 파트너 300+ 돌파" },
+  { year: "2024", event: "SDH · 배리어프리 자막 서비스 론칭, 글로벌 파트너 500+ 달성" },
 ];
 
 const teamStats = [
-  { icon: Users, value: "100+", label: "전문 번역가" },
-  { icon: Award, value: "50+", label: "지원 언어" },
-  { icon: TrendingUp, value: "500+", label: "글로벌 파트너" },
+  { icon: Users, value: "300+", label: "전문 번역가" },
+  { icon: TrendingUp, value: "50+", label: "기업 고객" },
+  { icon: Award, value: "150M+", label: "번역 단어" },
+  { icon: Target, value: "10+", label: "지원 언어" },
 ];
 
 export default function AboutPage() {
   return (
     <>
-      {/* Page Hero */}
-      <section className="bg-gradient-to-br from-foreground via-gray-900 to-gray-800 py-24 sm:py-32">
-        <div className="mx-auto max-w-7xl px-6">
-          <p className="mb-4 text-sm font-semibold uppercase tracking-wider text-primary">
-            About Us
-          </p>
-          <h1 className="text-4xl font-bold leading-tight text-white sm:text-5xl break-keep">
-            언어의 장벽을 넘어,
-            <br />
-            세계와 연결하는 기업
-          </h1>
-          <p className="mt-6 max-w-2xl text-lg leading-relaxed text-white/70 break-keep">
-            Nililia는 AI 기술과 전문가의 노하우를 결합하여 최상의 번역 및 현지화 서비스를 제공합니다.
-            2018년 설립 이후, 500개 이상의 기업과 함께 글로벌 시장 진출을 성공적으로 지원해 왔습니다.
-          </p>
-        </div>
-      </section>
+      <PageHero
+        label="About Us"
+        title={<>언어의 장벽을 넘어,<br />세계와 연결하는 기업</>}
+        description="Nililia는 AI 기술과 전문가의 노하우를 결합하여 최상의 번역 및 현지화 서비스를 제공합니다. 2018년 설립 이후, 500개 이상의 기업과 함께 글로벌 시장 진출을 성공적으로 지원해 왔습니다."
+      />
 
       {/* Mission */}
       <section className="bg-gradient-to-r from-primary to-primary-dark py-20">
@@ -104,7 +94,7 @@ export default function AboutPage() {
                 <h3 className="mb-2 text-xl font-bold text-foreground">
                   {value.title}
                 </h3>
-                <p className="text-sm leading-relaxed text-muted break-keep">
+                <p className="text-[length:var(--font-size-card-desc)] leading-relaxed text-muted break-keep">
                   {value.description}
                 </p>
               </div>
@@ -120,14 +110,14 @@ export default function AboutPage() {
           title="글로벌 전문가 네트워크"
           description="전 세계 50개 이상의 언어를 지원하는 전문 번역가 네트워크를 보유하고 있습니다."
         />
-        <div className="grid gap-8 sm:grid-cols-3">
+        <div className="grid gap-8 sm:grid-cols-4">
           {teamStats.map((stat) => {
             const Icon = stat.icon;
             return (
               <div key={stat.label} className="rounded-2xl border border-border bg-white p-8 text-center">
                 <Icon className="mx-auto mb-4 h-10 w-10 text-primary" />
                 <div className="text-4xl font-bold text-primary">{stat.value}</div>
-                <div className="mt-2 text-sm text-muted">{stat.label}</div>
+                <div className="mt-2 text-[length:var(--font-size-body)] text-muted">{stat.label}</div>
               </div>
             );
           })}
@@ -146,7 +136,7 @@ export default function AboutPage() {
               <div key={item.year} className="relative mb-10 last:mb-0">
                 <div className="absolute -left-[calc(2rem+5px)] top-1 h-3 w-3 rounded-full bg-primary" />
                 <span className="text-sm font-bold text-primary">{item.year}</span>
-                <p className="mt-1 text-base text-foreground break-keep">{item.event}</p>
+                <p className="mt-1 text-[length:var(--font-size-body)] text-foreground break-keep">{item.event}</p>
               </div>
             ))}
           </div>

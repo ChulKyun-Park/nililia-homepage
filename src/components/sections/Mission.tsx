@@ -10,7 +10,7 @@ export default function Mission() {
           <br className="hidden sm:block" />
           전 세계에 전달되는 세상을 만듭니다
         </h2>
-        <p className="mt-4 text-base text-white/80 break-keep">
+        <p className="mt-4 text-[length:var(--font-size-body)] text-white/80 break-keep">
           기술과 전문성의 조화로 완벽한 현지화 경험을 제공합니다.
         </p>
       </div>

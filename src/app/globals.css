@@ -14,6 +14,7 @@
   --color-muted: #6B7280;
   --color-border: #E5E7EB;
   --color-surface: #F9FAFB;
+  --color-hero-bg: #F8FBFF;
 
   /* Font families */
   --font-sans: "Pretendard Variable", "Pretendard", -apple-system, BlinkMacSystemFont, system-ui, Roboto, "Helvetica Neue", "Segoe UI", "Apple SD Gothic Neo", "Noto Sans KR", "Malgun Gothic", sans-serif;
@@ -22,6 +23,10 @@
   /* Typography scale (voithru.com 참고) */
   --font-size-hero-h1: 3.25rem;         /* 52px */
   --font-size-hero-sub: 1.175rem;       /* ~19px */
+  --font-size-body: 1.175rem;           /* 본문 텍스트 — hero-sub와 동일 */
+  --font-size-card-desc: 0.9rem;        /* 서비스 카드 설명 (12px×1.2) */
+  --font-size-card-title: 1.2rem;       /* 서비스 카드 제목 (16px×1.2) */
+  --font-size-card-link: 1.05rem;       /* 서비스 카드 링크 (14px×1.2) */
   --font-size-section-label: 0.9375rem; /* 15px */
   --font-size-section-h2: 2.375rem;     /* 38px */
   --font-size-section-body: 1.0625rem;  /* 17px */
@@ -56,7 +61,16 @@ html {
 }
 
 .animate-marquee {
-  animation: marquee 30s linear infinite;
+  animation: marquee 15s linear infinite;
+}
+
+@keyframes marquee-reverse {
+  0% { transform: translateX(-50%); }
+  100% { transform: translateX(0); }
+}
+
+.animate-marquee-reverse {
+  animation: marquee-reverse 17s linear infinite;
 }
 
 /* ── Floating animations ── */

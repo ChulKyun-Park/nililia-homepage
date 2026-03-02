@@ -1,6 +1,5 @@
 import Hero from "@/components/sections/Hero";
 import SocialProof from "@/components/sections/SocialProof";
-import Mission from "@/components/sections/Mission";
 import ServiceGrid from "@/components/sections/ServiceGrid";
 import WhyUs from "@/components/sections/WhyUs";
 import NewsCaseStudy from "@/components/sections/NewsCaseStudy";
@@ -13,7 +12,6 @@ export default function Home() {
     <>
       <Hero />
       <SocialProof />
-      <Mission />
       <ServiceGrid />
       <WhyUs />
       <NewsCaseStudy />

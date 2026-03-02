@@ -1,3 +1,4 @@
+import PageHero from "@/components/sections/PageHero";
 import type { Metadata } from "next";
 import SectionHeader from "@/components/ui/SectionHeader";
 import Card from "@/components/ui/Card";
@@ -7,9 +8,7 @@ import {
   Globe,
   Lightbulb,
   Heart,
-  MapPin,
-  Clock,
-  Users,
+  ArrowRight,
 } from "lucide-react";
 
 export const metadata: Metadata = {
@@ -50,87 +49,11 @@ const benefits = [
   },
 ];
 
-interface Position {
-  title: string;
-  team: string;
-  location: string;
-  type: string;
-}
-
-const fullTimePositions: Position[] = [
-  {
-    title: "프로젝트 매니저 (PM)",
-    team: "프로젝트 관리팀",
-    location: "서울 (하이브리드)",
-    type: "정규직",
-  },
-  {
-    title: "AI 번역 엔지니어",
-    team: "기술팀",
-    location: "서울 (하이브리드)",
-    type: "정규직",
-  },
-  {
-    title: "QA 리뷰어 (한/영)",
-    team: "품질관리팀",
-    location: "서울 (하이브리드)",
-    type: "정규직",
-  },
-];
-
-const freelancePositions: Position[] = [
-  {
-    title: "영상 번역가 (한→영)",
-    team: "번역팀",
-    location: "원격 근무",
-    type: "프리랜서",
-  },
-  {
-    title: "게임 현지화 번역가 (한→일)",
-    team: "게임팀",
-    location: "원격 근무",
-    type: "프리랜서",
-  },
-  {
-    title: "문서 번역가 (한→중)",
-    team: "번역팀",
-    location: "원격 근무",
-    type: "프리랜서",
-  },
-];
-
-function PositionCard({ position }: { position: Position }) {
-  return (
-    <Card
-      className="group cursor-pointer transition-all hover:-translate-y-0.5"
-    >
-      <h4 className="text-base font-bold text-foreground group-hover:text-primary transition-colors">
-        {position.title}
-      </h4>
-      <div className="mt-3 flex flex-wrap gap-x-4 gap-y-1.5 text-xs text-muted">
-        <span className="flex items-center gap-1">
-          <Users className="h-3.5 w-3.5" />
-          {position.team}
-        </span>
-        <span className="flex items-center gap-1">
-          <MapPin className="h-3.5 w-3.5" />
-          {position.location}
-        </span>
-        <span className="flex items-center gap-1">
-          <Clock className="h-3.5 w-3.5" />
-          {position.type}
-        </span>
-      </div>
-    </Card>
-  );
-}
-
 export default function CareerPage() {
   return (
     <>
-      {/* Hero — 2-column: text + image placeholder */}
-      <section className="bg-white py-24 sm:py-32">
-        <div className="mx-auto max-w-7xl px-6">
+      {/* Hero */}
+      <PageHero label="Careers" title="">
           <div className="grid items-center gap-12 lg:grid-cols-2 lg:gap-16">
             {/* Left: Text */}
             <div>
@@ -142,16 +65,16 @@ export default function CareerPage() {
                 <br />
                 인재를 찾습니다
               </h1>
-              <p className="mt-6 max-w-lg text-lg leading-relaxed text-muted break-keep">
+              <p className="mt-6 max-w-lg text-[length:var(--font-size-body)] leading-relaxed text-muted break-keep">
                 Nililia는 언어와 기술의 힘으로 콘텐츠의 글로벌 진출을 돕는
                 전문 기업입니다.
               </p>
-              <p className="mt-2 max-w-lg text-lg leading-relaxed text-muted break-keep">
+              <p className="mt-2 max-w-lg text-[length:var(--font-size-body)] leading-relaxed text-muted break-keep">
                 열정 있는 동료와 함께 성장할 기회를 만나보세요.
               </p>
               <div className="mt-8">
                 <Button
-                  href="mailto:hello@nililia.com?subject=입사 지원"
+                  href="https://nililia.ninehire.site"
                   variant="primary"
                   className="px-8 py-4 text-base"
                 >
@@ -167,12 +90,11 @@ export default function CareerPage() {
               </div>
             </div>
           </div>
-        </div>
-      </section>
+      </PageHero>
 
       {/* Benefits */}
       <section className="bg-surface py-24">
-        <div className="mx-auto max-w-7xl px-6">
+        <div className="mx-auto max-w-7xl px-6 lg:pl-12">
           <SectionHeader
             label="Why Nililia"
             title="Nililia에서 일하는 이유"
@@ -187,7 +109,7 @@ export default function CareerPage() {
                     <Icon className="h-6 w-6 text-primary" />
                   </div>
                   <h3 className="font-bold text-foreground">{benefit.title}</h3>
-                  <p className="mt-2 text-sm leading-relaxed text-muted break-keep">
+                  <p className="mt-2 text-[length:var(--font-size-card-desc)] leading-relaxed text-muted break-keep">
                     {benefit.description}
                   </p>
                 </Card>
@@ -197,59 +119,58 @@ export default function CareerPage() {
         </div>
       </section>
 
-      {/* Open Positions — 2-column: 정규직 + 프리랜서 */}
+      {/* Open Positions — 2단 카드 */}
       <section className="bg-white py-24">
-        <div className="mx-auto max-w-7xl px-6">
+        <div className="mx-auto max-w-7xl px-6 lg:pl-12">
           <SectionHeader
             label="Open Positions"
             title="채용 중인 포지션"
-            description="현재 모집 중인 정규직 및 프리랜서 포지션을 확인하세요."
           />
 
-          <div className="grid gap-12 lg:grid-cols-2 lg:gap-8">
-            {/* 정규직 */}
-            <div>
-              <h3 className="mb-6 flex items-center gap-2 text-lg font-bold text-foreground">
-                <span className="inline-flex h-7 w-7 items-center justify-center rounded-md bg-primary/10 text-xs font-bold text-primary">
-                  F
-                </span>
-                정규직
-              </h3>
-              <div className="space-y-4">
-                {fullTimePositions.map((pos) => (
-                  <PositionCard key={pos.title} position={pos} />
-                ))}
-              </div>
-            </div>
-
-            {/* 프리랜서 */}
-            <div>
-              <h3 className="mb-6 flex items-center gap-2 text-lg font-bold text-foreground">
-                <span className="inline-flex h-7 w-7 items-center justify-center rounded-md bg-primary/10 text-xs font-bold text-primary">
-                  P
-                </span>
-                프리랜서
-              </h3>
-              <div className="space-y-4">
-                {freelancePositions.map((pos) => (
-                  <PositionCard key={pos.title} position={pos} />
-                ))}
-              </div>
-            </div>
-          </div>
-
-          <div className="mt-12 text-center">
-            <p className="mb-6 text-sm text-muted break-keep">
-              원하시는 포지션이 없으신가요? 입사 지원서를 보내주시면 적합한
-              포지션이 열릴 때 우선 연락드리겠습니다.
-            </p>
-            <Button
-              href="mailto:hello@nililia.com?subject=입사 지원"
-              variant="primary"
-              className="px-8 py-4 text-base"
+          <div className="grid gap-6 sm:grid-cols-2">
+            {/* 정규직 채용 */}
+            <a
+              href="https://nililia.ninehire.site"
+              target="_blank"
+              rel="noopener noreferrer"
+              className="group relative overflow-hidden rounded-2xl bg-primary p-8 sm:p-10 min-h-[280px] flex flex-col justify-between transition-transform hover:-translate-y-1"
             >
-              입사 지원하기
-            </Button>
+              <div className="relative z-10">
+                <h2 className="text-2xl font-bold text-white">정규직 채용</h2>
+                <p className="mt-4 text-[length:var(--font-size-body)] leading-relaxed text-white/80 break-keep">
+                  닐리리아의<br />
+                  콘텐츠 현지화를 함께 이끌어갈<br />
+                  동료를 찾고 있습니다.
+                </p>
+              </div>
+              <div className="relative z-10 mt-6">
+                <span className="inline-flex items-center gap-1 text-sm font-semibold text-white group-hover:gap-2 transition-all">
+                  지금 지원하세요 <ArrowRight className="h-4 w-4" />
+                </span>
+              </div>
+            </a>
+
+            {/* 프리랜서 채용 */}
+            <a
+              href="https://nililia.ninehire.site"
+              target="_blank"
+              rel="noopener noreferrer"
+              className="group relative overflow-hidden rounded-2xl bg-amber-600 p-8 sm:p-10 min-h-[280px] flex flex-col justify-between transition-transform hover:-translate-y-1"
+            >
+              <div className="relative z-10">
+                <h2 className="text-2xl font-bold text-white">콘텐츠 현지화 프리랜서 채용</h2>
+                <p className="mt-4 text-[length:var(--font-size-body)] leading-relaxed text-white/80 break-keep">
+                  전문 역량을 활용해<br />
+                  콘텐츠 세계화에 참여하고<br />
+                  수익을 만들어보세요.
+                </p>
+              </div>
+              <div className="relative z-10 mt-6">
+                <span className="inline-flex items-center gap-1 text-sm font-semibold text-white group-hover:gap-2 transition-all">
+                  지금 지원하세요 <ArrowRight className="h-4 w-4" />
+                </span>
+              </div>
+            </a>
           </div>
         </div>
       </section>

@@ -33,11 +33,38 @@ export default function CareerPage() {
         </div>
       </section>
 
-      {/* Image */}
-      <section className="bg-white pt-16">
-        <div className="mx-auto max-w-4xl px-6">
-          <div className="aspect-[16/9] rounded-2xl overflow-hidden">
-            <img src="/images/careers.png" alt="닐리리아 팀" className="h-full w-full object-cover" />
+      {/* Mission-style section */}
+      <section className="bg-white py-20">
+        <div className="mx-auto max-w-7xl px-6 lg:pl-12">
+          <div className="grid items-center gap-12 lg:grid-cols-2 lg:gap-16">
+            {/* Left: Text */}
+            <div>
+              <h2 className="text-3xl font-bold leading-snug text-foreground sm:text-4xl break-keep">
+                함께 세계를 연결할 인재를 찾습니다
+              </h2>
+              <p className="mt-6 text-[length:var(--font-size-body)] leading-relaxed text-muted break-keep">
+                Nililia는 언어와 기술의 힘으로 콘텐츠의 글로벌 진출을 돕는 전문 기업입니다.
+                <br />
+                열정 있는 동료와 함께 성장할 기회를 만나보세요.
+              </p>
+              <div className="mt-6 flex flex-wrap gap-2">
+                {["글로벌 환경", "성장 기회", "유연한 근무", "경쟁력 있는 보상"].map((tag) => (
+                  <span
+                    key={tag}
+                    className="rounded-full border border-primary/20 bg-primary/10 px-4 py-1.5 text-xs font-medium text-primary"
+                  >
+                    {tag}
+                  </span>
+                ))}
+              </div>
+            </div>
+
+            {/* Right: Image */}
+            <div className="hidden lg:flex items-center justify-center">
+              <div className="w-[90%] aspect-[4/3] rounded-2xl overflow-hidden">
+                <img src="/images/careers.png" alt="닐리리아 팀" className="h-full w-full object-cover" />
+              </div>
+            </div>
           </div>
         </div>
       </section>
@@ -46,7 +73,7 @@ export default function CareerPage() {
       <section className="bg-white py-24">
         <div className="mx-auto max-w-3xl px-6">
           <h2 className="mb-12 text-center text-2xl font-bold text-foreground sm:text-3xl break-keep">
-            글로벌 현지화 시장의 최전선에서 함께 성장하세요
+            닐리리아와 함께 세상을 연결하세요!
           </h2>
 
           <div className="grid gap-6 sm:grid-cols-2">

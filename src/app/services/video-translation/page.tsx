@@ -4,7 +4,7 @@ import Section from "@/components/ui/Section";
 import { Video, CheckCircle } from "lucide-react";
 
 export const metadata: Metadata = {
-  title: "영상 번역 | NILILIA",
+  title: "영상 번역 | 닐리리아",
   description: "자막, 더빙, 보이스오버 등 모든 영상 콘텐츠의 다국어 번역 서비스를 제공합니다.",
 };
 

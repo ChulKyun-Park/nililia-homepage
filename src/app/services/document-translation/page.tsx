@@ -4,7 +4,7 @@ import Section from "@/components/ui/Section";
 import { FileText, CheckCircle } from "lucide-react";
 
 export const metadata: Metadata = {
-  title: "문서 번역 | NILILIA",
+  title: "문서 번역 | 닐리리아",
   description: "계약서, 매뉴얼, 마케팅 자료 등 전문 문서 번역 서비스를 제공합니다.",
 };
 

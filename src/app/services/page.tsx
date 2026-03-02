@@ -18,11 +18,11 @@ import {
 import Image from "next/image";
 
 export const metadata: Metadata = {
-  title: "서비스 | NILILIA",
+  title: "서비스 | 닐리리아",
   description:
     "영상 번역, 문서 번역, 웹 · 앱 현지화, 게임 현지화, 웹소설 · 웹툰 번역, SDH · 배리어프리 자막 제작, MTPE, AI 번역 · 더빙 등 다양한 번역 및 현지화 서비스를 제공합니다.",
   openGraph: {
-    title: "서비스 | NILILIA",
+    title: "서비스 | 닐리리아",
     description:
       "영상 번역, 문서 번역, 웹 · 앱 현지화, 게임 현지화, 웹소설 · 웹툰 번역, SDH · 배리어프리 자막 제작, MTPE, AI 번역 · 더빙 등 다양한 번역 및 현지화 서비스를 제공합니다.",
   },

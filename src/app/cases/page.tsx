@@ -8,13 +8,13 @@ import { fetchAllCaseStudies } from "@/lib/notion/client";
 export const revalidate = 3600;
 
 export const metadata: Metadata = {
-  title: "진행사례 | NILILIA",
+  title: "진행사례 | 닐리리아",
   description:
-    "다양한 산업 분야의 글로벌 진출을 성공적으로 지원한 NILILIA의 진행 사례를 확인하세요.",
+    "다양한 산업 분야의 글로벌 진출을 성공적으로 지원한 닐리리아의 진행 사례를 확인하세요.",
   openGraph: {
-    title: "진행사례 | NILILIA",
+    title: "진행사례 | 닐리리아",
     description:
-      "다양한 산업 분야의 글로벌 진출을 성공적으로 지원한 NILILIA의 진행 사례를 확인하세요.",
+      "다양한 산업 분야의 글로벌 진출을 성공적으로 지원한 닐리리아의 진행 사례를 확인하세요.",
   },
 };
 
@@ -101,7 +101,7 @@ export default async function CasesPage() {
             다음 진행 사례의 주인공이 되세요
           </h2>
           <p className="mt-4 text-lg text-white/80 break-keep">
-            NILILIA와 함께 글로벌 시장을 개척하세요.
+            닐리리아와 함께 글로벌 시장을 개척하세요.
           </p>
           <div className="mt-8">
             <Button

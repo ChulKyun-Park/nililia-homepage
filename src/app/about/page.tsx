@@ -5,13 +5,13 @@ import Button from "@/components/ui/Button";
 import { Target, Eye, Heart, Users, Award, TrendingUp } from "lucide-react";
 
 export const metadata: Metadata = {
-  title: "회사소개 | NILILIA",
+  title: "회사소개 | 닐리리아",
   description:
-    "NILILIA는 AI 기술과 전문가의 노하우를 결합하여 최상의 번역 및 현지화 서비스를 제공합니다.",
+    "닐리리아는 AI 기술과 전문가의 노하우를 결합하여 최상의 번역 및 현지화 서비스를 제공합니다.",
   openGraph: {
-    title: "회사소개 | NILILIA",
+    title: "회사소개 | 닐리리아",
     description:
-      "NILILIA는 AI 기술과 전문가의 노하우를 결합하여 최상의 번역 및 현지화 서비스를 제공합니다.",
+      "닐리리아는 AI 기술과 전문가의 노하우를 결합하여 최상의 번역 및 현지화 서비스를 제공합니다.",
   },
 };
 
@@ -171,7 +171,7 @@ export default function AboutPage() {
             함께 글로벌 시장을 개척하세요
           </h2>
           <p className="mt-4 text-lg text-white/80 break-keep">
-            NILILIA와 함께라면 언어의 장벽 없는 글로벌 비즈니스가 가능합니다.
+            닐리리아와 함께라면 언어의 장벽 없는 글로벌 비즈니스가 가능합니다.
           </p>
           <div className="mt-8">
             <Button

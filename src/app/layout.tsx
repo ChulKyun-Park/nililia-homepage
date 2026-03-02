@@ -11,7 +11,7 @@ const inter = Inter({
 });
 
 export const metadata: Metadata = {
-  title: "NILILIA | 전문 번역 & 현지화 서비스",
+  title: "닐리리아 | 전문 번역 & 현지화 서비스",
   description:
     "AI 기술과 전문가의 노하우로 최상의 품질을 보장하는 번역 및 현지화 서비스. 영상 번역, 문서 번역, 웹 · 앱 현지화, 게임 현지화.",
   keywords: [
@@ -23,16 +23,16 @@ export const metadata: Metadata = {
     "웹사이트 번역",
   ],
   openGraph: {
-    title: "NILILIA | 전문 번역 & 현지화 서비스",
+    title: "닐리리아 | 전문 번역 & 현지화 서비스",
     description:
       "AI 기술과 전문가의 노하우로 최상의 품질을 보장하는 번역 및 현지화 서비스.",
     type: "website",
     locale: "ko_KR",
-    siteName: "NILILIA",
+    siteName: "닐리리아",
   },
   twitter: {
     card: "summary_large_image",
-    title: "NILILIA | 전문 번역 & 현지화 서비스",
+    title: "닐리리아 | 전문 번역 & 현지화 서비스",
     description:
       "AI 기술과 전문가의 노하우로 최상의 품질을 보장하는 번역 및 현지화 서비스.",
   },

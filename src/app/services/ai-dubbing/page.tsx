@@ -4,7 +4,7 @@ import Section from "@/components/ui/Section";
 import { Mic, CheckCircle } from "lucide-react";
 
 export const metadata: Metadata = {
-  title: "AI 번역 · 더빙 | NILILIA",
+  title: "AI 번역 · 더빙 | 닐리리아",
   description: "AI 음성 합성과 립싱크 기술로 영상 콘텐츠를 다국어로 자연스럽게 더빙하여 글로벌 시청자에게 전달합니다.",
 };
 

@@ -56,24 +56,44 @@ export default function AboutPage() {
     <>
       <PageHero
         label="About Us"
-        title={<>언어의 장벽을 넘어,<br />세계와 연결하는 기업</>}
-        description="Nililia는 AI 기술과 전문가의 노하우를 결합하여 최상의 번역 및 현지화 서비스를 제공합니다. 2018년 설립 이후, 500개 이상의 기업과 함께 글로벌 시장 진출을 성공적으로 지원해 왔습니다."
+        title={<>닐리리아는 글로벌 콘텐츠 현지화를 선도하는<br />번역 및 현지화 전문 기업입니다.</>}
       />
 
       {/* Mission */}
-      <section className="bg-gradient-to-r from-primary to-primary-dark py-20">
-        <div className="mx-auto max-w-4xl px-6 text-center">
-          <p className="mb-4 text-sm font-semibold uppercase tracking-wider text-white/70">
-            Our Mission
-          </p>
-          <h2 className="text-3xl font-bold leading-snug text-white sm:text-4xl break-keep">
-            모든 콘텐츠가 언어의 경계를 넘어
-            <br className="hidden sm:block" />
-            전 세계에 전달되는 세상을 만듭니다
-          </h2>
-          <p className="mt-6 text-lg text-white/80 break-keep">
-            기술과 전문성의 조화로 완벽한 현지화 경험을 제공합니다.
-          </p>
+      <section className="bg-white py-20">
+        <div className="mx-auto max-w-7xl px-6 lg:pl-12">
+          <div className="grid items-center gap-12 lg:grid-cols-2 lg:gap-16">
+            {/* Left: Text */}
+            <div>
+              <p className="mb-4 text-sm font-semibold uppercase tracking-wider text-primary">
+                Our Mission
+              </p>
+              <h2 className="text-3xl font-bold leading-snug text-foreground sm:text-4xl break-keep">
+                언어의 경계를 넘어
+                <br />
+                세계를 연결합니다
+              </h2>
+              <p className="mt-6 text-[length:var(--font-size-body)] leading-relaxed text-muted break-keep">
+                2016년 설립 이래 영상·문서·웹·게임 등 콘텐츠 현지화만 10년
+                <br />
+                1,300개 이상의 기업·크리에이터와 함께 K-콘텐츠를 세계로 전달해 오고 있습니다.
+              </p>
+              <p className="mt-4 text-[length:var(--font-size-body)] leading-relaxed text-muted break-keep">
+                영상 자막 제작, 번역, 웹사이트·앱 현지화, 대본 번역,
+                <br />
+                홈페이지·앱 현지화, 웹소설 현지화, 게임 현지화, 다국어 번역 등
+                <br />
+                다양한 분야에서 글로벌 기업들의 신뢰를 쌓아가고 있습니다.
+              </p>
+            </div>
+
+            {/* Right: Image */}
+            <div className="hidden lg:block">
+              <div className="flex aspect-[4/3] items-center justify-center rounded-2xl border border-border bg-surface overflow-hidden">
+                <span className="text-sm text-muted">[Our Mission 이미지]</span>
+              </div>
+            </div>
+          </div>
         </div>
       </section>
 

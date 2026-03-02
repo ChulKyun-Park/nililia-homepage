@@ -63,6 +63,9 @@ const services = [
     slug: "sdh-subtitle",
     description: "청각장애인을 위한 자막(SDH) 제작으로 콘텐츠 접근성을 향상시킵니다.",
   },
+];
+
+const comingSoonServices = [
   {
     icon: ScanSearch,
     title: "MTPE",
@@ -105,7 +108,7 @@ export default function ServicesPage() {
         </div>
       </section>
 
-      {/* Service Cards — 홈과 동일한 그리드 */}
+      {/* Service Cards */}
       <Section>
           <div className="grid gap-5 sm:grid-cols-2 lg:grid-cols-3">
             {services.map((service) => {
@@ -113,7 +116,6 @@ export default function ServicesPage() {
               return (
                 <Link key={service.title} href={`/services/${service.slug}`}>
                   <Card className="group cursor-pointer overflow-hidden p-0 transition-all hover:-translate-y-1 h-full">
-                    {/* Thumbnail placeholder */}
                     <div className="flex aspect-[16/10] items-center justify-center bg-surface">
                       <span className="text-xs text-muted">
                         [{service.title} 이미지]
@@ -132,6 +134,41 @@ export default function ServicesPage() {
                     </div>
                   </Card>
                 </Link>
+              );
+            })}
+          </div>
+
+          {/* Coming Soon divider */}
+          <div className="mt-12 flex items-center gap-4">
+            <span className="inline-flex items-center rounded-lg border border-border px-4 py-2 text-sm font-medium text-foreground">
+              coming soon
+            </span>
+            <div className="flex-1 h-px bg-border" />
+          </div>
+
+          {/* Coming soon services — 클릭 불가 */}
+          <div className="mt-8 grid gap-5 sm:grid-cols-2 lg:grid-cols-3">
+            {comingSoonServices.map((service) => {
+              const Icon = service.icon;
+              return (
+                <Card key={service.title} className="group overflow-hidden p-0 cursor-default opacity-70 h-full">
+                  <div className="flex aspect-[16/10] items-center justify-center bg-surface">
+                    <span className="text-xs text-muted">
+                      [{service.title} 이미지]
+                    </span>
+                  </div>
+                  <div className="p-4">
+                    <div className="mb-2 inline-flex rounded-lg bg-primary/10 p-1.5">
+                      <Icon className="h-4 w-4 text-primary" />
+                    </div>
+                    <h3 className="mb-1.5 text-base font-bold text-foreground transition-colors">
+                      {service.title}
+                    </h3>
+                    <p className="text-xs leading-relaxed text-muted break-keep">
+                      {service.description}
+                    </p>
+                  </div>
+                </Card>
               );
             })}
           </div>

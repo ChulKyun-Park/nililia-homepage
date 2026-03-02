@@ -41,7 +41,7 @@ export default function WhyUs() {
   const [current, setCurrent] = useState(0);
   const [direction, setDirection] = useState<"up" | "down">("up");
   const [isAnimating, setIsAnimating] = useState(false);
-  const [isPaused, setIsPaused] = useState(false);
+
   const total = reasons.length;
 
   const goTo = useCallback(
@@ -61,18 +61,15 @@ export default function WhyUs() {
 
   // Auto-play
   useEffect(() => {
-    if (isPaused) return;
     const timer = setInterval(goNext, 4000);
     return () => clearInterval(timer);
-  }, [isPaused, goNext]);
+  }, [goNext]);
 
   const reason = reasons[current];
 
   return (
     <section
       className="bg-white py-24 overflow-hidden"
-      onMouseEnter={() => setIsPaused(true)}
-      onMouseLeave={() => setIsPaused(false)}
     >
       <style>{`
         @keyframes whyus-slide-up-enter {

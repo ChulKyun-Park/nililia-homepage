@@ -60,7 +60,7 @@ export default function SocialProof() {
             {[...clients, ...clients].map((client, i) => (
               <div
                 key={`comp-${i}`}
-                className="flex-none rounded-xl border border-primary/10 bg-primary/5 px-12 py-6 text-center font-bold text-foreground/30 shadow-sm min-w-[200px]"
+                className="flex-none rounded-lg border border-primary/10 bg-primary/5 px-6 py-3 text-center text-sm font-bold text-foreground/30"
               >
                 {client}
               </div>

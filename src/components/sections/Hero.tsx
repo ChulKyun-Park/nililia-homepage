@@ -21,8 +21,8 @@ function easeInOutCubic(t: number) {
 function lerp(a: number, b: number, t: number) { return a + (b - a) * t; }
 function cl(v: number) { return Math.max(0, Math.min(1, v)); }
 
-const STAGE_W = 700;
-const STAGE_H = 400;
+const STAGE_W = 665;
+const STAGE_H = 380;
 
 interface Slot {
   x: number; y: number; w: number; h: number; op: number; z: number;
@@ -40,67 +40,58 @@ interface Slot {
  * Row1: 3×115+2×10=365 → start=(700-365)/2=168
  */
 const A: Slot[] = [
-  // Row3 (앞, z:3, 180×210): 68, 260, 452 / y=195 (하단 잘림)
-  { x: 68,  y: 195, w: 180, h: 210, op: 1.0,  z: 3 },
-  { x: 260, y: 200, w: 180, h: 210, op: 1.0,  z: 3 },
-  { x: 452, y: 193, w: 180, h: 210, op: 0.90, z: 3 },
-  // Row2 (중, z:2, 144×168): 200, 356 / y=82
-  { x: 200, y: 82,  w: 144, h: 168, op: 0.70, z: 2 },
-  { x: 356, y: 87,  w: 144, h: 168, op: 0.65, z: 2 },
-  // Row1 (뒤, z:1, 115×134): 168, 293, 418 / y=-18 (상단 잘림)
-  { x: 168, y: -18, w: 115, h: 134, op: 0.40, z: 1 },
-  { x: 293, y: -14, w: 115, h: 134, op: 0.45, z: 1 },
-  { x: 418, y: -18, w: 115, h: 134, op: 0.35, z: 1 },
+  // Row3 (앞, z:3, 171×200)
+  { x: 65,  y: 185, w: 171, h: 200, op: 1.0,  z: 3 },
+  { x: 247, y: 190, w: 171, h: 200, op: 1.0,  z: 3 },
+  { x: 429, y: 183, w: 171, h: 200, op: 0.90, z: 3 },
+  // Row2 (중, z:2, 137×160)
+  { x: 190, y: 78,  w: 137, h: 160, op: 0.70, z: 2 },
+  { x: 338, y: 83,  w: 137, h: 160, op: 0.65, z: 2 },
+  // Row1 (뒤, z:1, 109×127)
+  { x: 160, y: -17, w: 109, h: 127, op: 0.40, z: 1 },
+  { x: 278, y: -13, w: 109, h: 127, op: 0.45, z: 1 },
+  { x: 397, y: -17, w: 109, h: 127, op: 0.35, z: 1 },
   // 숨김 (위에서 대기)
-  { x: 230, y: -180, w: 115, h: 134, op: 0, z: 0 },
-  { x: 355, y: -180, w: 115, h: 134, op: 0, z: 0 },
+  { x: 219, y: -171, w: 109, h: 127, op: 0, z: 0 },
+  { x: 337, y: -171, w: 109, h: 127, op: 0, z: 0 },
 ];
 
-/*
- * B: 323→232 결과
- * Row3(2장): 2×180+12=372 → start=164 → 164, 356
- * Row2(3장): 3×144+2×12=456 → start=122 → 122, 278, 434
- * Row1(2장): 2×115+10=240 → start=230 → 230, 355
- */
 const B: Slot[] = [
   // 카드0,1,2 → 아래로 퇴장
-  { x: 68,  y: STAGE_H + 50, w: 180, h: 210, op: 0, z: 0 },
-  { x: 260, y: STAGE_H + 50, w: 180, h: 210, op: 0, z: 0 },
-  { x: 452, y: STAGE_H + 50, w: 180, h: 210, op: 0, z: 0 },
-  // 카드3,4 → Row3 (1배)
-  { x: 164, y: 195, w: 180, h: 210, op: 1.0, z: 3 },
-  { x: 356, y: 200, w: 180, h: 210, op: 1.0, z: 3 },
-  // 카드5,6,7 → Row2 (0.8배)
-  { x: 122, y: 82,  w: 144, h: 168, op: 0.70, z: 2 },
-  { x: 278, y: 87,  w: 144, h: 168, op: 0.70, z: 2 },
-  { x: 434, y: 82,  w: 144, h: 168, op: 0.60, z: 2 },
-  // 카드8,9 → Row1 (0.64배)
-  { x: 230, y: -18, w: 115, h: 134, op: 0.40, z: 1 },
-  { x: 355, y: -14, w: 115, h: 134, op: 0.45, z: 1 },
+  { x: 65,  y: STAGE_H + 50, w: 171, h: 200, op: 0, z: 0 },
+  { x: 247, y: STAGE_H + 50, w: 171, h: 200, op: 0, z: 0 },
+  { x: 429, y: STAGE_H + 50, w: 171, h: 200, op: 0, z: 0 },
+  // 카드3,4 → Row3
+  { x: 156, y: 185, w: 171, h: 200, op: 1.0, z: 3 },
+  { x: 338, y: 190, w: 171, h: 200, op: 1.0, z: 3 },
+  // 카드5,6,7 → Row2
+  { x: 116, y: 78,  w: 137, h: 160, op: 0.70, z: 2 },
+  { x: 264, y: 83,  w: 137, h: 160, op: 0.70, z: 2 },
+  { x: 412, y: 78,  w: 137, h: 160, op: 0.60, z: 2 },
+  // 카드8,9 → Row1
+  { x: 219, y: -17, w: 109, h: 127, op: 0.40, z: 1 },
+  { x: 337, y: -13, w: 109, h: 127, op: 0.45, z: 1 },
 ];
 
-/*
- * C: 232→323 결과 (A와 동일 간격, 카드 배정만 다름)
- */
 const C: Slot[] = [
   // 카드0,1,2 → Row1 (위에서 재진입)
-  { x: 168, y: -18, w: 115, h: 134, op: 0.40, z: 1 },
-  { x: 293, y: -14, w: 115, h: 134, op: 0.45, z: 1 },
-  { x: 418, y: -18, w: 115, h: 134, op: 0.35, z: 1 },
+  { x: 160, y: -17, w: 109, h: 127, op: 0.40, z: 1 },
+  { x: 278, y: -13, w: 109, h: 127, op: 0.45, z: 1 },
+  { x: 397, y: -17, w: 109, h: 127, op: 0.35, z: 1 },
   // 카드3,4 → 아래로 퇴장
-  { x: 164, y: STAGE_H + 50, w: 180, h: 210, op: 0, z: 0 },
-  { x: 356, y: STAGE_H + 50, w: 180, h: 210, op: 0, z: 0 },
-  // 카드5,6,7 → Row3 (1배)
-  { x: 68,  y: 195, w: 180, h: 210, op: 1.0,  z: 3 },
-  { x: 260, y: 200, w: 180, h: 210, op: 1.0,  z: 3 },
-  { x: 452, y: 193, w: 180, h: 210, op: 0.90, z: 3 },
-  // 카드8,9 → Row2 (0.8배)
-  { x: 200, y: 82,  w: 144, h: 168, op: 0.70, z: 2 },
-  { x: 356, y: 87,  w: 144, h: 168, op: 0.65, z: 2 },
+  { x: 156, y: STAGE_H + 50, w: 171, h: 200, op: 0, z: 0 },
+  { x: 338, y: STAGE_H + 50, w: 171, h: 200, op: 0, z: 0 },
+  // 카드5,6,7 → Row3
+  { x: 65,  y: 185, w: 171, h: 200, op: 1.0,  z: 3 },
+  { x: 247, y: 190, w: 171, h: 200, op: 1.0,  z: 3 },
+  { x: 429, y: 183, w: 171, h: 200, op: 0.90, z: 3 },
+  // 카드8,9 → Row2
+  { x: 190, y: 78,  w: 137, h: 160, op: 0.70, z: 2 },
+  { x: 338, y: 83,  w: 137, h: 160, op: 0.65, z: 2 },
 ];
 
 /* 컨베이어: 기준 크기 */
-const CW = 180, CH = 210, CG = 14;
+const CW = 171, CH = 200, CG = 13;
 const N = SERVICES.length;
 
 function CardAnimation() {
@@ -175,7 +166,7 @@ function CardAnimation() {
 
       } else if (f <= T7) {
         /* Phase7: 우→좌 컨베이어 */
-        scroll.current += 0.55;
+        scroll.current += 0.52;
         const total = N * (CW + CG);
         let cx = i * (CW + CG) - scroll.current;
         while (cx < -CW - 20) cx += total;
@@ -249,7 +240,7 @@ export default function Hero() {
       <div className="relative z-10 mx-auto max-w-7xl px-6 py-16">
         <div className="relative w-full" style={{ minHeight: 420 }}>
           {/* 카드 애니메이션 — absolute, 우측 정렬 */}
-          <div className="absolute right-0 top-1/2 -translate-y-1/2 hidden lg:block" style={{ width: 760, height: 420 }}>
+          <div className="absolute right-0 top-1/2 -translate-y-1/2 hidden lg:block" style={{ width: 722, height: 399 }}>
             <div className="pointer-events-none absolute z-40 rounded-xl border border-primary/10 bg-white px-5 py-2.5 text-sm font-bold text-gray-400 shadow-[0_8px_24px_rgba(0,0,0,0.05)]"
               style={{ top: 145, left: 8, animation: "float-s 3.5s ease-in-out infinite 0s" }}>こんにちは</div>
             <div className="pointer-events-none absolute z-40 rounded-xl border border-primary/10 bg-white px-5 py-2.5 text-sm font-bold text-gray-400 shadow-[0_8px_24px_rgba(0,0,0,0.05)]"
@@ -259,7 +250,7 @@ export default function Hero() {
             <div className="pointer-events-none absolute z-40 rounded-xl border border-primary/10 bg-white px-5 py-2.5 text-sm font-bold text-gray-400 shadow-[0_8px_24px_rgba(0,0,0,0.05)]"
               style={{ bottom: 55, right: 50, animation: "float-s 3.6s ease-in-out infinite 1.5s" }}>สวัสดี</div>
 
-            <div className="absolute" style={{ top: 10, left: 30, width: 700, height: 400, overflow: "hidden" }}>
+            <div className="absolute" style={{ top: 10, left: 27, width: 665, height: 380, overflow: "hidden" }}>
               <CardAnimation />
             </div>
           </div>

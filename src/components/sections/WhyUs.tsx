@@ -103,10 +103,10 @@ export default function WhyUs() {
         {/* Header */}
         <div className="mb-16">
           <span className="mb-3 inline-block text-[length:var(--font-size-section-label)] font-semibold uppercase tracking-wider text-primary">
-            Why 닐리리아
+            WHY NILILIA
           </span>
           <h2 className="text-[length:var(--font-size-section-h2)] font-bold tracking-tight text-foreground break-keep">
-            왜 닐리리아를 선택해야 하나요?
+            왜 닐리리아인가?
           </h2>
         </div>
 

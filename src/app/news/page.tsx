@@ -1,4 +1,3 @@
-import PageHero from "@/components/sections/PageHero";
 import type { Metadata } from "next";
 import Section from "@/components/ui/Section";
 import SectionHeader from "@/components/ui/SectionHeader";
@@ -23,11 +22,17 @@ export default async function NewsPage() {
 
   return (
     <>
-      <PageHero
-        label="News & Insights"
-        title="최신 소식"
-        description="Nililia의 최신 소식과 번역 · 현지화 업계 인사이트를 만나보세요."
-      />
+      {/* Hero */}
+      <section className="bg-hero-bg py-8 lg:py-10">
+        <div className="mx-auto max-w-7xl px-6 text-center">
+          <h1 className="text-2xl font-bold leading-tight text-foreground sm:text-3xl break-keep">
+            최신 소식
+          </h1>
+          <p className="mx-auto mt-4 max-w-2xl text-[length:var(--font-size-body)] leading-relaxed text-muted break-keep">
+            Nililia의 최신 소식과 번역 · 현지화 업계 인사이트를 만나보세요.
+          </p>
+        </div>
+      </section>
 
       {/* News List */}
       <Section>

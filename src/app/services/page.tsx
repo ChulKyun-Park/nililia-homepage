@@ -1,4 +1,3 @@
-import PageHero from "@/components/sections/PageHero";
 import type { Metadata } from "next";
 import Section from "@/components/ui/Section";
 import SectionHeader from "@/components/ui/SectionHeader";
@@ -101,11 +100,19 @@ const process = [
 export default function ServicesPage() {
   return (
     <>
-      <PageHero
-        label="Services"
-        title={<>글로벌 진출을 위한<br />맞춤 솔루션</>}
-        description="다양한 콘텐츠 유형에 최적화된 전문 번역 및 현지화 서비스를 제공합니다. AI 기술과 전문가의 노하우로 최상의 품질을 보장합니다."
-      />
+      {/* Hero */}
+      <section className="bg-hero-bg py-8 lg:py-10">
+        <div className="mx-auto max-w-7xl px-6 text-center">
+          <h1 className="text-2xl font-bold leading-tight text-foreground sm:text-3xl break-keep">
+            글로벌 진출을 위한 맞춤 솔루션
+          </h1>
+          <p className="mx-auto mt-4 max-w-2xl text-[length:var(--font-size-body)] leading-relaxed text-muted break-keep">
+            다양한 콘텐츠 유형에 최적화된 전문 번역 및 현지화 서비스를 제공합니다.
+            <br />
+            AI 기술과 전문가의 노하우로 최상의 품질을 보장합니다.
+          </p>
+        </div>
+      </section>
 
       {/* Service Cards */}
       <Section>

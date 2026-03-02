@@ -21,12 +21,9 @@ export default function CareerPage() {
   return (
     <>
       {/* Hero */}
-      <section className="bg-hero-bg py-16 lg:py-20">
+      <section className="bg-hero-bg py-8 lg:py-10">
         <div className="mx-auto max-w-7xl px-6 text-center">
-          <p className="mb-4 text-sm font-semibold uppercase tracking-wider text-primary">
-            Career
-          </p>
-          <h1 className="text-3xl font-bold leading-tight text-foreground sm:text-4xl break-keep">
+          <h1 className="text-2xl font-bold leading-tight text-foreground sm:text-3xl break-keep">
             글로벌 시장을 움직이는 콘텐츠,
             <br />
             그 변화를 함께 만들 동료를 찾습니다.

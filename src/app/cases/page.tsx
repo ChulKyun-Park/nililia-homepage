@@ -1,4 +1,3 @@
-import PageHero from "@/components/sections/PageHero";
 import type { Metadata } from "next";
 import Section from "@/components/ui/Section";
 import SectionHeader from "@/components/ui/SectionHeader";
@@ -24,11 +23,17 @@ export default async function CasesPage() {
 
   return (
     <>
-      <PageHero
-        label="Case Studies"
-        title="성공 사례"
-        description="다양한 산업 분야의 글로벌 진출을 성공적으로 지원한 사례를 확인하세요."
-      />
+      {/* Hero */}
+      <section className="bg-hero-bg py-8 lg:py-10">
+        <div className="mx-auto max-w-7xl px-6 text-center">
+          <h1 className="text-2xl font-bold leading-tight text-foreground sm:text-3xl break-keep">
+            성공 사례
+          </h1>
+          <p className="mx-auto mt-4 max-w-2xl text-[length:var(--font-size-body)] leading-relaxed text-muted break-keep">
+            다양한 산업 분야의 글로벌 진출을 성공적으로 지원한 사례를 확인하세요.
+          </p>
+        </div>
+      </section>
 
       {/* Cases List */}
       <Section>

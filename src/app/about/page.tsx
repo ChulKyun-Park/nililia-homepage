@@ -54,12 +54,9 @@ export default function AboutPage() {
   return (
     <>
       {/* Hero */}
-      <section className="bg-hero-bg py-16 lg:py-20">
+      <section className="bg-hero-bg py-8 lg:py-10">
         <div className="mx-auto max-w-7xl px-6 text-center">
-          <p className="mb-4 text-sm font-semibold uppercase tracking-wider text-primary">
-            About Us
-          </p>
-          <h1 className="text-3xl font-bold leading-tight text-foreground sm:text-4xl break-keep">
+          <h1 className="text-2xl font-bold leading-tight text-foreground sm:text-3xl break-keep">
             닐리리아는 글로벌 콘텐츠 현지화를 선도하는<br />번역 및 현지화 전문 기업입니다.
           </h1>
         </div>

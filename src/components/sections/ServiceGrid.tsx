@@ -113,10 +113,10 @@ function ServiceCard({ service }: { service: ServiceItem }) {
         <div className="mb-2 inline-flex rounded-lg bg-primary/10 p-1.5">
           <Icon className="h-4 w-4 text-primary" />
         </div>
-        <h3 className={`mb-1.5 text-base font-bold text-foreground ${!service.comingSoon ? "group-hover:text-primary" : ""} transition-colors`}>
+        <h3 className={`mb-1.5 text-[length:var(--font-size-card-title)] font-bold text-foreground ${!service.comingSoon ? "group-hover:text-primary" : ""} transition-colors`}>
           {service.title}
         </h3>
-        <p className="text-[length:var(--font-size-body)] leading-relaxed text-muted break-keep">
+        <p className="text-[length:var(--font-size-card-desc)] leading-relaxed text-muted break-keep">
           {service.description}
         </p>
       </div>
@@ -161,7 +161,7 @@ export default function ServiceGrid() {
         <div className="mt-10 text-center">
           <Link
             href="/services"
-            className="text-[length:var(--font-size-body)] font-semibold text-primary hover:text-primary-dark transition-colors"
+            className="text-[length:var(--font-size-card-link)] font-semibold text-primary hover:text-primary-dark transition-colors"
           >
             전체 서비스 보기 &rarr;
           </Link>

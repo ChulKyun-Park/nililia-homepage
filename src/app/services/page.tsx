@@ -125,10 +125,10 @@ export default function ServicesPage() {
                       <div className="mb-2 inline-flex rounded-lg bg-primary/10 p-1.5">
                         <Icon className="h-4 w-4 text-primary" />
                       </div>
-                      <h3 className="mb-1.5 text-base font-bold text-foreground group-hover:text-primary transition-colors">
+                      <h3 className="mb-1.5 text-[length:var(--font-size-card-title)] font-bold text-foreground group-hover:text-primary transition-colors">
                         {service.title}
                       </h3>
-                      <p className="text-[length:var(--font-size-body)] leading-relaxed text-muted break-keep">
+                      <p className="text-[length:var(--font-size-card-desc)] leading-relaxed text-muted break-keep">
                         {service.description}
                       </p>
                     </div>
@@ -161,10 +161,10 @@ export default function ServicesPage() {
                     <div className="mb-2 inline-flex rounded-lg bg-primary/10 p-1.5">
                       <Icon className="h-4 w-4 text-primary" />
                     </div>
-                    <h3 className="mb-1.5 text-base font-bold text-foreground transition-colors">
+                    <h3 className="mb-1.5 text-[length:var(--font-size-card-title)] font-bold text-foreground transition-colors">
                       {service.title}
                     </h3>
-                    <p className="text-[length:var(--font-size-body)] leading-relaxed text-muted break-keep">
+                    <p className="text-[length:var(--font-size-card-desc)] leading-relaxed text-muted break-keep">
                       {service.description}
                     </p>
                   </div>
@@ -186,7 +186,7 @@ export default function ServicesPage() {
             <Card key={item.step} className="text-center">
               <span className="text-4xl font-bold text-primary/20">{item.step}</span>
               <h3 className="mt-3 text-lg font-bold text-foreground">{item.title}</h3>
-              <p className="mt-2 text-[length:var(--font-size-body)] text-muted break-keep">{item.description}</p>
+              <p className="mt-2 text-[length:var(--font-size-card-desc)] text-muted break-keep">{item.description}</p>
             </Card>
           ))}
         </div>

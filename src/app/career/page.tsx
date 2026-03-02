@@ -22,13 +22,9 @@ export default function CareerPage() {
   return (
     <>
       {/* Hero */}
-      <section className="relative bg-hero-bg py-8 lg:py-10 h-[250px] flex items-center overflow-hidden">
-        <div className="absolute inset-0">
-          <Image src="/images/채용CTA.png" alt="" fill className="object-cover" priority />
-          <div className="absolute inset-0 bg-black/60" />
-        </div>
-        <div className="relative mx-auto max-w-7xl px-6 text-center">
-          <h1 className="text-[length:var(--font-size-page-hero)] font-bold leading-tight text-white break-keep">
+      <section className="bg-hero-bg py-8 lg:py-10 h-[250px] flex items-center">
+        <div className="mx-auto max-w-7xl px-6 text-center">
+          <h1 className="text-[length:var(--font-size-page-hero)] font-bold leading-tight text-foreground break-keep">
             글로벌 시장을 움직이는 콘텐츠,
             <br />
             그 변화를 함께 만들 동료를 찾습니다.

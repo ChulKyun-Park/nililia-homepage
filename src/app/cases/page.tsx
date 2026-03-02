@@ -27,7 +27,7 @@ export default async function CasesPage() {
       {/* Hero */}
       <section className="relative bg-hero-bg py-8 lg:py-10 h-[250px] flex items-center overflow-hidden">
         <div className="absolute inset-0">
-          <Image src="/images/진행사례.png" alt="" fill className="object-cover" priority />
+          <Image src="/images/채용CTA.png" alt="" fill className="object-cover" priority />
           <div className="absolute inset-0 bg-black/60" />
         </div>
         <div className="relative mx-auto max-w-7xl px-6 text-center">

@@ -75,7 +75,7 @@ export default function ContactPage() {
           <h1 className="text-4xl font-bold leading-tight text-foreground sm:text-5xl break-keep">
             문의하기
           </h1>
-          <p className="mt-6 max-w-2xl text-lg leading-relaxed text-muted break-keep">
+          <p className="mt-6 max-w-2xl text-[length:var(--font-size-body)] leading-relaxed text-muted break-keep">
             프로젝트 상담, 견적 요청, 파트너십 등 무엇이든 문의해 주세요.
             전문 컨설턴트가 빠르게 답변드립니다.
           </p>
@@ -120,7 +120,7 @@ export default function ContactPage() {
             <h2 className="text-2xl font-bold text-foreground break-keep">
               문의 양식
             </h2>
-            <p className="mt-2 text-sm text-muted break-keep">
+            <p className="mt-2 text-[length:var(--font-size-body)] text-muted break-keep">
               아래 양식을 작성해 주시면, 영업일 기준 1일 이내에 답변드립니다.
             </p>
             <form className="mt-8 space-y-6">
@@ -221,7 +221,7 @@ export default function ContactPage() {
             <h2 className="text-2xl font-bold text-foreground break-keep">
               문의 유형
             </h2>
-            <p className="mt-2 text-sm text-muted break-keep">
+            <p className="mt-2 text-[length:var(--font-size-body)] text-muted break-keep">
               어떤 종류의 문의든 환영합니다.
             </p>
             <div className="mt-8 space-y-6">
@@ -234,7 +234,7 @@ export default function ContactPage() {
                     </div>
                     <div>
                       <h3 className="font-bold text-foreground">{type.title}</h3>
-                      <p className="mt-1 text-sm text-muted break-keep">{type.description}</p>
+                      <p className="mt-1 text-[length:var(--font-size-body)] text-muted break-keep">{type.description}</p>
                     </div>
                   </Card>
                 );

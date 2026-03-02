@@ -64,7 +64,7 @@ export default function AboutPage() {
             <br />
             세계와 연결하는 기업
           </h1>
-          <p className="mt-6 max-w-2xl text-lg leading-relaxed text-muted break-keep">
+          <p className="mt-6 max-w-2xl text-[length:var(--font-size-body)] leading-relaxed text-muted break-keep">
             Nililia는 AI 기술과 전문가의 노하우를 결합하여 최상의 번역 및 현지화 서비스를 제공합니다.
             2018년 설립 이후, 500개 이상의 기업과 함께 글로벌 시장 진출을 성공적으로 지원해 왔습니다.
           </p>
@@ -105,7 +105,7 @@ export default function AboutPage() {
                 <h3 className="mb-2 text-xl font-bold text-foreground">
                   {value.title}
                 </h3>
-                <p className="text-sm leading-relaxed text-muted break-keep">
+                <p className="text-[length:var(--font-size-body)] leading-relaxed text-muted break-keep">
                   {value.description}
                 </p>
               </div>

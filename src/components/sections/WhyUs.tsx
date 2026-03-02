@@ -115,7 +115,7 @@ export default function WhyUs() {
               <h3 className="text-2xl font-bold text-gray-900 sm:text-3xl break-keep">
                 {reason.title}
               </h3>
-              <p className="mt-4 max-w-lg text-base leading-relaxed text-gray-500 break-keep">
+              <p className="mt-4 max-w-lg text-[length:var(--font-size-body)] leading-relaxed text-gray-500 break-keep">
                 {reason.description}
               </p>
               <div className="mt-6 flex flex-wrap gap-2">

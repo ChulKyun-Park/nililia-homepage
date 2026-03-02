@@ -116,7 +116,7 @@ function ServiceCard({ service }: { service: ServiceItem }) {
         <h3 className={`mb-1.5 text-base font-bold text-foreground ${!service.comingSoon ? "group-hover:text-primary" : ""} transition-colors`}>
           {service.title}
         </h3>
-        <p className="text-xs leading-relaxed text-muted break-keep">
+        <p className="text-[length:var(--font-size-body)] leading-relaxed text-muted break-keep">
           {service.description}
         </p>
       </div>
@@ -161,7 +161,7 @@ export default function ServiceGrid() {
         <div className="mt-10 text-center">
           <Link
             href="/services"
-            className="text-sm font-semibold text-primary hover:text-primary-dark transition-colors"
+            className="text-[length:var(--font-size-body)] font-semibold text-primary hover:text-primary-dark transition-colors"
           >
             전체 서비스 보기 &rarr;
           </Link>

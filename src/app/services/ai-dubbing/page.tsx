@@ -22,7 +22,7 @@ export default function Page() {
         <div className="mx-auto max-w-7xl px-6 lg:pl-12">
           <p className="mb-4 text-sm font-semibold uppercase tracking-wider text-primary">Services</p>
           <h1 className="text-4xl font-bold leading-tight text-foreground sm:text-5xl break-keep">AI 번역 · 더빙</h1>
-          <p className="mt-6 max-w-2xl text-lg leading-relaxed text-muted break-keep">
+          <p className="mt-6 max-w-2xl text-[length:var(--font-size-body)] leading-relaxed text-muted break-keep">
             AI 음성 합성과 립싱크 기술로 영상 콘텐츠를 다국어로 자연스럽게 더빙하여 글로벌 시청자에게 전달합니다.
           </p>
         </div>

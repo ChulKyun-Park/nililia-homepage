@@ -31,7 +31,7 @@ export default async function NewsPage() {
           <h1 className="text-4xl font-bold leading-tight text-foreground sm:text-5xl break-keep">
             최신 소식
           </h1>
-          <p className="mt-6 max-w-2xl text-lg leading-relaxed text-muted break-keep">
+          <p className="mt-6 max-w-2xl text-[length:var(--font-size-body)] leading-relaxed text-muted break-keep">
             Nililia의 최신 소식과 번역 · 현지화 업계 인사이트를 만나보세요.
           </p>
         </div>
@@ -66,7 +66,7 @@ export default async function NewsPage() {
                     {item.title}
                   </h3>
                   {item.description && (
-                    <p className="mt-2 text-sm leading-relaxed text-muted break-keep">
+                    <p className="mt-2 text-[length:var(--font-size-body)] leading-relaxed text-muted break-keep">
                       {item.description}
                     </p>
                   )}

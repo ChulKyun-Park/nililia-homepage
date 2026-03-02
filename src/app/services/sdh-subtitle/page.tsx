@@ -22,7 +22,7 @@ export default function Page() {
         <div className="mx-auto max-w-7xl px-6 lg:pl-12">
           <p className="mb-4 text-sm font-semibold uppercase tracking-wider text-primary">Services</p>
           <h1 className="text-4xl font-bold leading-tight text-foreground sm:text-5xl break-keep">SDH · 배리어프리 자막 제작</h1>
-          <p className="mt-6 max-w-2xl text-lg leading-relaxed text-muted break-keep">
+          <p className="mt-6 max-w-2xl text-[length:var(--font-size-body)] leading-relaxed text-muted break-keep">
             청각장애인을 위한 자막(SDH) 제작으로 콘텐츠 접근성을 향상시킵니다.
           </p>
         </div>

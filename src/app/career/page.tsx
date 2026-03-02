@@ -65,11 +65,11 @@ export default function CareerPage() {
                 <br />
                 인재를 찾습니다
               </h1>
-              <p className="mt-6 max-w-lg text-lg leading-relaxed text-muted break-keep">
+              <p className="mt-6 max-w-lg text-[length:var(--font-size-body)] leading-relaxed text-muted break-keep">
                 Nililia는 언어와 기술의 힘으로 콘텐츠의 글로벌 진출을 돕는
                 전문 기업입니다.
               </p>
-              <p className="mt-2 max-w-lg text-lg leading-relaxed text-muted break-keep">
+              <p className="mt-2 max-w-lg text-[length:var(--font-size-body)] leading-relaxed text-muted break-keep">
                 열정 있는 동료와 함께 성장할 기회를 만나보세요.
               </p>
               <div className="mt-8">
@@ -110,7 +110,7 @@ export default function CareerPage() {
                     <Icon className="h-6 w-6 text-primary" />
                   </div>
                   <h3 className="font-bold text-foreground">{benefit.title}</h3>
-                  <p className="mt-2 text-sm leading-relaxed text-muted break-keep">
+                  <p className="mt-2 text-[length:var(--font-size-body)] leading-relaxed text-muted break-keep">
                     {benefit.description}
                   </p>
                 </Card>

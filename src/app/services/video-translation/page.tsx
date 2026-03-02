@@ -22,7 +22,7 @@ export default function Page() {
         <div className="mx-auto max-w-7xl px-6 lg:pl-12">
           <p className="mb-4 text-sm font-semibold uppercase tracking-wider text-primary">Services</p>
           <h1 className="text-4xl font-bold leading-tight text-foreground sm:text-5xl break-keep">영상 번역</h1>
-          <p className="mt-6 max-w-2xl text-lg leading-relaxed text-muted break-keep">
+          <p className="mt-6 max-w-2xl text-[length:var(--font-size-body)] leading-relaxed text-muted break-keep">
             자막, 더빙, 보이스오버 등 모든 영상 콘텐츠의 다국어 번역 서비스를 제공합니다.
           </p>
         </div>

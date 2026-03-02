@@ -46,7 +46,7 @@ export default async function News() {
                     {item.title}
                   </h3>
                   {item.description && (
-                    <p className="mt-2 line-clamp-2 text-sm text-muted break-keep">
+                    <p className="mt-2 line-clamp-2 text-[length:var(--font-size-body)] text-muted break-keep">
                       {item.description}
                     </p>
                   )}

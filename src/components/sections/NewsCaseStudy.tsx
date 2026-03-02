@@ -55,11 +55,11 @@ export default async function NewsCaseStudy() {
                           )}
                         </time>
                       )}
-                      <h3 className="mt-1 line-clamp-2 text-base font-bold text-foreground group-hover:text-primary transition-colors break-keep">
+                      <h3 className="mt-1 line-clamp-2 text-[length:var(--font-size-body)] font-bold text-foreground group-hover:text-primary transition-colors break-keep">
                         {item.title}
                       </h3>
                       {item.description && (
-                        <p className="mt-1 line-clamp-1 text-sm text-muted break-keep">
+                        <p className="mt-1 line-clamp-1 text-[length:var(--font-size-body)] text-muted break-keep">
                           {item.description}
                         </p>
                       )}
@@ -88,7 +88,7 @@ export default async function NewsCaseStudy() {
             <div className="mt-6">
               <Link
                 href="/news"
-                className="text-sm font-semibold text-primary hover:text-primary-dark transition-colors"
+                className="text-[length:var(--font-size-body)] font-semibold text-primary hover:text-primary-dark transition-colors"
               >
                 전체 소식 보기 &rarr;
               </Link>
@@ -134,11 +134,11 @@ export default async function NewsCaseStudy() {
                           {item.company}
                         </span>
                       )}
-                      <h3 className="mt-1 line-clamp-2 text-base font-bold text-foreground group-hover:text-primary transition-colors break-keep">
+                      <h3 className="mt-1 line-clamp-2 text-[length:var(--font-size-body)] font-bold text-foreground group-hover:text-primary transition-colors break-keep">
                         {item.title}
                       </h3>
                       {item.description && (
-                        <p className="mt-1 line-clamp-1 text-sm text-muted break-keep">
+                        <p className="mt-1 line-clamp-1 text-[length:var(--font-size-body)] text-muted break-keep">
                           {item.description}
                         </p>
                       )}
@@ -167,7 +167,7 @@ export default async function NewsCaseStudy() {
             <div className="mt-6">
               <Link
                 href="/cases"
-                className="text-sm font-semibold text-primary hover:text-primary-dark transition-colors"
+                className="text-[length:var(--font-size-body)] font-semibold text-primary hover:text-primary-dark transition-colors"
               >
                 전체 사례 보기 &rarr;
               </Link>

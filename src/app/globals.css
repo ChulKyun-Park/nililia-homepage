@@ -23,6 +23,7 @@
   /* Typography scale (voithru.com 참고) */
   --font-size-hero-h1: 3.25rem;         /* 52px */
   --font-size-hero-sub: 1.175rem;       /* ~19px */
+  --font-size-body: 1.175rem;           /* 본문 텍스트 — hero-sub와 동일 */
   --font-size-section-label: 0.9375rem; /* 15px */
   --font-size-section-h2: 2.375rem;     /* 38px */
   --font-size-section-body: 1.0625rem;  /* 17px */

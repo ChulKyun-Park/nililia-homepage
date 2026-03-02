@@ -101,7 +101,7 @@ export default function ServicesPage() {
             <br />
             맞춤 솔루션
           </h1>
-          <p className="mt-6 max-w-2xl text-lg leading-relaxed text-muted break-keep">
+          <p className="mt-6 max-w-2xl text-[length:var(--font-size-body)] leading-relaxed text-muted break-keep">
             다양한 콘텐츠 유형에 최적화된 전문 번역 및 현지화 서비스를 제공합니다.
             AI 기술과 전문가의 노하우로 최상의 품질을 보장합니다.
           </p>
@@ -186,7 +186,7 @@ export default function ServicesPage() {
             <Card key={item.step} className="text-center">
               <span className="text-4xl font-bold text-primary/20">{item.step}</span>
               <h3 className="mt-3 text-lg font-bold text-foreground">{item.title}</h3>
-              <p className="mt-2 text-sm text-muted break-keep">{item.description}</p>
+              <p className="mt-2 text-[length:var(--font-size-body)] text-muted break-keep">{item.description}</p>
             </Card>
           ))}
         </div>

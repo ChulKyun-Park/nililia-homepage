@@ -40,7 +40,7 @@ export default function SocialProof() {
               <div className="text-3xl font-bold text-primary sm:text-4xl">
                 {stat.value}
               </div>
-              <div className="mt-2 text-sm text-muted">{stat.label}</div>
+              <div className="mt-2 text-[length:var(--font-size-body)] text-muted">{stat.label}</div>
             </div>
           ))}
         </div>
@@ -70,7 +70,7 @@ export default function SocialProof() {
 
       {/* Company marquee */}
       <div className="mt-16 overflow-hidden">
-        <p className="mb-8 text-center text-sm font-medium uppercase tracking-wider text-muted">
+        <p className="mb-8 text-center text-[length:var(--font-size-body)] font-medium uppercase tracking-wider text-muted">
           국내외 선도 기업이 신뢰합니다
         </p>
         <div className="overflow-hidden">
@@ -84,7 +84,7 @@ export default function SocialProof() {
 
       {/* Creators marquee — 동일 박스 스타일, 반대 방향 */}
       <div className="mt-16 overflow-hidden">
-        <p className="mb-8 text-center text-sm font-medium uppercase tracking-wider text-muted">
+        <p className="mb-8 text-center text-[length:var(--font-size-body)] font-medium uppercase tracking-wider text-muted">
           크리에이터들도 함께합니다
         </p>
         <div className="overflow-hidden">
@@ -101,7 +101,7 @@ export default function SocialProof() {
         <div className="mt-10 text-center">
           <Link
             href="/cases"
-            className="text-sm font-semibold text-primary hover:text-primary-dark transition-colors"
+            className="text-[length:var(--font-size-body)] font-semibold text-primary hover:text-primary-dark transition-colors"
           >
             성공 사례 보기 &rarr;
           </Link>

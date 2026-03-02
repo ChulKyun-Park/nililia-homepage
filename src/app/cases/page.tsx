@@ -32,7 +32,7 @@ export default async function CasesPage() {
           <h1 className="text-4xl font-bold leading-tight text-foreground sm:text-5xl break-keep">
             성공 사례
           </h1>
-          <p className="mt-6 max-w-2xl text-lg leading-relaxed text-muted break-keep">
+          <p className="mt-6 max-w-2xl text-[length:var(--font-size-body)] leading-relaxed text-muted break-keep">
             다양한 산업 분야의 글로벌 진출을 성공적으로 지원한 사례를 확인하세요.
           </p>
         </div>
@@ -67,7 +67,7 @@ export default async function CasesPage() {
                     {item.title}
                   </h3>
                   {item.description && (
-                    <p className="mt-2 text-sm leading-relaxed text-muted break-keep">
+                    <p className="mt-2 text-[length:var(--font-size-body)] leading-relaxed text-muted break-keep">
                       {item.description}
                     </p>
                   )}

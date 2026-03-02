@@ -36,8 +36,8 @@ export default function CareerPage() {
       {/* Image */}
       <section className="bg-white pt-16">
         <div className="mx-auto max-w-4xl px-6">
-          <div className="flex aspect-[16/9] items-center justify-center rounded-2xl border border-border bg-surface overflow-hidden">
-            <span className="text-sm text-muted">[팀 사진]</span>
+          <div className="aspect-[16/9] rounded-2xl overflow-hidden">
+            <img src="/images/careers.png" alt="닐리리아 팀" className="h-full w-full object-cover" />
           </div>
         </div>
       </section>

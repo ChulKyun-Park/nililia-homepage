@@ -2,12 +2,12 @@ import Link from "next/link";
 import { Phone, Mail } from "lucide-react";
 
 const serviceLinks = [
-  { label: "영상 번역", href: "/services" },
-  { label: "문서 번역", href: "/services" },
-  { label: "웹소설 · 웹툰", href: "/services" },
-  { label: "SDH · 배리어프리 자막 제작", href: "/services" },
-  { label: "홈페이지 · 앱 현지화", href: "/services" },
-  { label: "게임 번역", href: "/services" },
+  { label: "영상 번역", href: "/services/video-translation" },
+  { label: "문서 번역", href: "/services/document-translation" },
+  { label: "웹소설 · 웹툰", href: "/services/webnovel-translation" },
+  { label: "SDH · 배리어프리 자막", href: "/services/sdh-subtitle" },
+  { label: "홈페이지 · 앱 현지화", href: "/services/web-app-localization" },
+  { label: "게임 번역", href: "/services/game-localization" },
   { label: "MTPE", href: "/services" },
   { label: "AI 번역 · 더빙", href: "/services" },
 ];

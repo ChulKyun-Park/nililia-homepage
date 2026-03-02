@@ -5,7 +5,7 @@ import { useEffect, useRef, useCallback } from "react";
 const SERVICES = [
   { icon: "▶️", title: "영상 번역", desc: "자막 & 더빙", img: "/images/영상 번역.jpg" },
   { icon: "📄", title: "문서 번역", desc: "전문 번역", img: "/images/문서 번역.jpg" },
-  { icon: "📺", title: "SDH · 배리어프리 자막 제작", desc: "청각장애인 자막", img: "/images/SDH · 배리어프리 자막 제작.jpg" },
+  { icon: "📺", title: "SDH 자막 제작", desc: "청각장애인 자막", img: "/images/SDH · 배리어프리 자막 제작.jpg" },
   { icon: "🌐", title: "홈페이지 현지화", desc: "웹사이트 최적화", img: "/images/홈페이지 현지화.jpg" },
   { icon: "📱", title: "앱 현지화", desc: "모바일 최적화", img: "/images/앱 현지화.png" },
   { icon: "📖", title: "웹소설 번역", desc: "콘텐츠 현지화", img: "/images/웹소설 번역.png" },

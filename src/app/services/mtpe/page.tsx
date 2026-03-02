@@ -1,3 +1,4 @@
+import PageHero from "@/components/sections/PageHero";
 import type { Metadata } from "next";
 import Section from "@/components/ui/Section";
 import { ScanSearch, CheckCircle } from "lucide-react";
@@ -18,15 +19,11 @@ const details = [
 export default function Page() {
   return (
     <>
-      <section className="bg-hero-bg flex items-center min-h-[420px] py-4 lg:py-6">
-        <div className="mx-auto w-full max-w-7xl px-6 lg:pl-12">
-          <p className="mb-4 text-sm font-semibold uppercase tracking-wider text-primary">Services</p>
-          <h1 className="text-4xl font-bold leading-tight text-foreground sm:text-5xl break-keep">MTPE</h1>
-          <p className="mt-6 max-w-2xl text-[length:var(--font-size-body)] leading-relaxed text-muted break-keep">
-            AI 기계 번역과 전문가 감수를 결합한 MTPE 서비스로, 대규모 프로젝트도 빠르고 정확하게 처리합니다.
-          </p>
-        </div>
-      </section>
+      <PageHero
+        label="Services"
+        title="MTPE"
+        description="AI 기계 번역과 전문가 감수를 결합한 MTPE 서비스로, 대규모 프로젝트도 빠르고 정확하게 처리합니다."
+      />
       <Section>
         <div className="flex flex-col gap-10 lg:flex-row lg:items-center">
           <div className="flex-1">

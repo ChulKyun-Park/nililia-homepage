@@ -1,3 +1,4 @@
+import PageHero from "@/components/sections/PageHero";
 import type { Metadata } from "next";
 import SectionHeader from "@/components/ui/SectionHeader";
 import Card from "@/components/ui/Card";
@@ -52,8 +53,7 @@ export default function CareerPage() {
   return (
     <>
       {/* Hero */}
-      <section className="bg-hero-bg flex items-center min-h-[420px] py-4 lg:py-6">
-        <div className="mx-auto w-full max-w-7xl px-6 lg:pl-12">
+      <PageHero label="Careers" title="">
           <div className="grid items-center gap-12 lg:grid-cols-2 lg:gap-16">
             {/* Left: Text */}
             <div>
@@ -90,8 +90,7 @@ export default function CareerPage() {
               </div>
             </div>
           </div>
-        </div>
-      </section>
+      </PageHero>
 
       {/* Benefits */}
       <section className="bg-surface py-24">

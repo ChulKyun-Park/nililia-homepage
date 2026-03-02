@@ -1,3 +1,4 @@
+import PageHero from "@/components/sections/PageHero";
 import type { Metadata } from "next";
 import Section from "@/components/ui/Section";
 import { Gamepad2, CheckCircle } from "lucide-react";
@@ -18,15 +19,11 @@ const details = [
 export default function Page() {
   return (
     <>
-      <section className="bg-hero-bg flex items-center min-h-[420px] py-4 lg:py-6">
-        <div className="mx-auto w-full max-w-7xl px-6 lg:pl-12">
-          <p className="mb-4 text-sm font-semibold uppercase tracking-wider text-primary">Services</p>
-          <h1 className="text-4xl font-bold leading-tight text-foreground sm:text-5xl break-keep">게임 현지화</h1>
-          <p className="mt-6 max-w-2xl text-[length:var(--font-size-body)] leading-relaxed text-muted break-keep">
-            게임 UI, 스토리, 마케팅 자료까지 완벽한 게임 현지화를 지원합니다.
-          </p>
-        </div>
-      </section>
+      <PageHero
+        label="Services"
+        title="게임 현지화"
+        description="게임 UI, 스토리, 마케팅 자료까지 완벽한 게임 현지화를 지원합니다."
+      />
       <Section>
         <div className="flex flex-col gap-10 lg:flex-row lg:items-center">
           <div className="flex-1">

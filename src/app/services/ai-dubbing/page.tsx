@@ -1,3 +1,4 @@
+import PageHero from "@/components/sections/PageHero";
 import type { Metadata } from "next";
 import Section from "@/components/ui/Section";
 import { Mic, CheckCircle } from "lucide-react";
@@ -18,15 +19,11 @@ const details = [
 export default function Page() {
   return (
     <>
-      <section className="bg-hero-bg flex items-center min-h-[420px] py-4 lg:py-6">
-        <div className="mx-auto w-full max-w-7xl px-6 lg:pl-12">
-          <p className="mb-4 text-sm font-semibold uppercase tracking-wider text-primary">Services</p>
-          <h1 className="text-4xl font-bold leading-tight text-foreground sm:text-5xl break-keep">AI 번역 · 더빙</h1>
-          <p className="mt-6 max-w-2xl text-[length:var(--font-size-body)] leading-relaxed text-muted break-keep">
-            AI 음성 합성과 립싱크 기술로 영상 콘텐츠를 다국어로 자연스럽게 더빙하여 글로벌 시청자에게 전달합니다.
-          </p>
-        </div>
-      </section>
+      <PageHero
+        label="Services"
+        title="AI 번역 · 더빙"
+        description="AI 음성 합성과 립싱크 기술로 영상 콘텐츠를 다국어로 자연스럽게 더빙하여 글로벌 시청자에게 전달합니다."
+      />
       <Section>
         <div className="flex flex-col gap-10 lg:flex-row lg:items-center">
           <div className="flex-1">

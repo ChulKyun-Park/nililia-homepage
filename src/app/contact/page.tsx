@@ -1,3 +1,4 @@
+import PageHero from "@/components/sections/PageHero";
 import type { Metadata } from "next";
 import Section from "@/components/ui/Section";
 import Card from "@/components/ui/Card";
@@ -66,21 +67,11 @@ const inquiryTypes = [
 export default function ContactPage() {
   return (
     <>
-      {/* Page Hero */}
-      <section className="bg-hero-bg flex items-center min-h-[420px] py-4 lg:py-6">
-        <div className="mx-auto w-full max-w-7xl px-6 lg:pl-12">
-          <p className="mb-4 text-sm font-semibold uppercase tracking-wider text-primary">
-            Contact Us
-          </p>
-          <h1 className="text-4xl font-bold leading-tight text-foreground sm:text-5xl break-keep">
-            문의하기
-          </h1>
-          <p className="mt-6 max-w-2xl text-[length:var(--font-size-body)] leading-relaxed text-muted break-keep">
-            프로젝트 상담, 견적 요청, 파트너십 등 무엇이든 문의해 주세요.
-            전문 컨설턴트가 빠르게 답변드립니다.
-          </p>
-        </div>
-      </section>
+      <PageHero
+        label="Contact Us"
+        title="문의하기"
+        description="프로젝트 상담, 견적 요청, 파트너십 등 무엇이든 문의해 주세요. 전문 컨설턴트가 빠르게 답변드립니다."
+      />
 
       {/* Contact Info Cards */}
       <Section>

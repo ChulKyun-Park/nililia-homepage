@@ -1,4 +1,5 @@
 import type { Metadata } from "next";
+import PageHero from "@/components/sections/PageHero";
 import Section from "@/components/ui/Section";
 import SectionHeader from "@/components/ui/SectionHeader";
 import Button from "@/components/ui/Button";
@@ -53,23 +54,11 @@ const teamStats = [
 export default function AboutPage() {
   return (
     <>
-      {/* Page Hero */}
-      <section className="bg-hero-bg flex items-center min-h-[420px] py-4 lg:py-6">
-        <div className="mx-auto w-full max-w-7xl px-6 lg:pl-12">
-          <p className="mb-4 text-sm font-semibold uppercase tracking-wider text-primary">
-            About Us
-          </p>
-          <h1 className="text-4xl font-bold leading-tight text-foreground sm:text-5xl break-keep">
-            언어의 장벽을 넘어,
-            <br />
-            세계와 연결하는 기업
-          </h1>
-          <p className="mt-6 max-w-2xl text-[length:var(--font-size-body)] leading-relaxed text-muted break-keep">
-            Nililia는 AI 기술과 전문가의 노하우를 결합하여 최상의 번역 및 현지화 서비스를 제공합니다.
-            2018년 설립 이후, 500개 이상의 기업과 함께 글로벌 시장 진출을 성공적으로 지원해 왔습니다.
-          </p>
-        </div>
-      </section>
+      <PageHero
+        label="About Us"
+        title={<>언어의 장벽을 넘어,<br />세계와 연결하는 기업</>}
+        description="Nililia는 AI 기술과 전문가의 노하우를 결합하여 최상의 번역 및 현지화 서비스를 제공합니다. 2018년 설립 이후, 500개 이상의 기업과 함께 글로벌 시장 진출을 성공적으로 지원해 왔습니다."
+      />
 
       {/* Mission */}
       <section className="bg-gradient-to-r from-primary to-primary-dark py-20">

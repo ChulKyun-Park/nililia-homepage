@@ -1,3 +1,4 @@
+import PageHero from "@/components/sections/PageHero";
 import type { Metadata } from "next";
 import Section from "@/components/ui/Section";
 import { Subtitles, CheckCircle } from "lucide-react";
@@ -18,15 +19,11 @@ const details = [
 export default function Page() {
   return (
     <>
-      <section className="bg-hero-bg flex items-center min-h-[420px] py-4 lg:py-6">
-        <div className="mx-auto w-full max-w-7xl px-6 lg:pl-12">
-          <p className="mb-4 text-sm font-semibold uppercase tracking-wider text-primary">Services</p>
-          <h1 className="text-4xl font-bold leading-tight text-foreground sm:text-5xl break-keep">SDH · 배리어프리 자막 제작</h1>
-          <p className="mt-6 max-w-2xl text-[length:var(--font-size-body)] leading-relaxed text-muted break-keep">
-            청각장애인을 위한 자막(SDH) 제작으로 콘텐츠 접근성을 향상시킵니다.
-          </p>
-        </div>
-      </section>
+      <PageHero
+        label="Services"
+        title="SDH · 배리어프리 자막 제작"
+        description="청각장애인을 위한 자막(SDH) 제작으로 콘텐츠 접근성을 향상시킵니다."
+      />
       <Section>
         <div className="flex flex-col gap-10 lg:flex-row lg:items-center">
           <div className="flex-1">

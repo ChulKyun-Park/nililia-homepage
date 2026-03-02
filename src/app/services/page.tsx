@@ -154,7 +154,7 @@ export default function ServicesPage() {
             {comingSoonServices.map((service) => {
               const Icon = service.icon;
               return (
-                <Card key={service.title} className="group overflow-hidden p-0 cursor-default opacity-70 h-full">
+                <Card key={service.title} className="group overflow-hidden p-0 cursor-default opacity-40 grayscale h-full">
                   <div className="relative aspect-[16/10] overflow-hidden bg-surface">
                     <Image
                       src={service.thumbnail}

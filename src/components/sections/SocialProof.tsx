@@ -65,11 +65,12 @@ function CompanyLogo({ filename }: { filename: string }) {
   return (
     <div className="flex-none flex items-center justify-center h-12 px-4">
       <Image
-        src={`/images/socialproof/company/${filename}`}
+        src={`/images/socialproof/company/${encodeURIComponent(filename)}`}
         alt={name}
         width={120}
         height={48}
         className="h-10 w-auto object-contain opacity-60 grayscale transition-all hover:opacity-100 hover:grayscale-0"
+        unoptimized
       />
     </div>
   );

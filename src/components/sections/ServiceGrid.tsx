@@ -101,7 +101,7 @@ function ServiceCard({ service }: { service: ServiceItem }) {
     <Card
       className={`group overflow-hidden p-0 transition-all ${
         service.comingSoon
-          ? "cursor-default opacity-70"
+          ? "cursor-default opacity-40 grayscale"
           : "cursor-pointer hover:-translate-y-1"
       }`}
     >

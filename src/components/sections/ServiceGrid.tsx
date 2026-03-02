@@ -107,7 +107,7 @@ function ServiceCard({ service }: { service: ServiceItem }) {
       }`}
     >
       <div className={`aspect-[16/10] bg-surface flex items-center justify-center ${isTest ? "p-[5%]" : "p-3"}`}>
-        <div className={`relative overflow-hidden rounded-lg ${isTest ? "w-[90%] h-[90%]" : "w-full h-full"}`}>
+        <div className={`relative overflow-hidden rounded-lg ${isTest ? "w-full h-full" : "w-full h-full"}`}>
           <Image
             src={service.thumbnail}
             alt={service.title}
@@ -117,7 +117,7 @@ function ServiceCard({ service }: { service: ServiceItem }) {
         />
         </div>
       </div>
-      <div className={isTest ? "px-[5%] py-4" : "p-4"}>
+      <div className={isTest ? "px-[5%] pb-4 pt-3" : "p-4"}>
         {isTest ? (
           <>
             <div className="mb-1.5 flex items-center gap-2">

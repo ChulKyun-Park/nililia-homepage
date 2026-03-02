@@ -19,7 +19,7 @@ export default function PageHero({ label, title, description, children }: PageHe
               <p className="mb-4 text-sm font-semibold uppercase tracking-wider text-primary">
                 {label}
               </p>
-              <h1 className="text-4xl font-bold leading-tight text-foreground sm:text-5xl break-keep">
+              <h1 className="text-2xl font-bold leading-tight text-foreground sm:text-3xl break-keep">
                 {title}
               </h1>
               {description && (

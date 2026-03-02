@@ -114,7 +114,7 @@ export default function WhyUs() {
               className={`flex-1 flex flex-col justify-center ${direction === "up" ? "slide-enter-up" : "slide-enter-down"}`}
               style={{ minHeight: "320px" }}
             >
-              <span className="mb-2 text-4xl font-bold text-primary/30">
+              <span className="mb-2 text-3xl font-bold text-primary/30">
                 {reason.number}
               </span>
               <h3 className="text-2xl font-bold text-gray-900 sm:text-3xl break-keep">

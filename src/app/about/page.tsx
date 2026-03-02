@@ -71,7 +71,7 @@ export default function AboutPage() {
               <p className="mb-4 text-sm font-semibold uppercase tracking-wider text-primary">
                 Our Mission
               </p>
-              <h2 className="text-3xl font-bold leading-snug text-foreground sm:text-4xl break-keep">
+              <h2 className="text-2xl font-bold leading-snug text-foreground sm:text-3xl break-keep">
                 언어의 경계를 넘어 세계를 연결합니다
               </h2>
               <p className="mt-6 text-[length:var(--font-size-body)] leading-relaxed text-muted break-keep">
@@ -137,7 +137,7 @@ export default function AboutPage() {
             return (
               <div key={stat.label} className="rounded-2xl border border-border bg-white p-8 text-center">
                 <Icon className="mx-auto mb-4 h-10 w-10 text-primary" />
-                <div className="text-4xl font-bold text-primary">{stat.value}</div>
+                <div className="text-3xl font-bold text-primary">{stat.value}</div>
                 <div className="mt-2 text-[length:var(--font-size-body)] text-muted">{stat.label}</div>
               </div>
             );

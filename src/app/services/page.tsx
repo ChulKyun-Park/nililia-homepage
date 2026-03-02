@@ -206,7 +206,7 @@ export default function ServicesPage() {
         <div className="grid gap-6 sm:grid-cols-2 lg:grid-cols-4">
           {process.map((item) => (
             <Card key={item.step} className="text-center">
-              <span className="text-4xl font-bold text-primary/20">{item.step}</span>
+              <span className="text-3xl font-bold text-primary/20">{item.step}</span>
               <h3 className="mt-3 text-lg font-bold text-foreground">{item.title}</h3>
               <p className="mt-2 text-[length:var(--font-size-card-desc)] text-muted break-keep">{item.description}</p>
             </Card>

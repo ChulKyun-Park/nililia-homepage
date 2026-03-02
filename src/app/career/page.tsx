@@ -39,7 +39,7 @@ export default function CareerPage() {
           <div className="grid items-center gap-12 lg:grid-cols-2 lg:gap-16">
             {/* Left: Text */}
             <div>
-              <h2 className="text-3xl font-bold leading-snug text-foreground sm:text-4xl break-keep">
+              <h2 className="text-2xl font-bold leading-snug text-foreground sm:text-3xl break-keep">
                 함께 세계를 연결할 인재를 찾습니다
               </h2>
               <p className="mt-6 text-[length:var(--font-size-body)] leading-relaxed text-muted break-keep">

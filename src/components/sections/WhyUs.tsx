@@ -76,16 +76,16 @@ export default function WhyUs() {
           100% { opacity: 1; transform: translateY(0); }
         }
         .slide-enter-up {
-          animation: whyus-slide-up-enter 0.8s cubic-bezier(0.22, 1, 0.36, 1) both;
+          animation: whyus-slide-up-enter 1.2s cubic-bezier(0.22, 1, 0.36, 1) both;
         }
         .slide-enter-down {
-          animation: whyus-slide-down-enter 0.8s cubic-bezier(0.22, 1, 0.36, 1) both;
+          animation: whyus-slide-down-enter 1.2s cubic-bezier(0.22, 1, 0.36, 1) both;
         }
         .slide-enter-up-delayed {
-          animation: whyus-slide-up-enter 0.8s cubic-bezier(0.22, 1, 0.36, 1) 0.15s both;
+          animation: whyus-slide-up-enter 1.2s cubic-bezier(0.22, 1, 0.36, 1) 0.15s both;
         }
         .slide-enter-down-delayed {
-          animation: whyus-slide-down-enter 0.8s cubic-bezier(0.22, 1, 0.36, 1) 0.15s both;
+          animation: whyus-slide-down-enter 1.2s cubic-bezier(0.22, 1, 0.36, 1) 0.15s both;
         }
       `}</style>
 
@@ -109,7 +109,7 @@ export default function WhyUs() {
               className={`flex-1 flex flex-col justify-center ${direction === "up" ? "slide-enter-up" : "slide-enter-down"}`}
               style={{ minHeight: "320px" }}
             >
-              <span className="mb-2 text-2xl font-bold text-primary/30">
+              <span className="mb-2 text-4xl font-bold text-primary/30">
                 {reason.number}
               </span>
               <h3 className="text-2xl font-bold text-gray-900 sm:text-3xl break-keep">

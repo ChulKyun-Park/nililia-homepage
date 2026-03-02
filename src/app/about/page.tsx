@@ -128,7 +128,7 @@ export default function AboutPage() {
               <div key={stat.label} className="rounded-2xl border border-border bg-white p-8 text-center">
                 <Icon className="mx-auto mb-4 h-10 w-10 text-primary" />
                 <div className="text-4xl font-bold text-primary">{stat.value}</div>
-                <div className="mt-2 text-sm text-muted">{stat.label}</div>
+                <div className="mt-2 text-[length:var(--font-size-body)] text-muted">{stat.label}</div>
               </div>
             );
           })}
@@ -147,7 +147,7 @@ export default function AboutPage() {
               <div key={item.year} className="relative mb-10 last:mb-0">
                 <div className="absolute -left-[calc(2rem+5px)] top-1 h-3 w-3 rounded-full bg-primary" />
                 <span className="text-sm font-bold text-primary">{item.year}</span>
-                <p className="mt-1 text-base text-foreground break-keep">{item.event}</p>
+                <p className="mt-1 text-[length:var(--font-size-body)] text-foreground break-keep">{item.event}</p>
               </div>
             ))}
           </div>

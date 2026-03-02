@@ -138,7 +138,7 @@ export default function CareerPage() {
             >
               <div className="relative z-10">
                 <h2 className="text-2xl font-bold text-white">정규직 채용</h2>
-                <p className="mt-4 text-base leading-relaxed text-white/80 break-keep">
+                <p className="mt-4 text-[length:var(--font-size-body)] leading-relaxed text-white/80 break-keep">
                   닐리리아의<br />
                   콘텐츠 현지화를 함께 이끌어갈<br />
                   동료를 찾고 있습니다.
@@ -160,7 +160,7 @@ export default function CareerPage() {
             >
               <div className="relative z-10">
                 <h2 className="text-2xl font-bold text-white">콘텐츠 현지화 프리랜서 채용</h2>
-                <p className="mt-4 text-base leading-relaxed text-white/80 break-keep">
+                <p className="mt-4 text-[length:var(--font-size-body)] leading-relaxed text-white/80 break-keep">
                   전문 역량을 활용해<br />
                   콘텐츠 세계화에 참여하고<br />
                   수익을 만들어보세요.

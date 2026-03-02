@@ -105,7 +105,7 @@ export default function ContactPage() {
                 ) : (
                   <p className="mt-2 text-lg font-bold text-foreground">{info.value}</p>
                 )}
-                <p className="mt-1 text-xs text-muted">{info.description}</p>
+                <p className="mt-1 text-[length:var(--font-size-body)] text-muted">{info.description}</p>
               </Card>
             );
           })}

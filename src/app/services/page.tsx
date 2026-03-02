@@ -128,7 +128,7 @@ export default function ServicesPage() {
                       <h3 className="mb-1.5 text-base font-bold text-foreground group-hover:text-primary transition-colors">
                         {service.title}
                       </h3>
-                      <p className="text-xs leading-relaxed text-muted break-keep">
+                      <p className="text-[length:var(--font-size-body)] leading-relaxed text-muted break-keep">
                         {service.description}
                       </p>
                     </div>
@@ -164,7 +164,7 @@ export default function ServicesPage() {
                     <h3 className="mb-1.5 text-base font-bold text-foreground transition-colors">
                       {service.title}
                     </h3>
-                    <p className="text-xs leading-relaxed text-muted break-keep">
+                    <p className="text-[length:var(--font-size-body)] leading-relaxed text-muted break-keep">
                       {service.description}
                     </p>
                   </div>

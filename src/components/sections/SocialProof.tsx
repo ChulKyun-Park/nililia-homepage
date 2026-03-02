@@ -31,7 +31,7 @@ export default function SocialProof() {
   const tripleCreators = [...creators, ...creators, ...creators];
 
   return (
-    <section className="bg-white py-24">
+    <section className="bg-white py-16">
       {/* Stats */}
       <div className="mx-auto max-w-7xl px-6 lg:pl-12">
         <div className="grid grid-cols-2 gap-8 md:grid-cols-4">

@@ -250,7 +250,7 @@ export default function Hero() {
         @keyframes float-s { 0%,100%{transform:translateY(0)} 50%{transform:translateY(-8px)} }
       `}</style>
 
-      <div className="relative z-10 mx-auto max-w-7xl px-6 py-4 lg:py-6">
+      <div className="relative z-10 mx-auto max-w-7xl px-6 py-16">
         <div className="relative w-full" style={{ minHeight: 420 }}>
           {/* 카드 애니메이션 — absolute, 우측 정렬 */}
           <div className="absolute right-0 top-1/2 -translate-y-1/2 hidden lg:block" style={{ width: 760, height: 420 }}>

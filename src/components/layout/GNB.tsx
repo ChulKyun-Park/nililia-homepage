@@ -43,7 +43,7 @@ export default function GNB() {
         <Link href="/" className="shrink-0">
           <img
             src="/images/NILILIA.png"
-            alt="NILILIA"
+            alt="닐리리아"
             className="h-[40px] w-auto"
           />
         </Link>

@@ -89,8 +89,8 @@ export default function AboutPage() {
             </div>
 
             {/* Right: Image */}
-            <div className="hidden lg:block">
-              <div className="aspect-[4/3] rounded-2xl overflow-hidden">
+            <div className="hidden lg:flex items-center justify-center">
+              <div className="w-[90%] aspect-[4/3] rounded-2xl overflow-hidden">
                 <img src="/images/about.png" alt="닐리리아 팀" className="h-full w-full object-cover" />
               </div>
             </div>

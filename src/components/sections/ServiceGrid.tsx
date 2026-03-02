@@ -117,16 +117,34 @@ function ServiceCard({ service }: { service: ServiceItem }) {
         />
         </div>
       </div>
-      <div className={isTest ? "p-4 flex flex-col items-center" : "p-4"}>
-        <div className="mb-2 inline-flex rounded-lg bg-primary/10 p-1.5">
-          <Icon className="h-4 w-4 text-primary" />
-        </div>
-        <h3 className={`mb-1.5 text-[length:var(--font-size-card-title)] font-bold text-foreground ${!service.comingSoon ? "group-hover:text-primary" : ""} transition-colors`}>
-          {service.title}
-        </h3>
-        <p className={`text-[length:var(--font-size-card-desc)] leading-relaxed text-muted break-keep ${isTest ? "text-center" : ""}`}>
-          {service.description}
-        </p>
+      <div className={isTest ? "px-[5%] py-4" : "p-4"}>
+        {isTest ? (
+          <>
+            <div className="mb-1.5 flex items-center gap-2">
+              <div className="inline-flex rounded-lg bg-primary/10 p-1.5">
+                <Icon className="h-4 w-4 text-primary" />
+              </div>
+              <h3 className={`text-[length:var(--font-size-card-title)] font-bold text-foreground group-hover:text-primary transition-colors`}>
+                {service.title}
+              </h3>
+            </div>
+            <p className="text-[length:var(--font-size-card-desc)] leading-relaxed text-muted break-keep">
+              {service.description}
+            </p>
+          </>
+        ) : (
+          <>
+            <div className="mb-2 inline-flex rounded-lg bg-primary/10 p-1.5">
+              <Icon className="h-4 w-4 text-primary" />
+            </div>
+            <h3 className={`mb-1.5 text-[length:var(--font-size-card-title)] font-bold text-foreground ${!service.comingSoon ? "group-hover:text-primary" : ""} transition-colors`}>
+              {service.title}
+            </h3>
+            <p className="text-[length:var(--font-size-card-desc)] leading-relaxed text-muted break-keep">
+              {service.description}
+            </p>
+          </>
+        )}
       </div>
     </Card>
   );

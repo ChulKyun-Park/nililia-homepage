@@ -1,6 +1,5 @@
 import type { Metadata } from "next";
 import Section from "@/components/ui/Section";
-import Button from "@/components/ui/Button";
 import { Video, CheckCircle } from "lucide-react";
 
 export const metadata: Metadata = {
@@ -36,7 +35,6 @@ export default function Page() {
             <ul className="mt-6 space-y-3">
               {details.map((d) => (<li key={d} className="flex items-start gap-3"><CheckCircle className="mt-0.5 h-5 w-5 shrink-0 text-primary" /><span className="text-sm text-foreground break-keep">{d}</span></li>))}
             </ul>
-            <div className="mt-8"><Button href="/contact" variant="primary" className="px-8 py-4 text-base">무료 상담 신청</Button></div>
           </div>
           <div className="flex-1"><div className="flex aspect-[4/3] items-center justify-center rounded-2xl bg-gradient-to-br from-primary/5 to-primary/10 text-sm text-muted">영상 번역 이미지</div></div>
         </div>

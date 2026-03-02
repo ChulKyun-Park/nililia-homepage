@@ -101,12 +101,16 @@ export default function ServicesPage() {
   return (
     <>
       {/* Hero */}
-      <section className="bg-hero-bg py-8 lg:py-10 h-[250px] flex items-center">
-        <div className="mx-auto max-w-7xl px-6 text-center">
-          <h1 className="text-[length:var(--font-size-page-hero)] font-bold leading-tight text-foreground break-keep">
+      <section className="relative bg-hero-bg py-8 lg:py-10 h-[250px] flex items-center overflow-hidden">
+        <div className="absolute inset-0">
+          <Image src="/images/맞춤솔루션.png" alt="" fill className="object-cover" priority />
+          <div className="absolute inset-0 bg-black/60" />
+        </div>
+        <div className="relative mx-auto max-w-7xl px-6 text-center">
+          <h1 className="text-[length:var(--font-size-page-hero)] font-bold leading-tight text-white break-keep">
             글로벌 진출을 위한 맞춤 솔루션
           </h1>
-          <p className="mx-auto mt-4 max-w-2xl text-[length:var(--font-size-body)] leading-relaxed text-muted break-keep">
+          <p className="mx-auto mt-4 max-w-2xl text-[length:var(--font-size-body)] leading-relaxed text-white/80 break-keep">
             다양한 콘텐츠 유형에 최적화된 전문 번역 및 현지화 서비스를 제공합니다.
             <br />
             AI 기술과 전문가의 노하우로 최상의 품질을 보장합니다.

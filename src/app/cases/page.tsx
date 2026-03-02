@@ -3,6 +3,7 @@ import Section from "@/components/ui/Section";
 import SectionHeader from "@/components/ui/SectionHeader";
 import Card from "@/components/ui/Card";
 import Button from "@/components/ui/Button";
+import Image from "next/image";
 import { fetchAllCaseStudies } from "@/lib/notion/client";
 
 export const revalidate = 3600;
@@ -24,12 +25,16 @@ export default async function CasesPage() {
   return (
     <>
       {/* Hero */}
-      <section className="bg-hero-bg py-8 lg:py-10 h-[250px] flex items-center">
-        <div className="mx-auto max-w-7xl px-6 text-center">
-          <h1 className="text-[length:var(--font-size-page-hero)] font-bold leading-tight text-foreground break-keep">
+      <section className="relative bg-hero-bg py-8 lg:py-10 h-[250px] flex items-center overflow-hidden">
+        <div className="absolute inset-0">
+          <Image src="/images/진행사례.png" alt="" fill className="object-cover" priority />
+          <div className="absolute inset-0 bg-black/60" />
+        </div>
+        <div className="relative mx-auto max-w-7xl px-6 text-center">
+          <h1 className="text-[length:var(--font-size-page-hero)] font-bold leading-tight text-white break-keep">
             진행 사례
           </h1>
-          <p className="mx-auto mt-4 max-w-2xl text-[length:var(--font-size-body)] leading-relaxed text-muted break-keep">
+          <p className="mx-auto mt-4 max-w-2xl text-[length:var(--font-size-body)] leading-relaxed text-white/80 break-keep">
             다양한 산업 분야의 글로벌 진출을 성공적으로 지원한 사례를 확인하세요.
           </p>
         </div>

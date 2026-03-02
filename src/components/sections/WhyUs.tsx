@@ -1,6 +1,7 @@
 "use client";
 
 import { useState, useEffect, useCallback } from "react";
+import Image from "next/image";
 
 const reasons = [
   {
@@ -9,7 +10,8 @@ const reasons = [
     description:
       "2016년 설립 이래 방송사·엔터·OTT·크리에이터까지, 콘텐츠 현지화만 10년. 누적 매출 60억 원, 재구매율 88%는 약속이 아니라 결과로 쌓은 숫자입니다.",
     tags: ["10년 업력", "누적 고객 1,300+", "재구매율 88%"],
-    imagePlaceholder: "100개 기업이 선택한 현지화 파트너",
+    image: "/images/현지화파트너.png",
+    imageAlt: "비즈니스 미팅 현장",
   },
   {
     number: "02",
@@ -17,7 +19,8 @@ const reasons = [
     description:
       "10개 이상의 언어를 지원하며, 각 언어권에 현지 전문가 네트워크를 보유하고 있습니다. 단순 번역이 아닌, 현지 문화와 정서에 맞는 진정한 현지화를 제공합니다.",
     tags: ["현지 전문가", "문화 적응", "글로벌 커버리지"],
-    imagePlaceholder: "글로벌 네트워크 맵",
+    image: "/images/글로벌.png",
+    imageAlt: "글로벌 네트워크 전문가",
   },
   {
     number: "03",
@@ -25,7 +28,8 @@ const reasons = [
     description:
       "K-드라마의 뉘앙스, 예능의 재치, 크리에이터의 개성 — 콘텐츠마다 번역이 달라야 합니다. 도메인별 전문 번역가를 배정하고, 10년간 축적한 1,300만+ 문장 쌍 데이터로 일관된 현지화 품질을 보장합니다.",
     tags: ["콘텐츠 특화", "도메인 전문가 배정", "1,300만+ 데이터"],
-    imagePlaceholder: "콘텐츠 도메인별 전문 번역",
+    image: "/images/맥락을.png",
+    imageAlt: "자막 번역 작업 현장",
   },
   {
     number: "04",
@@ -33,7 +37,8 @@ const reasons = [
     description:
       "체계적인 프로젝트 관리와 자동화된 워크플로우로 빠른 납기를 보장합니다. 실시간 진행 상황 대시보드를 통해 투명하게 프로젝트를 관리할 수 있습니다.",
     tags: ["자동 워크플로우", "실시간 대시보드", "빠른 납기"],
-    imagePlaceholder: "프로젝트 관리 대시보드",
+    image: "/images/빠른납기.png",
+    imageAlt: "프로젝트 관리 대시보드",
   },
 ];
 
@@ -135,18 +140,22 @@ export default function WhyUs() {
               </div>
             </div>
 
-            {/* Right: Image placeholder — 80% 크기 */}
+            {/* Right: Image — 80% 크기 */}
             <div
               key={`img-${current}`}
               className={`hidden lg:flex flex-1 items-center justify-center ${direction === "up" ? "slide-enter-up-delayed" : "slide-enter-down-delayed"}`}
             >
               <div
-                className="flex items-center justify-center rounded-2xl bg-surface"
+                className="relative overflow-hidden rounded-2xl"
                 style={{ width: "80%", aspectRatio: "4/3" }}
               >
-                <span className="text-sm text-muted">
-                  [{reason.imagePlaceholder}]
-                </span>
+                <Image
+                  src={reason.image}
+                  alt={reason.imageAlt}
+                  fill
+                  className="object-cover"
+                  sizes="(min-width: 1024px) 40vw, 0vw"
+                />
               </div>
             </div>
 

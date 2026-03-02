@@ -13,7 +13,7 @@ const serviceLinks = [
 ];
 
 const familySites = [
-  { label: "CONTENTSFLY", href: "https://contentsfly.com" },
+  { label: "CONTENTSFLY", href: "https://contentsfly.com/cf/main" },
   { label: "CONTENTSFLYS", href: "https://contentsfly-s.com" },
   { label: "CAREERS", href: "https://nililia.ninehire.site" },
 ];

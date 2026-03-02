@@ -97,7 +97,6 @@ const comingSoonServices: ServiceItem[] = [
 
 function ServiceCard({ service }: { service: ServiceItem }) {
   const Icon = service.icon;
-  const isTest = service.slug === "video-translation";
   return (
     <Card
       className={`group overflow-hidden p-0 transition-all ${
@@ -106,45 +105,29 @@ function ServiceCard({ service }: { service: ServiceItem }) {
           : "cursor-pointer hover:-translate-y-1"
       }`}
     >
-      <div className={`aspect-[16/10] bg-surface flex items-center justify-center ${isTest ? "p-[5%]" : "p-3"}`}>
-        <div className={`relative overflow-hidden rounded-lg ${isTest ? "w-full h-full" : "w-full h-full"}`}>
+      <div className="aspect-[16/10] bg-surface flex items-center justify-center p-[5%]">
+        <div className="relative overflow-hidden rounded-lg w-full h-full">
           <Image
             src={service.thumbnail}
             alt={service.title}
             fill
             className="object-cover"
-          sizes="(max-width: 640px) 100vw, (max-width: 1024px) 50vw, 33vw"
-        />
+            sizes="(max-width: 640px) 100vw, (max-width: 1024px) 50vw, 33vw"
+          />
         </div>
       </div>
-      <div className={isTest ? "px-[5%] pb-4 pt-3" : "p-4"}>
-        {isTest ? (
-          <>
-            <div className="mb-1.5 flex items-center gap-2">
-              <div className="inline-flex rounded-lg bg-primary/10 p-1.5">
-                <Icon className="h-4 w-4 text-primary" />
-              </div>
-              <h3 className={`text-[length:var(--font-size-card-title)] font-bold text-foreground group-hover:text-primary transition-colors`}>
-                {service.title}
-              </h3>
-            </div>
-            <p className="text-[length:var(--font-size-card-desc)] leading-relaxed text-muted break-keep">
-              {service.description}
-            </p>
-          </>
-        ) : (
-          <>
-            <div className="mb-2 inline-flex rounded-lg bg-primary/10 p-1.5">
-              <Icon className="h-4 w-4 text-primary" />
-            </div>
-            <h3 className={`mb-1.5 text-[length:var(--font-size-card-title)] font-bold text-foreground ${!service.comingSoon ? "group-hover:text-primary" : ""} transition-colors`}>
-              {service.title}
-            </h3>
-            <p className="text-[length:var(--font-size-card-desc)] leading-relaxed text-muted break-keep">
-              {service.description}
-            </p>
-          </>
-        )}
+      <div className="px-[5%] pb-4 pt-3">
+        <div className="mb-1.5 flex items-center gap-2">
+          <div className="inline-flex rounded-lg bg-primary/10 p-1.5">
+            <Icon className="h-4 w-4 text-primary" />
+          </div>
+          <h3 className={`text-[length:var(--font-size-card-title)] font-bold text-foreground ${!service.comingSoon ? "group-hover:text-primary" : ""} transition-colors`}>
+            {service.title}
+          </h3>
+        </div>
+        <p className="text-[length:var(--font-size-card-desc)] leading-relaxed text-muted break-keep">
+          {service.description}
+        </p>
       </div>
     </Card>
   );

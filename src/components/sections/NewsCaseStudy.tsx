@@ -88,7 +88,7 @@ export default async function NewsCaseStudy() {
             <div className="mt-6">
               <Link
                 href="/news"
-                className="text-[length:var(--font-size-body)] font-semibold text-primary hover:text-primary-dark transition-colors"
+                className="text-[length:var(--font-size-card-link)] font-semibold text-primary hover:text-primary-dark transition-colors"
               >
                 전체 소식 보기 &rarr;
               </Link>
@@ -167,7 +167,7 @@ export default async function NewsCaseStudy() {
             <div className="mt-6">
               <Link
                 href="/cases"
-                className="text-[length:var(--font-size-body)] font-semibold text-primary hover:text-primary-dark transition-colors"
+                className="text-[length:var(--font-size-card-link)] font-semibold text-primary hover:text-primary-dark transition-colors"
               >
                 전체 사례 보기 &rarr;
               </Link>

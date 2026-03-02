@@ -77,10 +77,10 @@ export default function AboutPage() {
               <p className="mt-6 text-[length:var(--font-size-body)] leading-relaxed text-muted break-keep">
                 2016년 설립 이래 영상·문서·웹·게임 등 콘텐츠 현지화만 10년
                 <br />
-                1,300개 이상의 기업·크리에이터와 함께 K-콘텐츠를 세계로 전달해 오고 있습니다.
+                1,300개 이상의 기업·크리에이터와 함께 K-콘텐츠를 세계로 전달합니다.
               </p>
               <p className="mt-4 text-[length:var(--font-size-body)] leading-relaxed text-muted break-keep">
-                영상 자막 제작, 번역, 웹사이트·앱 현지화, 대본 번역,
+                영상 자막 제작 및 번역, 웹사이트·앱 현지화, 대본 번역,
                 <br />
                 홈페이지·앱 현지화, 웹소설 현지화, 게임 현지화, 다국어 번역 등
                 <br />

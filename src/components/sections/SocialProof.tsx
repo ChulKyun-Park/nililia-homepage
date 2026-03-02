@@ -51,7 +51,7 @@ const creators = [
 
 function MarqueeBox({ label }: { label: string }) {
   return (
-    <div className="flex-none rounded-lg border border-primary/10 bg-primary/5 px-6 py-3 text-center text-sm font-bold text-foreground/30">
+    <div className="flex-none rounded-lg border border-primary/10 bg-primary/5 px-6 py-3 mx-[26px] text-center text-sm font-bold text-foreground/30">
       {label}
     </div>
   );
@@ -60,7 +60,7 @@ function MarqueeBox({ label }: { label: string }) {
 function CompanyLogo({ filename }: { filename: string }) {
   const name = filename.replace(/\.[^.]+$/, "");
   return (
-    <div className="flex-none flex items-center justify-center h-12 px-4">
+    <div className="flex-none flex items-center justify-center h-12 mx-[26px]">
       <Image
         src={`/images/socialproof/company/${filename}`}
         alt={name}
@@ -121,7 +121,7 @@ export default function SocialProof() {
           국내외 선도 기업이 신뢰합니다
         </p>
         <div className="overflow-hidden">
-          <div className="marquee-track marquee-left" style={{ gap: "52px" }}>
+          <div className="marquee-track marquee-left">
             {doubleLogos.map((logo, i) => (
               <CompanyLogo key={`comp-${i}`} filename={logo} />
             ))}
@@ -135,7 +135,7 @@ export default function SocialProof() {
           크리에이터들도 함께합니다
         </p>
         <div className="overflow-hidden">
-          <div className="marquee-track marquee-right" style={{ gap: "52px" }}>
+          <div className="marquee-track marquee-right">
             {doubleCreators.map((creator, i) => (
               <MarqueeBox key={`cre-${i}`} label={creator} />
             ))}

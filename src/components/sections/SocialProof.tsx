@@ -44,14 +44,53 @@ const companyLogos = [
 ];
 
 const creators = [
-  "Channel 1", "Channel 2", "Channel 3", "Channel 4", "Channel 5",
-  "Channel 6", "Channel 7", "Channel 8", "Channel 9", "Channel 10",
+  "경식스필름.png",
+  "권유리.png",
+  "당구라.png",
+  "띠부.png",
+  "로하.png",
+  "루퐁이네.png",
+  "맵하니.png",
+  "문복희.png",
+  "밀키복이탄이.png",
+  "반보영.png",
+  "배지연's.png",
+  "사나고.png",
+  "샤랄라스튜디오.png",
+  "슈앤트리.png",
+  "신현지시리즈.png",
+  "앵쩡.png",
+  "어반플로우.png",
+  "여수언니정혜영.png",
+  "옥뷰티.png",
+  "와인마시는아톰.png",
+  "워너비보라.png",
+  "잼스터.png",
+  "젤라.png",
+  "지지야먹자.png",
+  "지편한세상.png",
+  "지효쏭.png",
+  "쯔양.png",
+  "카우치 포테이토 클럽.png",
+  "플랜디.png",
+  "햄지.png",
+  "히밥.png",
 ];
 
-function MarqueeBox({ label }: { label: string }) {
+function CreatorAvatar({ filename }: { filename: string }) {
+  const name = filename.replace(/\.[^.]+$/, "");
   return (
-    <div className="flex-none rounded-lg border border-primary/10 bg-primary/5 px-6 py-3 mx-[26px] text-center text-sm font-bold text-foreground/30">
-      {label}
+    <div className="flex-none flex flex-col items-center mx-[20px]">
+      <div className="h-10 w-10 overflow-hidden rounded-full">
+        <Image
+          src={`/images/socialproof/creator/${filename}`}
+          alt={name}
+          width={120}
+          height={120}
+          className="h-full w-full object-cover"
+        />
+      </div>
+      <span className="mt-1.5 text-xs text-muted whitespace-nowrap">{name}</span>
     </div>
   );
 }
@@ -102,7 +141,7 @@ export default function SocialProof() {
           animation: sp-marquee-left 60s linear infinite;
         }
         .marquee-right {
-          animation: sp-marquee-right 22s linear infinite;
+          animation: sp-marquee-right 45s linear infinite;
         }
         @keyframes sp-marquee-left {
           0% { transform: translate3d(0, 0, 0); }
@@ -136,7 +175,7 @@ export default function SocialProof() {
         <div className="overflow-hidden">
           <div className="marquee-track marquee-right">
             {doubleCreators.map((creator, i) => (
-              <MarqueeBox key={`cre-${i}`} label={creator} />
+              <CreatorAvatar key={`cre-${i}`} filename={creator} />
             ))}
           </div>
         </div>

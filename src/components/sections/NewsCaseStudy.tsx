@@ -20,7 +20,7 @@ export default async function NewsCaseStudy() {
               <span className="mb-2 inline-block text-[length:var(--font-size-section-label)] font-semibold uppercase tracking-wider text-primary">
                 News
               </span>
-              <h2 className="text-2xl font-bold tracking-tight text-foreground sm:text-3xl break-keep">
+              <h2 className="text-[length:var(--font-size-section-h2)] font-bold tracking-tight text-foreground break-keep">
                 최신 소식
               </h2>
             </div>
@@ -101,7 +101,7 @@ export default async function NewsCaseStudy() {
               <span className="mb-2 inline-block text-[length:var(--font-size-section-label)] font-semibold uppercase tracking-wider text-primary">
                 Case Studies
               </span>
-              <h2 className="text-2xl font-bold tracking-tight text-foreground sm:text-3xl break-keep">
+              <h2 className="text-[length:var(--font-size-section-h2)] font-bold tracking-tight text-foreground break-keep">
                 진행 사례
               </h2>
             </div>

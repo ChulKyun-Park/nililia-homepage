@@ -26,7 +26,7 @@ export default async function CasesPage() {
       {/* Hero */}
       <section className="bg-hero-bg py-8 lg:py-10 min-h-[200px] flex items-center">
         <div className="mx-auto max-w-7xl px-6 text-center">
-          <h1 className="text-2xl font-bold leading-tight text-foreground sm:text-3xl break-keep">
+          <h1 className="text-[length:var(--font-size-page-hero)] font-bold leading-tight text-foreground break-keep">
             진행 사례
           </h1>
           <p className="mx-auto mt-4 max-w-2xl text-[length:var(--font-size-body)] leading-relaxed text-muted break-keep">
@@ -97,7 +97,7 @@ export default async function CasesPage() {
       {/* Bottom CTA */}
       <section className="bg-gradient-to-r from-primary to-primary-dark py-20">
         <div className="mx-auto max-w-3xl px-6 text-center">
-          <h2 className="text-3xl font-bold text-white break-keep">
+          <h2 className="text-[length:var(--font-size-section-h2)] font-bold text-white break-keep">
             다음 진행 사례의 주인공이 되세요
           </h2>
           <p className="mt-4 text-lg text-white/80 break-keep">

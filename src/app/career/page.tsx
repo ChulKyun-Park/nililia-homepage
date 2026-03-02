@@ -23,7 +23,7 @@ export default function CareerPage() {
       {/* Hero */}
       <section className="bg-hero-bg py-8 lg:py-10 min-h-[200px] flex items-center">
         <div className="mx-auto max-w-7xl px-6 text-center">
-          <h1 className="text-2xl font-bold leading-tight text-foreground sm:text-3xl break-keep">
+          <h1 className="text-[length:var(--font-size-page-hero)] font-bold leading-tight text-foreground break-keep">
             글로벌 시장을 움직이는 콘텐츠,
             <br />
             그 변화를 함께 만들 동료를 찾습니다.
@@ -39,7 +39,7 @@ export default function CareerPage() {
           <div className="grid items-center gap-12 lg:grid-cols-2 lg:gap-16">
             {/* Left: Text */}
             <div>
-              <h2 className="text-2xl font-bold leading-snug text-foreground sm:text-3xl break-keep">
+              <h2 className="text-[length:var(--font-size-section-h2)] font-bold leading-snug text-foreground break-keep">
                 함께 세계를 연결할 인재를 찾습니다
               </h2>
               <p className="mt-6 text-[length:var(--font-size-body)] leading-relaxed text-muted break-keep">
@@ -72,7 +72,7 @@ export default function CareerPage() {
       {/* Cards */}
       <section className="bg-white py-24">
         <div className="mx-auto max-w-3xl px-6">
-          <h2 className="mb-12 text-center text-2xl font-bold text-foreground sm:text-3xl break-keep">
+          <h2 className="mb-12 text-center text-[length:var(--font-size-section-h2)] font-bold text-foreground break-keep">
             닐리리아와 함께 세상을 연결하세요!
           </h2>
 
@@ -121,7 +121,7 @@ export default function CareerPage() {
       {/* Bottom CTA */}
       <section className="bg-gradient-to-r from-primary to-primary-dark py-20">
         <div className="mx-auto max-w-3xl px-6 text-center">
-          <h2 className="text-3xl font-bold text-white break-keep">
+          <h2 className="text-[length:var(--font-size-section-h2)] font-bold text-white break-keep">
             궁금한 점이 있으신가요?
           </h2>
           <p className="mt-4 text-lg text-white/80 break-keep">

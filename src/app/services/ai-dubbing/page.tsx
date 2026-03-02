@@ -28,7 +28,7 @@ export default function Page() {
         <div className="flex flex-col gap-10 lg:flex-row lg:items-center">
           <div className="flex-1">
             <div className="mb-4 inline-flex rounded-xl bg-primary-light p-3"><Mic className="h-7 w-7 text-primary" /></div>
-            <h2 className="text-2xl font-bold text-foreground sm:text-3xl break-keep">서비스 상세</h2>
+            <h2 className="text-[length:var(--font-size-section-h2)] font-bold text-foreground break-keep">서비스 상세</h2>
             <ul className="mt-6 space-y-3">
               {details.map((d) => (<li key={d} className="flex items-start gap-3"><CheckCircle className="mt-0.5 h-5 w-5 shrink-0 text-primary" /><span className="text-sm text-foreground break-keep">{d}</span></li>))}
             </ul>

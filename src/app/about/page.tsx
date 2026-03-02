@@ -56,7 +56,7 @@ export default function AboutPage() {
       {/* Hero */}
       <section className="bg-hero-bg py-8 lg:py-10 min-h-[200px] flex items-center">
         <div className="mx-auto max-w-7xl px-6 text-center">
-          <h1 className="text-2xl font-bold leading-tight text-foreground sm:text-3xl break-keep">
+          <h1 className="text-[length:var(--font-size-page-hero)] font-bold leading-tight text-foreground break-keep">
             닐리리아는 글로벌 콘텐츠 현지화를 선도하는<br />번역 및 현지화 전문 기업입니다.
           </h1>
         </div>
@@ -71,7 +71,7 @@ export default function AboutPage() {
               <p className="mb-4 text-sm font-semibold uppercase tracking-wider text-primary">
                 Our Mission
               </p>
-              <h2 className="text-3xl font-bold leading-snug text-foreground sm:text-4xl break-keep">
+              <h2 className="text-[length:var(--font-size-section-h2)] font-bold leading-snug text-foreground break-keep">
                 언어의 경계를 넘어 세계를 연결합니다
               </h2>
               <p className="mt-6 text-[length:var(--font-size-body)] leading-relaxed text-muted break-keep">
@@ -167,7 +167,7 @@ export default function AboutPage() {
       {/* Bottom CTA */}
       <section className="bg-gradient-to-r from-primary to-primary-dark py-20">
         <div className="mx-auto max-w-3xl px-6 text-center">
-          <h2 className="text-3xl font-bold text-white break-keep">
+          <h2 className="text-[length:var(--font-size-section-h2)] font-bold text-white break-keep">
             함께 글로벌 시장을 개척하세요
           </h2>
           <p className="mt-4 text-lg text-white/80 break-keep">

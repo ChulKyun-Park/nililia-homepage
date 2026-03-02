@@ -25,7 +25,7 @@ export default async function NewsPage() {
       {/* Hero */}
       <section className="bg-hero-bg py-8 lg:py-10 min-h-[200px] flex items-center">
         <div className="mx-auto max-w-7xl px-6 text-center">
-          <h1 className="text-2xl font-bold leading-tight text-foreground sm:text-3xl break-keep">
+          <h1 className="text-[length:var(--font-size-page-hero)] font-bold leading-tight text-foreground break-keep">
             최신 소식
           </h1>
           <p className="mx-auto mt-4 max-w-2xl text-[length:var(--font-size-body)] leading-relaxed text-muted break-keep">

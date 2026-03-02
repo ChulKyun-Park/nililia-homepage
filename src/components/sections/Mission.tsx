@@ -5,7 +5,7 @@ export default function Mission() {
         <p className="mb-3 text-sm font-semibold uppercase tracking-wider text-white/70">
           Our Mission
         </p>
-        <h2 className="text-2xl font-bold leading-snug text-white sm:text-3xl lg:text-4xl break-keep">
+        <h2 className="text-[length:var(--font-size-section-h2)] font-bold leading-snug text-white break-keep">
           모든 콘텐츠가 언어의 경계를 넘어
           <br className="hidden sm:block" />
           전 세계에 전달되는 세상을 만듭니다

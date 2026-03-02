@@ -28,7 +28,8 @@
   --font-size-card-title: 1.2rem;       /* 서비스 카드 제목 (16px×1.2) */
   --font-size-card-link: 1.05rem;       /* 서비스 카드 링크 (14px×1.2) */
   --font-size-section-label: 0.9375rem; /* 15px */
-  --font-size-section-h2: 2.375rem;     /* 38px */
+  --font-size-page-hero: 2.375rem;      /* 38px — 메뉴 페이지 히어로 제목 */
+  --font-size-section-h2: 1.875rem;     /* 30px — 섹션 제목 */
   --font-size-section-body: 1.0625rem;  /* 17px */
   --font-size-number-highlight: 3.5rem; /* 56px */
   --font-size-card-title: 1.25rem;      /* 20px */

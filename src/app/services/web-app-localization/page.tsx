@@ -4,7 +4,7 @@ import Section from "@/components/ui/Section";
 import { Globe, CheckCircle } from "lucide-react";
 
 export const metadata: Metadata = {
-  title: "웹 · 앱 현지화 | Nililia",
+  title: "웹 · 앱 현지화 | NILILIA",
   description: "웹사이트와 모바일 앱의 현지화로 글로벌 사용자 경험을 최적화합니다.",
 };
 

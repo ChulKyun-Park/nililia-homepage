@@ -7,13 +7,13 @@ import { fetchAllNews } from "@/lib/notion/client";
 export const revalidate = 3600;
 
 export const metadata: Metadata = {
-  title: "소식 | Nililia",
+  title: "소식 | NILILIA",
   description:
-    "Nililia의 최신 소식, 업계 동향, 인사이트를 확인하세요.",
+    "NILILIA의 최신 소식, 업계 동향, 인사이트를 확인하세요.",
   openGraph: {
-    title: "소식 | Nililia",
+    title: "소식 | NILILIA",
     description:
-      "Nililia의 최신 소식, 업계 동향, 인사이트를 확인하세요.",
+      "NILILIA의 최신 소식, 업계 동향, 인사이트를 확인하세요.",
   },
 };
 
@@ -29,7 +29,7 @@ export default async function NewsPage() {
             최신 소식
           </h1>
           <p className="mx-auto mt-4 max-w-2xl text-[length:var(--font-size-body)] leading-relaxed text-muted break-keep">
-            Nililia의 최신 소식과 번역 · 현지화 업계 인사이트를 만나보세요.
+            NILILIA의 최신 소식과 번역 · 현지화 업계 인사이트를 만나보세요.
           </p>
         </div>
       </section>

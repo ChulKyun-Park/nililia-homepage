@@ -4,7 +4,7 @@ import Section from "@/components/ui/Section";
 import { Gamepad2, CheckCircle } from "lucide-react";
 
 export const metadata: Metadata = {
-  title: "게임 현지화 | Nililia",
+  title: "게임 현지화 | NILILIA",
   description: "게임 UI, 스토리, 마케팅 자료까지 완벽한 게임 현지화를 지원합니다.",
 };
 

@@ -98,10 +98,10 @@ export default function WhyUs() {
         {/* Header */}
         <div className="mb-16">
           <span className="mb-3 inline-block text-[length:var(--font-size-section-label)] font-semibold uppercase tracking-wider text-primary">
-            Why Nililia
+            Why NILILIA
           </span>
           <h2 className="text-3xl font-bold tracking-tight text-foreground sm:text-[length:var(--font-size-section-h2)] break-keep">
-            왜 Nililia를 선택해야 하나요?
+            왜 NILILIA를 선택해야 하나요?
           </h2>
         </div>
 

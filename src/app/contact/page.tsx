@@ -5,13 +5,13 @@ import Card from "@/components/ui/Card";
 import { Mail, Phone, MapPin, Clock, MessageCircle } from "lucide-react";
 
 export const metadata: Metadata = {
-  title: "문의하기 | Nililia",
+  title: "문의하기 | NILILIA",
   description:
-    "Nililia에 프로젝트 상담, 견적 요청, 파트너십 문의를 해주세요. 전문 컨설턴트가 빠르게 답변드립니다.",
+    "NILILIA에 프로젝트 상담, 견적 요청, 파트너십 문의를 해주세요. 전문 컨설턴트가 빠르게 답변드립니다.",
   openGraph: {
-    title: "문의하기 | Nililia",
+    title: "문의하기 | NILILIA",
     description:
-      "Nililia에 프로젝트 상담, 견적 요청, 파트너십 문의를 해주세요.",
+      "NILILIA에 프로젝트 상담, 견적 요청, 파트너십 문의를 해주세요.",
   },
 };
 

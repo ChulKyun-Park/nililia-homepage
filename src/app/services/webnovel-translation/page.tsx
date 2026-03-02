@@ -4,7 +4,7 @@ import Section from "@/components/ui/Section";
 import { BookOpen, CheckCircle } from "lucide-react";
 
 export const metadata: Metadata = {
-  title: "웹소설 · 웹툰 번역 | Nililia",
+  title: "웹소설 · 웹툰 번역 | NILILIA",
   description: "웹소설, 웹툰 등 한류 콘텐츠의 고품질 번역 서비스를 제공합니다.",
 };
 

@@ -7,13 +7,13 @@ import {
 } from "lucide-react";
 
 export const metadata: Metadata = {
-  title: "채용 | Nililia",
+  title: "채용 | NILILIA",
   description:
-    "Nililia와 함께 언어의 장벽을 넘어 세계를 연결할 인재를 찾습니다. 채용 정보를 확인하세요.",
+    "NILILIA와 함께 언어의 장벽을 넘어 세계를 연결할 인재를 찾습니다. 채용 정보를 확인하세요.",
   openGraph: {
-    title: "채용 | Nililia",
+    title: "채용 | NILILIA",
     description:
-      "Nililia와 함께 언어의 장벽을 넘어 세계를 연결할 인재를 찾습니다.",
+      "NILILIA와 함께 언어의 장벽을 넘어 세계를 연결할 인재를 찾습니다.",
   },
 };
 
@@ -43,7 +43,7 @@ export default function CareerPage() {
                 함께 세계를 연결할 인재를 찾습니다
               </h2>
               <p className="mt-6 text-[length:var(--font-size-body)] leading-relaxed text-muted break-keep">
-                Nililia는 언어와 기술의 힘으로 콘텐츠의 글로벌 진출을 돕는 전문 기업입니다.
+                NILILIA는 언어와 기술의 힘으로 콘텐츠의 글로벌 진출을 돕는 전문 기업입니다.
                 <br />
                 열정 있는 동료와 함께 성장할 기회를 만나보세요.
               </p>

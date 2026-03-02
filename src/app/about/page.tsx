@@ -69,9 +69,7 @@ export default function AboutPage() {
                 Our Mission
               </p>
               <h2 className="text-3xl font-bold leading-snug text-foreground sm:text-4xl break-keep">
-                언어의 경계를 넘어
-                <br />
-                세계를 연결합니다
+                언어의 경계를 넘어 세계를 연결합니다
               </h2>
               <p className="mt-6 text-[length:var(--font-size-body)] leading-relaxed text-muted break-keep">
                 2016년 설립 이래 영상·문서·웹·게임 등 콘텐츠 현지화만 10년

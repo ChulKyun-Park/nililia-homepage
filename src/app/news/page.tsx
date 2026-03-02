@@ -23,7 +23,7 @@ export default async function NewsPage() {
   return (
     <>
       {/* Hero */}
-      <section className="bg-hero-bg py-8 lg:py-10 min-h-[200px] flex items-center">
+      <section className="bg-hero-bg py-8 lg:py-10 h-[250px] flex items-center">
         <div className="mx-auto max-w-7xl px-6 text-center">
           <h1 className="text-[length:var(--font-size-page-hero)] font-bold leading-tight text-foreground break-keep">
             최신 소식

@@ -8,6 +8,8 @@ import {
   Gamepad2,
   BookOpen,
   Subtitles,
+  ScanSearch,
+  Mic,
 } from "lucide-react";
 import type { LucideIcon } from "lucide-react";
 
@@ -36,7 +38,7 @@ const services: ServiceItem[] = [
   },
   {
     icon: Globe,
-    title: "웹/앱 현지화",
+    title: "웹 · 앱 현지화",
     thumbnail: "/images/services/web-app-localization.jpg",
     description:
       "웹사이트와 모바일 앱의 현지화로 글로벌 사용자 경험을 최적화합니다.",
@@ -57,10 +59,24 @@ const services: ServiceItem[] = [
   },
   {
     icon: Subtitles,
-    title: "SDH 자막",
+    title: "SDH · 배리어프리 자막 제작",
     thumbnail: "/images/services/sdh-subtitle.jpg",
     description:
       "청각장애인을 위한 자막(SDH) 제작으로 콘텐츠 접근성을 향상시킵니다.",
+  },
+  {
+    icon: ScanSearch,
+    title: "MTPE",
+    thumbnail: "/images/services/mtpe.jpg",
+    description:
+      "AI 기계 번역 결과물을 전문 번역가가 감수·교정하여 빠른 속도와 높은 품질을 동시에 달성합니다.",
+  },
+  {
+    icon: Mic,
+    title: "AI 번역 · 더빙",
+    thumbnail: "/images/services/ai-dubbing.jpg",
+    description:
+      "AI 음성 합성과 립싱크 기술로 영상 콘텐츠를 다국어로 자연스럽게 더빙합니다.",
   },
 ];
 

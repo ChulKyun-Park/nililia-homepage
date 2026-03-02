@@ -4,7 +4,7 @@ import Button from "@/components/ui/Button";
 import { Globe, CheckCircle } from "lucide-react";
 
 export const metadata: Metadata = {
-  title: "웹/앱 현지화 | Nililia",
+  title: "웹 · 앱 현지화 | Nililia",
   description: "웹사이트와 모바일 앱의 현지화로 글로벌 사용자 경험을 최적화합니다.",
 };
 
@@ -22,7 +22,7 @@ export default function Page() {
       <section className="bg-surface flex items-center min-h-[420px] py-4 lg:py-6">
         <div className="mx-auto max-w-7xl px-6 lg:pl-12">
           <p className="mb-4 text-sm font-semibold uppercase tracking-wider text-primary">Services</p>
-          <h1 className="text-4xl font-bold leading-tight text-foreground sm:text-5xl break-keep">웹/앱 현지화</h1>
+          <h1 className="text-4xl font-bold leading-tight text-foreground sm:text-5xl break-keep">웹 · 앱 현지화</h1>
           <p className="mt-6 max-w-2xl text-lg leading-relaxed text-muted break-keep">
             웹사이트와 모바일 앱의 현지화로 글로벌 사용자 경험을 최적화합니다.
           </p>
@@ -38,7 +38,7 @@ export default function Page() {
             </ul>
             <div className="mt-8"><Button href="/contact" variant="primary" className="px-8 py-4 text-base">무료 상담 신청</Button></div>
           </div>
-          <div className="flex-1"><div className="flex aspect-[4/3] items-center justify-center rounded-2xl bg-gradient-to-br from-primary/5 to-primary/10 text-sm text-muted">웹/앱 현지화 이미지</div></div>
+          <div className="flex-1"><div className="flex aspect-[4/3] items-center justify-center rounded-2xl bg-gradient-to-br from-primary/5 to-primary/10 text-sm text-muted">웹 · 앱 현지화 이미지</div></div>
         </div>
       </Section>
     </>

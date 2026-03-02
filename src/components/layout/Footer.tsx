@@ -5,7 +5,7 @@ const serviceLinks = [
   { label: "영상 번역", href: "/services" },
   { label: "문서 번역", href: "/services" },
   { label: "웹소설 · 웹툰", href: "/services" },
-  { label: "SDH 자막 제작", href: "/services" },
+  { label: "SDH · 배리어프리 자막 제작", href: "/services" },
   { label: "홈페이지 · 앱 현지화", href: "/services" },
   { label: "게임 번역", href: "/services" },
   { label: "MTPE", href: "/services" },

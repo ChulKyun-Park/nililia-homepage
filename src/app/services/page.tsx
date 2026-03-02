@@ -11,16 +11,18 @@ import {
   Gamepad2,
   BookOpen,
   Subtitles,
+  ScanSearch,
+  Mic,
 } from "lucide-react";
 
 export const metadata: Metadata = {
   title: "서비스 | Nililia",
   description:
-    "영상 번역, 문서 번역, 웹/앱 현지화, 게임 현지화, 웹소설 번역, SDH 자막 등 다양한 번역 및 현지화 서비스를 제공합니다.",
+    "영상 번역, 문서 번역, 웹 · 앱 현지화, 게임 현지화, 웹소설 번역, SDH · 배리어프리 자막 제작, MTPE, AI 번역 · 더빙 등 다양한 번역 및 현지화 서비스를 제공합니다.",
   openGraph: {
     title: "서비스 | Nililia",
     description:
-      "영상 번역, 문서 번역, 웹/앱 현지화, 게임 현지화, 웹소설 번역, SDH 자막 등 다양한 번역 및 현지화 서비스를 제공합니다.",
+      "영상 번역, 문서 번역, 웹 · 앱 현지화, 게임 현지화, 웹소설 번역, SDH · 배리어프리 자막 제작, MTPE, AI 번역 · 더빙 등 다양한 번역 및 현지화 서비스를 제공합니다.",
   },
 };
 
@@ -39,7 +41,7 @@ const services = [
   },
   {
     icon: Globe,
-    title: "웹/앱 현지화",
+    title: "웹 · 앱 현지화",
     slug: "web-app-localization",
     description: "웹사이트와 모바일 앱의 현지화로 글로벌 사용자 경험을 최적화합니다.",
   },
@@ -57,9 +59,21 @@ const services = [
   },
   {
     icon: Subtitles,
-    title: "SDH 자막",
+    title: "SDH · 배리어프리 자막 제작",
     slug: "sdh-subtitle",
     description: "청각장애인을 위한 자막(SDH) 제작으로 콘텐츠 접근성을 향상시킵니다.",
+  },
+  {
+    icon: ScanSearch,
+    title: "MTPE",
+    slug: "mtpe",
+    description: "AI 기계 번역 결과물을 전문 번역가가 감수·교정하여 빠른 속도와 높은 품질을 동시에 달성합니다.",
+  },
+  {
+    icon: Mic,
+    title: "AI 번역 · 더빙",
+    slug: "ai-dubbing",
+    description: "AI 음성 합성과 립싱크 기술로 영상 콘텐츠를 다국어로 자연스럽게 더빙합니다.",
   },
 ];
 

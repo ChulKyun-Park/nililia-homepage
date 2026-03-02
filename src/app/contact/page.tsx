@@ -188,10 +188,10 @@ export default function ContactPage() {
                   <option value="">서비스를 선택해 주세요</option>
                   <option value="video">영상 번역</option>
                   <option value="document">문서 번역</option>
-                  <option value="web-app">웹/앱 현지화</option>
+                  <option value="web-app">웹 · 앱 현지화</option>
                   <option value="game">게임 현지화</option>
                   <option value="webnovel">웹소설 번역</option>
-                  <option value="sdh">SDH 자막</option>
+                  <option value="sdh">SDH · 배리어프리 자막 제작</option>
                   <option value="other">기타</option>
                 </select>
               </div>

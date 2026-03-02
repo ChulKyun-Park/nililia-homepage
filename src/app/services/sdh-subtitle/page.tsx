@@ -4,7 +4,7 @@ import Button from "@/components/ui/Button";
 import { Subtitles, CheckCircle } from "lucide-react";
 
 export const metadata: Metadata = {
-  title: "SDH 자막 | Nililia",
+  title: "SDH · 배리어프리 자막 제작 | Nililia",
   description: "청각장애인을 위한 자막(SDH) 제작으로 콘텐츠 접근성을 향상시킵니다.",
 };
 
@@ -13,7 +13,7 @@ const details = [
   "음향 효과 및 음악 설명 포함",
   "화자 식별 자막",
   "접근성 기준 준수",
-  "다국어 SDH 자막 제작",
+  "다국어 SDH · 배리어프리 자막 제작",
 ];
 
 export default function Page() {
@@ -22,7 +22,7 @@ export default function Page() {
       <section className="bg-surface flex items-center min-h-[420px] py-4 lg:py-6">
         <div className="mx-auto max-w-7xl px-6 lg:pl-12">
           <p className="mb-4 text-sm font-semibold uppercase tracking-wider text-primary">Services</p>
-          <h1 className="text-4xl font-bold leading-tight text-foreground sm:text-5xl break-keep">SDH 자막</h1>
+          <h1 className="text-4xl font-bold leading-tight text-foreground sm:text-5xl break-keep">SDH · 배리어프리 자막 제작</h1>
           <p className="mt-6 max-w-2xl text-lg leading-relaxed text-muted break-keep">
             청각장애인을 위한 자막(SDH) 제작으로 콘텐츠 접근성을 향상시킵니다.
           </p>
@@ -38,7 +38,7 @@ export default function Page() {
             </ul>
             <div className="mt-8"><Button href="/contact" variant="primary" className="px-8 py-4 text-base">무료 상담 신청</Button></div>
           </div>
-          <div className="flex-1"><div className="flex aspect-[4/3] items-center justify-center rounded-2xl bg-gradient-to-br from-primary/5 to-primary/10 text-sm text-muted">SDH 자막 이미지</div></div>
+          <div className="flex-1"><div className="flex aspect-[4/3] items-center justify-center rounded-2xl bg-gradient-to-br from-primary/5 to-primary/10 text-sm text-muted">SDH · 배리어프리 자막 제작 이미지</div></div>
         </div>
       </Section>
     </>

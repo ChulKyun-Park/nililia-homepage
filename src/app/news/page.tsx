@@ -32,7 +32,7 @@ export default async function NewsPage() {
             최신 소식
           </h1>
           <p className="mt-6 max-w-2xl text-lg leading-relaxed text-muted break-keep">
-            Nililia의 최신 소식과 번역/현지화 업계 인사이트를 만나보세요.
+            Nililia의 최신 소식과 번역 · 현지화 업계 인사이트를 만나보세요.
           </p>
         </div>
       </section>

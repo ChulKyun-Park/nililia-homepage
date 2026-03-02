@@ -93,7 +93,7 @@ export default function ServicesPage() {
 
       {/* Service Cards — 홈과 동일한 그리드 */}
       <Section>
-        <div className="mx-auto max-w-7xl px-6">
+        <div className="mx-auto max-w-5xl">
           <div className="grid gap-5 sm:grid-cols-2 lg:grid-cols-3">
             {services.map((service) => {
               const Icon = service.icon;

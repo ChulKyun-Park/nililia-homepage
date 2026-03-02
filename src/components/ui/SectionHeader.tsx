@@ -29,7 +29,7 @@ export default function SectionHeader({
         </span>
       )}
       <h2
-        className="text-3xl font-bold tracking-tight text-foreground sm:text-[length:var(--font-size-section-h2)] break-keep"
+        className="text-[length:var(--font-size-section-h2)] font-bold tracking-tight text-foreground break-keep"
       >
         {title}
       </h2>

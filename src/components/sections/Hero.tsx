@@ -258,7 +258,7 @@ export default function Hero() {
           {/* 텍스트 — relative, 카드 위에 겹침 */}
           <div className="relative z-20 flex min-h-[420px] items-center">
             <div className="max-w-xl lg:pl-12">
-            <h1 className="text-4xl font-bold leading-tight tracking-tight text-foreground sm:text-5xl lg:text-[length:var(--font-size-hero-h1)] break-keep">
+            <h1 className="text-[length:var(--font-size-hero-h1)] font-bold leading-tight tracking-tight text-foreground break-keep">
               여러분의 콘텐츠에<br />
               <span className="text-primary">날개를 달아줍니다</span>
             </h1>

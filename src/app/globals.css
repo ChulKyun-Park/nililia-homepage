@@ -21,15 +21,15 @@
   --font-heading: "Inter", "Pretendard Variable", "Pretendard", sans-serif;
 
   /* Typography scale (voithru.com 참고) */
-  --font-size-hero-h1: 3.25rem;         /* 52px */
+  --font-size-hero-h1: 2.25rem;         /* 36px — 모바일 */
   --font-size-hero-sub: 1.175rem;       /* ~19px */
   --font-size-body: 1.175rem;           /* 본문 텍스트 — hero-sub와 동일 */
   --font-size-card-desc: 0.9rem;        /* 서비스 카드 설명 (12px×1.2) */
   --font-size-card-title: 1.2rem;       /* 서비스 카드 제목 (16px×1.2) */
   --font-size-card-link: 1.05rem;       /* 서비스 카드 링크 (14px×1.2) */
   --font-size-section-label: 0.9375rem; /* 15px */
-  --font-size-page-hero: 2.375rem;      /* 38px — 메뉴 페이지 히어로 제목 */
-  --font-size-section-h2: 1.875rem;     /* 30px — 섹션 제목 */
+  --font-size-page-hero: 1.875rem;      /* 30px — 모바일 */
+  --font-size-section-h2: 1.5rem;       /* 24px — 모바일 */
   --font-size-section-body: 1.0625rem;  /* 17px */
   --font-size-number-highlight: 3.5rem; /* 56px */
   --font-size-card-title: 1.25rem;      /* 20px */
@@ -39,6 +39,15 @@
   --font-size-cta-button: 1.0625rem;    /* 17px */
   --font-size-footer: 0.8125rem;        /* 13px */
   --font-size-gnb: 1rem;                /* 16px */
+}
+
+/* ── Desktop font overrides (640px+) ── */
+@media (min-width: 640px) {
+  :root {
+    --font-size-hero-h1: 3.25rem;       /* 52px */
+    --font-size-page-hero: 2.375rem;    /* 38px */
+    --font-size-section-h2: 1.875rem;   /* 30px */
+  }
 }
 
 /* ── Base styles ── */

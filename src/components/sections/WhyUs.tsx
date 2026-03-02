@@ -100,7 +100,7 @@ export default function WhyUs() {
           <span className="mb-3 inline-block text-[length:var(--font-size-section-label)] font-semibold uppercase tracking-wider text-primary">
             Why 닐리리아
           </span>
-          <h2 className="text-3xl font-bold tracking-tight text-foreground sm:text-[length:var(--font-size-section-h2)] break-keep">
+          <h2 className="text-[length:var(--font-size-section-h2)] font-bold tracking-tight text-foreground break-keep">
             왜 닐리리아를 선택해야 하나요?
           </h2>
         </div>

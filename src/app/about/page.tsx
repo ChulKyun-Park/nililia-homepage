@@ -55,7 +55,7 @@ export default function AboutPage() {
     <>
       {/* Page Hero */}
       <section className="bg-hero-bg flex items-center min-h-[420px] py-4 lg:py-6">
-        <div className="mx-auto max-w-7xl px-6 lg:pl-12">
+        <div className="mx-auto w-full max-w-7xl px-6 lg:pl-12">
           <p className="mb-4 text-sm font-semibold uppercase tracking-wider text-primary">
             About Us
           </p>

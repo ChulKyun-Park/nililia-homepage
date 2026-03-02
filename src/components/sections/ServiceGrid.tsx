@@ -58,7 +58,7 @@ const services: ServiceItem[] = [
   },
   {
     icon: BookOpen,
-    title: "웹소설 번역",
+    title: "웹소설 · 웹툰 번역",
     slug: "webnovel-translation",
     thumbnail: "/images/services/웹소설 · 웹소설.png",
     description:
@@ -97,6 +97,7 @@ const comingSoonServices: ServiceItem[] = [
 
 function ServiceCard({ service }: { service: ServiceItem }) {
   const Icon = service.icon;
+  const isTest = service.slug === "video-translation";
   return (
     <Card
       className={`group overflow-hidden p-0 transition-all ${
@@ -105,23 +106,25 @@ function ServiceCard({ service }: { service: ServiceItem }) {
           : "cursor-pointer hover:-translate-y-1"
       }`}
     >
-      <div className="relative aspect-[16/10] overflow-hidden bg-surface">
-        <Image
-          src={service.thumbnail}
-          alt={service.title}
-          fill
-          className="object-cover"
+      <div className={`aspect-[16/10] bg-surface flex items-center justify-center ${isTest ? "p-[5%]" : "p-3"}`}>
+        <div className={`relative overflow-hidden rounded-lg ${isTest ? "w-[90%] h-[90%]" : "w-full h-full"}`}>
+          <Image
+            src={service.thumbnail}
+            alt={service.title}
+            fill
+            className="object-cover"
           sizes="(max-width: 640px) 100vw, (max-width: 1024px) 50vw, 33vw"
         />
+        </div>
       </div>
-      <div className="p-4">
+      <div className={isTest ? "p-4 flex flex-col items-center" : "p-4"}>
         <div className="mb-2 inline-flex rounded-lg bg-primary/10 p-1.5">
           <Icon className="h-4 w-4 text-primary" />
         </div>
         <h3 className={`mb-1.5 text-[length:var(--font-size-card-title)] font-bold text-foreground ${!service.comingSoon ? "group-hover:text-primary" : ""} transition-colors`}>
           {service.title}
         </h3>
-        <p className="text-[length:var(--font-size-card-desc)] leading-relaxed text-muted break-keep">
+        <p className={`text-[length:var(--font-size-card-desc)] leading-relaxed text-muted break-keep ${isTest ? "text-center" : ""}`}>
           {service.description}
         </p>
       </div>

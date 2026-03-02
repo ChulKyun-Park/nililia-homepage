@@ -4,7 +4,7 @@ import Section from "@/components/ui/Section";
 import { BookOpen, CheckCircle } from "lucide-react";
 
 export const metadata: Metadata = {
-  title: "웹소설 번역 | Nililia",
+  title: "웹소설 · 웹툰 번역 | Nililia",
   description: "웹소설, 웹툰 등 한류 콘텐츠의 고품질 번역 서비스를 제공합니다.",
 };
 
@@ -21,7 +21,7 @@ export default function Page() {
     <>
       <PageHero
         label="Services"
-        title="웹소설 번역"
+        title="웹소설 · 웹툰 번역"
         description="웹소설, 웹툰 등 한류 콘텐츠의 고품질 번역 서비스를 제공합니다."
       />
       <Section>
@@ -33,7 +33,7 @@ export default function Page() {
               {details.map((d) => (<li key={d} className="flex items-start gap-3"><CheckCircle className="mt-0.5 h-5 w-5 shrink-0 text-primary" /><span className="text-sm text-foreground break-keep">{d}</span></li>))}
             </ul>
           </div>
-          <div className="flex-1"><div className="flex aspect-[4/3] items-center justify-center rounded-2xl bg-gradient-to-br from-primary/5 to-primary/10 text-sm text-muted">웹소설 번역 이미지</div></div>
+          <div className="flex-1"><div className="flex aspect-[4/3] items-center justify-center rounded-2xl bg-gradient-to-br from-primary/5 to-primary/10 text-sm text-muted">웹소설 · 웹툰 번역 이미지</div></div>
         </div>
       </Section>
     </>

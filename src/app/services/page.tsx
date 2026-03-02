@@ -21,11 +21,11 @@ import Image from "next/image";
 export const metadata: Metadata = {
   title: "서비스 | Nililia",
   description:
-    "영상 번역, 문서 번역, 웹 · 앱 현지화, 게임 현지화, 웹소설 번역, SDH · 배리어프리 자막 제작, MTPE, AI 번역 · 더빙 등 다양한 번역 및 현지화 서비스를 제공합니다.",
+    "영상 번역, 문서 번역, 웹 · 앱 현지화, 게임 현지화, 웹소설 · 웹툰 번역, SDH · 배리어프리 자막 제작, MTPE, AI 번역 · 더빙 등 다양한 번역 및 현지화 서비스를 제공합니다.",
   openGraph: {
     title: "서비스 | Nililia",
     description:
-      "영상 번역, 문서 번역, 웹 · 앱 현지화, 게임 현지화, 웹소설 번역, SDH · 배리어프리 자막 제작, MTPE, AI 번역 · 더빙 등 다양한 번역 및 현지화 서비스를 제공합니다.",
+      "영상 번역, 문서 번역, 웹 · 앱 현지화, 게임 현지화, 웹소설 · 웹툰 번역, SDH · 배리어프리 자막 제작, MTPE, AI 번역 · 더빙 등 다양한 번역 및 현지화 서비스를 제공합니다.",
   },
 };
 
@@ -60,7 +60,7 @@ const services = [
   },
   {
     icon: BookOpen,
-    title: "웹소설 번역",
+    title: "웹소설 · 웹툰 번역",
     slug: "webnovel-translation",
     thumbnail: "/images/services/웹소설 · 웹소설.png",
     description: "웹소설, 웹툰 등 한류 콘텐츠의 고품질 번역 서비스를 제공합니다.",

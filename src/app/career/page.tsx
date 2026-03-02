@@ -1,4 +1,3 @@
-import PageHero from "@/components/sections/PageHero";
 import type { Metadata } from "next";
 import Button from "@/components/ui/Button";
 import {
@@ -22,18 +21,20 @@ export default function CareerPage() {
   return (
     <>
       {/* Hero */}
-      <PageHero
-        label="Career"
-        title={
-          <>
+      <section className="bg-hero-bg py-16 lg:py-20">
+        <div className="mx-auto max-w-7xl px-6 text-center">
+          <p className="mb-4 text-sm font-semibold uppercase tracking-wider text-primary">
+            Career
+          </p>
+          <h1 className="text-3xl font-bold leading-tight text-foreground sm:text-4xl break-keep">
             글로벌 시장을 움직이는 콘텐츠,
             <br />
             그 변화를 함께 만들 동료를 찾습니다.
             <br />
             닐리리아에서 시작하세요.
-          </>
-        }
-      />
+          </h1>
+        </div>
+      </section>
 
       {/* Image */}
       <section className="bg-white">

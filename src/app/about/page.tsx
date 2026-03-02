@@ -1,5 +1,4 @@
 import type { Metadata } from "next";
-import PageHero from "@/components/sections/PageHero";
 import Section from "@/components/ui/Section";
 import SectionHeader from "@/components/ui/SectionHeader";
 import Button from "@/components/ui/Button";
@@ -54,10 +53,17 @@ const teamStats = [
 export default function AboutPage() {
   return (
     <>
-      <PageHero
-        label="About Us"
-        title={<>닐리리아는 글로벌 콘텐츠 현지화를 선도하는<br />번역 및 현지화 전문 기업입니다.</>}
-      />
+      {/* Hero */}
+      <section className="bg-hero-bg py-16 lg:py-20">
+        <div className="mx-auto max-w-7xl px-6 text-center">
+          <p className="mb-4 text-sm font-semibold uppercase tracking-wider text-primary">
+            About Us
+          </p>
+          <h1 className="text-3xl font-bold leading-tight text-foreground sm:text-4xl break-keep">
+            닐리리아는 글로벌 콘텐츠 현지화를 선도하는<br />번역 및 현지화 전문 기업입니다.
+          </h1>
+        </div>
+      </section>
 
       {/* Mission */}
       <section className="bg-white py-20">

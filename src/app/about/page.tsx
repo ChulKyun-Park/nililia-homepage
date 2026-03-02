@@ -94,7 +94,7 @@ export default function AboutPage() {
                 <h3 className="mb-2 text-xl font-bold text-foreground">
                   {value.title}
                 </h3>
-                <p className="text-[length:var(--font-size-body)] leading-relaxed text-muted break-keep">
+                <p className="text-[length:var(--font-size-card-desc)] leading-relaxed text-muted break-keep">
                   {value.description}
                 </p>
               </div>

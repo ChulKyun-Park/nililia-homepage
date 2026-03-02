@@ -109,7 +109,7 @@ export default function CareerPage() {
                     <Icon className="h-6 w-6 text-primary" />
                   </div>
                   <h3 className="font-bold text-foreground">{benefit.title}</h3>
-                  <p className="mt-2 text-[length:var(--font-size-body)] leading-relaxed text-muted break-keep">
+                  <p className="mt-2 text-[length:var(--font-size-card-desc)] leading-relaxed text-muted break-keep">
                     {benefit.description}
                   </p>
                 </Card>

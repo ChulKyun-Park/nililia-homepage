@@ -34,7 +34,7 @@ export default function CareerPage() {
       </section>
 
       {/* Image */}
-      <section className="bg-white">
+      <section className="bg-white pt-16">
         <div className="mx-auto max-w-4xl px-6">
           <div className="flex aspect-[16/9] items-center justify-center rounded-2xl border border-border bg-surface overflow-hidden">
             <span className="text-sm text-muted">[팀 사진]</span>

@@ -25,14 +25,14 @@
   --font-size-page-hero: 1.875rem;      /* 30px — 메뉴 페이지 히어로 */
   --font-size-section-h2: 1.5rem;       /* 24px — 섹션 제목 */
 
-  /* Typography scale — 본문 · 카드 (고정) */
-  --font-size-hero-sub: 1.175rem;       /* 19px — 히어로 본문 */
-  --font-size-body: 1.175rem;           /* 19px — 일반 본문 */
-  --font-size-section-body: 1.0625rem;  /* 17px — 섹션 설명 */
-  --font-size-section-label: 0.9375rem; /* 15px — 섹션 라벨 (Services, History 등) */
-  --font-size-card-title: 1.25rem;      /* 20px — 카드 제목 */
-  --font-size-card-desc: 0.9375rem;     /* 15px — 카드 설명 */
-  --font-size-card-link: 1.0625rem;     /* 17px — 카드 링크 */
+  /* Typography scale — 본문 · 카드 (반응형: 모바일 기본, 데스크탑은 @media) */
+  --font-size-hero-sub: 1rem;           /* 16px — 히어로 본문 (모바일) */
+  --font-size-body: 1rem;               /* 16px — 일반 본문 (모바일) */
+  --font-size-section-body: 0.9375rem;  /* 15px — 섹션 설명 (모바일) */
+  --font-size-section-label: 0.8125rem; /* 13px — 섹션 라벨 (모바일) */
+  --font-size-card-title: 1.0625rem;    /* 17px — 카드 제목 (모바일) */
+  --font-size-card-desc: 0.8125rem;     /* 13px — 카드 설명 (모바일) */
+  --font-size-card-link: 0.9375rem;     /* 15px — 카드 링크 (모바일) */
 }
 
 /* ── Desktop font overrides (640px+) ── */
@@ -41,6 +41,13 @@
     --font-size-hero-h1: 3.25rem;       /* 52px */
     --font-size-page-hero: 2.375rem;    /* 38px */
     --font-size-section-h2: 1.875rem;   /* 30px */
+    --font-size-hero-sub: 1.175rem;     /* 19px */
+    --font-size-body: 1.175rem;         /* 19px */
+    --font-size-section-body: 1.0625rem;/* 17px */
+    --font-size-section-label: 0.9375rem;/* 15px */
+    --font-size-card-title: 1.25rem;    /* 20px */
+    --font-size-card-desc: 0.9375rem;   /* 15px */
+    --font-size-card-link: 1.0625rem;   /* 17px */
   }
 }
 

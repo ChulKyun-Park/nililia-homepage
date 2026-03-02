@@ -207,7 +207,7 @@ export default function ServicesPage() {
           {process.map((item) => (
             <Card key={item.step} className="text-center">
               <span className="text-4xl font-bold text-primary/20">{item.step}</span>
-              <h3 className="mt-3 text-lg font-bold text-foreground">{item.title}</h3>
+              <h3 className="mt-3 text-[length:var(--font-size-card-title)] font-bold text-foreground">{item.title}</h3>
               <p className="mt-2 text-[length:var(--font-size-card-desc)] text-muted break-keep">{item.description}</p>
             </Card>
           ))}
@@ -220,7 +220,7 @@ export default function ServicesPage() {
           <h2 className="text-[length:var(--font-size-section-h2)] font-bold text-white break-keep">
             프로젝트에 맞는 솔루션을 찾아보세요
           </h2>
-          <p className="mt-4 text-lg text-white/80 break-keep">
+          <p className="mt-4 text-[length:var(--font-size-body)] text-white/80 break-keep">
             전문 컨설턴트가 최적의 서비스와 견적을 제안해 드립니다.
           </p>
           <div className="mt-8">

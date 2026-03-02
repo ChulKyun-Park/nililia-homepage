@@ -60,7 +60,7 @@ export default async function CasesPage() {
                       {item.company}
                     </span>
                   )}
-                  <h3 className="mt-3 text-lg font-bold text-foreground group-hover:text-primary transition-colors break-keep">
+                  <h3 className="mt-3 text-[length:var(--font-size-card-title)] font-bold text-foreground group-hover:text-primary transition-colors break-keep">
                     {item.title}
                   </h3>
                   {item.description && (
@@ -100,7 +100,7 @@ export default async function CasesPage() {
           <h2 className="text-[length:var(--font-size-section-h2)] font-bold text-white break-keep">
             다음 진행 사례의 주인공이 되세요
           </h2>
-          <p className="mt-4 text-lg text-white/80 break-keep">
+          <p className="mt-4 text-[length:var(--font-size-body)] text-white/80 break-keep">
             닐리리아와 함께 글로벌 시장을 개척하세요.
           </p>
           <div className="mt-8">

@@ -87,7 +87,7 @@ export default function CareerPage() {
               <div className="mb-6 inline-flex rounded-xl bg-primary/10 p-3">
                 <Briefcase className="h-6 w-6 text-primary" />
               </div>
-              <h3 className="text-xl font-bold text-foreground">정규직 채용</h3>
+              <h3 className="text-[length:var(--font-size-card-title)] font-bold text-foreground">정규직 채용</h3>
               <p className="mt-2 text-[length:var(--font-size-card-desc)] leading-relaxed text-muted break-keep">
                 닐리리아의 글로벌화에 합류하세요.
               </p>
@@ -106,7 +106,7 @@ export default function CareerPage() {
               <div className="mb-6 inline-flex rounded-xl bg-primary/10 p-3">
                 <Globe className="h-6 w-6 text-primary" />
               </div>
-              <h3 className="text-xl font-bold text-foreground">프리랜서 채용</h3>
+              <h3 className="text-[length:var(--font-size-card-title)] font-bold text-foreground">프리랜서 채용</h3>
               <p className="mt-2 text-[length:var(--font-size-card-desc)] leading-relaxed text-muted break-keep">
                 글로벌 프로젝트에 참여해 보세요.
               </p>
@@ -124,7 +124,7 @@ export default function CareerPage() {
           <h2 className="text-[length:var(--font-size-section-h2)] font-bold text-white break-keep">
             궁금한 점이 있으신가요?
           </h2>
-          <p className="mt-4 text-lg text-white/80 break-keep">
+          <p className="mt-4 text-[length:var(--font-size-body)] text-white/80 break-keep">
             채용 관련 문의는 언제든지 환영합니다.
           </p>
           <div className="mt-8">

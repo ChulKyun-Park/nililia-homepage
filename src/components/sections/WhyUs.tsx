@@ -117,7 +117,7 @@ export default function WhyUs() {
               <span className="mb-2 text-4xl font-bold text-primary/30">
                 {reason.number}
               </span>
-              <h3 className="text-2xl font-bold text-gray-900 sm:text-3xl break-keep">
+              <h3 className="text-[length:var(--font-size-section-h2)] font-bold text-gray-900 break-keep">
                 {reason.title}
               </h3>
               <p className="mt-4 max-w-lg text-[length:var(--font-size-body)] leading-relaxed text-gray-500 break-keep">

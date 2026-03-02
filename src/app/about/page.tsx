@@ -112,7 +112,7 @@ export default function AboutPage() {
                 <div className="mx-auto mb-4 inline-flex rounded-2xl bg-primary-light p-4">
                   <Icon className="h-8 w-8 text-primary" />
                 </div>
-                <h3 className="mb-2 text-xl font-bold text-foreground">
+                <h3 className="mb-2 text-[length:var(--font-size-card-title)] font-bold text-foreground">
                   {value.title}
                 </h3>
                 <p className="text-[length:var(--font-size-card-desc)] leading-relaxed text-muted break-keep">
@@ -170,7 +170,7 @@ export default function AboutPage() {
           <h2 className="text-[length:var(--font-size-section-h2)] font-bold text-white break-keep">
             함께 글로벌 시장을 개척하세요
           </h2>
-          <p className="mt-4 text-lg text-white/80 break-keep">
+          <p className="mt-4 text-[length:var(--font-size-body)] text-white/80 break-keep">
             닐리리아와 함께라면 언어의 장벽 없는 글로벌 비즈니스가 가능합니다.
           </p>
           <div className="mt-8">

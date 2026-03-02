@@ -7,7 +7,7 @@ export default function BottomCTA() {
         <h2 className="text-[length:var(--font-size-section-h2)] font-bold text-white break-keep">
           글로벌 진출, 지금 시작하세요
         </h2>
-        <p className="mt-4 text-lg text-white/80 break-keep">
+        <p className="mt-4 text-[length:var(--font-size-body)] text-white/80 break-keep">
           전문 컨설턴트가 프로젝트에 맞는 최적의 솔루션을 제안해 드립니다.
           지금 바로 무료 상담을 신청하세요.
         </p>

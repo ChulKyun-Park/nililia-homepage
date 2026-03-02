@@ -42,7 +42,7 @@ export default async function CaseStudy() {
                       {item.company}
                     </span>
                   )}
-                  <h3 className="mt-3 line-clamp-2 text-lg font-bold text-foreground group-hover:text-primary transition-colors break-keep">
+                  <h3 className="mt-3 line-clamp-2 text-[length:var(--font-size-card-title)] font-bold text-foreground group-hover:text-primary transition-colors break-keep">
                     {item.title}
                   </h3>
                   {item.description && (

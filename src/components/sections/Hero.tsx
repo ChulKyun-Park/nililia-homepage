@@ -203,11 +203,7 @@ function CardAnimation() {
         z = a.z; // 즉시 목표 z — lerp하면 카드끼리 z 교차→깜빡임
       }
 
-      const sY = 4 + z * 4;
-      const sB = 10 + z * 8;
-      const sA = 0.04 + z * 0.025;
-
-      el.style.cssText = `position:absolute;left:${x}px;top:${y}px;width:${w}px;height:${h}px;opacity:${cl(op)};z-index:${z};will-change:left,top,width,height,opacity;border-radius:16px;background:#fff;border:1px solid rgba(0,151,254,0.06);display:flex;flex-direction:column;overflow:hidden;box-shadow:0 ${sY}px ${sB}px rgba(0,0,0,${sA}), 0 2px 4px rgba(0,0,0,0.03)`;
+      el.style.cssText = `position:absolute;left:${x}px;top:${y}px;width:${w}px;height:${h}px;opacity:${cl(op)};z-index:${z};will-change:left,top,width,height,opacity;border-radius:16px;background:#fff;border:1px solid rgba(0,151,254,0.08);display:flex;flex-direction:column;overflow:hidden;box-shadow:none`;
     });
 
     raf.current = requestAnimationFrame(tick);

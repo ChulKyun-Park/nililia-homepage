@@ -1,4 +1,5 @@
 import Link from "next/link";
+import Image from "next/image";
 
 const stats = [
   { value: "50+", label: "기업 고객" },
@@ -7,9 +8,43 @@ const stats = [
   { value: "90%", label: "고객 만족도" },
 ];
 
-const clients = [
-  "Samsung", "LG", "Hyundai", "SK", "Naver",
-  "Kakao", "CJ", "Lotte", "KT", "Nexon",
+const companyLogos = [
+  "EBS.png",
+  "GF엔터.png",
+  "JTBC.png",
+  "JYP.png",
+  "KBS.png",
+  "LG U+.png",
+  "LG.png",
+  "MBC.png",
+  "SBS콘텐츠허브.png",
+  "koz.png",
+  "kt스튜디오.png",
+  "고려대학교의료원.png",
+  "고양시.png",
+  "다이아TV.png",
+  "드밀.png",
+  "딩고.png",
+  "마이크로소프트.png",
+  "비디오빌리지.png",
+  "샌드박스.png",
+  "스카이라이프.png",
+  "스튜디오XU.png",
+  "에버모어.png",
+  "왓챠.png",
+  "웨이브.png",
+  "유데미.png",
+  "채널A.png",
+  "카카오엔터.png",
+  "콜로소.png",
+  "큐브엔터테인먼트_CI.png",
+  "클래스101.png",
+  "테라코믹스.png",
+  "트레저헌터.png",
+  "티빙.png",
+  "파라스타엔터.png",
+  "하이헷엔터.png",
+  "한스바이오메드드.png",
 ];
 
 const creators = [
@@ -25,9 +60,24 @@ function MarqueeBox({ label }: { label: string }) {
   );
 }
 
+function CompanyLogo({ filename }: { filename: string }) {
+  const name = filename.replace(/\.[^.]+$/, "");
+  return (
+    <div className="flex-none flex items-center justify-center h-12 px-4">
+      <Image
+        src={`/images/socialproof/company/${filename}`}
+        alt={name}
+        width={120}
+        height={48}
+        className="h-10 w-auto object-contain opacity-60 grayscale transition-all hover:opacity-100 hover:grayscale-0"
+      />
+    </div>
+  );
+}
+
 export default function SocialProof() {
   // 3배 복제로 끊김 방지
-  const tripleClients = [...clients, ...clients, ...clients];
+  const tripleLogos = [...companyLogos, ...companyLogos, ...companyLogos];
   const tripleCreators = [...creators, ...creators, ...creators];
 
   return (
@@ -53,7 +103,7 @@ export default function SocialProof() {
           will-change: transform;
         }
         .marquee-left {
-          animation: sp-marquee-left 20s linear infinite;
+          animation: sp-marquee-left 60s linear infinite;
         }
         .marquee-right {
           animation: sp-marquee-right 22s linear infinite;
@@ -75,8 +125,8 @@ export default function SocialProof() {
         </p>
         <div className="overflow-hidden">
           <div className="marquee-track marquee-left" style={{ gap: "52px" }}>
-            {tripleClients.map((client, i) => (
-              <MarqueeBox key={`comp-${i}`} label={client} />
+            {tripleLogos.map((logo, i) => (
+              <CompanyLogo key={`comp-${i}`} filename={logo} />
             ))}
           </div>
         </div>

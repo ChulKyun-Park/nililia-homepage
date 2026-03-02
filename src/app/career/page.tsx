@@ -52,7 +52,7 @@ export default function CareerPage() {
   return (
     <>
       {/* Hero */}
-      <section className="bg-white flex items-center min-h-[420px] py-4 lg:py-6">
+      <section className="bg-hero-bg flex items-center min-h-[420px] py-4 lg:py-6">
         <div className="mx-auto max-w-7xl px-6 lg:pl-12">
           <div className="grid items-center gap-12 lg:grid-cols-2 lg:gap-16">
             {/* Left: Text */}

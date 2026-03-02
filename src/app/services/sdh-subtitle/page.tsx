@@ -18,7 +18,7 @@ const details = [
 export default function Page() {
   return (
     <>
-      <section className="bg-surface flex items-center min-h-[420px] py-4 lg:py-6">
+      <section className="bg-hero-bg flex items-center min-h-[420px] py-4 lg:py-6">
         <div className="mx-auto max-w-7xl px-6 lg:pl-12">
           <p className="mb-4 text-sm font-semibold uppercase tracking-wider text-primary">Services</p>
           <h1 className="text-4xl font-bold leading-tight text-foreground sm:text-5xl break-keep">SDH · 배리어프리 자막 제작</h1>

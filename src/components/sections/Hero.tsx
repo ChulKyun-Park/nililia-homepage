@@ -240,10 +240,10 @@ function CardAnimation() {
 
 export default function Hero() {
   return (
-    <section className="relative bg-white">
+    <section className="relative bg-hero-bg">
       <div className="absolute inset-0 overflow-hidden">
-        <div className="absolute inset-0 bg-[radial-gradient(ellipse_at_20%_50%,_rgba(0,151,254,0.06)_0%,_transparent_60%)]" />
-        <div className="absolute inset-0 bg-[radial-gradient(ellipse_at_80%_20%,_rgba(0,151,254,0.04)_0%,_transparent_50%)]" />
+        <div className="absolute inset-0 bg-[radial-gradient(ellipse_at_20%_50%,_rgba(0,151,254,0.08)_0%,_transparent_60%)]" />
+        <div className="absolute inset-0 bg-[radial-gradient(ellipse_at_80%_20%,_rgba(0,151,254,0.06)_0%,_transparent_50%)]" />
       </div>
 
       <style>{`
@@ -271,7 +271,7 @@ export default function Hero() {
                 backdropFilter: "blur(6px)", WebkitBackdropFilter: "blur(6px)",
                 maskImage: "linear-gradient(to bottom, black 0%, transparent 100%)",
                 WebkitMaskImage: "linear-gradient(to bottom, black 0%, transparent 100%)",
-                background: "linear-gradient(to bottom, rgba(255,255,255,0.7) 0%, transparent 100%)",
+                background: "linear-gradient(to bottom, rgba(238,246,255,0.7) 0%, transparent 100%)",
               }} />
               {/* 하단 페이드+블러 */}
               <div className="pointer-events-none absolute inset-x-0 bottom-0 z-30" style={{
@@ -279,7 +279,7 @@ export default function Hero() {
                 backdropFilter: "blur(6px)", WebkitBackdropFilter: "blur(6px)",
                 maskImage: "linear-gradient(to top, black 0%, transparent 100%)",
                 WebkitMaskImage: "linear-gradient(to top, black 0%, transparent 100%)",
-                background: "linear-gradient(to top, rgba(255,255,255,0.7) 0%, transparent 100%)",
+                background: "linear-gradient(to top, rgba(238,246,255,0.7) 0%, transparent 100%)",
               }} />
               {/* 좌측 페이드+블러 */}
               <div className="pointer-events-none absolute inset-y-0 left-0 z-30" style={{
@@ -287,7 +287,7 @@ export default function Hero() {
                 backdropFilter: "blur(8px)", WebkitBackdropFilter: "blur(8px)",
                 maskImage: "linear-gradient(to right, black 0%, black 30%, transparent 100%)",
                 WebkitMaskImage: "linear-gradient(to right, black 0%, black 30%, transparent 100%)",
-                background: "linear-gradient(to right, rgba(255,255,255,0.95) 0%, rgba(255,255,255,0.7) 40%, transparent 100%)",
+                background: "linear-gradient(to right, rgba(238,246,255,0.95) 0%, rgba(238,246,255,0.7) 40%, transparent 100%)",
               }} />
               {/* 우측 페이드+블러 */}
               <div className="pointer-events-none absolute inset-y-0 right-0 z-30" style={{
@@ -295,7 +295,7 @@ export default function Hero() {
                 backdropFilter: "blur(8px)", WebkitBackdropFilter: "blur(8px)",
                 maskImage: "linear-gradient(to left, black 0%, black 30%, transparent 100%)",
                 WebkitMaskImage: "linear-gradient(to left, black 0%, black 30%, transparent 100%)",
-                background: "linear-gradient(to left, rgba(255,255,255,0.95) 0%, rgba(255,255,255,0.7) 40%, transparent 100%)",
+                background: "linear-gradient(to left, rgba(238,246,255,0.95) 0%, rgba(238,246,255,0.7) 40%, transparent 100%)",
               }} />
             </div>
           </div>

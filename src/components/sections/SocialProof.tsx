@@ -74,8 +74,8 @@ function CompanyLogo({ filename }: { filename: string }) {
 
 export default function SocialProof() {
   // 3배 복제로 끊김 방지
-  const tripleLogos = [...companyLogos, ...companyLogos, ...companyLogos];
-  const tripleCreators = [...creators, ...creators, ...creators];
+  const doubleLogos = [...companyLogos, ...companyLogos];
+  const doubleCreators = [...creators, ...creators];
 
   return (
     <section className="bg-white py-16">
@@ -107,10 +107,10 @@ export default function SocialProof() {
         }
         @keyframes sp-marquee-left {
           0% { transform: translate3d(0, 0, 0); }
-          100% { transform: translate3d(-33.333%, 0, 0); }
+          100% { transform: translate3d(-50%, 0, 0); }
         }
         @keyframes sp-marquee-right {
-          0% { transform: translate3d(-33.333%, 0, 0); }
+          0% { transform: translate3d(-50%, 0, 0); }
           100% { transform: translate3d(0, 0, 0); }
         }
       `}</style>
@@ -122,7 +122,7 @@ export default function SocialProof() {
         </p>
         <div className="overflow-hidden">
           <div className="marquee-track marquee-left" style={{ gap: "52px" }}>
-            {tripleLogos.map((logo, i) => (
+            {doubleLogos.map((logo, i) => (
               <CompanyLogo key={`comp-${i}`} filename={logo} />
             ))}
           </div>
@@ -136,7 +136,7 @@ export default function SocialProof() {
         </p>
         <div className="overflow-hidden">
           <div className="marquee-track marquee-right" style={{ gap: "52px" }}>
-            {tripleCreators.map((creator, i) => (
+            {doubleCreators.map((creator, i) => (
               <MarqueeBox key={`cre-${i}`} label={creator} />
             ))}
           </div>

@@ -80,7 +80,7 @@ const creators = [
 function CreatorAvatar({ filename }: { filename: string }) {
   const name = filename.replace(/\.[^.]+$/, "");
   return (
-    <div className="flex-none flex flex-col items-center mx-[20px]">
+    <div className="flex-none flex items-center mx-[30px]">
       <div className="h-10 w-10 overflow-hidden rounded-full">
         <Image
           src={`/images/socialproof/creator/${filename}`}
@@ -90,7 +90,6 @@ function CreatorAvatar({ filename }: { filename: string }) {
           className="h-full w-full object-cover"
         />
       </div>
-      <span className="mt-1.5 text-xs text-muted whitespace-nowrap">{name}</span>
     </div>
   );
 }
@@ -98,13 +97,13 @@ function CreatorAvatar({ filename }: { filename: string }) {
 function CompanyLogo({ filename }: { filename: string }) {
   const name = filename.replace(/\.[^.]+$/, "");
   return (
-    <div className="flex-none flex items-center justify-center h-12 mx-[26px]">
+    <div className="flex-none flex items-center justify-center h-8 mx-[31px]">
       <Image
         src={`/images/socialproof/company/${filename}`}
         alt={name}
         width={120}
         height={48}
-        className="h-10 w-auto object-contain"
+        className="h-7 w-auto object-contain"
       />
     </div>
   );

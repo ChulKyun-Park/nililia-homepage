@@ -265,38 +265,6 @@ export default function Hero() {
 
             <div className="absolute" style={{ top: 10, left: 30, width: 700, height: 400, overflow: "hidden" }}>
               <CardAnimation />
-              {/* 상단 페이드+블러 */}
-              <div className="pointer-events-none absolute inset-x-0 top-0 z-30" style={{
-                height: 55,
-                backdropFilter: "blur(6px)", WebkitBackdropFilter: "blur(6px)",
-                maskImage: "linear-gradient(to bottom, black 0%, transparent 100%)",
-                WebkitMaskImage: "linear-gradient(to bottom, black 0%, transparent 100%)",
-                background: "linear-gradient(to bottom, rgba(238,246,255,0.7) 0%, transparent 100%)",
-              }} />
-              {/* 하단 페이드+블러 */}
-              <div className="pointer-events-none absolute inset-x-0 bottom-0 z-30" style={{
-                height: 65,
-                backdropFilter: "blur(6px)", WebkitBackdropFilter: "blur(6px)",
-                maskImage: "linear-gradient(to top, black 0%, transparent 100%)",
-                WebkitMaskImage: "linear-gradient(to top, black 0%, transparent 100%)",
-                background: "linear-gradient(to top, rgba(238,246,255,0.7) 0%, transparent 100%)",
-              }} />
-              {/* 좌측 페이드+블러 */}
-              <div className="pointer-events-none absolute inset-y-0 left-0 z-30" style={{
-                width: 90,
-                backdropFilter: "blur(8px)", WebkitBackdropFilter: "blur(8px)",
-                maskImage: "linear-gradient(to right, black 0%, black 30%, transparent 100%)",
-                WebkitMaskImage: "linear-gradient(to right, black 0%, black 30%, transparent 100%)",
-                background: "linear-gradient(to right, rgba(238,246,255,0.95) 0%, rgba(238,246,255,0.7) 40%, transparent 100%)",
-              }} />
-              {/* 우측 페이드+블러 */}
-              <div className="pointer-events-none absolute inset-y-0 right-0 z-30" style={{
-                width: 90,
-                backdropFilter: "blur(8px)", WebkitBackdropFilter: "blur(8px)",
-                maskImage: "linear-gradient(to left, black 0%, black 30%, transparent 100%)",
-                WebkitMaskImage: "linear-gradient(to left, black 0%, black 30%, transparent 100%)",
-                background: "linear-gradient(to left, rgba(238,246,255,0.95) 0%, rgba(238,246,255,0.7) 40%, transparent 100%)",
-              }} />
             </div>
           </div>
 

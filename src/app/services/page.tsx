@@ -101,7 +101,7 @@ export default function ServicesPage() {
   return (
     <>
       {/* Hero */}
-      <section className="bg-hero-bg py-8 lg:py-10">
+      <section className="bg-hero-bg py-8 lg:py-10 min-h-[200px] flex items-center">
         <div className="mx-auto max-w-7xl px-6 text-center">
           <h1 className="text-2xl font-bold leading-tight text-foreground sm:text-3xl break-keep">
             글로벌 진출을 위한 맞춤 솔루션

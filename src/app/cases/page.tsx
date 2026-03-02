@@ -8,13 +8,13 @@ import { fetchAllCaseStudies } from "@/lib/notion/client";
 export const revalidate = 3600;
 
 export const metadata: Metadata = {
-  title: "성공사례 | Nililia",
+  title: "진행사례 | Nililia",
   description:
-    "다양한 산업 분야의 글로벌 진출을 성공적으로 지원한 Nililia의 성공 사례를 확인하세요.",
+    "다양한 산업 분야의 글로벌 진출을 성공적으로 지원한 Nililia의 진행 사례를 확인하세요.",
   openGraph: {
-    title: "성공사례 | Nililia",
+    title: "진행사례 | Nililia",
     description:
-      "다양한 산업 분야의 글로벌 진출을 성공적으로 지원한 Nililia의 성공 사례를 확인하세요.",
+      "다양한 산업 분야의 글로벌 진출을 성공적으로 지원한 Nililia의 진행 사례를 확인하세요.",
   },
 };
 
@@ -27,7 +27,7 @@ export default async function CasesPage() {
       <section className="bg-hero-bg py-8 lg:py-10 min-h-[200px] flex items-center">
         <div className="mx-auto max-w-7xl px-6 text-center">
           <h1 className="text-2xl font-bold leading-tight text-foreground sm:text-3xl break-keep">
-            성공 사례
+            진행 사례
           </h1>
           <p className="mx-auto mt-4 max-w-2xl text-[length:var(--font-size-body)] leading-relaxed text-muted break-keep">
             다양한 산업 분야의 글로벌 진출을 성공적으로 지원한 사례를 확인하세요.
@@ -75,8 +75,8 @@ export default async function CasesPage() {
         ) : (
           <div className="text-center">
             <SectionHeader
-              title="성공 사례 준비 중"
-              description="곧 다양한 성공 사례를 공유할 예정입니다."
+              title="진행 사례 준비 중"
+              description="곧 다양한 진행 사례를 공유할 예정입니다."
             />
             <div className="grid gap-8 sm:grid-cols-2 lg:grid-cols-3">
               {[1, 2, 3, 4, 5, 6].map((i) => (
@@ -98,7 +98,7 @@ export default async function CasesPage() {
       <section className="bg-gradient-to-r from-primary to-primary-dark py-20">
         <div className="mx-auto max-w-3xl px-6 text-center">
           <h2 className="text-3xl font-bold text-white break-keep">
-            다음 성공 사례의 주인공이 되세요
+            다음 진행 사례의 주인공이 되세요
           </h2>
           <p className="mt-4 text-lg text-white/80 break-keep">
             Nililia와 함께 글로벌 시장을 개척하세요.

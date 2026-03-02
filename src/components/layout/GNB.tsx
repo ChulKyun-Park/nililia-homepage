@@ -11,7 +11,7 @@ const navLinks = [
   { label: "홈", href: "/", icon: true },
   { label: "회사소개", href: "/about" },
   { label: "서비스", href: "/services" },
-  { label: "성공사례", href: "/cases" },
+  { label: "진행사례", href: "/cases" },
   { label: "소식", href: "/news" },
   { label: "채용", href: "/career" },
 ] as const;

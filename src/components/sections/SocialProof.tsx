@@ -1,4 +1,3 @@
-import Link from "next/link";
 import Image from "next/image";
 
 const stats = [
@@ -143,17 +142,6 @@ export default function SocialProof() {
         </div>
       </div>
 
-      {/* Link */}
-      <div className="mx-auto max-w-7xl px-6 lg:pl-12">
-        <div className="mt-10 text-center">
-          <Link
-            href="/cases"
-            className="text-[length:var(--font-size-body)] font-semibold text-primary hover:text-primary-dark transition-colors"
-          >
-            성공 사례 보기 &rarr;
-          </Link>
-        </div>
-      </div>
     </section>
   );
 }

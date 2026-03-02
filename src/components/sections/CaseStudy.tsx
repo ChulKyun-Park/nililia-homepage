@@ -11,7 +11,7 @@ export default async function CaseStudy() {
       <div className="mx-auto max-w-7xl px-6 lg:pl-12">
         <SectionHeader
           label="Case Studies"
-          title="성공 사례"
+          title="진행 사례"
           description="다양한 산업 분야의 글로벌 진출을 성공적으로 지원한 사례를 확인하세요."
         />
 

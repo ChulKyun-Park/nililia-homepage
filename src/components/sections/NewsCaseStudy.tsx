@@ -102,7 +102,7 @@ export default async function NewsCaseStudy() {
                 Case Studies
               </span>
               <h2 className="text-2xl font-bold tracking-tight text-foreground sm:text-3xl break-keep">
-                성공 사례
+                진행 사례
               </h2>
             </div>
 

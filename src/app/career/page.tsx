@@ -95,7 +95,7 @@ export default function CareerPage() {
 
       {/* Benefits */}
       <section className="bg-surface py-24">
-        <div className="mx-auto max-w-7xl px-6">
+        <div className="mx-auto max-w-7xl px-6 lg:pl-12">
           <SectionHeader
             label="Why Nililia"
             title="Nililia에서 일하는 이유"
@@ -122,7 +122,7 @@ export default function CareerPage() {
 
       {/* Open Positions — 2단 카드 */}
       <section className="bg-white py-24">
-        <div className="mx-auto max-w-7xl px-6">
+        <div className="mx-auto max-w-7xl px-6 lg:pl-12">
           <SectionHeader
             label="Open Positions"
             title="채용 중인 포지션"

@@ -59,6 +59,15 @@ html {
   animation: marquee 30s linear infinite;
 }
 
+@keyframes marquee-reverse {
+  0% { transform: translateX(-50%); }
+  100% { transform: translateX(0); }
+}
+
+.animate-marquee-reverse {
+  animation: marquee-reverse 35s linear infinite;
+}
+
 /* ── Floating animations ── */
 @keyframes float {
   0%, 100% { transform: translateY(0px); }

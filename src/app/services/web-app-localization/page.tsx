@@ -19,11 +19,11 @@ const details = [
 export default function Page() {
   return (
     <>
-      <section className="bg-gradient-to-br from-foreground via-gray-900 to-gray-800 flex items-center min-h-[420px] py-4 lg:py-6">
+      <section className="bg-surface flex items-center min-h-[420px] py-4 lg:py-6">
         <div className="mx-auto max-w-7xl px-6 lg:pl-12">
           <p className="mb-4 text-sm font-semibold uppercase tracking-wider text-primary">Services</p>
-          <h1 className="text-4xl font-bold leading-tight text-white sm:text-5xl break-keep">웹/앱 현지화</h1>
-          <p className="mt-6 max-w-2xl text-lg leading-relaxed text-white/70 break-keep">
+          <h1 className="text-4xl font-bold leading-tight text-foreground sm:text-5xl break-keep">웹/앱 현지화</h1>
+          <p className="mt-6 max-w-2xl text-lg leading-relaxed text-muted break-keep">
             웹사이트와 모바일 앱의 현지화로 글로벌 사용자 경험을 최적화합니다.
           </p>
         </div>

@@ -74,17 +74,17 @@ export default function ServicesPage() {
   return (
     <>
       {/* Page Hero */}
-      <section className="bg-gradient-to-br from-foreground via-gray-900 to-gray-800 flex items-center min-h-[420px] py-4 lg:py-6">
+      <section className="bg-surface flex items-center min-h-[420px] py-4 lg:py-6">
         <div className="mx-auto max-w-7xl px-6 lg:pl-12">
           <p className="mb-4 text-sm font-semibold uppercase tracking-wider text-primary">
             Services
           </p>
-          <h1 className="text-4xl font-bold leading-tight text-white sm:text-5xl break-keep">
+          <h1 className="text-4xl font-bold leading-tight text-foreground sm:text-5xl break-keep">
             글로벌 진출을 위한
             <br />
             맞춤 솔루션
           </h1>
-          <p className="mt-6 max-w-2xl text-lg leading-relaxed text-white/70 break-keep">
+          <p className="mt-6 max-w-2xl text-lg leading-relaxed text-muted break-keep">
             다양한 콘텐츠 유형에 최적화된 전문 번역 및 현지화 서비스를 제공합니다.
             AI 기술과 전문가의 노하우로 최상의 품질을 보장합니다.
           </p>

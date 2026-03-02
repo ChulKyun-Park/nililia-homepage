@@ -8,32 +8,28 @@ const stats = [
 ];
 
 const clients = [
-  "Samsung",
-  "LG",
-  "Hyundai",
-  "SK",
-  "Naver",
-  "Kakao",
-  "CJ",
-  "Lotte",
-  "KT",
-  "Nexon",
+  "Samsung", "LG", "Hyundai", "SK", "Naver",
+  "Kakao", "CJ", "Lotte", "KT", "Nexon",
 ];
 
 const creators = [
-  "Channel 1",
-  "Channel 2",
-  "Channel 3",
-  "Channel 4",
-  "Channel 5",
-  "Channel 6",
-  "Channel 7",
-  "Channel 8",
-  "Channel 9",
-  "Channel 10",
+  "Channel 1", "Channel 2", "Channel 3", "Channel 4", "Channel 5",
+  "Channel 6", "Channel 7", "Channel 8", "Channel 9", "Channel 10",
 ];
 
+function MarqueeBox({ label }: { label: string }) {
+  return (
+    <div className="flex-none rounded-lg border border-primary/10 bg-primary/5 px-6 py-3 text-center text-sm font-bold text-foreground/30">
+      {label}
+    </div>
+  );
+}
+
 export default function SocialProof() {
+  // 3배 복제로 끊김 방지
+  const tripleClients = [...clients, ...clients, ...clients];
+  const tripleCreators = [...creators, ...creators, ...creators];
+
   return (
     <section className="bg-white py-24">
       {/* Stats */}
@@ -50,44 +46,51 @@ export default function SocialProof() {
         </div>
       </div>
 
-      {/* Company marquee — 좌→우 무한루프 */}
+      <style>{`
+        .marquee-track {
+          display: flex;
+          width: max-content;
+          will-change: transform;
+        }
+        .marquee-left {
+          animation: sp-marquee-left 20s linear infinite;
+        }
+        .marquee-right {
+          animation: sp-marquee-right 22s linear infinite;
+        }
+        @keyframes sp-marquee-left {
+          0% { transform: translate3d(0, 0, 0); }
+          100% { transform: translate3d(-33.333%, 0, 0); }
+        }
+        @keyframes sp-marquee-right {
+          0% { transform: translate3d(-33.333%, 0, 0); }
+          100% { transform: translate3d(0, 0, 0); }
+        }
+      `}</style>
+
+      {/* Company marquee */}
       <div className="mt-16 overflow-hidden">
         <p className="mb-8 text-center text-sm font-medium uppercase tracking-wider text-muted">
           국내외 선도 기업이 신뢰합니다
         </p>
-        <div className="relative">
-          <div className="animate-marquee flex items-center gap-10 whitespace-nowrap">
-            {[...clients, ...clients].map((client, i) => (
-              <div
-                key={`comp-${i}`}
-                className="flex-none rounded-lg border border-primary/10 bg-primary/5 px-6 py-3 text-center text-sm font-bold text-foreground/30"
-              >
-                {client}
-              </div>
+        <div className="overflow-hidden">
+          <div className="marquee-track marquee-left" style={{ gap: "52px" }}>
+            {tripleClients.map((client, i) => (
+              <MarqueeBox key={`comp-${i}`} label={client} />
             ))}
           </div>
         </div>
       </div>
 
-      {/* Creators marquee — 우→좌 무한루프 (반대 방향) */}
+      {/* Creators marquee — 동일 박스 스타일, 반대 방향 */}
       <div className="mt-16 overflow-hidden">
         <p className="mb-8 text-center text-sm font-medium uppercase tracking-wider text-muted">
           크리에이터들도 함께합니다
         </p>
-        <div className="relative">
-          <div className="animate-marquee-reverse flex items-center gap-10 whitespace-nowrap">
-            {[...creators, ...creators].map((creator, i) => (
-              <div
-                key={`cre-${i}`}
-                className="flex-none flex flex-col items-center gap-3 min-w-[140px]"
-              >
-                <div className="flex h-16 w-16 items-center justify-center rounded-xl border border-primary/10 bg-primary/5 shadow-inner">
-                  <svg className="h-7 w-7 fill-current text-foreground/30" viewBox="0 0 24 24">
-                    <path d="M19.615 3.184c-3.604-.246-11.631-.245-15.23 0-3.897.266-4.356 2.62-4.385 8.816.029 6.185.484 8.549 4.385 8.816 3.6.245 11.626.246 15.23 0 3.897-.266 4.356-2.62 4.385-8.816-.029-6.185-.484-8.549-4.385-8.816zm-10.615 12.816v-8l8 3.993-8 4.007z" />
-                  </svg>
-                </div>
-                <p className="text-xs font-bold text-foreground/30">{creator}</p>
-              </div>
+        <div className="overflow-hidden">
+          <div className="marquee-track marquee-right" style={{ gap: "52px" }}>
+            {tripleCreators.map((creator, i) => (
+              <MarqueeBox key={`cre-${i}`} label={creator} />
             ))}
           </div>
         </div>

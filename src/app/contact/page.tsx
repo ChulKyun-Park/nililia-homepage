@@ -67,15 +67,15 @@ export default function ContactPage() {
   return (
     <>
       {/* Page Hero */}
-      <section className="bg-gradient-to-br from-foreground via-gray-900 to-gray-800 flex items-center min-h-[420px] py-4 lg:py-6">
+      <section className="bg-surface flex items-center min-h-[420px] py-4 lg:py-6">
         <div className="mx-auto max-w-7xl px-6 lg:pl-12">
           <p className="mb-4 text-sm font-semibold uppercase tracking-wider text-primary">
             Contact Us
           </p>
-          <h1 className="text-4xl font-bold leading-tight text-white sm:text-5xl break-keep">
+          <h1 className="text-4xl font-bold leading-tight text-foreground sm:text-5xl break-keep">
             문의하기
           </h1>
-          <p className="mt-6 max-w-2xl text-lg leading-relaxed text-white/70 break-keep">
+          <p className="mt-6 max-w-2xl text-lg leading-relaxed text-muted break-keep">
             프로젝트 상담, 견적 요청, 파트너십 등 무엇이든 문의해 주세요.
             전문 컨설턴트가 빠르게 답변드립니다.
           </p>

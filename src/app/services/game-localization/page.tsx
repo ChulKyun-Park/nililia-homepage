@@ -19,11 +19,11 @@ const details = [
 export default function Page() {
   return (
     <>
-      <section className="bg-gradient-to-br from-foreground via-gray-900 to-gray-800 flex items-center min-h-[420px] py-4 lg:py-6">
+      <section className="bg-surface flex items-center min-h-[420px] py-4 lg:py-6">
         <div className="mx-auto max-w-7xl px-6 lg:pl-12">
           <p className="mb-4 text-sm font-semibold uppercase tracking-wider text-primary">Services</p>
-          <h1 className="text-4xl font-bold leading-tight text-white sm:text-5xl break-keep">게임 현지화</h1>
-          <p className="mt-6 max-w-2xl text-lg leading-relaxed text-white/70 break-keep">
+          <h1 className="text-4xl font-bold leading-tight text-foreground sm:text-5xl break-keep">게임 현지화</h1>
+          <p className="mt-6 max-w-2xl text-lg leading-relaxed text-muted break-keep">
             게임 UI, 스토리, 마케팅 자료까지 완벽한 게임 현지화를 지원합니다.
           </p>
         </div>

@@ -24,15 +24,15 @@ export default async function CasesPage() {
   return (
     <>
       {/* Page Hero */}
-      <section className="bg-gradient-to-br from-foreground via-gray-900 to-gray-800 flex items-center min-h-[420px] py-4 lg:py-6">
+      <section className="bg-surface flex items-center min-h-[420px] py-4 lg:py-6">
         <div className="mx-auto max-w-7xl px-6 lg:pl-12">
           <p className="mb-4 text-sm font-semibold uppercase tracking-wider text-primary">
             Case Studies
           </p>
-          <h1 className="text-4xl font-bold leading-tight text-white sm:text-5xl break-keep">
+          <h1 className="text-4xl font-bold leading-tight text-foreground sm:text-5xl break-keep">
             성공 사례
           </h1>
-          <p className="mt-6 max-w-2xl text-lg leading-relaxed text-white/70 break-keep">
+          <p className="mt-6 max-w-2xl text-lg leading-relaxed text-muted break-keep">
             다양한 산업 분야의 글로벌 진출을 성공적으로 지원한 사례를 확인하세요.
           </p>
         </div>

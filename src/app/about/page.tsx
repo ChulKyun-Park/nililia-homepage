@@ -54,17 +54,17 @@ export default function AboutPage() {
   return (
     <>
       {/* Page Hero */}
-      <section className="bg-gradient-to-br from-foreground via-gray-900 to-gray-800 flex items-center min-h-[420px] py-4 lg:py-6">
+      <section className="bg-surface flex items-center min-h-[420px] py-4 lg:py-6">
         <div className="mx-auto max-w-7xl px-6 lg:pl-12">
           <p className="mb-4 text-sm font-semibold uppercase tracking-wider text-primary">
             About Us
           </p>
-          <h1 className="text-4xl font-bold leading-tight text-white sm:text-5xl break-keep">
+          <h1 className="text-4xl font-bold leading-tight text-foreground sm:text-5xl break-keep">
             언어의 장벽을 넘어,
             <br />
             세계와 연결하는 기업
           </h1>
-          <p className="mt-6 max-w-2xl text-lg leading-relaxed text-white/70 break-keep">
+          <p className="mt-6 max-w-2xl text-lg leading-relaxed text-muted break-keep">
             Nililia는 AI 기술과 전문가의 노하우를 결합하여 최상의 번역 및 현지화 서비스를 제공합니다.
             2018년 설립 이후, 500개 이상의 기업과 함께 글로벌 시장 진출을 성공적으로 지원해 왔습니다.
           </p>
@@ -74,10 +74,10 @@ export default function AboutPage() {
       {/* Mission */}
       <section className="bg-gradient-to-r from-primary to-primary-dark py-20">
         <div className="mx-auto max-w-4xl px-6 text-center">
-          <p className="mb-4 text-sm font-semibold uppercase tracking-wider text-white/70">
+          <p className="mb-4 text-sm font-semibold uppercase tracking-wider text-muted">
             Our Mission
           </p>
-          <h2 className="text-3xl font-bold leading-snug text-white sm:text-4xl break-keep">
+          <h2 className="text-3xl font-bold leading-snug text-foreground sm:text-4xl break-keep">
             모든 콘텐츠가 언어의 경계를 넘어
             <br className="hidden sm:block" />
             전 세계에 전달되는 세상을 만듭니다

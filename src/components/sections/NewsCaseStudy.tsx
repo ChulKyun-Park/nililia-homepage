@@ -58,9 +58,9 @@ export default async function NewsCaseStudy() {
                       <h3 className="mt-1 line-clamp-2 text-[length:var(--font-size-body)] font-bold text-foreground group-hover:text-primary transition-colors break-keep">
                         {item.title}
                       </h3>
-                      {item.description && (
+                      {item.excerpt && (
                         <p className="mt-1 line-clamp-1 text-[length:var(--font-size-body)] text-muted break-keep">
-                          {item.description}
+                          {item.excerpt}
                         </p>
                       )}
                     </div>
@@ -129,17 +129,17 @@ export default async function NewsCaseStudy() {
                     </div>
                     {/* Text */}
                     <div className="flex-1 min-w-0">
-                      {item.company && (
+                      {item.client && (
                         <span className="inline-block rounded-full border border-primary/20 bg-primary/10 px-2.5 py-0.5 text-xs font-medium text-primary">
-                          {item.company}
+                          {item.client}
                         </span>
                       )}
                       <h3 className="mt-1 line-clamp-2 text-[length:var(--font-size-body)] font-bold text-foreground group-hover:text-primary transition-colors break-keep">
                         {item.title}
                       </h3>
-                      {item.description && (
+                      {item.excerpt && (
                         <p className="mt-1 line-clamp-1 text-[length:var(--font-size-body)] text-muted break-keep">
-                          {item.description}
+                          {item.excerpt}
                         </p>
                       )}
                     </div>

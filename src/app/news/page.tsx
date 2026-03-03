@@ -67,9 +67,9 @@ export default async function NewsPage() {
                   <h3 className="mt-2 text-[length:var(--font-size-card-title)] font-bold text-foreground group-hover:text-primary transition-colors break-keep">
                     {item.title}
                   </h3>
-                  {item.description && (
+                  {item.excerpt && (
                     <p className="mt-2 text-[length:var(--font-size-body)] leading-relaxed text-muted break-keep">
-                      {item.description}
+                      {item.excerpt}
                     </p>
                   )}
                 </div>

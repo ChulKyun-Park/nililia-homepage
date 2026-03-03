@@ -37,17 +37,17 @@ export default async function CaseStudy() {
                   )}
                 </div>
                 <div className="p-5">
-                  {item.company && (
+                  {item.client && (
                     <span className="inline-block rounded-full border border-primary/20 bg-primary/10 px-3 py-1 text-xs font-medium text-primary">
-                      {item.company}
+                      {item.client}
                     </span>
                   )}
                   <h3 className="mt-3 line-clamp-2 text-[length:var(--font-size-card-title)] font-bold text-foreground group-hover:text-primary transition-colors break-keep">
                     {item.title}
                   </h3>
-                  {item.description && (
+                  {item.excerpt && (
                     <p className="mt-2 line-clamp-2 text-[length:var(--font-size-body)] text-muted break-keep">
-                      {item.description}
+                      {item.excerpt}
                     </p>
                   )}
                 </div>

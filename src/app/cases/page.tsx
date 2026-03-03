@@ -60,17 +60,17 @@ export default async function CasesPage() {
                   )}
                 </div>
                 <div className="p-6">
-                  {item.company && (
+                  {item.client && (
                     <span className="inline-block rounded-full bg-primary-light px-3 py-1 text-xs font-medium text-primary">
-                      {item.company}
+                      {item.client}
                     </span>
                   )}
                   <h3 className="mt-3 text-[length:var(--font-size-card-title)] font-bold text-foreground group-hover:text-primary transition-colors break-keep">
                     {item.title}
                   </h3>
-                  {item.description && (
+                  {item.excerpt && (
                     <p className="mt-2 text-[length:var(--font-size-body)] leading-relaxed text-muted break-keep">
-                      {item.description}
+                      {item.excerpt}
                     </p>
                   )}
                 </div>

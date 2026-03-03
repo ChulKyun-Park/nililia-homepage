@@ -45,9 +45,9 @@ export default async function News() {
                   <h3 className="mt-2 line-clamp-2 text-base font-bold text-foreground group-hover:text-primary transition-colors break-keep">
                     {item.title}
                   </h3>
-                  {item.description && (
+                  {item.excerpt && (
                     <p className="mt-2 line-clamp-2 text-[length:var(--font-size-body)] text-muted break-keep">
-                      {item.description}
+                      {item.excerpt}
                     </p>
                   )}
                 </div>

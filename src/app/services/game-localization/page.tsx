@@ -1,19 +1,44 @@
 import PageHero from "@/components/sections/PageHero";
+import BottomCTA from "@/components/sections/BottomCTA";
+import {
+  SupportedLanguages,
+  ServiceWhy,
+  ServiceProcess,
+} from "@/components/sections/service-detail";
 import type { Metadata } from "next";
-import Section from "@/components/ui/Section";
-import { Gamepad2, CheckCircle } from "lucide-react";
 
 export const metadata: Metadata = {
   title: "게임 현지화 | 닐리리아",
-  description: "게임 UI, 스토리, 마케팅 자료까지 완벽한 게임 현지화를 지원합니다.",
+  description:
+    "게임 UI, 스토리, 마케팅 자료까지 완벽한 게임 현지화를 지원합니다.",
 };
 
-const details = [
-  "게임 내 텍스트 및 UI 번역",
-  "스토리/대화 현지화",
-  "인게임 이미지 및 에셋 현지화",
-  "게임 마케팅 콘텐츠 번역",
-  "QA 테스트 및 LQA 지원",
+const whyItems = [
+  {
+    title: "게임 전문 번역가 매칭",
+    description: "게임 장르와 플랫폼에 맞는 전문 번역가를 배정합니다.",
+  },
+  {
+    title: "스토리 & 대화 현지화",
+    description: "캐릭터 성격과 세계관을 반영한 몰입감 있는 번역을 제공합니다.",
+  },
+  {
+    title: "인게임 에셋 현지화",
+    description: "UI 텍스트, 이미지, 폰트 등 게임 내 모든 에셋을 현지화합니다.",
+  },
+  {
+    title: "LQA 테스트 지원",
+    description: "실제 플레이 환경에서 번역 품질과 UI 적합성을 검증합니다.",
+  },
+];
+
+const processSteps = [
+  { title: "상담 & 분석", description: "게임 장르, 플랫폼, 타겟 시장을 분석합니다." },
+  { title: "용어집 구축", description: "게임 세계관에 맞는 전문 용어집을 구축합니다." },
+  { title: "번역", description: "게임 전문 번역가가 스토리와 UI를 번역합니다." },
+  { title: "에셋 현지화", description: "이미지, 폰트, 레이아웃을 현지화합니다." },
+  { title: "LQA 테스트", description: "실제 게임 환경에서 품질을 검증합니다." },
+  { title: "납품 & 지원", description: "최종 파일을 납품하고 출시 후 지원합니다." },
 ];
 
 export default function Page() {
@@ -23,19 +48,16 @@ export default function Page() {
         label="Services"
         title="게임 현지화"
         description="게임 UI, 스토리, 마케팅 자료까지 완벽한 게임 현지화를 지원합니다."
+        imageSrc="/images/services/게임 번역.png"
+        imageAlt="게임 현지화 서비스"
       />
-      <Section>
-        <div className="flex flex-col gap-10 lg:flex-row lg:items-center">
-          <div className="flex-1">
-            <div className="mb-4 inline-flex rounded-xl bg-primary-light p-3"><Gamepad2 className="h-7 w-7 text-primary" /></div>
-            <h2 className="text-[length:var(--font-size-section-h2)] font-bold text-foreground break-keep">서비스 상세</h2>
-            <ul className="mt-6 space-y-3">
-              {details.map((d) => (<li key={d} className="flex items-start gap-3"><CheckCircle className="mt-0.5 h-5 w-5 shrink-0 text-primary" /><span className="text-sm text-foreground break-keep">{d}</span></li>))}
-            </ul>
-          </div>
-          <div className="flex-1"><div className="flex aspect-[4/3] items-center justify-center rounded-2xl bg-gradient-to-br from-primary/5 to-primary/10 text-sm text-muted">게임 현지화 이미지</div></div>
-        </div>
-      </Section>
+      <SupportedLanguages />
+      <ServiceWhy
+        title="몰입감을 살리는 게임 현지화"
+        items={whyItems}
+      />
+      <ServiceProcess steps={processSteps} />
+      <BottomCTA />
     </>
   );
 }

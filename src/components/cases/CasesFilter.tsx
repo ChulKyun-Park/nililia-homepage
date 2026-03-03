@@ -22,25 +22,26 @@ import type { NotionCaseStudyItem } from "@/types/notion";
 const ALL = "전체";
 const SIDEBAR_ITEMS = [
   ALL,
-  "문서",
   "영상",
-  "웹소설/웹툰",
-  "홈페이지/앱",
-  "게임",
+  "문서",
   "SDH",
+  "홈페이지 · 앱",
+  "웹소설 · 웹툰",
+  "게임",
   "MTPE",
+  "AI 번역 · 더빙",
 ] as const;
 
 type SidebarItem = (typeof SIDEBAR_ITEMS)[number];
 
 /* ── Fallback field chips per content type ── */
 const FALLBACK_FIELDS: Record<string, string[]> = {
-  "문서":       ["마케팅", "기술", "법률", "의료"],
-  "영상":       ["예능", "드라마", "영화"],
-  "웹소설/웹툰": ["웹툰", "웹소설"],
-  "홈페이지/앱": ["랜딩", "앱", "웹"],
-  "게임":       ["모바일", "콘솔", "RPG", "캐주얼"],
-  // SDH, MTPE: no fallback — "전체" only is fine
+  "영상":          ["예능", "드라마", "영화"],
+  "문서":          ["마케팅", "기술", "법률", "의료"],
+  "홈페이지 · 앱": ["랜딩", "앱", "웹"],
+  "웹소설 · 웹툰": ["웹툰", "웹소설"],
+  "게임":          ["모바일", "콘솔", "RPG", "캐주얼"],
+  // SDH, MTPE, AI 번역 · 더빙: no fallback — "전체" only is fine
 };
 
 /** Whitespace-insensitive category comparison */

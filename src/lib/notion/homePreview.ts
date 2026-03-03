@@ -15,7 +15,7 @@ import type { NotionNewsItem, NotionCaseStudyItem } from "@/types/notion";
 
 const NOTION_API_BASE = "https://api.notion.com/v1";
 const NOTION_VERSION = "2022-06-28";
-const REVALIDATE_SECONDS = 60;
+const REVALIDATE_SECONDS = 0;
 
 const NEWS_DB_ID = process.env.NOTION_NEWS_DB_ID ?? "";
 const CASESTUDY_DB_ID = process.env.NOTION_CASESTUDY_DB_ID ?? "";

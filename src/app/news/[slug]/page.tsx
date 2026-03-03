@@ -5,7 +5,7 @@ import { ArrowLeft } from "lucide-react";
 import { fetchNewsBySlug, fetchPageBlocks } from "@/lib/notion/client";
 import BlockRenderer from "@/components/notion/BlockRenderer";
 
-export const revalidate = 60;
+export const revalidate = 10;
 
 type Props = { params: Promise<{ slug: string }> };
 

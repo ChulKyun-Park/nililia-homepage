@@ -9,7 +9,7 @@ import type { Metadata } from "next";
 export const metadata: Metadata = {
   title: "SDH · 배리어프리 자막 제작 | 닐리리아",
   description:
-    "청각장애인을 위한 자막(SDH) 제작으로 콘텐츠 접근성을 향상시킵니다.",
+    "모든 사람을 위한 자막(SDH · 배리어프리) 제작으로 콘텐츠 접근성을 향상시킵니다.",
 };
 
 const whyItems = [
@@ -45,7 +45,7 @@ export default function Page() {
       <PageHero
         label="Services"
         title="SDH · 배리어프리 자막 제작"
-        description="청각장애인을 위한 자막(SDH) 제작으로 콘텐츠 접근성을 향상시킵니다."
+        description="모든 사람을 위한 자막(SDH · 배리어프리) 제작으로 콘텐츠 접근성을 향상시킵니다."
         imageSrc="/images/services/SDH · 배리어프리 자막 제작.png"
         imageAlt="SDH · 배리어프리 자막 제작 서비스"
       />

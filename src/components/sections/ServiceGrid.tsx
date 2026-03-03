@@ -70,7 +70,7 @@ const services: ServiceItem[] = [
     slug: "sdh-subtitle",
     thumbnail: "/images/services/SDH · 배리어프리 자막 제작.png",
     description:
-      "청각장애인을 위한 자막(SDH) 제작으로 콘텐츠 접근성을 향상시킵니다.",
+      "모든 사람을 위한 자막(SDH · 배리어프리) 제작으로 콘텐츠 접근성을 향상시킵니다.",
   },
 ];
 

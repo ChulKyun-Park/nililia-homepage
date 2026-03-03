@@ -171,8 +171,11 @@ export default function NewsFilter({ news }: { news: NotionNewsItem[] }) {
   // Pinned 항목 분리 (최대 5개)
   const pinnedItems = useMemo(() => news.filter((n) => n.pinned).slice(0, 5), [news]);
 
-  // 고정 카테고리 목록 (Notion DB Category select 옵션과 일치해야 함)
-  const categories = ["전체", "공지", "번역 팁", "업계 동향", "기술", "ETC"];
+  // 카테고리를 Notion 데이터에서 동적 생성 — "전체" + 실제 사용된 카테고리만 표시
+  const categories = useMemo(() => {
+    const uniqueCats = [...new Set(news.map((n) => n.category).filter(Boolean))];
+    return ["전체", ...uniqueCats];
+  }, [news]);
 
   // 필터링된 일반 글 (pinned 포함 — 전체 목록에서 카테고리만 필터)
   const filteredNews = useMemo(() => {

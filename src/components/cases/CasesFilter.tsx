@@ -19,28 +19,6 @@ import type { NotionCaseStudyItem } from "@/types/notion";
  * ────────────────────────────────────────────────────── */
 
 const ALL = "전체";
-const SIDEBAR_ITEMS = [
-  ALL,
-  "영상",
-  "문서",
-  "SDH",
-  "홈페이지 · 앱",
-  "웹소설 · 웹툰",
-  "게임",
-  "MTPE",
-  "AI 번역 · 더빙",
-] as const;
-
-type SidebarItem = (typeof SIDEBAR_ITEMS)[number];
-
-const FALLBACK_FIELDS: Record<string, string[]> = {
-  "영상":          ["예능", "드라마", "영화"],
-  "문서":          ["마케팅", "기술", "법률", "의료"],
-  "홈페이지 · 앱": ["랜딩", "앱", "웹"],
-  "웹소설 · 웹툰": ["웹툰", "웹소설"],
-  "게임":          ["모바일", "콘솔", "RPG", "캐주얼"],
-  // SDH, MTPE, AI 번역 · 더빙: no fallback — "전체" only is fine
-};
 
 /** Whitespace-insensitive category comparison */
 function matchType(itemCategory: string, type: string): boolean {
@@ -108,45 +86,26 @@ export default function CasesFilter({
 }: {
   cases: NotionCaseStudyItem[];
 }) {
-  const [activeSidebar, setActiveSidebar] = useState<SidebarItem>(ALL);
+  const [activeSidebar, setActiveSidebar] = useState(ALL);
   const [activeField, setActiveField] = useState(ALL);
+
+  // 사이드바(ContentType)를 Notion 데이터에서 동적 생성
+  const sidebarItems = useMemo(() => {
+    const uniqueCats = [...new Set(cases.map((c) => c.category).filter(Boolean))];
+    return [ALL, ...uniqueCats];
+  }, [cases]);
 
   const scopedCases = useMemo(() => {
     if (activeSidebar === ALL) return cases;
     return cases.filter((c) => matchType(c.category, activeSidebar));
   }, [cases, activeSidebar]);
 
-  const rawDataFields = useMemo(() => {
+  // 2차 칩 필터(Field)를 Notion 데이터에서 동적 생성
+  const displayedFields = useMemo(() => {
     const set = new Set<string>();
     scopedCases.forEach((c) => c.tags.forEach((t) => set.add(t)));
     return Array.from(set).sort((a, b) => a.localeCompare(b, "ko"));
   }, [scopedCases]);
-
-  const { displayedFields, usingFallback } = useMemo(() => {
-    // If we have real data fields, use them
-    if (rawDataFields.length > 0) {
-      return { displayedFields: rawDataFields, usingFallback: false };
-    }
-
-    // Otherwise, compute fallback
-    if (activeSidebar === ALL) {
-      // Union of all fallback fields (deduped)
-      const union = new Set<string>();
-      Object.values(FALLBACK_FIELDS).forEach((arr) =>
-        arr.forEach((f) => union.add(f))
-      );
-      return {
-        displayedFields: Array.from(union).sort((a, b) =>
-          a.localeCompare(b, "ko")
-        ),
-        usingFallback: true,
-      };
-    }
-
-    // Specific content type fallback
-    const fb = FALLBACK_FIELDS[activeSidebar] || [];
-    return { displayedFields: fb, usingFallback: true };
-  }, [rawDataFields, activeSidebar]);
 
   const filteredCases = useMemo(() => {
     let result = scopedCases;
@@ -163,14 +122,14 @@ export default function CasesFilter({
   const countByItem = useMemo(() => {
     const map: Record<string, number> = {};
     map[ALL] = cases.length;
-    SIDEBAR_ITEMS.forEach((item) => {
+    sidebarItems.forEach((item) => {
       if (item === ALL) return;
       map[item] = cases.filter((c) => matchType(c.category, item)).length;
     });
     return map;
-  }, [cases]);
+  }, [cases, sidebarItems]);
 
-  const handleSidebarChange = (item: SidebarItem) => {
+  const handleSidebarChange = (item: string) => {
     setActiveSidebar(item);
     setActiveField(ALL); // reset secondary when primary changes
   };
@@ -182,7 +141,7 @@ export default function CasesFilter({
         <div className="flex flex-col lg:flex-row gap-8 lg:gap-12">
           <aside className="lg:w-44 flex-shrink-0">
             <nav className="flex lg:flex-col gap-1.5 overflow-x-auto lg:overflow-visible pb-3 lg:pb-0 lg:sticky lg:top-24 -mx-1 px-1">
-              {SIDEBAR_ITEMS.map((item) => {
+              {sidebarItems.map((item) => {
                 const isActive = activeSidebar === item;
                 const count = countByItem[item];
                 return (

@@ -2,7 +2,7 @@ import type { Metadata } from "next";
 import Image from "next/image";
 import Button from "@/components/ui/Button";
 import CasesFilter from "@/components/cases/CasesFilter";
-import { fetchAllCaseStudies } from "@/lib/notion/client";
+import { fetchAllCaseStudiesCorrected } from "@/lib/notion/homePreview";
 
 export const revalidate = 3600;
 
@@ -18,7 +18,7 @@ export const metadata: Metadata = {
 };
 
 export default async function CasesPage() {
-  const cases = await fetchAllCaseStudies();
+  const cases = await fetchAllCaseStudiesCorrected();
 
   return (
     <>

@@ -1,11 +1,10 @@
 import Card from "@/components/ui/Card";
-import { fetchNewsPreview } from "@/lib/notion/client";
-import { fetchCaseStudyPreview } from "@/lib/notion/client";
+import { fetchHomeNewsPreview, fetchHomeCaseStudyPreview } from "@/lib/notion/homePreview";
 
 export default async function NewsCaseStudy() {
   const [news, cases] = await Promise.all([
-    fetchNewsPreview(3),
-    fetchCaseStudyPreview(3),
+    fetchHomeNewsPreview(3),
+    fetchHomeCaseStudyPreview(3),
   ]);
 
   return (

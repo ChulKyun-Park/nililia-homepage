@@ -5,20 +5,20 @@ import Card from "@/components/ui/Card";
 import type { NotionCaseStudyItem } from "@/types/notion";
 
 /* ──────────────────────────────────────────────────────
- * Notion DB  →  UI field mapping
+ * Notion DB  →  UI field mapping (CMS 가이드 기준)
  * ──────────────────────────────────────────────────────
- *  content_type  → Category  (select)
- *  field         → Tags      (multi_select)
- *  client_name   → Client    (rich_text)  — card title (bold)
- *  task_title    → Title     (rich_text)  — 1-line summary
- *  languages     → Languages (rich_text)  — e.g. "KR → EN"
- *  duration      → Duration  (rich_text)  — e.g. "3주"
- *  volume        → Results   (rich_text)  — e.g. "15종 콘텐츠"
- *  sortOrder     → Pinned    (checkbox)   — pinned=true items first
- *  published     → Published (checkbox)   — only true shown (server-side)
+ *  ContentType  → category  (select)   — 사이드바 필터
+ *  Field        → tags      (multi_select) — 2차 칩 필터
+ *  필드명(title) → client   (title)    — 고객사명/카드 타이틀
+ *  Task         → title     (rich_text) — 과업명(1줄 요약)
+ *  Languages    → languages (rich_text) — e.g. "KR → EN"
+ *  Duration     → duration  (rich_text) — e.g. "3주"
+ *  Results      → results   (rich_text) — e.g. "15종 콘텐츠"
+ *  Pinned       → pinned    (checkbox)  — pinned=true items first
+ *  Published    → published (checkbox)  — only true shown (server-side)
  * ────────────────────────────────────────────────────── */
 
-/* ── Sidebar items — exact order per spec ── */
+/* ── Sidebar items — CMS 가이드 ContentType 옵션 기준 ── */
 const ALL = "전체";
 const SIDEBAR_ITEMS = [
   ALL,

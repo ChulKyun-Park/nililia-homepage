@@ -8,39 +8,39 @@ const stats = [
 ];
 
 const companyLogos = [
-  "CUBE엔터.png",
-  "EBS.png",
-  "GF엔터.png",
-  "JTBC.png",
-  "JYP.png",
-  "KBS.png",
-  "LG U+.png",
-  "LG.png",
-  "MBC.png",
-  "koz.png",
-  "kt스튜디오.png",
-  "고려대의료원.png",
-  "고양시.png",
-  "다이아TV.png",
-  "딩고.png",
-  "마이크로소프트.png",
-  "비디오빌리지.png",
-  "비스포크랩.png",
-  "샌드박스.png",
-  "스카이라이프티비.png",
-  "스튜디오XU.png",
-  "에버모어엔터.png",
-  "유데미.png",
-  "채널A.png",
-  "카카오엔터.png",
-  "콜로소.png",
-  "클래스101.png",
-  "테라코믹스.png",
-  "트레저헌터.png",
-  "티빙.png",
-  "파라스타엔터.png",
-  "하이헷 엔터.png",
-  "한스바이오메드.png",
+  "01_CUBE엔터.png",
+  "02_EBS.png",
+  "03_GF엔터.png",
+  "04_JTBC.png",
+  "05_JYP.png",
+  "06_KBS.png",
+  "07_LG U+.png",
+  "08_LG.png",
+  "09_MBC.png",
+  "10_koz.png",
+  "11_kt스튜디오.png",
+  "12_고려대의료원.png",
+  "13_고양시.png",
+  "14_다이아TV.png",
+  "15_딩고.png",
+  "16_마이크로소프트.png",
+  "17_비디오빌리지.png",
+  "18_비스포크랩.png",
+  "19_샌드박스.png",
+  "20_스카이라이프티비.png",
+  "21_스튜디오XU.png",
+  "22_에버모어엔터.png",
+  "23_유데미.png",
+  "24_채널A.png",
+  "25_카카오엔터.png",
+  "26_콜로소.png",
+  "27_클래스101.png",
+  "28_테라코믹스.png",
+  "29_트레저헌터.png",
+  "30_티빙.png",
+  "31_파라스타엔터.png",
+  "32_하이헷 엔터.png",
+  "33_한스바이오메드.png",
 ];
 
 const creators = [
@@ -95,7 +95,7 @@ function CreatorAvatar({ filename }: { filename: string }) {
 }
 
 function CompanyLogo({ filename }: { filename: string }) {
-  const name = filename.replace(/\.[^.]+$/, "");
+  const name = filename.replace(/\.[^.]+$/, "").replace(/^\d+_/, "");
   return (
     <div className="flex-none flex items-center justify-center h-8 mx-[37px]">
       <Image

@@ -1,4 +1,6 @@
 import Image from "next/image";
+import fs from "fs";
+import path from "path";
 
 const stats = [
   { value: "50+", label: "기업 고객" },
@@ -7,75 +9,15 @@ const stats = [
   { value: "90%", label: "고객 만족도" },
 ];
 
-const companyLogos = [
-  "01_CUBE엔터.png",
-  "02_EBS.png",
-  "03_GF엔터.png",
-  "04_JTBC.png",
-  "05_JYP.png",
-  "06_KBS.png",
-  "07_LG U+.png",
-  "08_트레저헌터.png",
-  "09_MBC.png",
-  "10_koz.png",
-  "11_kt스튜디오.png",
-  "12_고려대의료원.png",
-  "13_고양시.png",
-  "14_다이아TV.png",
-  "15_딩고.png",
-  "16_마이크로소프트.png",
-  "17_비디오빌리지.png",
-  "18_비스포크랩.png",
-  "19_샌드박스.png",
-  "20_스카이라이프티비.png",
-  "21_스튜디오XU.png",
-  "22_에버모어엔터.png",
-  "23_유데미.png",
-  "24_채널A.png",
-  "25_카카오엔터.png",
-  "26_콜로소.png",
-  "27_클래스101.png",
-  "28_테라코믹스.png",
-  "29_LG.png",
-  "30_티빙.png",
-  "31_파라스타엔터.png",
-  "32_하이헷 엔터.png",
-  "33_한스바이오메드.png",
-];
+const companyDir = path.join(process.cwd(), "public/images/socialproof/company");
+const companyLogos = fs.readdirSync(companyDir)
+  .filter((f) => /\.(png|jpg|jpeg|svg)$/i.test(f))
+  .sort();
 
-const creators = [
-  "경식스필름.png",
-  "권유리.png",
-  "당구라.png",
-  "띠부.png",
-  "로하.png",
-  "루퐁이네.png",
-  "맵하니.png",
-  "문복희.png",
-  "밀키복이탄이.png",
-  "반보영.png",
-  "배지연's.png",
-  "사나고.png",
-  "샤랄라스튜디오.png",
-  "슈앤트리.png",
-  "신현지시리즈.png",
-  "앵쩡.png",
-  "어반플로우.png",
-  "여수언니정혜영.png",
-  "옥뷰티.png",
-  "와인마시는아톰.png",
-  "워너비보라.png",
-  "잼스터.png",
-  "젤라.png",
-  "지지야먹자.png",
-  "지편한세상.png",
-  "지효쏭.png",
-  "쯔양.png",
-  "카우치 포테이토 클럽.png",
-  "플랜디.png",
-  "햄지.png",
-  "히밥.png",
-];
+const creatorDir = path.join(process.cwd(), "public/images/socialproof/creator");
+const creators = fs.readdirSync(creatorDir)
+  .filter((f) => /\.(png|jpg|jpeg|svg)$/i.test(f))
+  .sort();
 
 function CreatorAvatar({ filename }: { filename: string }) {
   const name = filename.replace(/\.[^.]+$/, "");

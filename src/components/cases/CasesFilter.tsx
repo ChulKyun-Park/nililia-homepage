@@ -5,21 +5,25 @@ import Card from "@/components/ui/Card";
 import type { NotionCaseStudyItem } from "@/types/notion";
 
 /* ──────────────────────────────────────────────────────
- * Notion field mapping
+ * Notion DB  →  UI field mapping
  * ──────────────────────────────────────────────────────
- *  content_type   → Category (select)
- *  industry_field → Tags (multi_select) — first tag used as industry pill
- *  client_name    → Client (rich_text)
- *  project_title  → Title (rich_text)
- *  languages      → Languages (rich_text)   e.g. "KR → EN"
- *  duration       → Duration (rich_text)    e.g. "3주"
- *  content_volume → Results (rich_text)     e.g. "15종 콘텐츠"
+ *  content_type  → Category  (select)
+ *  field         → Tags      (multi_select)
+ *  client_name   → Client    (rich_text)  — card title (bold)
+ *  task_title    → Title     (rich_text)  — 1-line summary
+ *  languages     → Languages (rich_text)  — e.g. "KR → EN"
+ *  duration      → Duration  (rich_text)  — e.g. "3주"
+ *  volume        → Results   (rich_text)  — e.g. "15종 콘텐츠"
+ *  sortOrder     → Pinned    (checkbox)   — pinned=true items first
+ *  published     → Published (checkbox)   — only true shown (server-side)
  * ────────────────────────────────────────────────────── */
 
-/* ── Primary Filter: Content Types (sidebar) ── */
-const CONTENT_TYPES = [
-  "영상",
+/* ── Sidebar items — exact order per spec ── */
+const ALL = "전체";
+const SIDEBAR_ITEMS = [
+  ALL,
   "문서",
+  "영상",
   "웹소설/웹툰",
   "홈페이지/앱",
   "게임",
@@ -27,25 +31,19 @@ const CONTENT_TYPES = [
   "MTPE",
 ] as const;
 
-type ContentType = (typeof CONTENT_TYPES)[number];
+type SidebarItem = (typeof SIDEBAR_ITEMS)[number];
 
-/* ── Secondary Filter: Industry / Field per content type ── */
-const INDUSTRY_MAP: Record<ContentType, string[]> = {
-  "영상":       ["예능", "드라마", "영화", "OTT", "유튜브"],
-  "문서":       ["마케팅", "법률", "HR", "세무", "기술"],
-  "웹소설/웹툰": ["로맨스", "판타지", "무협", "BL", "액션"],
-  "홈페이지/앱": ["이커머스", "SaaS", "핀테크", "헬스케어", "교육"],
-  "게임":       ["모바일", "콘솔", "RPG", "캐주얼"],
-  "SDH":       ["예능", "드라마", "영화", "다큐멘터리"],
-  "MTPE":      ["마케팅", "기술", "법률", "의료"],
-};
-
-/** 공백 제거 후 비교 — Notion DB Category 옵션 차이 허용 */
+/** Whitespace-insensitive category comparison */
 function matchType(itemCategory: string, type: string): boolean {
-  return itemCategory.replace(/\s/g, "").toLowerCase() === type.replace(/\s/g, "").toLowerCase();
+  return (
+    itemCategory.replace(/\s/g, "").toLowerCase() ===
+    type.replace(/\s/g, "").toLowerCase()
+  );
 }
 
-/* ── Case Card ── */
+/* ══════════════════════════════════════════════════════
+ * Case Card
+ * ══════════════════════════════════════════════════════ */
 function CaseCard({ item }: { item: NotionCaseStudyItem }) {
   const meta = [item.languages, item.duration, item.results]
     .filter(Boolean)
@@ -54,19 +52,19 @@ function CaseCard({ item }: { item: NotionCaseStudyItem }) {
   return (
     <a href={`/cases/${item.slug}`} className="block h-full">
       <Card className="group flex h-full cursor-pointer flex-col p-6">
-        {/* Industry tag (pill) */}
+        {/* Field tag (pill) — first tag */}
         {item.tags.length > 0 && (
           <span className="inline-block self-start rounded-full border border-border bg-surface px-3 py-1 text-xs font-medium text-muted">
             {item.tags[0]}
           </span>
         )}
 
-        {/* Client name — largest, boldest */}
+        {/* Client name — bold, largest */}
         <h3 className="mt-3 text-lg font-bold text-foreground group-hover:text-primary transition-colors break-keep lg:text-xl">
           {item.client || item.title}
         </h3>
 
-        {/* Project title — one line */}
+        {/* Task title — one-line summary */}
         {item.title && item.client && (
           <p className="mt-1 line-clamp-1 text-sm text-muted break-keep">
             {item.title}
@@ -80,7 +78,7 @@ function CaseCard({ item }: { item: NotionCaseStudyItem }) {
           </p>
         )}
 
-        {/* Meta info — bottom */}
+        {/* Meta line — bottom-anchored */}
         {meta && (
           <div className="mt-auto pt-4">
             <p className="text-xs text-muted/60">{meta}</p>
@@ -91,7 +89,7 @@ function CaseCard({ item }: { item: NotionCaseStudyItem }) {
   );
 }
 
-/* ── Skeleton Card (empty state) ── */
+/* ── Skeleton Card ── */
 function SkeletonCard() {
   return (
     <Card className="flex flex-col p-6">
@@ -105,74 +103,82 @@ function SkeletonCard() {
   );
 }
 
-/* ── Main Component ── */
+/* ══════════════════════════════════════════════════════
+ * Main Component
+ * ══════════════════════════════════════════════════════ */
 export default function CasesFilter({
   cases,
 }: {
   cases: NotionCaseStudyItem[];
 }) {
-  const [activeType, setActiveType] = useState<ContentType>("영상");
-  const [activeField, setActiveField] = useState("전체");
+  const [activeSidebar, setActiveSidebar] = useState<SidebarItem>(ALL);
+  const [activeField, setActiveField] = useState(ALL);
 
-  /* Available industry fields — static defaults + any extra from actual data */
+  /* ── Cases scoped by primary filter (content type) ── */
+  const scopedCases = useMemo(() => {
+    if (activeSidebar === ALL) return cases;
+    return cases.filter((c) => matchType(c.category, activeSidebar));
+  }, [cases, activeSidebar]);
+
+  /* ── Dynamic field chips — union of Tags in scoped cases ── */
   const availableFields = useMemo(() => {
-    const staticFields = INDUSTRY_MAP[activeType] || [];
-    const dataFields = new Set<string>();
-    cases
-      .filter((c) => matchType(c.category, activeType))
-      .forEach((c) => c.tags.forEach((t) => dataFields.add(t)));
+    const set = new Set<string>();
+    scopedCases.forEach((c) => c.tags.forEach((t) => set.add(t)));
+    // Stable alphabetical order
+    return Array.from(set).sort((a, b) => a.localeCompare(b, "ko"));
+  }, [scopedCases]);
 
-    const merged = [...staticFields];
-    dataFields.forEach((f) => {
-      if (!merged.includes(f)) merged.push(f);
-    });
-    return merged;
-  }, [cases, activeType]);
-
-  /* Filtered cases: content type (primary) + industry field (secondary) */
+  /* ── Final filtered list: scoped + field filter ── */
   const filteredCases = useMemo(() => {
-    let result = cases.filter((c) => matchType(c.category, activeType));
-    if (activeField !== "전체") {
-      result = result.filter((c) => c.tags.some((t) => t === activeField));
+    let result = scopedCases;
+    if (activeField !== ALL) {
+      result = result.filter((c) => c.tags.includes(activeField));
     }
-    return result;
-  }, [cases, activeType, activeField]);
+    // Sort: pinned first, then by publishedAt desc
+    return [...result].sort((a, b) => {
+      if (a.pinned !== b.pinned) return a.pinned ? -1 : 1;
+      return (b.publishedAt || "").localeCompare(a.publishedAt || "");
+    });
+  }, [scopedCases, activeField]);
 
-  /* Count per content type — for optional count badge */
-  const countByType = useMemo(() => {
+  /* ── Per-type count (for badge) ── */
+  const countByItem = useMemo(() => {
     const map: Record<string, number> = {};
-    CONTENT_TYPES.forEach((type) => {
-      map[type] = cases.filter((c) => matchType(c.category, type)).length;
+    map[ALL] = cases.length;
+    SIDEBAR_ITEMS.forEach((item) => {
+      if (item === ALL) return;
+      map[item] = cases.filter((c) => matchType(c.category, item)).length;
     });
     return map;
   }, [cases]);
 
-  const handleTypeChange = (type: ContentType) => {
-    setActiveType(type);
-    setActiveField("전체");
+  /* ── Handlers ── */
+  const handleSidebarChange = (item: SidebarItem) => {
+    setActiveSidebar(item);
+    setActiveField(ALL); // reset secondary when primary changes
   };
 
   return (
     <section className="bg-white py-12 lg:py-16">
       <div className="mx-auto max-w-7xl px-6">
         <div className="flex flex-col lg:flex-row gap-8 lg:gap-12">
-          {/* ═══════ LEFT SIDEBAR ═══════ */}
+          {/* ═══════ LEFT SIDEBAR — Primary Filter ═══════ */}
           <aside className="lg:w-44 flex-shrink-0">
             <nav className="flex lg:flex-col gap-1.5 overflow-x-auto lg:overflow-visible pb-3 lg:pb-0 lg:sticky lg:top-24 -mx-1 px-1">
-              {CONTENT_TYPES.map((type) => {
-                const isActive = activeType === type;
-                const count = countByType[type];
+              {SIDEBAR_ITEMS.map((item) => {
+                const isActive = activeSidebar === item;
+                const count = countByItem[item];
                 return (
                   <button
-                    key={type}
-                    onClick={() => handleTypeChange(type)}
+                    key={item}
+                    onClick={() => handleSidebarChange(item)}
                     className={`flex items-center gap-2 whitespace-nowrap rounded-lg px-4 py-2.5 text-sm font-medium transition-all text-left ${
                       isActive
                         ? "bg-primary text-white shadow-sm"
                         : "text-muted hover:text-foreground hover:bg-surface"
                     }`}
                   >
-                    <span>{type}</span>
+                    <span>{item}</span>
                     {count > 0 && (
                       <span
                         className={`ml-auto text-xs ${
@@ -190,12 +196,12 @@ export default function CasesFilter({
 
           {/* ═══════ RIGHT CONTENT AREA ═══════ */}
           <div className="flex-1 min-w-0">
-            {/* Top Horizontal Filter — Secondary (Industry / Field) */}
+            {/* Top Chips — Secondary Filter (Field / Industry) */}
             <div className="mb-8 flex flex-wrap gap-2">
               <button
-                onClick={() => setActiveField("전체")}
+                onClick={() => setActiveField(ALL)}
                 className={`rounded-full px-4 py-1.5 text-sm font-medium transition-colors ${
-                  activeField === "전체"
+                  activeField === ALL
                     ? "bg-foreground text-white"
                     : "text-muted hover:text-foreground border border-border"
                 }`}
@@ -228,7 +234,7 @@ export default function CasesFilter({
                 ))}
               </div>
             ) : (
-              /* Empty state — skeletons + message */
+              /* Empty state */
               <div>
                 <div className="grid gap-6 sm:grid-cols-2 lg:grid-cols-3">
                   {[1, 2, 3].map((i) => (

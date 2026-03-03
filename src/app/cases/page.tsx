@@ -4,7 +4,7 @@ import Button from "@/components/ui/Button";
 import CasesFilter from "@/components/cases/CasesFilter";
 import { fetchAllCaseStudiesCorrected } from "@/lib/notion/homePreview";
 
-export const revalidate = 3600;
+export const revalidate = 60;
 
 export const metadata: Metadata = {
   title: "진행사례 | 닐리리아",

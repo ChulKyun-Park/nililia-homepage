@@ -5,7 +5,7 @@ import WhyUs from "@/components/sections/WhyUs";
 import NewsCaseStudy from "@/components/sections/NewsCaseStudy";
 import BottomCTA from "@/components/sections/BottomCTA";
 
-export const revalidate = 3600;
+export const revalidate = 60;
 
 export default function Home() {
   return (

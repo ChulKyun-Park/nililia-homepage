@@ -5,7 +5,7 @@ import Card from "@/components/ui/Card";
 import NewsFilter from "@/components/news/NewsFilter";
 import { fetchAllNews } from "@/lib/notion/client";
 
-export const revalidate = 3600;
+export const revalidate = 60;
 
 export const metadata: Metadata = {
   title: "소식 | 닐리리아",

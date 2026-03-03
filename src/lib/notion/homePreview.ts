@@ -24,13 +24,7 @@ const CASESTUDY_DB_ID = process.env.NOTION_CASESTUDY_DB_ID ?? "";
 /* ── Helpers (client.ts 에서 export 안 되므로 복제) ── */
 
 function getToken(): string {
-  const raw = process.env.NOTION_API_KEY;
-  const token = raw?.trim();
-  // 일시적 진단 (배포 후 제거)
-  console.log("[DIAG] NOTION_API_KEY raw length:", raw?.length, "trimmed length:", token?.length);
-  console.log("[DIAG] starts with 'ntn_':", token?.startsWith("ntn_"));
-  console.log("[DIAG] first 8 chars:", token?.slice(0, 8));
-  console.log("[DIAG] last 4 chars:", token?.slice(-4));
+  const token = process.env.NOTION_API_KEY?.trim();
   if (!token) throw new Error("NOTION_API_KEY is not configured");
   return token;
 }

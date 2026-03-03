@@ -39,7 +39,7 @@ function CreatorAvatar({ filename }: { filename: string }) {
 function CompanyLogo({ filename }: { filename: string }) {
   const name = filename.replace(/\.[^.]+$/, "").replace(/^\d+_/, "");
   return (
-    <div className="flex-none flex items-center justify-center h-8 mx-[37px]">
+    <div className="flex-none flex items-center justify-center h-8 mx-[44px]">
       <Image
         src={`/images/socialproof/company/${filename}`}
         alt={name}

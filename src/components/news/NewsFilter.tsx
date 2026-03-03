@@ -203,7 +203,7 @@ export default function NewsFilter({ news }: { news: NotionNewsItem[] }) {
               <p className="mb-6 text-sm font-semibold uppercase tracking-wider text-primary">
                 Pinned
               </p>
-              <div className="grid grid-cols-1 gap-6 sm:grid-cols-2 lg:grid-cols-3 xl:grid-cols-5">
+              <div className="grid grid-cols-2 gap-3 sm:grid-cols-3 lg:grid-cols-5">
                 {pinnedItems.map((item) => (
                   <PinnedCard key={item.id} item={item} />
                 ))}

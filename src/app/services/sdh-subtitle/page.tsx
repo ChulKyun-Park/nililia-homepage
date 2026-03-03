@@ -1,19 +1,42 @@
 import PageHero from "@/components/sections/PageHero";
+import BottomCTA from "@/components/sections/BottomCTA";
+import {
+  ServiceWhy,
+  ServiceProcess,
+} from "@/components/sections/service-detail";
 import type { Metadata } from "next";
-import Section from "@/components/ui/Section";
-import { Subtitles, CheckCircle } from "lucide-react";
 
 export const metadata: Metadata = {
   title: "SDH · 배리어프리 자막 제작 | 닐리리아",
-  description: "청각장애인을 위한 자막(SDH) 제작으로 콘텐츠 접근성을 향상시킵니다.",
+  description:
+    "청각장애인을 위한 자막(SDH) 제작으로 콘텐츠 접근성을 향상시킵니다.",
 };
 
-const details = [
-  "SDH(Subtitles for the Deaf and Hard of Hearing) 제작",
-  "음향 효과 및 음악 설명 포함",
-  "화자 식별 자막",
-  "접근성 기준 준수",
-  "다국어 SDH · 배리어프리 자막 제작",
+const whyItems = [
+  {
+    title: "접근성 기준 완벽 준수",
+    description: "국내외 접근성 가이드라인(WCAG, 방송통신표준 등)을 철저히 준수합니다.",
+  },
+  {
+    title: "음향 효과 & 음악 설명 포함",
+    description: "대사뿐 아니라 배경 음악, 효과음 등 비언어적 요소도 자막으로 전달합니다.",
+  },
+  {
+    title: "화자 식별 자막",
+    description: "여러 화자를 명확히 구분하여 시청 이해도를 높입니다.",
+  },
+  {
+    title: "다국어 SDH 제작",
+    description: "한국어뿐 아니라 다국어 SDH · 배리어프리 자막도 제작 가능합니다.",
+  },
+];
+
+const processSteps = [
+  { title: "상담 & 분석", description: "영상 콘텐츠와 접근성 요구사항을 분석합니다." },
+  { title: "스크립트 작성", description: "대사, 음향 효과, 음악 등을 포함한 스크립트를 작성합니다." },
+  { title: "SDH 자막 제작", description: "화자 식별과 비언어적 요소를 포함한 자막을 제작합니다." },
+  { title: "접근성 검수", description: "가이드라인 준수 여부와 가독성을 검증합니다." },
+  { title: "납품", description: "플랫폼 요구 포맷으로 최종 파일을 납품합니다." },
 ];
 
 export default function Page() {
@@ -23,19 +46,16 @@ export default function Page() {
         label="Services"
         title="SDH · 배리어프리 자막 제작"
         description="청각장애인을 위한 자막(SDH) 제작으로 콘텐츠 접근성을 향상시킵니다."
+        imageSrc="/images/services/SDH · 배리어프리 자막 제작.png"
+        imageAlt="SDH · 배리어프리 자막 제작 서비스"
       />
-      <Section>
-        <div className="flex flex-col gap-10 lg:flex-row lg:items-center">
-          <div className="flex-1">
-            <div className="mb-4 inline-flex rounded-xl bg-primary-light p-3"><Subtitles className="h-7 w-7 text-primary" /></div>
-            <h2 className="text-[length:var(--font-size-section-h2)] font-bold text-foreground break-keep">서비스 상세</h2>
-            <ul className="mt-6 space-y-3">
-              {details.map((d) => (<li key={d} className="flex items-start gap-3"><CheckCircle className="mt-0.5 h-5 w-5 shrink-0 text-primary" /><span className="text-sm text-foreground break-keep">{d}</span></li>))}
-            </ul>
-          </div>
-          <div className="flex-1"><div className="flex aspect-[4/3] items-center justify-center rounded-2xl bg-gradient-to-br from-primary/5 to-primary/10 text-sm text-muted">SDH · 배리어프리 자막 제작 이미지</div></div>
-        </div>
-      </Section>
+      {/* SDH는 지원 언어 섹션 생략 */}
+      <ServiceWhy
+        title="모든 시청자를 위한 자막을 만듭니다"
+        items={whyItems}
+      />
+      <ServiceProcess steps={processSteps} />
+      <BottomCTA />
     </>
   );
 }

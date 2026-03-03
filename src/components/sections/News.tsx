@@ -1,6 +1,5 @@
 import SectionHeader from "@/components/ui/SectionHeader";
 import Card from "@/components/ui/Card";
-import Link from "next/link";
 import { fetchNewsPreview } from "@/lib/notion/client";
 
 export default async function News() {
@@ -18,40 +17,39 @@ export default async function News() {
         {news.length > 0 ? (
           <div className="grid gap-6 sm:grid-cols-2 lg:grid-cols-4">
             {news.slice(0, 4).map((item) => (
-              <Card
-                key={item.id}
-                className="group overflow-hidden p-0"
-              >
-                {/* Thumbnail */}
-                <div className="aspect-[16/10] overflow-hidden bg-surface">
-                  {item.thumbnail ? (
-                    <img
-                      src={item.thumbnail}
-                      alt={item.title}
-                      className="h-full w-full object-cover transition-transform duration-300 group-hover:scale-105"
-                    />
-                  ) : (
-                    <div className="flex h-full items-center justify-center text-sm text-muted">
-                      No Image
-                    </div>
-                  )}
-                </div>
-                <div className="p-5">
-                  {item.publishedAt && (
-                    <time className="text-xs text-muted">
-                      {new Date(item.publishedAt).toLocaleDateString("ko-KR")}
-                    </time>
-                  )}
-                  <h3 className="mt-2 line-clamp-2 text-base font-bold text-foreground group-hover:text-primary transition-colors break-keep">
-                    {item.title}
-                  </h3>
-                  {item.description && (
-                    <p className="mt-2 line-clamp-2 text-[length:var(--font-size-body)] text-muted break-keep">
-                      {item.description}
-                    </p>
-                  )}
-                </div>
-              </Card>
+              <a key={item.id} href={`/news/${item.slug}`} className="block">
+                <Card className="group overflow-hidden p-0 h-full">
+                  {/* Thumbnail */}
+                  <div className="aspect-[16/10] overflow-hidden bg-surface">
+                    {item.thumbnail ? (
+                      <img
+                        src={item.thumbnail}
+                        alt={item.title}
+                        className="h-full w-full object-cover transition-transform duration-300 group-hover:scale-105"
+                      />
+                    ) : (
+                      <div className="flex h-full items-center justify-center text-sm text-muted">
+                        No Image
+                      </div>
+                    )}
+                  </div>
+                  <div className="p-5">
+                    {item.publishedAt && (
+                      <time className="text-xs text-muted">
+                        {new Date(item.publishedAt).toLocaleDateString("ko-KR")}
+                      </time>
+                    )}
+                    <h3 className="mt-2 line-clamp-2 text-base font-bold text-foreground group-hover:text-primary transition-colors break-keep">
+                      {item.title}
+                    </h3>
+                    {item.excerpt && (
+                      <p className="mt-2 line-clamp-2 text-[length:var(--font-size-body)] text-muted break-keep">
+                        {item.excerpt}
+                      </p>
+                    )}
+                  </div>
+                </Card>
+              </a>
             ))}
           </div>
         ) : (
@@ -70,12 +68,12 @@ export default async function News() {
         )}
 
         <div className="mt-10 text-center">
-          <Link
+          <a
             href="/news"
             className="text-sm font-semibold text-primary hover:text-primary-dark transition-colors"
           >
             전체 소식 보기 &rarr;
-          </Link>
+          </a>
         </div>
       </div>
     </section>

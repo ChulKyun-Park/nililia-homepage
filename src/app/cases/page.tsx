@@ -1,10 +1,8 @@
 import type { Metadata } from "next";
-import Section from "@/components/ui/Section";
-import SectionHeader from "@/components/ui/SectionHeader";
-import Card from "@/components/ui/Card";
-import Button from "@/components/ui/Button";
 import Image from "next/image";
-import { fetchAllCaseStudies } from "@/lib/notion/client";
+import Button from "@/components/ui/Button";
+import CasesFilter from "@/components/cases/CasesFilter";
+import { fetchAllCaseStudiesCorrected } from "@/lib/notion/homePreview";
 
 export const revalidate = 3600;
 
@@ -20,14 +18,20 @@ export const metadata: Metadata = {
 };
 
 export default async function CasesPage() {
-  const cases = await fetchAllCaseStudies();
+  const cases = await fetchAllCaseStudiesCorrected();
 
   return (
     <>
       {/* Hero */}
       <section className="relative bg-hero-bg py-8 lg:py-10 h-[250px] flex items-center overflow-hidden">
         <div className="absolute inset-0">
-          <Image src="/images/채용CTA.png" alt="" fill className="object-cover" priority />
+          <Image
+            src="/images/채용CTA.png"
+            alt=""
+            fill
+            className="object-cover"
+            priority
+          />
           <div className="absolute inset-0 bg-black/60" />
         </div>
         <div className="relative mx-auto max-w-7xl px-6 text-center">
@@ -40,64 +44,8 @@ export default async function CasesPage() {
         </div>
       </section>
 
-      {/* Cases List */}
-      <Section>
-        {cases.length > 0 ? (
-          <div className="grid gap-8 sm:grid-cols-2 lg:grid-cols-3">
-            {cases.map((item) => (
-              <Card key={item.id} className="group overflow-hidden p-0">
-                <div className="aspect-[16/10] overflow-hidden bg-surface">
-                  {item.thumbnail ? (
-                    <img
-                      src={item.thumbnail}
-                      alt={item.title}
-                      className="h-full w-full object-cover transition-transform duration-300 group-hover:scale-105"
-                    />
-                  ) : (
-                    <div className="flex h-full items-center justify-center text-sm text-muted">
-                      No Image
-                    </div>
-                  )}
-                </div>
-                <div className="p-6">
-                  {item.company && (
-                    <span className="inline-block rounded-full bg-primary-light px-3 py-1 text-xs font-medium text-primary">
-                      {item.company}
-                    </span>
-                  )}
-                  <h3 className="mt-3 text-[length:var(--font-size-card-title)] font-bold text-foreground group-hover:text-primary transition-colors break-keep">
-                    {item.title}
-                  </h3>
-                  {item.description && (
-                    <p className="mt-2 text-[length:var(--font-size-body)] leading-relaxed text-muted break-keep">
-                      {item.description}
-                    </p>
-                  )}
-                </div>
-              </Card>
-            ))}
-          </div>
-        ) : (
-          <div className="text-center">
-            <SectionHeader
-              title="진행 사례 준비 중"
-              description="곧 다양한 진행 사례를 공유할 예정입니다."
-            />
-            <div className="grid gap-8 sm:grid-cols-2 lg:grid-cols-3">
-              {[1, 2, 3, 4, 5, 6].map((i) => (
-                <Card key={i} className="overflow-hidden p-0">
-                  <div className="aspect-[16/10] bg-surface" />
-                  <div className="p-6">
-                    <div className="h-5 w-20 rounded-full bg-surface" />
-                    <div className="mt-3 h-5 w-full rounded bg-surface" />
-                    <div className="mt-2 h-4 w-3/4 rounded bg-surface" />
-                  </div>
-                </Card>
-              ))}
-            </div>
-          </div>
-        )}
-      </Section>
+      {/* Main Content — Sidebar + Filters + Grid */}
+      <CasesFilter cases={cases} />
 
       {/* Bottom CTA */}
       <section className="bg-gradient-to-r from-primary to-primary-dark py-20">

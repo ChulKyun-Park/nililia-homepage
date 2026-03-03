@@ -48,9 +48,18 @@ function getDate(prop: unknown): string {
   return d?.start ?? "";
 }
 
-function getUrl(prop: unknown): string | null {
-  if (typeof prop === "string") return prop;
-  return null;
+function getCheckbox(prop: unknown): boolean {
+  return prop === true;
+}
+
+function getSelect(prop: unknown): string {
+  const s = prop as { name?: string } | null;
+  return s?.name ?? "";
+}
+
+function getMultiSelect(prop: unknown): string[] {
+  const arr = prop as Array<{ name?: string }> | undefined;
+  return arr?.map((t) => t.name ?? "").filter(Boolean) ?? [];
 }
 
 function getFileThumbnail(prop: unknown): string | null {
@@ -70,6 +79,8 @@ type NotionProperty = {
   url?: unknown;
   files?: unknown;
   select?: { name?: string } | null;
+  multi_select?: Array<{ name?: string }>;
+  checkbox?: boolean;
 };
 
 type NotionPage = {
@@ -77,15 +88,31 @@ type NotionPage = {
   properties: Record<string, NotionProperty>;
 };
 
+/** Published=true 필터 */
+const publishedFilter = {
+  property: "Published",
+  checkbox: { equals: true },
+};
+
+/** Pinned 우선 + Date 최신순 정렬 */
+const defaultSorts = [
+  { property: "Pinned", direction: "descending" as const },
+  { property: "Date", direction: "descending" as const },
+];
+
 function mapNewsPage(page: NotionPage): NotionNewsItem {
   const props = page.properties;
   return {
     id: page.id,
-    title: getTitle(props.Title?.title ?? props.Name?.title),
-    description: getRichText(props.Description?.rich_text ?? props.Summary?.rich_text),
-    thumbnail: getFileThumbnail(props.Thumbnail?.files) ?? getUrl(props.Thumbnail?.url),
-    publishedAt: getDate(props.PublishedAt?.date),
+    title: getRichText(props.Title?.rich_text),
+    excerpt: getRichText(props.Excerpt?.rich_text),
+    thumbnail: getFileThumbnail(props.Thumbnail?.files),
+    publishedAt: getDate(props.Date?.date),
     slug: getRichText(props.Slug?.rich_text) || page.id,
+    category: getSelect(props.Category?.select),
+    author: getRichText(props.Author?.rich_text),
+    pinned: getCheckbox(props.Pinned?.checkbox),
+    tags: getMultiSelect(props.Tags?.multi_select),
   };
 }
 
@@ -93,11 +120,18 @@ function mapCasePage(page: NotionPage): NotionCaseStudyItem {
   const props = page.properties;
   return {
     id: page.id,
-    title: getTitle(props.Title?.title ?? props.Name?.title),
-    description: getRichText(props.Description?.rich_text ?? props.Summary?.rich_text),
-    thumbnail: getFileThumbnail(props.Thumbnail?.files) ?? getUrl(props.Thumbnail?.url),
-    company: getRichText(props.Company?.rich_text) ?? props.Company?.select?.name ?? "",
+    title: getRichText(props.Title?.rich_text),
+    excerpt: getRichText(props.Excerpt?.rich_text),
+    thumbnail: getFileThumbnail(props.Thumbnail?.files),
+    client: getRichText(props.Client?.rich_text),
     slug: getRichText(props.Slug?.rich_text) || page.id,
+    category: getSelect(props.Category?.select),
+    languages: getRichText(props.Languages?.rich_text),
+    duration: getRichText(props.Duration?.rich_text),
+    results: getRichText(props.Results?.rich_text),
+    pinned: getCheckbox(props.Pinned?.checkbox),
+    tags: getMultiSelect(props.Tags?.multi_select),
+    publishedAt: getDate(props.Date?.date),
   };
 }
 
@@ -106,7 +140,8 @@ export async function fetchNewsPreview(limit = 4): Promise<NotionNewsItem[]> {
   if (!NEWS_DB_ID) return [];
   try {
     const response = await queryDatabase(NEWS_DB_ID, {
-      sorts: [{ property: "PublishedAt", direction: "descending" }],
+      filter: publishedFilter,
+      sorts: defaultSorts,
       page_size: limit,
     });
     return ((response.results ?? []) as NotionPage[]).map(mapNewsPage);
@@ -121,7 +156,8 @@ export async function fetchAllNews(): Promise<NotionNewsItem[]> {
   if (!NEWS_DB_ID) return [];
   try {
     const response = await queryDatabase(NEWS_DB_ID, {
-      sorts: [{ property: "PublishedAt", direction: "descending" }],
+      filter: publishedFilter,
+      sorts: defaultSorts,
       page_size: 100,
     });
     return ((response.results ?? []) as NotionPage[]).map(mapNewsPage);
@@ -136,7 +172,8 @@ export async function fetchCaseStudyPreview(limit = 3): Promise<NotionCaseStudyI
   if (!CASESTUDY_DB_ID) return [];
   try {
     const response = await queryDatabase(CASESTUDY_DB_ID, {
-      sorts: [{ property: "PublishedAt", direction: "descending" }],
+      filter: publishedFilter,
+      sorts: defaultSorts,
       page_size: limit,
     });
     return ((response.results ?? []) as NotionPage[]).map(mapCasePage);
@@ -151,12 +188,62 @@ export async function fetchAllCaseStudies(): Promise<NotionCaseStudyItem[]> {
   if (!CASESTUDY_DB_ID) return [];
   try {
     const response = await queryDatabase(CASESTUDY_DB_ID, {
-      sorts: [{ property: "PublishedAt", direction: "descending" }],
+      filter: publishedFilter,
+      sorts: defaultSorts,
       page_size: 100,
     });
     return ((response.results ?? []) as NotionPage[]).map(mapCasePage);
   } catch (error) {
     console.error("Failed to fetch all case studies:", error);
+    return [];
+  }
+}
+
+/** Fetch a single news item by slug */
+export async function fetchNewsBySlug(slug: string): Promise<NotionNewsItem | null> {
+  if (!NEWS_DB_ID) return null;
+  try {
+    const response = await queryDatabase(NEWS_DB_ID, {
+      filter: {
+        and: [
+          publishedFilter,
+          { property: "Slug", rich_text: { equals: slug } },
+        ],
+      },
+      page_size: 1,
+    });
+    const pages = (response.results ?? []) as NotionPage[];
+    if (pages.length === 0) return null;
+    return mapNewsPage(pages[0]);
+  } catch (error) {
+    console.error("Failed to fetch news by slug:", error);
+    return null;
+  }
+}
+
+/** Notion block types */
+export type NotionBlock = {
+  id: string;
+  type: string;
+  has_children: boolean;
+  [key: string]: unknown;
+};
+
+/** Fetch page blocks (content) */
+export async function fetchPageBlocks(pageId: string): Promise<NotionBlock[]> {
+  try {
+    const res = await fetch(`${NOTION_API_BASE}/blocks/${pageId}/children?page_size=100`, {
+      headers: {
+        Authorization: `Bearer ${getToken()}`,
+        "Notion-Version": NOTION_VERSION,
+      },
+      next: { revalidate: REVALIDATE_SECONDS },
+    });
+    if (!res.ok) return [];
+    const data = await res.json();
+    return (data.results ?? []) as NotionBlock[];
+  } catch (error) {
+    console.error("Failed to fetch page blocks:", error);
     return [];
   }
 }

@@ -25,7 +25,7 @@ function CreatorAvatar({ filename }: { filename: string }) {
     <div className="flex-none flex items-center mx-[36px]">
       <div className="h-12 w-12 overflow-hidden rounded-full">
         <Image
-          src={`/images/socialproof/creator/${encodeURIComponent(filename)}`}
+          src={`/images/socialproof/creator/${filename}`}
           alt={name}
           width={120}
           height={120}
@@ -41,7 +41,7 @@ function CompanyLogo({ filename }: { filename: string }) {
   return (
     <div className="flex-none flex items-center justify-center h-8 mx-[44px]">
       <Image
-        src={`/images/socialproof/company/${encodeURIComponent(filename)}`}
+        src={`/images/socialproof/company/${filename}`}
         alt={name}
         width={120}
         height={48}

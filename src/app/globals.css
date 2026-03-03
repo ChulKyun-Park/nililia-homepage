@@ -60,9 +60,21 @@ body {
   -moz-osx-font-smoothing: grayscale;
 }
 
-/* ── Smooth scroll ── */
+/* ── Smooth scroll + 가로 스크롤 방지 ── */
 html {
   scroll-behavior: smooth;
+  overflow-x: hidden;
+}
+
+/* ── Notion 본문 콘텐츠 줄바꿈 보호 ── */
+.notion-content {
+  overflow-wrap: break-word;
+  word-break: break-word;
+}
+
+.notion-content img {
+  max-width: 100%;
+  height: auto;
 }
 
 /* ── Marquee animation ── */

@@ -1,9 +1,17 @@
 "use client";
 
-import { useState, useMemo } from "react";
+import { useState, useMemo, useRef, useCallback } from "react";
 import Link from "next/link";
+import { ChevronLeft, ChevronRight } from "lucide-react";
 import Card from "@/components/ui/Card";
 import type { NotionNewsItem } from "@/types/notion";
+
+const ITEMS_PER_PAGE = 10;
+
+/** 공백 제거 후 비교 — Notion DB 옵션("업계동향")과 UI 탭("업계 동향") 차이 허용 */
+function matchCategory(itemCat: string, tabCat: string): boolean {
+  return itemCat.replace(/\s/g, "") === tabCat.replace(/\s/g, "");
+}
 
 function NewsCard({ item }: { item: NotionNewsItem }) {
   return (
@@ -95,27 +103,107 @@ function PinnedCard({ item }: { item: NotionNewsItem }) {
   );
 }
 
+function Pagination({
+  currentPage,
+  totalPages,
+  onPageChange,
+}: {
+  currentPage: number;
+  totalPages: number;
+  onPageChange: (page: number) => void;
+}) {
+  if (totalPages <= 1) return null;
+
+  // 표시할 페이지 번호 범위 계산 (최대 5개)
+  const maxVisible = 5;
+  let startPage = Math.max(1, currentPage - Math.floor(maxVisible / 2));
+  const endPage = Math.min(totalPages, startPage + maxVisible - 1);
+  if (endPage - startPage + 1 < maxVisible) {
+    startPage = Math.max(1, endPage - maxVisible + 1);
+  }
+
+  const pages: number[] = [];
+  for (let i = startPage; i <= endPage; i++) {
+    pages.push(i);
+  }
+
+  return (
+    <nav className="mt-12 flex items-center justify-center gap-1" aria-label="페이지네이션">
+      {/* 이전 */}
+      <button
+        onClick={() => onPageChange(currentPage - 1)}
+        disabled={currentPage === 1}
+        className="flex h-10 w-10 items-center justify-center rounded-lg text-muted transition-colors hover:text-foreground disabled:opacity-30 disabled:cursor-not-allowed"
+        aria-label="이전 페이지"
+      >
+        <ChevronLeft className="h-5 w-5" />
+      </button>
+
+      {/* 페이지 번호 */}
+      {pages.map((page) => (
+        <button
+          key={page}
+          onClick={() => onPageChange(page)}
+          className={`flex h-10 w-10 items-center justify-center rounded-lg text-sm transition-colors ${
+            page === currentPage
+              ? "font-bold text-primary"
+              : "text-muted hover:text-foreground"
+          }`}
+          aria-label={`${page}페이지`}
+          aria-current={page === currentPage ? "page" : undefined}
+        >
+          {page}
+        </button>
+      ))}
+
+      {/* 다음 */}
+      <button
+        onClick={() => onPageChange(currentPage + 1)}
+        disabled={currentPage === totalPages}
+        className="flex h-10 w-10 items-center justify-center rounded-lg text-muted transition-colors hover:text-foreground disabled:opacity-30 disabled:cursor-not-allowed"
+        aria-label="다음 페이지"
+      >
+        <ChevronRight className="h-5 w-5" />
+      </button>
+    </nav>
+  );
+}
+
 export default function NewsFilter({ news }: { news: NotionNewsItem[] }) {
   const [activeCategory, setActiveCategory] = useState("전체");
+  const [currentPage, setCurrentPage] = useState(1);
+  const listSectionRef = useRef<HTMLElement>(null);
 
   // Pinned 항목 분리 (최대 5개)
   const pinnedItems = useMemo(() => news.filter((n) => n.pinned).slice(0, 5), [news]);
 
-  // 카테고리 목록 동적 추출
-  const categories = useMemo(() => {
-    const cats = new Set<string>();
-    news.forEach((n) => {
-      if (n.category) cats.add(n.category);
-    });
-    return ["전체", ...Array.from(cats)];
-  }, [news]);
+  // 고정 카테고리 목록 (Notion DB Category select 옵션과 일치해야 함)
+  const categories = ["전체", "공지", "번역 팁", "업계 동향", "기술", "ETC"];
 
-  // 필터링된 일반 글 (pinned 제외)
+  // 필터링된 일반 글 (pinned 포함 — 전체 목록에서 카테고리만 필터)
   const filteredNews = useMemo(() => {
-    const nonPinned = news.filter((n) => !n.pinned);
-    if (activeCategory === "전체") return nonPinned;
-    return nonPinned.filter((n) => n.category === activeCategory);
+    if (activeCategory === "전체") return news;
+    return news.filter((n) => matchCategory(n.category, activeCategory));
   }, [news, activeCategory]);
+
+  // 페이지네이션 계산
+  const totalPages = Math.max(1, Math.ceil(filteredNews.length / ITEMS_PER_PAGE));
+  const paginatedNews = useMemo(() => {
+    const start = (currentPage - 1) * ITEMS_PER_PAGE;
+    return filteredNews.slice(start, start + ITEMS_PER_PAGE);
+  }, [filteredNews, currentPage]);
+
+  // 카테고리 변경 시 1페이지로 리셋
+  const handleCategoryChange = useCallback((cat: string) => {
+    setActiveCategory(cat);
+    setCurrentPage(1);
+  }, []);
+
+  // 페이지 변경 시 일반 글 영역 상단으로 스크롤
+  const handlePageChange = useCallback((page: number) => {
+    setCurrentPage(page);
+    listSectionRef.current?.scrollIntoView({ behavior: "smooth", block: "start" });
+  }, []);
 
   return (
     <>
@@ -138,35 +226,42 @@ export default function NewsFilter({ news }: { news: NotionNewsItem[] }) {
       )}
 
       {/* 카테고리 탭 + 카드 리스트 */}
-      <section className="bg-surface py-16">
+      <section ref={listSectionRef} className="bg-surface py-16">
         <div className="mx-auto max-w-7xl px-6">
           <div className="lg:pl-12">
             {/* 카테고리 탭 */}
-            {categories.length > 1 && (
-              <div className="mb-10 flex flex-wrap gap-2 border-b border-border pb-4">
-                {categories.map((cat) => (
-                  <button
-                    key={cat}
-                    onClick={() => setActiveCategory(cat)}
-                    className={`rounded-full px-4 py-2 text-sm font-medium transition-colors ${
-                      activeCategory === cat
-                        ? "bg-primary text-white"
-                        : "bg-white text-muted hover:text-foreground border border-border"
-                    }`}
-                  >
-                    {cat}
-                  </button>
-                ))}
-              </div>
-            )}
+            <div className="mb-10 flex flex-wrap gap-2 border-b border-border pb-4">
+              {categories.map((cat) => (
+                <button
+                  key={cat}
+                  onClick={() => handleCategoryChange(cat)}
+                  className={`rounded-full px-4 py-2 text-sm font-medium transition-colors ${
+                    activeCategory === cat
+                      ? "bg-primary text-white"
+                      : "bg-white text-muted hover:text-foreground border border-border"
+                  }`}
+                >
+                  {cat}
+                </button>
+              ))}
+            </div>
 
             {/* 1단 카드 리스트 */}
-            {filteredNews.length > 0 ? (
-              <div className="space-y-6">
-                {filteredNews.map((item) => (
-                  <NewsCard key={item.id} item={item} />
-                ))}
-              </div>
+            {paginatedNews.length > 0 ? (
+              <>
+                <div className="space-y-6">
+                  {paginatedNews.map((item) => (
+                    <NewsCard key={item.id} item={item} />
+                  ))}
+                </div>
+
+                {/* 페이지네이션 */}
+                <Pagination
+                  currentPage={currentPage}
+                  totalPages={totalPages}
+                  onPageChange={handlePageChange}
+                />
+              </>
             ) : (
               <div className="space-y-6">
                 {[1, 2, 3].map((i) => (

@@ -1,5 +1,5 @@
 import type { Metadata } from "next";
-import PageHero from "@/components/sections/PageHero";
+import Image from "next/image";
 import SectionHeader from "@/components/ui/SectionHeader";
 import Card from "@/components/ui/Card";
 import NewsFilter from "@/components/news/NewsFilter";
@@ -23,11 +23,21 @@ export default async function NewsPage() {
 
   return (
     <>
-      <PageHero
-        label="News"
-        title="최신 소식"
-        description="닐리리아의 최신 소식과 번역 · 현지화 업계 인사이트를 만나보세요."
-      />
+      {/* Hero — 예외 페이지: 기존 h-[250px] + 배경 이미지 유지 */}
+      <section className="relative bg-hero-bg py-8 lg:py-10 h-[250px] flex items-center overflow-hidden">
+        <div className="absolute inset-0">
+          <Image src="/images/최신소식.png" alt="" fill className="object-cover" priority />
+          <div className="absolute inset-0 bg-black/60" />
+        </div>
+        <div className="relative mx-auto max-w-7xl px-6 text-center">
+          <h1 className="text-[length:var(--font-size-page-hero)] font-bold leading-tight text-white break-keep">
+            최신 소식
+          </h1>
+          <p className="mx-auto mt-4 max-w-2xl text-[length:var(--font-size-body)] leading-relaxed text-white/80 break-keep">
+            닐리리아의 최신 소식과 번역 · 현지화 업계 인사이트를 만나보세요.
+          </p>
+        </div>
+      </section>
 
       {news.length > 0 ? (
         <NewsFilter news={news} />

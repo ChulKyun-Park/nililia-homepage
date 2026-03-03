@@ -198,3 +198,52 @@ export async function fetchAllCaseStudies(): Promise<NotionCaseStudyItem[]> {
     return [];
   }
 }
+
+/** Fetch a single news item by slug */
+export async function fetchNewsBySlug(slug: string): Promise<NotionNewsItem | null> {
+  if (!NEWS_DB_ID) return null;
+  try {
+    const response = await queryDatabase(NEWS_DB_ID, {
+      filter: {
+        and: [
+          publishedFilter,
+          { property: "Slug", rich_text: { equals: slug } },
+        ],
+      },
+      page_size: 1,
+    });
+    const pages = (response.results ?? []) as NotionPage[];
+    if (pages.length === 0) return null;
+    return mapNewsPage(pages[0]);
+  } catch (error) {
+    console.error("Failed to fetch news by slug:", error);
+    return null;
+  }
+}
+
+/** Notion block types */
+export type NotionBlock = {
+  id: string;
+  type: string;
+  has_children: boolean;
+  [key: string]: unknown;
+};
+
+/** Fetch page blocks (content) */
+export async function fetchPageBlocks(pageId: string): Promise<NotionBlock[]> {
+  try {
+    const res = await fetch(`${NOTION_API_BASE}/blocks/${pageId}/children?page_size=100`, {
+      headers: {
+        Authorization: `Bearer ${getToken()}`,
+        "Notion-Version": NOTION_VERSION,
+      },
+      next: { revalidate: REVALIDATE_SECONDS },
+    });
+    if (!res.ok) return [];
+    const data = await res.json();
+    return (data.results ?? []) as NotionBlock[];
+  } catch (error) {
+    console.error("Failed to fetch page blocks:", error);
+    return [];
+  }
+}

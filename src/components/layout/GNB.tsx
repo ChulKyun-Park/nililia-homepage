@@ -39,7 +39,6 @@ export default function GNB() {
       )}
     >
       <div className="mx-auto flex h-[52px] max-w-7xl items-center justify-between px-6 lg:h-[56px]">
-        {/* Left: Logo */}
         <Link href="/" className="shrink-0">
           <img
             src="/images/NILILIA.png"
@@ -48,7 +47,6 @@ export default function GNB() {
           />
         </Link>
 
-        {/* Center: Navigation */}
         <nav className="hidden items-center gap-7 lg:flex">
           {navLinks.map((link) => (
             <Link
@@ -66,7 +64,6 @@ export default function GNB() {
           ))}
         </nav>
 
-        {/* Right: Language + CTA Buttons */}
         <div className="hidden items-center gap-3 lg:flex">
           <LanguageSelector />
           <Button
@@ -85,7 +82,6 @@ export default function GNB() {
           </a>
         </div>
 
-        {/* Mobile Toggle */}
         <button
           type="button"
           onClick={() => setMobileOpen((v) => !v)}
@@ -100,11 +96,9 @@ export default function GNB() {
         </button>
       </div>
 
-      {/* Mobile Menu */}
       {mobileOpen && (
         <div className="border-t border-border bg-white lg:hidden">
           <nav className="mx-auto max-w-7xl px-6 py-4">
-            {/* Navigation Links */}
             <div className="space-y-1">
               {navLinks.map((link) => (
                 <Link
@@ -126,10 +120,8 @@ export default function GNB() {
               ))}
             </div>
 
-            {/* Divider */}
             <div className="my-4 border-t border-border" />
 
-            {/* Language Selector */}
             <div className="px-4">
               <p className="mb-2 text-xs font-semibold uppercase tracking-wider text-muted">
                 Language
@@ -137,10 +129,8 @@ export default function GNB() {
               <LanguageSelector variant="list" />
             </div>
 
-            {/* Divider */}
             <div className="my-4 border-t border-border" />
 
-            {/* CTA Buttons */}
             <div className="space-y-3 px-4">
               <Button
                 href="/contact"

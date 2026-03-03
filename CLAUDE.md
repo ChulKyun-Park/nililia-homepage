@@ -1,6 +1,6 @@
 # CLAUDE.md — Claude Code 상시 참조 가이드
 
-> **최종 업데이트**: 2026-03-02
+> **최종 업데이트**: 2026-03-03
 > 이 문서는 모든 Claude Code 세션의 기본 컨텍스트입니다. 삭제 금지.
 
 ---
@@ -13,7 +13,7 @@
 | 회사명 | **(주)닐리리아** / Nililia Inc. (⚠️ 닐릴리아 아님) |
 | 레포 | https://github.com/ChulKyun-Park/nililia-homepage |
 | 배포 | https://nililia-homepage.vercel.app |
-| 스택 | Next.js 14+ / TypeScript / Tailwind CSS v4 / Notion API / Vercel |
+| 스택 | Next.js 16 (Turbopack) / TypeScript / Tailwind CSS v4 / Notion API / Vercel |
 | 폰트 | Pretendard (CDN) + Inter (next/font/google) |
 | 테마 | 라이트 모드 (흰색 배경 + `#0097FE` 포인트) |
 
@@ -36,24 +36,33 @@
 ```
 src/
 ├── app/
-│   ├── layout.tsx          # 전체 레이아웃 (GNB + Footer)
-│   ├── page.tsx            # 홈 (섹션 조합)
-│   ├── globals.css         # 테마 토큰, keyframes
-│   ├── about/page.tsx      # 회사소개
-│   ├── career/page.tsx     # 채용
-│   ├── cases/page.tsx      # 성공사례 (Notion)
-│   ├── contact/page.tsx    # 문의
-│   ├── news/page.tsx       # 소식 (Notion)
-│   └── services/page.tsx   # 서비스
+│   ├── layout.tsx              # 전체 레이아웃 (GNB + Footer)
+│   ├── page.tsx                # 홈 (섹션 조합)
+│   ├── globals.css             # 디자인 토큰, keyframes
+│   ├── about/page.tsx          # 회사소개
+│   ├── career/page.tsx         # 채용
+│   ├── cases/page.tsx          # 성공사례 (Notion)
+│   ├── contact/page.tsx        # 문의
+│   ├── news/
+│   │   ├── page.tsx            # 소식 목록 (Notion)
+│   │   └── [slug]/page.tsx     # 소식 상세 (Notion 블록 렌더링)
+│   └── services/
+│       ├── page.tsx            # 서비스 목록
+│       └── {slug}/page.tsx     # 서비스 상세 ×8 (히어로→지원언어→Why→프로세스→CTA)
 ├── components/
-│   ├── layout/             # GNB, Footer, LanguageSelector
-│   ├── sections/           # Hero, SocialProof, Mission, ServiceGrid,
-│   │                       # WhyUs, News, CaseStudy, BottomCTA
-│   └── ui/                 # Button, Card, Container
-├── lib/notion/client.ts    # ⛔
-└── types/notion.ts         # ⛔
+│   ├── layout/                 # GNB, Footer, LanguageSelector
+│   ├── sections/               # Hero, SocialProof, Mission, ServiceGrid,
+│   │                           # WhyUs, PageHero, NewsCaseStudy, BottomCTA,
+│   │                           # ServiceWhy, ServiceProcess, SupportedLanguages
+│   ├── ui/                     # Button, Card, Container, Section, SectionHeader
+│   ├── news/                   # NewsFilter, BlockRenderer
+│   └── cases/                  # CasesFilter
+├── lib/notion/
+│   ├── client.ts               # ⛔ Notion API 코어
+│   └── homePreview.ts          # 홈 프리뷰 + 사례 보정 fetch
+└── types/notion.ts             # ⛔ Notion 타입 정의
 
-public/images/              # 서비스 이미지 (한글 파일명)
+public/images/                  # 서비스 이미지, 로고, 소셜프루프
 ```
 
 ---

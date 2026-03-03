@@ -18,7 +18,6 @@ import type { NotionCaseStudyItem } from "@/types/notion";
  *  Published    → published (checkbox)  — only true shown (server-side)
  * ────────────────────────────────────────────────────── */
 
-/* ── Sidebar items — CMS 가이드 ContentType 옵션 기준 ── */
 const ALL = "전체";
 const SIDEBAR_ITEMS = [
   ALL,
@@ -34,7 +33,6 @@ const SIDEBAR_ITEMS = [
 
 type SidebarItem = (typeof SIDEBAR_ITEMS)[number];
 
-/* ── Fallback field chips per content type ── */
 const FALLBACK_FIELDS: Record<string, string[]> = {
   "영상":          ["예능", "드라마", "영화"],
   "문서":          ["마케팅", "기술", "법률", "의료"],
@@ -52,9 +50,6 @@ function matchType(itemCategory: string, type: string): boolean {
   );
 }
 
-/* ══════════════════════════════════════════════════════
- * Case Card
- * ══════════════════════════════════════════════════════ */
 function CaseCard({ item }: { item: NotionCaseStudyItem }) {
   const meta = [item.languages, item.duration, item.results]
     .filter(Boolean)
@@ -63,33 +58,28 @@ function CaseCard({ item }: { item: NotionCaseStudyItem }) {
   return (
     <a href={`/cases/${item.slug}`} className="block h-full">
       <Card className="group flex h-full cursor-pointer flex-col p-6">
-        {/* Field tag (pill) — first tag */}
         {item.tags.length > 0 && (
           <span className="inline-block self-start rounded-full border border-border bg-surface px-3 py-1 text-xs font-medium text-muted">
             {item.tags[0]}
           </span>
         )}
 
-        {/* Client name — bold, largest */}
         <h3 className="mt-3 text-lg font-bold text-foreground group-hover:text-primary transition-colors break-keep lg:text-xl">
           {item.client || item.title}
         </h3>
 
-        {/* Task title — one-line summary */}
         {item.title && item.client && (
           <p className="mt-1 line-clamp-1 text-sm text-muted break-keep">
             {item.title}
           </p>
         )}
 
-        {/* Excerpt — optional, max 2 lines */}
         {item.excerpt && (
           <p className="mt-2 line-clamp-2 text-sm leading-relaxed text-muted/80 break-keep">
             {item.excerpt}
           </p>
         )}
 
-        {/* Meta line — bottom-anchored */}
         {meta && (
           <div className="mt-auto pt-4">
             <p className="text-xs text-muted/60">{meta}</p>
@@ -100,7 +90,6 @@ function CaseCard({ item }: { item: NotionCaseStudyItem }) {
   );
 }
 
-/* ── Skeleton Card ── */
 function SkeletonCard() {
   return (
     <Card className="flex flex-col p-6">
@@ -114,9 +103,6 @@ function SkeletonCard() {
   );
 }
 
-/* ══════════════════════════════════════════════════════
- * Main Component
- * ══════════════════════════════════════════════════════ */
 export default function CasesFilter({
   cases,
 }: {
@@ -125,20 +111,17 @@ export default function CasesFilter({
   const [activeSidebar, setActiveSidebar] = useState<SidebarItem>(ALL);
   const [activeField, setActiveField] = useState(ALL);
 
-  /* ── Cases scoped by primary filter (content type) ── */
   const scopedCases = useMemo(() => {
     if (activeSidebar === ALL) return cases;
     return cases.filter((c) => matchType(c.category, activeSidebar));
   }, [cases, activeSidebar]);
 
-  /* ── Raw data fields — extracted from scoped cases' Tags ── */
   const rawDataFields = useMemo(() => {
     const set = new Set<string>();
     scopedCases.forEach((c) => c.tags.forEach((t) => set.add(t)));
     return Array.from(set).sort((a, b) => a.localeCompare(b, "ko"));
   }, [scopedCases]);
 
-  /* ── Displayed field chips — data fields OR fallback ── */
   const { displayedFields, usingFallback } = useMemo(() => {
     // If we have real data fields, use them
     if (rawDataFields.length > 0) {
@@ -165,7 +148,6 @@ export default function CasesFilter({
     return { displayedFields: fb, usingFallback: true };
   }, [rawDataFields, activeSidebar]);
 
-  /* ── Final filtered list: scoped + field filter ── */
   const filteredCases = useMemo(() => {
     let result = scopedCases;
     if (activeField !== ALL) {
@@ -178,7 +160,6 @@ export default function CasesFilter({
     });
   }, [scopedCases, activeField]);
 
-  /* ── Per-type count (for badge) ── */
   const countByItem = useMemo(() => {
     const map: Record<string, number> = {};
     map[ALL] = cases.length;
@@ -189,7 +170,6 @@ export default function CasesFilter({
     return map;
   }, [cases]);
 
-  /* ── Handlers ── */
   const handleSidebarChange = (item: SidebarItem) => {
     setActiveSidebar(item);
     setActiveField(ALL); // reset secondary when primary changes
@@ -200,7 +180,6 @@ export default function CasesFilter({
 
       <div className="mx-auto max-w-7xl px-6">
         <div className="flex flex-col lg:flex-row gap-8 lg:gap-12">
-          {/* ═══════ LEFT SIDEBAR — Primary Filter ═══════ */}
           <aside className="lg:w-44 flex-shrink-0">
             <nav className="flex lg:flex-col gap-1.5 overflow-x-auto lg:overflow-visible pb-3 lg:pb-0 lg:sticky lg:top-24 -mx-1 px-1">
               {SIDEBAR_ITEMS.map((item) => {
@@ -232,9 +211,7 @@ export default function CasesFilter({
             </nav>
           </aside>
 
-          {/* ═══════ RIGHT CONTENT AREA ═══════ */}
           <div className="flex-1 min-w-0">
-            {/* Top Chips — Secondary Filter (Field / Industry) */}
             <div className="mb-8 flex flex-wrap gap-2">
               <button
                 onClick={() => setActiveField(ALL)}
@@ -261,10 +238,8 @@ export default function CasesFilter({
               ))}
             </div>
 
-            {/* Divider */}
             <div className="mb-8 border-t border-border" />
 
-            {/* Card Grid */}
             {filteredCases.length > 0 ? (
               <div className="grid gap-6 sm:grid-cols-2 lg:grid-cols-3">
                 {filteredCases.map((item) => (
@@ -272,7 +247,6 @@ export default function CasesFilter({
                 ))}
               </div>
             ) : (
-              /* Empty state */
               <div>
                 <div className="grid gap-6 sm:grid-cols-2 lg:grid-cols-3">
                   {[1, 2, 3].map((i) => (

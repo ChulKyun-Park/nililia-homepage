@@ -18,7 +18,6 @@ function NewsCard({ item }: { item: NotionNewsItem }) {
     <Link href={`/news/${item.slug}`}>
       <Card className="group overflow-hidden p-0">
         <div className="flex flex-col sm:flex-row">
-          {/* Thumbnail */}
           <div className="aspect-[16/10] sm:aspect-auto sm:h-auto sm:w-64 flex-shrink-0 overflow-hidden bg-surface">
             {item.thumbnail ? (
               <img
@@ -32,7 +31,6 @@ function NewsCard({ item }: { item: NotionNewsItem }) {
               </div>
             )}
           </div>
-          {/* Text */}
           <div className="flex flex-1 flex-col justify-center p-5 sm:p-6">
             <div className="flex items-center gap-3">
               {item.category && (
@@ -114,7 +112,6 @@ function Pagination({
 }) {
   if (totalPages <= 1) return null;
 
-  // 표시할 페이지 번호 범위 계산 (최대 5개)
   const maxVisible = 5;
   let startPage = Math.max(1, currentPage - Math.floor(maxVisible / 2));
   const endPage = Math.min(totalPages, startPage + maxVisible - 1);
@@ -129,7 +126,6 @@ function Pagination({
 
   return (
     <nav className="mt-12 flex items-center justify-center gap-1" aria-label="페이지네이션">
-      {/* 이전 */}
       <button
         onClick={() => onPageChange(currentPage - 1)}
         disabled={currentPage === 1}
@@ -139,7 +135,6 @@ function Pagination({
         <ChevronLeft className="h-5 w-5" />
       </button>
 
-      {/* 페이지 번호 */}
       {pages.map((page) => (
         <button
           key={page}
@@ -156,7 +151,6 @@ function Pagination({
         </button>
       ))}
 
-      {/* 다음 */}
       <button
         onClick={() => onPageChange(currentPage + 1)}
         disabled={currentPage === totalPages}
@@ -186,20 +180,17 @@ export default function NewsFilter({ news }: { news: NotionNewsItem[] }) {
     return news.filter((n) => matchCategory(n.category, activeCategory));
   }, [news, activeCategory]);
 
-  // 페이지네이션 계산
   const totalPages = Math.max(1, Math.ceil(filteredNews.length / ITEMS_PER_PAGE));
   const paginatedNews = useMemo(() => {
     const start = (currentPage - 1) * ITEMS_PER_PAGE;
     return filteredNews.slice(start, start + ITEMS_PER_PAGE);
   }, [filteredNews, currentPage]);
 
-  // 카테고리 변경 시 1페이지로 리셋
   const handleCategoryChange = useCallback((cat: string) => {
     setActiveCategory(cat);
     setCurrentPage(1);
   }, []);
 
-  // 페이지 변경 시 일반 글 영역 상단으로 스크롤
   const handlePageChange = useCallback((page: number) => {
     setCurrentPage(page);
     listSectionRef.current?.scrollIntoView({ behavior: "smooth", block: "start" });
@@ -207,7 +198,6 @@ export default function NewsFilter({ news }: { news: NotionNewsItem[] }) {
 
   return (
     <>
-      {/* Pinned 영역 */}
       {pinnedItems.length > 0 && (
         <section className="bg-white py-12">
           <div className="mx-auto max-w-7xl px-6">
@@ -225,11 +215,9 @@ export default function NewsFilter({ news }: { news: NotionNewsItem[] }) {
         </section>
       )}
 
-      {/* 카테고리 탭 + 카드 리스트 */}
       <section ref={listSectionRef} className="bg-surface py-16">
         <div className="mx-auto max-w-7xl px-6">
           <div className="lg:pl-12">
-            {/* 카테고리 탭 */}
             <div className="mb-10 flex flex-wrap gap-2 border-b border-border pb-4">
               {categories.map((cat) => (
                 <button
@@ -246,7 +234,6 @@ export default function NewsFilter({ news }: { news: NotionNewsItem[] }) {
               ))}
             </div>
 
-            {/* 1단 카드 리스트 */}
             {paginatedNews.length > 0 ? (
               <>
                 <div className="space-y-6">
@@ -255,7 +242,6 @@ export default function NewsFilter({ news }: { news: NotionNewsItem[] }) {
                   ))}
                 </div>
 
-                {/* 페이지네이션 */}
                 <Pagination
                   currentPage={currentPage}
                   totalPages={totalPages}

@@ -13,7 +13,6 @@
 
 import type { NotionNewsItem, NotionCaseStudyItem } from "@/types/notion";
 
-/* ── Constants ── */
 const NOTION_API_BASE = "https://api.notion.com/v1";
 const NOTION_VERSION = "2022-06-28";
 const REVALIDATE_SECONDS = 3600;
@@ -92,8 +91,6 @@ function getFileThumbnail(prop: unknown): string | null {
   if (!files || files.length === 0) return null;
   return files[0]?.file?.url ?? files[0]?.external?.url ?? null;
 }
-
-/* ── Notion types ── */
 
 type NotionProperty = {
   type?: string;
@@ -185,8 +182,6 @@ function mapCasePage(page: NotionPage): NotionCaseStudyItem {
     publishedAt: page.created_time?.slice(0, 10) ?? "",
   };
 }
-
-/* ── Filters & Sorts ── */
 
 const publishedFilter = {
   property: "Published",

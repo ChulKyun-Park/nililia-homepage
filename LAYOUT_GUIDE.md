@@ -124,6 +124,19 @@ mx-auto max-w-7xl px-6
 | `Container` | `src/components/ui/Container.tsx` | 본문 섹션 컨테이너 |
 | `Section` | `src/components/ui/Section.tsx` | 본문 섹션 래퍼 |
 | `SectionHeader` | `src/components/ui/SectionHeader.tsx` | 섹션 제목 |
+| `ServiceWhy` | `src/components/sections/ServiceWhy.tsx` | 서비스 상세 — "왜 닐리리아인가" (8개) |
+| `ServiceProcess` | `src/components/sections/ServiceProcess.tsx` | 서비스 상세 — 프로세스 단계 (8개) |
+| `SupportedLanguages` | `src/components/sections/SupportedLanguages.tsx` | 서비스 상세 — 지원 언어 (7개, SDH 제외) |
+
+### 서비스 상세 페이지 5-섹션 구조
+
+```
+PageHero (좌 텍스트 + 우 이미지, --font-size-page-hero)
+  → SupportedLanguages (SDH 제외)
+    → ServiceWhy (3~4항목)
+      → ServiceProcess (3~5단계)
+        → BottomCTA
+```
 
 ---
 

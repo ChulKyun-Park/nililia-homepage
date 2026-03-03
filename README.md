@@ -10,7 +10,7 @@
 </p>
 
 <p align="center">
-  <img src="https://img.shields.io/badge/Next.js-14+-000?logo=next.js" />
+  <img src="https://img.shields.io/badge/Next.js-16-000?logo=next.js" />
   <img src="https://img.shields.io/badge/TypeScript-5-3178C6?logo=typescript&logoColor=white" />
   <img src="https://img.shields.io/badge/Tailwind_CSS-v4-06B6D4?logo=tailwindcss&logoColor=white" />
   <img src="https://img.shields.io/badge/Notion_API-CMS-000?logo=notion" />
@@ -21,7 +21,7 @@
 
 ## ✨ 프로젝트 소개
 
-NILILIA는 영상 번역, 문서 번역, 웹/앱 현지화, 게임 번역 등 **10개 서비스**를 제공하는 번역·로컬리제이션 전문 기업의 공식 홈페이지입니다.
+**(주)닐리리아**는 영상 번역, 문서 번역, 웹/앱 현지화, 게임 번역 등 **10개 서비스**를 제공하는 번역·로컬리제이션 전문 기업의 공식 홈페이지입니다.
 
 ---
 
@@ -29,13 +29,24 @@ NILILIA는 영상 번역, 문서 번역, 웹/앱 현지화, 게임 번역 등 **
 
 | 영역 | 기술 |
 |------|------|
-| 프레임워크 | Next.js 14+ (App Router) |
-| 언어 | TypeScript |
+| 프레임워크 | Next.js 16 (App Router, Turbopack) |
+| 언어 | TypeScript 5 |
 | 스타일링 | Tailwind CSS v4 |
-| CMS | Notion API (REST 직접 호출) |
+| CMS | Notion API (REST 직접 호출, ISR 1h) |
 | 배포 | Vercel |
 | 폰트 | Pretendard (한글) + Inter (영문) |
 | 테마 | 라이트 모드 (`#0097FE` 포인트) |
+
+---
+
+## 💡 주요 기능
+
+- **Notion CMS 연동** — 소식/성공사례를 Notion DB에서 관리, ISR로 1시간 간격 자동 갱신
+- **히어로 카드 애니메이션** — 3-2-3 캐스케이드 + 컨베이어 (16초 사이클, CSS keyframes)
+- **서비스 상세 페이지** — 8개 서비스별 전용 페이지 (히어로 → 지원 언어 → Why → 프로세스 → CTA)
+- **반응형 디자인** — 모바일(375px) / 태블릿(768px) / 데스크탑(1280px) 완전 대응
+- **CSS 변수 기반 디자인 시스템** — 컬러, 타이포그래피, 여백을 변수로 일원 관리
+- **Server Components 우선** — 클라이언트 번들 최소화, 인터랙션 필요 시만 Client Component
 
 ---
 
@@ -44,24 +55,41 @@ NILILIA는 영상 번역, 문서 번역, 웹/앱 현지화, 게임 번역 등 **
 ```
 src/
 ├── app/
-│   ├── layout.tsx            # 전체 레이아웃
-│   ├── page.tsx              # 홈 (섹션 조합)
-│   ├── globals.css           # 테마 토큰
-│   ├── about/page.tsx        # 회사소개
-│   ├── career/page.tsx       # 채용
-│   ├── cases/page.tsx        # 성공사례 (Notion)
-│   ├── contact/page.tsx      # 문의
-│   ├── news/page.tsx         # 소식 (Notion)
-│   └── services/page.tsx     # 서비스
+│   ├── layout.tsx              # 전체 레이아웃 (GNB + Footer)
+│   ├── page.tsx                # 홈 (섹션 조합)
+│   ├── globals.css             # 디자인 토큰, keyframes
+│   ├── about/page.tsx          # 회사소개
+│   ├── career/page.tsx         # 채용
+│   ├── cases/page.tsx          # 성공사례 (Notion)
+│   ├── contact/page.tsx        # 문의
+│   ├── news/
+│   │   ├── page.tsx            # 소식 목록 (Notion)
+│   │   └── [slug]/page.tsx     # 소식 상세
+│   └── services/
+│       ├── page.tsx            # 서비스 목록
+│       ├── video-translation/  # 영상 번역
+│       ├── document-translation/
+│       ├── web-app-localization/
+│       ├── game-localization/
+│       ├── webnovel-translation/
+│       ├── sdh-subtitle/
+│       ├── mtpe/
+│       └── ai-dubbing/
 ├── components/
-│   ├── layout/               # GNB, Footer, LanguageSelector
-│   ├── sections/             # Hero, SocialProof, Mission, ServiceGrid,
-│   │                         # WhyUs, News, CaseStudy, BottomCTA
-│   └── ui/                   # Button, Card, Container
-├── lib/notion/client.ts      # ⛔ Notion API (수정 금지)
-└── types/notion.ts           # ⛔ 타입 정의 (수정 금지)
+│   ├── layout/                 # GNB, Footer, LanguageSelector
+│   ├── sections/               # Hero, SocialProof, Mission, ServiceGrid,
+│   │                           # WhyUs, PageHero, NewsCaseStudy, BottomCTA
+│   ├── ui/                     # Button, Card, Container, Section, SectionHeader
+│   ├── news/                   # NewsFilter
+│   └── cases/                  # CasesFilter
+├── lib/
+│   └── notion/
+│       ├── client.ts           # Notion API 코어 (뉴스/사례 CRUD)
+│       └── homePreview.ts      # 홈 프리뷰 + 사례 보정 fetch
+└── types/
+    └── notion.ts               # Notion 타입 정의
 
-public/images/                # 서비스 이미지, 로고
+public/images/                  # 서비스 이미지, 로고, 소셜프루프
 ```
 
 ---
@@ -69,18 +97,14 @@ public/images/                # 서비스 이미지, 로고
 ## 🚀 시작하기
 
 ```bash
-# 클론
 git clone https://github.com/ChulKyun-Park/nililia-homepage.git
 cd nililia-homepage
 
-# 의존성 설치
 npm install
 
-# 환경변수 설정
 cp .env.example .env.local
-# NOTION_API_KEY, NOTION_NEWS_DB_ID, NOTION_CASESTUDY_DB_ID 입력
+# .env.local 파일에 Notion API 키와 DB ID 입력
 
-# 개발 서버
 npm run dev
 ```
 
@@ -123,8 +147,8 @@ npm run dev
 
 | 문서 | 용도 |
 |------|------|
-| [`CLAUDE.md`](CLAUDE.md) | Claude Code 상시 참조 가이드 |
-| [`FINAL_프롬프트_Claude_Code.md`](FINAL_프롬프트_Claude_Code.md) | 초기 빌드 프롬프트 (아카이브) |
+| [`CLAUDE.md`](CLAUDE.md) | 개발 가이드 (컬러, 타이포, 애니메이션 스펙) |
+| [`LAYOUT_GUIDE.md`](LAYOUT_GUIDE.md) | 레이아웃 기준 (히어로, 컨테이너, 여백) |
 
 ---
 

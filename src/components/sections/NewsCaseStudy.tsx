@@ -10,9 +10,7 @@ export default async function NewsCaseStudy() {
   return (
     <section className="bg-surface py-24">
       <div className="mx-auto max-w-7xl px-6 lg:pl-12">
-        {/* 2-column grid */}
         <div className="grid gap-12 lg:grid-cols-2">
-          {/* Left: News */}
           <div>
             <div className="mb-8">
               <span className="mb-2 inline-block text-[length:var(--font-size-section-label)] font-semibold uppercase tracking-wider text-primary">
@@ -28,7 +26,6 @@ export default async function NewsCaseStudy() {
                 {news.map((item) => (
                   <a key={item.id} href={`/news/${item.slug}`} className="block">
                     <Card className="group flex flex-row items-start gap-4 overflow-hidden p-4">
-                      {/* Thumbnail */}
                       <div className="h-24 w-24 flex-shrink-0 overflow-hidden rounded-xl bg-surface">
                         {item.thumbnail ? (
                           <img
@@ -42,7 +39,6 @@ export default async function NewsCaseStudy() {
                           </div>
                         )}
                       </div>
-                      {/* Text */}
                       <div className="flex-1 min-w-0">
                         {item.publishedAt && (
                           <time className="text-xs text-muted">
@@ -92,7 +88,6 @@ export default async function NewsCaseStudy() {
             </div>
           </div>
 
-          {/* Right: Case Studies */}
           <div>
             <div className="mb-8">
               <span className="mb-2 inline-block text-[length:var(--font-size-section-label)] font-semibold uppercase tracking-wider text-primary">
@@ -108,7 +103,6 @@ export default async function NewsCaseStudy() {
                 {cases.map((item) => (
                   <a key={item.id} href="/cases" className="block">
                     <Card className="group flex flex-row items-start gap-4 overflow-hidden p-4">
-                      {/* Thumbnail */}
                       <div className="h-24 w-24 flex-shrink-0 overflow-hidden rounded-xl bg-surface">
                         {item.thumbnail ? (
                           <img
@@ -122,7 +116,6 @@ export default async function NewsCaseStudy() {
                           </div>
                         )}
                       </div>
-                      {/* Text */}
                       <div className="flex-1 min-w-0">
                         {item.client && (
                           <span className="inline-block rounded-full border border-primary/20 bg-primary/10 px-2.5 py-0.5 text-xs font-medium text-primary">

@@ -22,7 +22,6 @@ export default async function CasesPage() {
 
   return (
     <>
-      {/* Hero */}
       <section className="relative bg-hero-bg py-8 lg:py-10 h-[250px] flex items-center overflow-hidden">
         <div className="absolute inset-0">
           <Image
@@ -44,10 +43,8 @@ export default async function CasesPage() {
         </div>
       </section>
 
-      {/* Main Content — Sidebar + Filters + Grid */}
       <CasesFilter cases={cases} />
 
-      {/* Bottom CTA */}
       <section className="bg-gradient-to-r from-primary to-primary-dark py-20">
         <div className="mx-auto max-w-3xl px-6 text-center">
           <h2 className="text-[length:var(--font-size-section-h2)] font-bold text-white break-keep">

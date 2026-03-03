@@ -143,7 +143,6 @@ export default function ServiceGrid() {
           description="다양한 콘텐츠 유형에 최적화된 전문 번역 및 현지화 서비스를 제공합니다."
         />
 
-        {/* Active services */}
         <div className="grid gap-5 sm:grid-cols-2 lg:grid-cols-3">
           {services.map((service) => (
             <Link key={service.title} href={`/services/${service.slug}`}>
@@ -152,7 +151,6 @@ export default function ServiceGrid() {
           ))}
         </div>
 
-        {/* Coming Soon divider */}
         <div className="mt-12 flex items-center gap-4">
           <span className="inline-flex items-center rounded-lg border border-border px-4 py-2 text-sm font-medium text-foreground">
             coming soon
@@ -160,7 +158,6 @@ export default function ServiceGrid() {
           <div className="flex-1 h-px bg-border" />
         </div>
 
-        {/* Coming soon services — 클릭 불가 */}
         <div className="mt-8 grid gap-5 sm:grid-cols-2 lg:grid-cols-3">
           {comingSoonServices.map((service) => (
             <ServiceCard key={service.title} service={service} />

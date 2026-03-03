@@ -81,7 +81,7 @@ function CreatorAvatar({ filename }: { filename: string }) {
   const name = filename.replace(/\.[^.]+$/, "");
   return (
     <div className="flex-none flex items-center mx-[36px]">
-      <div className="h-10 w-10 overflow-hidden rounded-full">
+      <div className="h-12 w-12 overflow-hidden rounded-full">
         <Image
           src={`/images/socialproof/creator/${filename}`}
           alt={name}

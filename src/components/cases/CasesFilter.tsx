@@ -33,6 +33,16 @@ const SIDEBAR_ITEMS = [
 
 type SidebarItem = (typeof SIDEBAR_ITEMS)[number];
 
+/* ── Fallback field chips per content type ── */
+const FALLBACK_FIELDS: Record<string, string[]> = {
+  "문서":       ["마케팅", "기술", "법률", "의료"],
+  "영상":       ["예능", "드라마", "영화"],
+  "웹소설/웹툰": ["웹툰", "웹소설"],
+  "홈페이지/앱": ["랜딩", "앱", "웹"],
+  "게임":       ["모바일", "콘솔", "RPG", "캐주얼"],
+  // SDH, MTPE: no fallback — "전체" only is fine
+};
+
 /** Whitespace-insensitive category comparison */
 function matchType(itemCategory: string, type: string): boolean {
   return (
@@ -104,6 +114,75 @@ function SkeletonCard() {
 }
 
 /* ══════════════════════════════════════════════════════
+ * Debug Panel (temporary — remove after confirming)
+ * ══════════════════════════════════════════════════════ */
+function DebugPanel({
+  activeSidebar,
+  filteredCount,
+  scopedCount,
+  totalCount,
+  rawDataFields,
+  displayedFields,
+  usingFallback,
+}: {
+  activeSidebar: string;
+  filteredCount: number;
+  scopedCount: number;
+  totalCount: number;
+  rawDataFields: string[];
+  displayedFields: string[];
+  usingFallback: boolean;
+}) {
+  return (
+    <div className="fixed right-4 top-20 z-50 w-72 rounded-lg border border-orange-300 bg-orange-50 p-4 text-xs font-mono shadow-lg">
+      <p className="mb-2 text-sm font-bold text-orange-700">
+        🔍 Debug Panel (temp)
+      </p>
+      <table className="w-full">
+        <tbody>
+          <tr>
+            <td className="pr-2 text-orange-600">selectedType:</td>
+            <td className="font-semibold text-foreground">{activeSidebar}</td>
+          </tr>
+          <tr>
+            <td className="pr-2 text-orange-600">total items:</td>
+            <td className="font-semibold text-foreground">{totalCount}</td>
+          </tr>
+          <tr>
+            <td className="pr-2 text-orange-600">scoped items:</td>
+            <td className="font-semibold text-foreground">{scopedCount}</td>
+          </tr>
+          <tr>
+            <td className="pr-2 text-orange-600">filtered items:</td>
+            <td className="font-semibold text-foreground">{filteredCount}</td>
+          </tr>
+          <tr>
+            <td className="pr-2 text-orange-600">usingFallback:</td>
+            <td className="font-semibold text-foreground">
+              {usingFallback ? "YES" : "no"}
+            </td>
+          </tr>
+          <tr>
+            <td className="pr-2 align-top text-orange-600">rawDataFields:</td>
+            <td className="font-semibold text-foreground break-all">
+              {rawDataFields.length > 0
+                ? JSON.stringify(rawDataFields)
+                : "(empty)"}
+            </td>
+          </tr>
+          <tr>
+            <td className="pr-2 align-top text-orange-600">displayedChips:</td>
+            <td className="font-semibold text-foreground break-all">
+              {JSON.stringify(displayedFields)}
+            </td>
+          </tr>
+        </tbody>
+      </table>
+    </div>
+  );
+}
+
+/* ══════════════════════════════════════════════════════
  * Main Component
  * ══════════════════════════════════════════════════════ */
 export default function CasesFilter({
@@ -120,13 +199,39 @@ export default function CasesFilter({
     return cases.filter((c) => matchType(c.category, activeSidebar));
   }, [cases, activeSidebar]);
 
-  /* ── Dynamic field chips — union of Tags in scoped cases ── */
-  const availableFields = useMemo(() => {
+  /* ── Raw data fields — extracted from scoped cases' Tags ── */
+  const rawDataFields = useMemo(() => {
     const set = new Set<string>();
     scopedCases.forEach((c) => c.tags.forEach((t) => set.add(t)));
-    // Stable alphabetical order
     return Array.from(set).sort((a, b) => a.localeCompare(b, "ko"));
   }, [scopedCases]);
+
+  /* ── Displayed field chips — data fields OR fallback ── */
+  const { displayedFields, usingFallback } = useMemo(() => {
+    // If we have real data fields, use them
+    if (rawDataFields.length > 0) {
+      return { displayedFields: rawDataFields, usingFallback: false };
+    }
+
+    // Otherwise, compute fallback
+    if (activeSidebar === ALL) {
+      // Union of all fallback fields (deduped)
+      const union = new Set<string>();
+      Object.values(FALLBACK_FIELDS).forEach((arr) =>
+        arr.forEach((f) => union.add(f))
+      );
+      return {
+        displayedFields: Array.from(union).sort((a, b) =>
+          a.localeCompare(b, "ko")
+        ),
+        usingFallback: true,
+      };
+    }
+
+    // Specific content type fallback
+    const fb = FALLBACK_FIELDS[activeSidebar] || [];
+    return { displayedFields: fb, usingFallback: true };
+  }, [rawDataFields, activeSidebar]);
 
   /* ── Final filtered list: scoped + field filter ── */
   const filteredCases = useMemo(() => {
@@ -160,6 +265,17 @@ export default function CasesFilter({
 
   return (
     <section className="bg-white py-12 lg:py-16">
+      {/* ── Debug Panel (temporary) ── */}
+      <DebugPanel
+        activeSidebar={activeSidebar}
+        filteredCount={filteredCases.length}
+        scopedCount={scopedCases.length}
+        totalCount={cases.length}
+        rawDataFields={rawDataFields}
+        displayedFields={displayedFields}
+        usingFallback={usingFallback}
+      />
+
       <div className="mx-auto max-w-7xl px-6">
         <div className="flex flex-col lg:flex-row gap-8 lg:gap-12">
           {/* ═══════ LEFT SIDEBAR — Primary Filter ═══════ */}
@@ -208,7 +324,7 @@ export default function CasesFilter({
               >
                 전체
               </button>
-              {availableFields.map((field) => (
+              {displayedFields.map((field) => (
                 <button
                   key={field}
                   onClick={() => setActiveField(field)}

@@ -19,6 +19,7 @@ const REVALIDATE_SECONDS = 3600;
 
 const NEWS_DB_ID = process.env.NOTION_NEWS_DB_ID ?? "";
 const CASESTUDY_DB_ID = process.env.NOTION_CASESTUDY_DB_ID ?? "";
+const POPUP_DB_ID = process.env.NOTION_POPUP_DB_ID ?? "";
 
 /* ── Helpers (client.ts 에서 export 안 되므로 복제) ── */
 
@@ -311,4 +312,98 @@ export async function fetchAllCaseStudiesCorrected(): Promise<
     console.error("Failed to fetch all case studies (corrected):", error);
     return [];
   }
+}
+
+/* ══════════════════════════════════════════════════════
+ * 팝업 — News DB (PopUp=true) + 별도 Popup DB 통합
+ * ══════════════════════════════════════════════════════ */
+
+export type NotionPopupItem = {
+  id: string;
+  title: string;
+  image: string | null;
+  link: string;
+  source: "news" | "popup";
+};
+
+/**
+ * 팝업 아이템 fetch.
+ * 1) Popup DB: Published=true, 오늘이 StartDate~EndDate 범위
+ * 2) News DB:  Published=true AND PopUp=true
+ * Popup DB 우선, News DB 후순.
+ */
+export async function fetchPopupItems(): Promise<NotionPopupItem[]> {
+  const items: NotionPopupItem[] = [];
+  const today = new Date().toISOString().slice(0, 10);
+
+  // 1) Popup DB
+  if (POPUP_DB_ID) {
+    try {
+      const response = await queryDatabase(POPUP_DB_ID, {
+        filter: {
+          and: [
+            { property: "Published", checkbox: { equals: true } },
+            {
+              or: [
+                { property: "StartDate", date: { is_empty: true } },
+                { property: "StartDate", date: { on_or_before: today } },
+              ],
+            },
+            {
+              or: [
+                { property: "EndDate", date: { is_empty: true } },
+                { property: "EndDate", date: { on_or_after: today } },
+              ],
+            },
+          ],
+        },
+        page_size: 10,
+      });
+
+      for (const page of (response.results ?? []) as NotionPage[]) {
+        const props = page.properties;
+        items.push({
+          id: page.id,
+          title: getTitle(props["이름"]?.title),
+          image: getFileThumbnail(props.Image?.files),
+          link: (props.Link?.url as string) ?? "",
+          source: "popup",
+        });
+      }
+    } catch (error) {
+      console.error("Failed to fetch popup DB:", error);
+    }
+  }
+
+  // 2) News DB — PopUp=true
+  if (NEWS_DB_ID) {
+    try {
+      const response = await queryDatabase(NEWS_DB_ID, {
+        filter: {
+          and: [
+            publishedFilter,
+            { property: "PopUp", checkbox: { equals: true } },
+          ],
+        },
+        sorts: newsSorts,
+        page_size: 5,
+      });
+
+      for (const page of (response.results ?? []) as NotionPage[]) {
+        const props = page.properties;
+        const slug = getRichText(props.Slug?.rich_text) || page.id;
+        items.push({
+          id: page.id,
+          title: getRichText(props.Title?.rich_text),
+          image: getFileThumbnail(props.Thumbnail?.files),
+          link: `/news/${slug}`,
+          source: "news",
+        });
+      }
+    } catch (error) {
+      console.error("Failed to fetch news popups:", error);
+    }
+  }
+
+  return items;
 }

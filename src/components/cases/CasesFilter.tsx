@@ -115,75 +115,6 @@ function SkeletonCard() {
 }
 
 /* ══════════════════════════════════════════════════════
- * Debug Panel (temporary — remove after confirming)
- * ══════════════════════════════════════════════════════ */
-function DebugPanel({
-  activeSidebar,
-  filteredCount,
-  scopedCount,
-  totalCount,
-  rawDataFields,
-  displayedFields,
-  usingFallback,
-}: {
-  activeSidebar: string;
-  filteredCount: number;
-  scopedCount: number;
-  totalCount: number;
-  rawDataFields: string[];
-  displayedFields: string[];
-  usingFallback: boolean;
-}) {
-  return (
-    <div className="fixed right-4 top-20 z-50 w-72 rounded-lg border border-orange-300 bg-orange-50 p-4 text-xs font-mono shadow-lg">
-      <p className="mb-2 text-sm font-bold text-orange-700">
-        🔍 Debug Panel (temp)
-      </p>
-      <table className="w-full">
-        <tbody>
-          <tr>
-            <td className="pr-2 text-orange-600">selectedType:</td>
-            <td className="font-semibold text-foreground">{activeSidebar}</td>
-          </tr>
-          <tr>
-            <td className="pr-2 text-orange-600">total items:</td>
-            <td className="font-semibold text-foreground">{totalCount}</td>
-          </tr>
-          <tr>
-            <td className="pr-2 text-orange-600">scoped items:</td>
-            <td className="font-semibold text-foreground">{scopedCount}</td>
-          </tr>
-          <tr>
-            <td className="pr-2 text-orange-600">filtered items:</td>
-            <td className="font-semibold text-foreground">{filteredCount}</td>
-          </tr>
-          <tr>
-            <td className="pr-2 text-orange-600">usingFallback:</td>
-            <td className="font-semibold text-foreground">
-              {usingFallback ? "YES" : "no"}
-            </td>
-          </tr>
-          <tr>
-            <td className="pr-2 align-top text-orange-600">rawDataFields:</td>
-            <td className="font-semibold text-foreground break-all">
-              {rawDataFields.length > 0
-                ? JSON.stringify(rawDataFields)
-                : "(empty)"}
-            </td>
-          </tr>
-          <tr>
-            <td className="pr-2 align-top text-orange-600">displayedChips:</td>
-            <td className="font-semibold text-foreground break-all">
-              {JSON.stringify(displayedFields)}
-            </td>
-          </tr>
-        </tbody>
-      </table>
-    </div>
-  );
-}
-
-/* ══════════════════════════════════════════════════════
  * Main Component
  * ══════════════════════════════════════════════════════ */
 export default function CasesFilter({
@@ -266,16 +197,6 @@ export default function CasesFilter({
 
   return (
     <section className="bg-white py-12 lg:py-16">
-      {/* ── Debug Panel (temporary) ── */}
-      <DebugPanel
-        activeSidebar={activeSidebar}
-        filteredCount={filteredCases.length}
-        scopedCount={scopedCases.length}
-        totalCount={cases.length}
-        rawDataFields={rawDataFields}
-        displayedFields={displayedFields}
-        usingFallback={usingFallback}
-      />
 
       <div className="mx-auto max-w-7xl px-6">
         <div className="flex flex-col lg:flex-row gap-8 lg:gap-12">

@@ -109,6 +109,7 @@ type NotionProperty = {
 
 type NotionPage = {
   id: string;
+  created_time?: string;
   properties: Record<string, NotionProperty>;
 };
 
@@ -181,7 +182,7 @@ function mapCasePage(page: NotionPage): NotionCaseStudyItem {
     results: getRichText(props.Results?.rich_text),
     pinned: getCheckbox(props.Pinned?.checkbox),
     tags: mergedTags,
-    publishedAt: getDate(props.Date?.date),
+    publishedAt: page.created_time?.slice(0, 10) ?? "",
   };
 }
 
@@ -199,9 +200,16 @@ const homeExposureFilter = {
   ],
 };
 
-const defaultSorts = [
+/** News DB — Date 속성 있음 */
+const newsSorts = [
   { property: "Pinned", direction: "descending" as const },
   { property: "Date", direction: "descending" as const },
+];
+
+/** Case Study DB — Date 속성 없음, created_time 타임스탬프로 대체 */
+const caseSorts = [
+  { property: "Pinned", direction: "descending" as const },
+  { timestamp: "created_time", direction: "descending" as const },
 ];
 
 /* ══════════════════════════════════════════════════════
@@ -221,7 +229,7 @@ export async function fetchHomeNewsPreview(
     // 1) "홈메뉴 노출" checked items
     const response = await queryDatabase(NEWS_DB_ID, {
       filter: homeExposureFilter,
-      sorts: defaultSorts,
+      sorts: newsSorts,
       page_size: limit,
     });
 
@@ -234,7 +242,7 @@ export async function fetchHomeNewsPreview(
     // 2) Fallback: latest published items
     const fallback = await queryDatabase(NEWS_DB_ID, {
       filter: publishedFilter,
-      sorts: defaultSorts,
+      sorts: newsSorts,
       page_size: limit,
     });
 
@@ -258,7 +266,7 @@ export async function fetchHomeCaseStudyPreview(
     // 1) "홈메뉴 노출" checked items
     const response = await queryDatabase(CASESTUDY_DB_ID, {
       filter: homeExposureFilter,
-      sorts: defaultSorts,
+      sorts: caseSorts,
       page_size: limit,
     });
 
@@ -271,7 +279,7 @@ export async function fetchHomeCaseStudyPreview(
     // 2) Fallback: latest published items
     const fallback = await queryDatabase(CASESTUDY_DB_ID, {
       filter: publishedFilter,
-      sorts: defaultSorts,
+      sorts: caseSorts,
       page_size: limit,
     });
 
@@ -300,7 +308,7 @@ export async function fetchAllCaseStudiesCorrected(): Promise<
   try {
     const response = await queryDatabase(CASESTUDY_DB_ID, {
       filter: publishedFilter,
-      sorts: defaultSorts,
+      sorts: caseSorts,
       page_size: 100,
     });
     return ((response.results ?? []) as NotionPage[]).map(mapCasePage);

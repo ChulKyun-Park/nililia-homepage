@@ -165,7 +165,12 @@ export default function ServicesPage() {
             {comingSoonServices.map((service) => {
               const Icon = service.icon;
               return (
-                <Card key={service.title} className="group overflow-hidden p-0 cursor-default opacity-40 grayscale h-full">
+                <Card key={service.title} className="group relative overflow-hidden p-0 cursor-default h-full">
+                  <div className="absolute inset-0 z-10 flex items-center justify-center bg-black/40">
+                    <span className="rounded-full bg-white px-5 py-2 text-sm font-bold tracking-wide text-foreground shadow-lg">
+                      Coming Soon
+                    </span>
+                  </div>
                   <div className="aspect-[16/10] bg-surface flex items-center justify-center p-[5%]">
                     <div className="relative overflow-hidden rounded-lg w-full h-full">
                       <Image

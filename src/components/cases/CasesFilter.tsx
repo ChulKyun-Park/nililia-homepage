@@ -34,15 +34,15 @@ function CaseCard({ item }: { item: NotionCaseStudyItem }) {
     .join(" | ");
 
   return (
-    <a href={`/cases/${item.slug}`} className="block h-full">
-      <Card className="group flex h-full cursor-pointer flex-col p-6">
+    <div className="block h-full">
+      <Card className="group flex h-full cursor-default flex-col p-6">
         {item.tags.length > 0 && (
           <span className="inline-block self-start rounded-full border border-border bg-surface px-3 py-1 text-xs font-medium text-muted">
             {item.tags[0]}
           </span>
         )}
 
-        <h3 className="mt-3 text-lg font-bold text-foreground group-hover:text-primary transition-colors break-keep lg:text-xl">
+        <h3 className="mt-3 text-lg font-bold text-foreground break-keep lg:text-xl">
           {item.client || item.title}
         </h3>
 
@@ -64,7 +64,7 @@ function CaseCard({ item }: { item: NotionCaseStudyItem }) {
           </div>
         )}
       </Card>
-    </a>
+    </div>
   );
 }
 

@@ -7,7 +7,7 @@ import BottomCTA from "@/components/sections/BottomCTA";
 import PopupModal from "@/components/popup/PopupModal";
 import { fetchPopupItems } from "@/lib/notion/homePreview";
 
-export const revalidate = 10;
+export const revalidate = 0;
 
 export default async function Home() {
   const popups = await fetchPopupItems();

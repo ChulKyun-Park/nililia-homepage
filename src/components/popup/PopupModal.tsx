@@ -57,7 +57,7 @@ export default function PopupModal({ popups }: { popups: NotionPopupItem[] }) {
       onClick={handleClose}
     >
       <div
-        className="relative w-full max-w-md overflow-hidden rounded-2xl bg-white shadow-2xl"
+        className="relative w-full max-w-[270px] overflow-hidden rounded-2xl bg-white shadow-2xl"
         onClick={(e) => e.stopPropagation()}
       >
         {/* Close button */}

@@ -109,7 +109,7 @@ export default function SocialProof() {
       </div>
 
       {/* Creators marquee — 동일 박스 스타일, 반대 방향 */}
-      <div className="mt-16 overflow-hidden">
+      <div className="mt-24 overflow-hidden">
         <p className="mb-8 text-center text-[length:var(--font-size-body)] font-medium uppercase tracking-wider text-muted">
           크리에이터들도 함께합니다
         </p>

@@ -4,7 +4,7 @@ import { fetchHomeNewsPreview, fetchHomeCaseStudyPreview } from "@/lib/notion/ho
 export default async function NewsCaseStudy() {
   const [news, cases] = await Promise.all([
     fetchHomeNewsPreview(3),
-    fetchHomeCaseStudyPreview(3),
+    fetchHomeCaseStudyPreview(5),
   ]);
 
   return (
@@ -99,11 +99,11 @@ export default async function NewsCaseStudy() {
             </div>
 
             {cases.length > 0 ? (
-              <div className="space-y-4">
+              <div className="space-y-2">
                 {cases.map((item) => (
                   <a key={item.id} href="/cases" className="block">
-                    <Card className="group flex flex-row items-start gap-4 overflow-hidden p-4">
-                      <div className="h-24 w-24 flex-shrink-0 overflow-hidden rounded-xl bg-surface">
+                    <Card className="group flex flex-row items-center gap-3 overflow-hidden p-2.5">
+                      <div className="h-14 w-14 flex-shrink-0 overflow-hidden rounded-lg bg-surface">
                         {item.thumbnail ? (
                           <img
                             src={item.thumbnail}
@@ -111,42 +111,36 @@ export default async function NewsCaseStudy() {
                             className="h-full w-full object-cover transition-transform duration-300 group-hover:scale-105"
                           />
                         ) : (
-                          <div className="flex h-full w-full items-center justify-center text-xs text-muted">
+                          <div className="flex h-full w-full items-center justify-center text-[10px] text-muted">
                             No Image
                           </div>
                         )}
                       </div>
                       <div className="flex-1 min-w-0">
                         {item.client && (
-                          <span className="inline-block rounded-full border border-primary/20 bg-primary/10 px-2.5 py-0.5 text-xs font-medium text-primary">
+                          <span className="inline-block rounded-full border border-primary/20 bg-primary/10 px-2 py-0.5 text-[11px] font-medium text-primary">
                             {item.client}
                           </span>
                         )}
-                        <h3 className="mt-1 line-clamp-2 text-[length:var(--font-size-body)] font-bold text-foreground group-hover:text-primary transition-colors break-keep">
+                        <h3 className="mt-0.5 line-clamp-1 text-sm font-bold text-foreground group-hover:text-primary transition-colors break-keep">
                           {item.title}
                         </h3>
-                        {item.excerpt && (
-                          <p className="mt-1 line-clamp-1 text-[length:var(--font-size-body)] text-muted break-keep">
-                            {item.excerpt}
-                          </p>
-                        )}
                       </div>
                     </Card>
                   </a>
                 ))}
               </div>
             ) : (
-              <div className="space-y-4">
-                {[1, 2, 3].map((i) => (
+              <div className="space-y-2">
+                {[1, 2, 3, 4, 5].map((i) => (
                   <Card
                     key={i}
-                    className="flex flex-row items-start gap-4 p-4"
+                    className="flex flex-row items-center gap-3 p-2.5"
                   >
-                    <div className="h-24 w-24 flex-shrink-0 rounded-xl bg-border/30" />
-                    <div className="flex-1 space-y-2">
-                      <div className="h-5 w-20 rounded-full bg-border/30" />
-                      <div className="h-5 w-full rounded bg-border/30" />
-                      <div className="h-4 w-3/4 rounded bg-border/30" />
+                    <div className="h-14 w-14 flex-shrink-0 rounded-lg bg-border/30" />
+                    <div className="flex-1 space-y-1.5">
+                      <div className="h-4 w-16 rounded-full bg-border/30" />
+                      <div className="h-4 w-full rounded bg-border/30" />
                     </div>
                   </Card>
                 ))}

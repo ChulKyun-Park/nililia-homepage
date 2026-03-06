@@ -46,7 +46,7 @@ export default function Page() {
         label="Services"
         title="SDH · 배리어프리 자막 제작"
         description="모든 사람을 위한 자막(SDH · 배리어프리) 제작으로 콘텐츠 접근성을 향상시킵니다."
-        imageSrc="/images/services/SDH · 배리어프리 자막 제작.png"
+        imageSrc="/images/services/SDH·배리어프리 자막 제작.jpeg"
         imageAlt="SDH · 배리어프리 자막 제작 서비스"
       />
       {/* SDH는 지원 언어 섹션 생략 */}

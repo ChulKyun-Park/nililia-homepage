@@ -48,7 +48,7 @@ export default function Page() {
         label="Services"
         title="문서 번역"
         description="계약서, 매뉴얼, 마케팅 자료 등 전문 문서 번역 서비스를 제공합니다."
-        imageSrc="/images/services/문서번역.png"
+        imageSrc="/images/services/문서번역.jpeg"
         imageAlt="문서 번역 서비스"
       />
       <SupportedLanguages />

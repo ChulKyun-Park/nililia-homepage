@@ -48,7 +48,7 @@ export default function Page() {
         label="Services"
         title="웹소설 · 웹툰 번역"
         description="웹소설, 웹툰 등 한류 콘텐츠의 고품질 번역 서비스를 제공합니다."
-        imageSrc="/images/services/웹소설 · 웹소설.png"
+        imageSrc="/images/services/웹툰번역.jpeg"
         imageAlt="웹소설 · 웹툰 번역 서비스"
       />
       <SupportedLanguages />

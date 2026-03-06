@@ -48,7 +48,7 @@ export default function Page() {
         label="Services"
         title="게임 현지화"
         description="게임 UI, 스토리, 마케팅 자료까지 완벽한 게임 현지화를 지원합니다."
-        imageSrc="/images/services/게임 번역.png"
+        imageSrc="/images/services/게임번역.jpeg"
         imageAlt="게임 현지화 서비스"
       />
       <SupportedLanguages />

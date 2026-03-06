@@ -48,7 +48,7 @@ export default function Page() {
         label="Services"
         title="웹 · 앱 현지화"
         description="웹사이트와 모바일 앱의 현지화로 글로벌 사용자 경험을 최적화합니다."
-        imageSrc="/images/services/홈페이지 · 앱 현지화.png"
+        imageSrc="/images/services/홈페이지·앱 현지화.jpeg"
         imageAlt="웹 · 앱 현지화 서비스"
       />
       <SupportedLanguages />

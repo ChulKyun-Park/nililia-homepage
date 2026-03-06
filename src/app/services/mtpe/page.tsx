@@ -48,7 +48,7 @@ export default function Page() {
         label="Services"
         title="MTPE"
         description="AI 기계 번역과 전문가 감수를 결합한 MTPE 서비스로, 대규모 프로젝트도 빠르고 정확하게 처리합니다."
-        imageSrc="/images/services/MTPE.png"
+        imageSrc="/images/services/MTPE.jpeg"
         imageAlt="MTPE 서비스"
       />
       <SupportedLanguages />

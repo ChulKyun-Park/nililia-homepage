@@ -41,15 +41,14 @@ export default function PageHero({
               )}
             </div>
             <div className="flex justify-center lg:justify-end">
-              <div className="relative w-full aspect-[16/10] overflow-hidden rounded-2xl">
-                <Image
-                  src={imageSrc}
-                  alt={imageAlt || ""}
-                  fill
-                  className="object-contain rounded-2xl"
-                  sizes="(max-width: 1024px) 100vw, 50vw"
-                />
-              </div>
+              <Image
+                src={imageSrc}
+                alt={imageAlt || ""}
+                width={800}
+                height={500}
+                className="w-full h-auto rounded-2xl"
+                sizes="(max-width: 1024px) 100vw, 50vw"
+              />
             </div>
           </div>
         ) : (

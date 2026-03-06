@@ -89,23 +89,18 @@ export default function LanguageSelector({
       </button>
 
       {open && (
-        <div className="absolute right-0 top-full z-50 mt-1 min-w-[200px] rounded-xl border border-border bg-white py-1 shadow-xl">
+        <div className="absolute right-0 top-full z-50 mt-1 grid grid-cols-5 gap-1 rounded-xl border border-border bg-white p-2 shadow-xl">
           {languages.map((lang) => (
             <button
               key={lang.code}
               type="button"
               onClick={() => handleSelect(lang)}
               className={cn(
-                "flex w-full items-center justify-between px-4 py-2.5 text-sm transition-colors hover:bg-surface",
-                selected.code === lang.code
-                  ? "font-semibold text-primary"
-                  : "text-foreground",
+                "flex items-center justify-center rounded-lg p-1.5 transition-colors hover:bg-surface",
+                selected.code === lang.code && "ring-2 ring-primary",
               )}
             >
-              <span className="inline-flex items-center gap-2">
-                <img src={lang.flag} alt={lang.code} className="h-4 w-6 rounded-sm object-cover" loading="eager" />
-                <span>{lang.label}</span>
-              </span>
+              <img src={lang.flag} alt={lang.code} className="h-4 w-6 rounded-sm object-cover" loading="eager" />
             </button>
           ))}
         </div>

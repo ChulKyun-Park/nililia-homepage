@@ -25,12 +25,11 @@ export default function CareerPage() {
       <section className="bg-hero-bg py-8 lg:py-10 h-[250px] flex items-center">
         <div className="mx-auto max-w-7xl px-6 text-center">
           <h1 className="text-[length:var(--font-size-page-hero)] font-bold leading-tight text-foreground break-keep">
-            글로벌 시장을 움직이는 콘텐츠,
-            <br />
-            그 변화를 함께 만들 동료를 찾습니다.
-            <br />
             닐리리아에서 시작하세요.
           </h1>
+          <p className="mx-auto mt-4 max-w-2xl text-[length:var(--font-size-body)] leading-relaxed text-muted break-keep">
+            글로벌 시장을 움직이는 콘텐츠, 그 변화를 함께 만들 동료를 찾습니다.
+          </p>
         </div>
       </section>
 

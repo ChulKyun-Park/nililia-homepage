@@ -10,9 +10,9 @@ import BrochureModal from "@/components/brochure/BrochureModal";
 
 const navLinks = [
   { label: "홈", href: "/", icon: true },
-  { label: "회사소개", href: "/about" },
   { label: "서비스", href: "/services" },
   { label: "진행사례", href: "/cases" },
+  { label: "회사소개", href: "/about" },
   { label: "소식", href: "/news" },
   { label: "채용", href: "/career" },
 ] as const;
@@ -73,7 +73,7 @@ export default function GNB() {
             variant="primary"
             className="px-5 py-2.5 text-sm"
           >
-            문의하기
+            무료 샘플 요청
           </Button>
           <button
             type="button"
@@ -140,7 +140,7 @@ export default function GNB() {
                 variant="primary"
                 className="w-full justify-center py-3"
               >
-                문의하기
+                무료 샘플 요청
               </Button>
               <button
                 type="button"

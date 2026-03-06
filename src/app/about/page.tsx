@@ -7,11 +7,11 @@ import { Target, Eye, Heart, Users, Award, TrendingUp } from "lucide-react";
 export const metadata: Metadata = {
   title: "회사소개 | 닐리리아",
   description:
-    "닐리리아는 AI 기술과 전문가의 노하우를 결합하여 최상의 번역 및 현지화 서비스를 제공합니다.",
+    "콘텐츠의 결을 살리는 번역. 천만 유튜버부터 엔터·방송·OTT까지, 10년간 K-콘텐츠를 세계로 전달합니다.",
   openGraph: {
     title: "회사소개 | 닐리리아",
     description:
-      "닐리리아는 AI 기술과 전문가의 노하우를 결합하여 최상의 번역 및 현지화 서비스를 제공합니다.",
+      "콘텐츠의 결을 살리는 번역. 천만 유튜버부터 엔터·방송·OTT까지, 10년간 K-콘텐츠를 세계로 전달합니다.",
   },
 };
 
@@ -45,9 +45,9 @@ const history = [
 
 const teamStats = [
   { icon: Users, value: "300+", label: "전문 번역가" },
-  { icon: TrendingUp, value: "50+", label: "기업 고객" },
-  { icon: Award, value: "150M+", label: "번역 단어" },
-  { icon: Target, value: "10+", label: "지원 언어" },
+  { icon: TrendingUp, value: "10년", label: "콘텐츠 현지화 업력" },
+  { icon: Award, value: "1,300만+", label: "학습된 문장 쌍" },
+  { icon: Target, value: "88%", label: "재구매율" },
 ];
 
 export default function AboutPage() {
@@ -57,7 +57,7 @@ export default function AboutPage() {
       <section className="bg-hero-bg py-8 lg:py-10 h-[250px] flex items-center">
         <div className="mx-auto max-w-7xl px-6 text-center">
           <h1 className="text-[length:var(--font-size-page-hero)] font-bold leading-tight text-foreground break-keep">
-            닐리리아는 글로벌 콘텐츠 현지화를 선도하는<br />번역 및 현지화 전문 기업입니다.
+            콘텐츠의 결을 살리는 번역, 10년의 기록
           </h1>
         </div>
       </section>
@@ -72,19 +72,19 @@ export default function AboutPage() {
                 Our Mission
               </p>
               <h2 className="text-[length:var(--font-size-section-h2)] font-bold leading-snug text-foreground break-keep">
-                언어의 경계를 넘어 세계를 연결합니다
+                단어가 아니라 맥락을 옮깁니다
               </h2>
               <p className="mt-6 text-[length:var(--font-size-body)] leading-relaxed text-muted break-keep">
-                2016년 설립 이래 영상·문서·웹·게임 등 콘텐츠 현지화만 10년
+                2016년 설립 이래 영상·문서·웹·게임 등 콘텐츠 현지화만 10년.
                 <br />
-                1,300개 이상의 기업·크리에이터와 함께 K-콘텐츠를 세계로 전달합니다.
+                천만 유튜버부터 엔터·방송·OTT까지, K-콘텐츠의 결을 살려 세계로 전달합니다.
               </p>
               <p className="mt-4 text-[length:var(--font-size-body)] leading-relaxed text-muted break-keep">
-                영상 자막 제작 및 번역, 웹사이트·앱 현지화, 대본 번역,
+                크리에이터 채널은 컨텐츠플라이로, 기업 프로젝트는 컨텐츠플라이S로.
                 <br />
-                홈페이지·앱 현지화, 웹소설 현지화, 게임 현지화, 다국어 번역 등
+                콘텐츠 유형을 가리지 않고 일관된 품질을 보장하는
                 <br />
-                다양한 분야에서 글로벌 기업들의 신뢰를 쌓아가고 있습니다.
+                현지화 파트너입니다.
               </p>
             </div>
 
@@ -150,7 +150,7 @@ export default function AboutPage() {
         <SectionHeader
           label="Our Team"
           title="글로벌 전문가 네트워크"
-          description="전 세계 50개 이상의 언어를 지원하는 전문 번역가 네트워크를 보유하고 있습니다."
+          description="10개 언어를 상시 지원하며, 요청에 따라 추가 언어 대응이 가능한 전문 번역가 네트워크를 보유하고 있습니다."
         />
         <div className="grid grid-cols-4 gap-3 sm:gap-8">
           {teamStats.map((stat) => {
@@ -189,17 +189,17 @@ export default function AboutPage() {
       <section className="bg-gradient-to-r from-primary to-primary-dark py-20">
         <div className="mx-auto max-w-3xl px-6 text-center">
           <h2 className="text-[length:var(--font-size-section-h2)] font-bold text-white break-keep">
-            함께 글로벌 시장을 개척하세요
+            먼저 품질을 확인하세요
           </h2>
           <p className="mt-4 text-[length:var(--font-size-body)] text-white/80 break-keep">
-            닐리리아와 함께라면 언어의 장벽 없는 글로벌 비즈니스가 가능합니다.
+            샘플 번역을 무료로 보내드립니다. 결과물로 판단해 주세요.
           </p>
           <div className="mt-8">
             <Button
               href="/contact"
               className="bg-white px-8 py-4 text-base font-bold text-primary hover:bg-white/90"
             >
-              문의하기
+              무료 샘플 요청
             </Button>
           </div>
         </div>

@@ -41,16 +41,14 @@ export default function PageHero({
               )}
             </div>
             <div className="flex justify-center lg:justify-end">
-              <div className="relative w-full aspect-[16/10] overflow-hidden rounded-2xl bg-surface p-[5%]">
-                <div className="relative w-full h-full overflow-hidden rounded-lg">
-                  <Image
-                    src={imageSrc}
-                    alt={imageAlt || ""}
-                    fill
-                    className="object-cover"
-                    sizes="(max-width: 1024px) 100vw, 50vw"
-                  />
-                </div>
+              <div className="relative w-full aspect-[16/10] overflow-hidden rounded-2xl">
+                <Image
+                  src={imageSrc}
+                  alt={imageAlt || ""}
+                  fill
+                  className="object-contain"
+                  sizes="(max-width: 1024px) 100vw, 50vw"
+                />
               </div>
             </div>
           </div>

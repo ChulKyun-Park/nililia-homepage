@@ -41,7 +41,7 @@ export default function PageHero({
               )}
             </div>
             <div className="flex justify-center lg:justify-end">
-              <div className="relative w-full max-w-md aspect-[4/3] overflow-hidden rounded-2xl">
+              <div className="relative w-full max-w-lg aspect-[16/10] overflow-hidden rounded-2xl">
                 <Image
                   src={imageSrc}
                   alt={imageAlt || ""}

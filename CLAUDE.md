@@ -1,6 +1,6 @@
 # CLAUDE.md — Claude Code 상시 참조 가이드
 
-> **최종 업데이트**: 2026-03-03
+> **최종 업데이트**: 2026-03-06
 > 이 문서는 모든 Claude Code 세션의 기본 컨텍스트입니다. 삭제 금지.
 
 ---
@@ -10,7 +10,7 @@
 | 항목 | 값 |
 |------|---|
 | 프로젝트 | 번역/로컬리제이션 서비스 회사 홈페이지 |
-| 회사명 | **(주)닐리리아** / Nililia Inc. (⚠️ 닐릴리아 아님) |
+| 회사명 | **(주)닐리리아** / Nililia Inc. (닐릴리아 아님) |
 | 레포 | https://github.com/ChulKyun-Park/nililia-homepage |
 | 배포 | https://nililia-homepage.vercel.app |
 | 스택 | Next.js 16 (Turbopack) / TypeScript / Tailwind CSS v4 / Notion API / Vercel |
@@ -19,7 +19,7 @@
 
 ---
 
-## 2. 수정 금지 영역 (⛔)
+## 2. 수정 금지 영역
 
 | 파일 | 이유 |
 |------|------|
@@ -36,38 +36,61 @@
 ```
 src/
 ├── app/
-│   ├── layout.tsx              # 전체 레이아웃 (GNB + Footer)
-│   ├── page.tsx                # 홈 (섹션 조합)
-│   ├── globals.css             # 디자인 토큰, keyframes
-│   ├── about/page.tsx          # 회사소개
-│   ├── career/page.tsx         # 채용
-│   ├── cases/page.tsx          # 성공사례 (Notion)
-│   ├── contact/page.tsx        # 문의
+│   ├── layout.tsx                # 전체 레이아웃 (GNB + Footer)
+│   ├── page.tsx                  # 홈 (섹션 조합)
+│   ├── globals.css               # 디자인 토큰, keyframes
+│   ├── icon.svg                  # 파비콘 (N 레터마크, #0097FE)
+│   ├── about/page.tsx            # 회사소개
+│   ├── career/page.tsx           # 채용
+│   ├── cases/page.tsx            # 성공사례 (Notion)
+│   ├── contact/page.tsx          # 문의하기
 │   ├── news/
-│   │   ├── page.tsx            # 소식 목록 (Notion)
-│   │   └── [slug]/page.tsx     # 소식 상세 (Notion 블록 렌더링)
-│   └── services/
-│       ├── page.tsx            # 서비스 목록
-│       └── {slug}/page.tsx     # 서비스 상세 ×8 (히어로→지원언어→Why→프로세스→CTA)
+│   │   ├── page.tsx              # 소식 목록 (Notion)
+│   │   └── [slug]/page.tsx       # 소식 상세 (Notion 블록 렌더링)
+│   ├── services/
+│   │   ├── page.tsx              # 서비스 목록
+│   │   └── {slug}/page.tsx       # 서비스 상세 x8 (히어로→지원언어→Why→프로세스→CTA)
+│   └── api/
+│       ├── brochure/route.ts     # 회사소개서 리드 저장 API
+│       └── contact/route.ts      # 문의하기 폼 저장 API
 ├── components/
-│   ├── layout/                 # GNB, Footer, LanguageSelector
-│   ├── sections/               # Hero, SocialProof, Mission, ServiceGrid,
-│   │                           # WhyUs, PageHero, NewsCaseStudy, BottomCTA,
-│   │                           # ServiceWhy, ServiceProcess, SupportedLanguages
-│   ├── ui/                     # Button, Card, Container, Section, SectionHeader
-│   ├── news/                   # NewsFilter, BlockRenderer
-│   └── cases/                  # CasesFilter
+│   ├── layout/                   # GNB, Footer, LanguageSelector
+│   ├── sections/                 # Hero, SocialProof, Mission, ServiceGrid,
+│   │                             # WhyUs, PageHero, NewsCaseStudy, BottomCTA,
+│   │                             # ServiceWhy, ServiceProcess, SupportedLanguages
+│   ├── ui/                       # Button, Card, Container, Section, SectionHeader
+│   ├── brochure/                 # BrochureModal (회사소개서 다운로드 팝업)
+│   ├── contact/                  # ContactForm (문의하기 폼)
+│   ├── news/                     # NewsFilter, BlockRenderer
+│   └── cases/                    # CasesFilter
 ├── lib/notion/
-│   ├── client.ts               # ⛔ Notion API 코어
-│   └── homePreview.ts          # 홈 프리뷰 + 사례 보정 fetch
-└── types/notion.ts             # ⛔ Notion 타입 정의
+│   ├── client.ts                 # Notion API 코어 (수정 금지)
+│   ├── homePreview.ts            # 홈 프리뷰 + 사례 보정 fetch
+│   ├── brochureLead.ts           # 회사소개서 리드 저장
+│   └── contactLead.ts            # 문의하기 리드 저장
+└── types/notion.ts               # Notion 타입 정의 (수정 금지)
 
-public/images/                  # 서비스 이미지, 로고, 소셜프루프
+public/
+├── images/                       # 서비스 이미지, 로고, 소셜프루프
+└── files/                        # 다운로드 파일 (회사소개서 PDF 등)
 ```
 
 ---
 
-## 4. 색상 규칙
+## 4. 환경변수
+
+```
+NOTION_API_KEY                  # Notion Integration 토큰
+NOTION_NEWS_DB_ID               # 소식 DB
+NOTION_CASESTUDY_DB_ID          # 성공사례 DB
+NOTION_POPUP_DB_ID              # 팝업 배너 DB
+NOTION_BROCHURE_LEADS_DB_ID     # 회사소개서 리드 DB
+NOTION_CONTACT_DB_ID            # 문의하기 리드 DB
+```
+
+---
+
+## 5. 색상 규칙
 
 ```
 [허용]
@@ -75,6 +98,7 @@ public/images/                  # 서비스 이미지, 로고, 소셜프루프
 타이틀:      #111827 (Gray 900)
 본문:        #6B7280 (Gray 500)
 포인트:      #0097FE (primary)
+포인트 진한: #0078CB (primary-dark)
 포인트 연한: #E6F4FF 또는 rgba(0,151,254,0.05)
 CTA 배경:    bg-gradient-to-r from-primary to-primary-dark (유일한 진한 배경)
 
@@ -86,44 +110,44 @@ bg-dark-*, text-white (CTA 제외)
 
 ---
 
-## 5. 타이포그래피 스케일
+## 6. 타이포그래피 스케일
 
 | 용도 | 데스크탑 | 모바일 | weight |
 |------|---------|--------|--------|
-| 히어로 H1 | 48–56px | 28–32px | 700 |
-| 히어로 서브카피 | 18–20px | 15–16px | 400 |
-| 섹션 라벨 | 14–16px | 12–14px | 500–600 |
-| 섹션 제목 H2 | 36–42px | 24–28px | 700 |
-| 본문 | 16–18px | 14–16px | 400 |
-| 숫자 강조 | 48–64px | 36–48px | 800 |
-| 카드 제목 | 18–22px | 16–18px | 600 |
-| 카드 설명 | 14–16px | 13–15px | 400 |
-| Why Us 넘버링 | 72–96px | 48–64px | 800 |
-| CTA 버튼 | 16–18px | 15–16px | 600 |
+| 히어로 H1 | 48-56px | 28-32px | 700 |
+| 히어로 서브카피 | 18-20px | 15-16px | 400 |
+| 섹션 라벨 | 14-16px | 12-14px | 500-600 |
+| 섹션 제목 H2 | 36-42px | 24-28px | 700 |
+| 본문 | 16-18px | 14-16px | 400 |
+| 숫자 강조 | 48-64px | 36-48px | 800 |
+| 카드 제목 | 18-22px | 16-18px | 600 |
+| 카드 설명 | 14-16px | 13-15px | 400 |
+| Why Us 넘버링 | 72-96px | 48-64px | 800 |
+| CTA 버튼 | 16-18px | 15-16px | 600 |
 | GNB 메뉴 | 16px | 16px | 500 |
-| 푸터 | 13–14px | 12–13px | 400 |
+| 푸터 | 13-14px | 12-13px | 400 |
 
 ---
 
-## 6. 히어로 카드 애니메이션 사양
+## 7. 히어로 카드 애니메이션 사양
 
 ### 레이아웃
-- 스테이지: 700×400, overflow:hidden
+- 스테이지: 700x400, overflow:hidden
 - 카드 비율: 6:7 (width:height)
 - 행 크기비: 1.0 : 0.8 : 0.64 (Row3 > Row2 > Row1)
-- Row3(앞, 3장): 180×210, y=195, z=3
-- Row2(중, 2장): 144×168, y=82, z=2
-- Row1(뒤, 3장): 115×134, y=-18, z=1
+- Row3(앞, 3장): 180x210, y=195, z=3
+- Row2(중, 2장): 144x168, y=82, z=2
+- Row1(뒤, 3장): 115x134, y=-18, z=1
 - 행간 50%+ 수직 겹침
 
 ### 애니메이션 사이클 (16초)
-1. **323 정지** (0.9s) — 12px 드리프트
-2. **323→232 캐스케이드** (1.9s)
+1. **323 정지** (0.9s) - 12px 드리프트
+2. **323->232 캐스케이드** (1.9s)
 3. **232 정지** (1.0s)
-4. **232→323 캐스케이드** (1.9s)
+4. **232->323 캐스케이드** (1.9s)
 5. **323 정지** (1.0s)
 6. **한 줄 정렬** (1.5s)
-7. **컨베이어 우→좌** (4.3s, 0.55px/frame)
+7. **컨베이어 우->좌** (4.3s, 0.55px/frame)
 8. **323 재조립** (3.5s, snapX 기반)
 
 ### 서비스 목록 (10장)
@@ -131,30 +155,33 @@ bg-dark-*, text-white (CTA 제외)
 
 ---
 
-## 7. 에셋 참조
+## 8. 에셋 참조
 
 | 에셋 | 위치 |
 |------|------|
 | 로고 PNG | `public/images/NILILIA.png` |
+| 로고 SVG | `public/images/NILILIA_LOGO.svg` |
+| 파비콘 | `src/app/icon.svg` |
 | 서비스 이미지 | `public/images/{서비스명}.jpg/.png` |
 | 채용 이미지 | `public/images/careers_img.png` |
+| 회사소개서 PDF | `public/files/닐리리아_회사소개서.pdf` |
 
 ---
 
-## 8. 수정 후 체크리스트
+## 9. 수정 후 체크리스트
 
 - [ ] `npm run build` 에러 없음
 - [ ] Notion API 데이터 정상 렌더링
 - [ ] `--color-primary: #0097FE` 변경 없음
-- [ ] `src/lib/notion/` 수정 없음
+- [ ] `src/lib/notion/client.ts` 수정 없음
 - [ ] 모바일 375px 레이아웃 정상
 - [ ] bg-dark-* 클래스 0개
 - [ ] 배포 사이트 실제 확인 (코드만 보고 판단 금지)
-- [ ] 회사명 "닐리리아" 확인 (닐릴리아 ❌)
+- [ ] 회사명 "닐리리아" 확인 (닐릴리아 아님)
 
 ---
 
-## 9. 푸터 스펙
+## 10. 푸터 스펙
 
 ### 레이아웃
 - 컨테이너: `mx-auto max-w-7xl px-12`
@@ -169,25 +196,27 @@ bg-dark-*, text-white (CTA 제외)
 | 4 | Contact | text-sm font-medium |
 
 ### 본문 폰트
-- 전체 text-sm 통일 (font-size-footer CSS 변수 사용하지 않음)
+- 전체 text-sm 통일
 
 ### 간격 규칙
-- 고객센터 → copyright: mt-8
-- copyright → SNS 아이콘: mt-8
+- 고객센터 -> copyright: mt-8
+- copyright -> SNS 아이콘: mt-8
 - 이용약관: 그리드 밖 하단, border-t py-4
 
 ### SNS 아이콘
-Instagram / YouTube / 네이버블로그(b| 새 BI) / X / Facebook
+Instagram / YouTube / 네이버블로그 / X / Facebook
 - 전체 currentColor, hover:text-primary
 
-### 이메일
+### 연락처
+- 전화: 070-8820-3116
 - 기업 문의: sales@nililia.com
 - 제휴 문의: partnership@nililia.com
 - 채용 문의: recruit@nililia.com
+- 주소: 경기도 안양시 동안구 시민대로 327번길 11-41, 6층
 
 ---
 
-## 10. SocialProof 지표 (확정, 미반영)
+## 11. SocialProof 지표
 
 | 순서 | 숫자 | 라벨 |
 |------|------|------|
@@ -195,9 +224,6 @@ Instagram / YouTube / 네이버블로그(b| 새 BI) / X / Facebook
 | 2 | 150M+ | 번역 단어 |
 | 3 | 10+ | 지원 언어 |
 | 4 | 90% | 고객 만족도 |
-
-- 150M+ 근거: 1800만 문장 × 평균 ~11단어 ≈ 2억 → 보수적 150M+
-- 중복 미제거 (업계 표준: 총 처리량 기준)
 
 ---
 

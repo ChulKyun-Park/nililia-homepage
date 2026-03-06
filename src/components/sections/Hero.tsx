@@ -270,7 +270,7 @@ export default function Hero() {
               전문 번역과 현지화 서비스로 글로벌 시장 진출을 지원합니다.
             </p>
             <p className="mt-2 text-[length:var(--font-size-hero-sub)] leading-relaxed text-muted break-keep">
-              AI 기술과 전문가의 노하우로 최상의 품질을 보장합니다.
+              전문가의 노하우와 기술의 결합으로 최상의 품질을 보장합니다.
             </p>
             </div>
           </div>

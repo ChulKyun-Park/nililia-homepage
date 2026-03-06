@@ -3,16 +3,16 @@
 import { useEffect, useRef, useCallback } from "react";
 
 const SERVICES = [
-  { icon: "▶️", title: "영상 번역", desc: "자막 & 더빙", img: "/images/hero/영상 번역.jpg" },
-  { icon: "📄", title: "문서 번역", desc: "전문 번역", img: "/images/hero/문서 번역.jpg" },
-  { icon: "📺", title: "SDH 자막 제작", desc: "청각장애인 자막", img: "/images/hero/SDH · 배리어프리 자막 제작.jpg" },
-  { icon: "🌐", title: "홈페이지 현지화", desc: "웹사이트 최적화", img: "/images/hero/홈페이지 현지화.jpg" },
-  { icon: "📱", title: "앱 현지화", desc: "모바일 최적화", img: "/images/hero/앱 현지화.png" },
-  { icon: "📖", title: "웹소설 번역", desc: "웹소설 현지화", img: "/images/hero/웹소설 번역.png" },
-  { icon: "🖼️", title: "웹툰 번역", desc: "콘텐츠 현지화", img: "/images/hero/웹툰 번역.jpg" },
-  { icon: "🎮", title: "게임 번역", desc: "게임 현지화", img: "/images/hero/게임 번역.png" },
-  { icon: "✏️", title: "MTPE", desc: "기계번역 후편집", img: "/images/hero/MTPE.png" },
-  { icon: "🏢", title: "기업 맞춤 번역", desc: "맞춤형 솔루션", img: "/images/hero/기업 맞춤 번역.png" },
+  { icon: "▶️", title: "영상 번역", desc: "자막 & 더빙", img: "/images/hero/영상번역.jpeg" },
+  { icon: "📄", title: "문서 번역", desc: "전문 번역", img: "/images/hero/문서번역.jpeg" },
+  { icon: "📺", title: "SDH 자막 제작", desc: "청각장애인 자막", img: "/images/hero/SDH·배리어프리 자막 제작.jpeg" },
+  { icon: "🌐", title: "홈페이지 현지화", desc: "웹사이트 최적화", img: "/images/hero/홈페이지 현지화.jpeg" },
+  { icon: "📱", title: "앱 현지화", desc: "모바일 최적화", img: "/images/hero/앱 현지화.jpeg" },
+  { icon: "🌍", title: "홈페이지·앱 현지화", desc: "통합 현지화", img: "/images/hero/홈페이지·앱 현지화.jpeg" },
+  { icon: "🖼️", title: "웹툰 번역", desc: "콘텐츠 현지화", img: "/images/hero/웹툰번역.jpeg" },
+  { icon: "🎮", title: "게임 번역", desc: "게임 현지화", img: "/images/hero/게임번역.jpeg" },
+  { icon: "✏️", title: "MTPE", desc: "기계번역 후편집", img: "/images/hero/MTPE.jpeg" },
+  { icon: "🤖", title: "AI 번역·더빙", desc: "AI 솔루션", img: "/images/hero/AI 번역·더빙.jpeg" },
 ];
 
 function easeInOutCubic(t: number) {

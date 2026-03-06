@@ -6,6 +6,7 @@ import { cn } from "@/lib/utils";
 import { Menu, X, Download, Home } from "lucide-react";
 import Button from "@/components/ui/Button";
 import LanguageSelector from "@/components/layout/LanguageSelector";
+import BrochureModal from "@/components/brochure/BrochureModal";
 
 const navLinks = [
   { label: "홈", href: "/", icon: true },
@@ -19,6 +20,7 @@ const navLinks = [
 export default function GNB() {
   const [mobileOpen, setMobileOpen] = useState(false);
   const [scrolled, setScrolled] = useState(false);
+  const [brochureOpen, setBrochureOpen] = useState(false);
 
   useEffect(() => {
     function handleScroll() {
@@ -73,13 +75,14 @@ export default function GNB() {
           >
             문의하기
           </Button>
-          <a
-            href="#"
+          <button
+            type="button"
+            onClick={() => setBrochureOpen(true)}
             className="inline-flex items-center gap-1.5 rounded-lg border border-border px-4 py-2.5 text-sm font-medium text-foreground transition-colors hover:border-muted hover:bg-surface"
           >
             <Download className="h-4 w-4" />
             회사소개서
-          </a>
+          </button>
         </div>
 
         <button
@@ -139,17 +142,25 @@ export default function GNB() {
               >
                 문의하기
               </Button>
-              <a
-                href="#"
+              <button
+                type="button"
+                onClick={() => {
+                  setMobileOpen(false);
+                  setBrochureOpen(true);
+                }}
                 className="flex w-full items-center justify-center gap-2 rounded-lg border border-border px-4 py-3 text-sm font-medium text-foreground transition-colors hover:bg-surface"
               >
                 <Download className="h-4 w-4" />
                 회사소개서 다운로드
-              </a>
+              </button>
             </div>
           </nav>
         </div>
       )}
+      <BrochureModal
+        open={brochureOpen}
+        onClose={() => setBrochureOpen(false)}
+      />
     </header>
   );
 }

@@ -11,6 +11,7 @@ const inter = Inter({
 });
 
 export const metadata: Metadata = {
+  metadataBase: new URL("https://nililia-homepage.vercel.app"),
   title: "닐리리아 | 전문 번역 & 현지화 서비스",
   description:
     "전문 번역과 현지화 서비스로 글로벌 시장 진출을 지원합니다. 영상 번역, 문서 번역, 웹 · 앱 현지화, 게임 현지화.",
@@ -29,12 +30,20 @@ export const metadata: Metadata = {
     type: "website",
     locale: "ko_KR",
     siteName: "닐리리아",
+    url: "https://nililia-homepage.vercel.app",
+    images: [
+      {
+        url: "/images/NILILIA.png",
+        alt: "Nililia",
+      },
+    ],
   },
   twitter: {
     card: "summary_large_image",
     title: "닐리리아 | 전문 번역 & 현지화 서비스",
     description:
       "전문 번역과 현지화 서비스로 글로벌 시장 진출을 지원합니다.",
+    images: ["/images/NILILIA.png"],
   },
 };
 

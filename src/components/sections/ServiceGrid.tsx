@@ -28,7 +28,7 @@ const services: ServiceItem[] = [
     icon: Video,
     title: "영상 번역",
     slug: "video-translation",
-    thumbnail: "/images/services/영상번역.png",
+    thumbnail: "/images/services/영상번역.jpeg",
     description:
       "자막, 더빙, 보이스오버 등 모든 영상 콘텐츠의 다국어 번역 서비스를 제공합니다.",
   },

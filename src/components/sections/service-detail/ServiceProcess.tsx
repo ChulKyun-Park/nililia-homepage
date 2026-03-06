@@ -23,7 +23,8 @@ export default function ServiceProcess({
   return (
     <Section>
       <SectionHeader label={label} title={title} description={description} />
-      <div className="grid gap-5 sm:grid-cols-2 lg:grid-cols-3">
+      {/* 모바일: 가로 레이아웃 (넘버-이름-설명) / 데스크탑: 카드 그리드 */}
+      <div className="hidden sm:grid gap-5 sm:grid-cols-2 lg:grid-cols-3">
         {steps.map((step, idx) => (
           <Card key={idx} className="relative">
             <span className="text-3xl font-bold text-primary/20">
@@ -36,6 +37,23 @@ export default function ServiceProcess({
               {step.description}
             </p>
           </Card>
+        ))}
+      </div>
+      <div className="space-y-5 sm:hidden">
+        {steps.map((step, idx) => (
+          <div key={idx} className="flex gap-4">
+            <span className="flex h-8 w-8 shrink-0 items-center justify-center rounded-lg bg-primary/10 text-sm font-bold text-primary">
+              {String(idx + 1).padStart(2, "0")}
+            </span>
+            <div>
+              <h3 className="text-[length:var(--font-size-card-title)] font-bold text-foreground break-keep">
+                {step.title}
+              </h3>
+              <p className="mt-1 text-[length:var(--font-size-card-desc)] leading-relaxed text-muted break-keep">
+                {step.description}
+              </p>
+            </div>
+          </div>
         ))}
       </div>
     </Section>

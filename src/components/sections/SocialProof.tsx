@@ -23,7 +23,7 @@ function CreatorAvatar({ filename }: { filename: string }) {
   const name = filename.replace(/\.[^.]+$/, "");
   return (
     <div className="flex-none flex items-center mx-[36px]">
-      <div className="h-[72px] w-[72px] overflow-hidden rounded-full">
+      <div className="h-[58px] w-[58px] sm:h-[72px] sm:w-[72px] overflow-hidden rounded-full">
         <Image
           src={`/images/socialproof/creator/${filename}`}
           alt={name}
@@ -60,13 +60,13 @@ export default function SocialProof() {
     <section className="bg-white py-16">
       {/* Stats */}
       <div className="mx-auto max-w-7xl px-6 lg:pl-12">
-        <div className="grid grid-cols-2 gap-8 md:grid-cols-4">
+        <div className="grid grid-cols-4 gap-3 sm:gap-8">
           {stats.map((stat) => (
             <div key={stat.label} className="text-center">
-              <div className="text-3xl font-bold text-primary sm:text-4xl">
+              <div className="text-xl font-bold text-primary sm:text-3xl md:text-4xl">
                 {stat.value}
               </div>
-              <div className="mt-2 text-[length:var(--font-size-body)] text-muted">{stat.label}</div>
+              <div className="mt-1 text-xs sm:mt-2 sm:text-[length:var(--font-size-body)] text-muted">{stat.label}</div>
             </div>
           ))}
         </div>

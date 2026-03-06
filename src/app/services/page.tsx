@@ -116,7 +116,7 @@ export default function ServicesPage() {
 
       {/* Service Cards */}
       <Section>
-          <div className="grid gap-5 sm:grid-cols-2 lg:grid-cols-3">
+          <div className="grid grid-cols-2 gap-3 sm:gap-5 lg:grid-cols-3">
             {services.map((service) => {
               const Icon = service.icon;
               return (
@@ -161,7 +161,7 @@ export default function ServicesPage() {
           </div>
 
           {/* Coming soon services — 클릭 불가 */}
-          <div className="mt-8 grid gap-5 sm:grid-cols-2 lg:grid-cols-3">
+          <div className="mt-8 grid grid-cols-2 gap-3 sm:gap-5 lg:grid-cols-3">
             {comingSoonServices.map((service) => {
               const Icon = service.icon;
               return (
@@ -208,13 +208,31 @@ export default function ServicesPage() {
           title="서비스 진행 프로세스"
           description="체계적인 프로세스로 빠르고 정확한 결과물을 제공합니다."
         />
-        <div className="grid gap-6 sm:grid-cols-2 lg:grid-cols-4">
+        {/* 모바일: 가로 레이아웃 (넘버-이름-설명) / 데스크탑: 4컬럼 카드 */}
+        <div className="hidden sm:grid gap-6 sm:grid-cols-2 lg:grid-cols-4">
           {process.map((item) => (
             <Card key={item.step} className="text-center">
               <span className="text-4xl font-bold text-primary/20">{item.step}</span>
               <h3 className="mt-3 text-[length:var(--font-size-card-title)] font-bold text-foreground">{item.title}</h3>
               <p className="mt-2 text-[length:var(--font-size-card-desc)] text-muted break-keep">{item.description}</p>
             </Card>
+          ))}
+        </div>
+        <div className="space-y-5 sm:hidden">
+          {process.map((item) => (
+            <div key={item.step} className="flex gap-4">
+              <span className="flex h-8 w-8 shrink-0 items-center justify-center rounded-lg bg-primary/10 text-sm font-bold text-primary">
+                {item.step}
+              </span>
+              <div>
+                <h3 className="text-[length:var(--font-size-card-title)] font-bold text-foreground break-keep">
+                  {item.title}
+                </h3>
+                <p className="mt-1 text-[length:var(--font-size-card-desc)] leading-relaxed text-muted break-keep">
+                  {item.description}
+                </p>
+              </div>
+            </div>
           ))}
         </div>
       </Section>

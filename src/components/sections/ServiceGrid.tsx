@@ -150,7 +150,7 @@ export default function ServiceGrid() {
           description="다양한 콘텐츠 유형에 최적화된 전문 번역 및 현지화 서비스를 제공합니다."
         />
 
-        <div className="grid gap-5 sm:grid-cols-2 lg:grid-cols-3">
+        <div className="grid grid-cols-2 gap-3 sm:gap-5 lg:grid-cols-3">
           {services.map((service) => (
             <Link key={service.title} href={`/services/${service.slug}`}>
               <ServiceCard service={service} />
@@ -165,7 +165,7 @@ export default function ServiceGrid() {
           <div className="flex-1 h-px bg-border" />
         </div>
 
-        <div className="mt-8 grid gap-5 sm:grid-cols-2 lg:grid-cols-3">
+        <div className="mt-8 grid grid-cols-2 gap-3 sm:gap-5 lg:grid-cols-3">
           {comingSoonServices.map((service) => (
             <ServiceCard key={service.title} service={service} />
           ))}

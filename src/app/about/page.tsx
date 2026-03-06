@@ -104,7 +104,8 @@ export default function AboutPage() {
           label="Core Values"
           title="우리가 소중히 여기는 가치"
         />
-        <div className="grid gap-8 sm:grid-cols-3">
+        {/* 모바일: 가로 레이아웃 (아이콘-이름-설명) / 데스크탑: 3컬럼 센터 */}
+        <div className="hidden sm:grid gap-8 sm:grid-cols-3">
           {values.map((value) => {
             const Icon = value.icon;
             return (
@@ -122,6 +123,26 @@ export default function AboutPage() {
             );
           })}
         </div>
+        <div className="space-y-5 sm:hidden">
+          {values.map((value) => {
+            const Icon = value.icon;
+            return (
+              <div key={value.title} className="flex gap-4">
+                <span className="flex h-10 w-10 shrink-0 items-center justify-center rounded-xl bg-primary-light">
+                  <Icon className="h-5 w-5 text-primary" />
+                </span>
+                <div>
+                  <h3 className="text-[length:var(--font-size-card-title)] font-bold text-foreground">
+                    {value.title}
+                  </h3>
+                  <p className="mt-1 text-[length:var(--font-size-card-desc)] leading-relaxed text-muted break-keep">
+                    {value.description}
+                  </p>
+                </div>
+              </div>
+            );
+          })}
+        </div>
       </Section>
 
       {/* Team Stats */}
@@ -131,14 +152,14 @@ export default function AboutPage() {
           title="글로벌 전문가 네트워크"
           description="전 세계 50개 이상의 언어를 지원하는 전문 번역가 네트워크를 보유하고 있습니다."
         />
-        <div className="grid gap-8 sm:grid-cols-4">
+        <div className="grid grid-cols-4 gap-3 sm:gap-8">
           {teamStats.map((stat) => {
             const Icon = stat.icon;
             return (
-              <div key={stat.label} className="rounded-2xl border border-border bg-white p-8 text-center">
-                <Icon className="mx-auto mb-4 h-10 w-10 text-primary" />
-                <div className="text-4xl font-bold text-primary">{stat.value}</div>
-                <div className="mt-2 text-[length:var(--font-size-body)] text-muted">{stat.label}</div>
+              <div key={stat.label} className="rounded-2xl border border-border bg-white p-3 sm:p-8 text-center">
+                <Icon className="mx-auto mb-2 h-6 w-6 sm:mb-4 sm:h-10 sm:w-10 text-primary" />
+                <div className="text-xl sm:text-4xl font-bold text-primary">{stat.value}</div>
+                <div className="mt-1 text-xs sm:mt-2 sm:text-[length:var(--font-size-body)] text-muted">{stat.label}</div>
               </div>
             );
           })}

@@ -42,14 +42,14 @@ export default function SupportedLanguages({
             className="mb-0"
           />
         </div>
-        <div className="grid grid-cols-2 gap-3 sm:grid-cols-3 md:grid-cols-4 lg:grid-cols-5">
+        <div className="grid grid-cols-3 gap-2 sm:gap-3 md:grid-cols-4 lg:grid-cols-5">
           {languages.map((lang) => (
             <div
               key={lang.code}
-              className="flex items-center gap-2 rounded-xl border border-border bg-white px-4 py-3"
+              className="flex items-center gap-1 sm:gap-2 rounded-xl border border-border bg-white px-2 py-2 sm:px-4 sm:py-3"
             >
-              <span className="text-xs font-bold text-primary">{lang.code}</span>
-              <span className="text-sm text-foreground">{lang.name}</span>
+              <span className="text-[10px] sm:text-xs font-bold text-primary">{lang.code}</span>
+              <span className="text-xs sm:text-sm text-foreground truncate">{lang.name}</span>
             </div>
           ))}
         </div>

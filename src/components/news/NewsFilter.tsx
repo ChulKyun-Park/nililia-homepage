@@ -17,42 +17,27 @@ function NewsCard({ item }: { item: NotionNewsItem }) {
   return (
     <Link href={`/news/${item.slug}`}>
       <Card className="group overflow-hidden p-0">
-        <div className="flex flex-col sm:flex-row">
-          <div className="aspect-[16/10] sm:aspect-auto sm:h-auto sm:w-64 flex-shrink-0 overflow-hidden bg-surface">
-            {item.thumbnail ? (
-              <img
-                src={item.thumbnail}
-                alt={item.title}
-                className="h-full w-full object-cover transition-transform duration-300 group-hover:scale-105"
-              />
-            ) : (
-              <div className="flex h-full min-h-[160px] w-full items-center justify-center text-sm text-muted">
-                No Image
-              </div>
+        <div className="flex flex-1 flex-col justify-center p-5 sm:p-6">
+          <div className="flex items-center gap-3">
+            {item.category && (
+              <span className="inline-block rounded-full bg-primary/10 px-2.5 py-0.5 text-xs font-medium text-primary">
+                {item.category}
+              </span>
+            )}
+            {item.publishedAt && (
+              <time className="text-xs text-muted">
+                {new Date(item.publishedAt).toLocaleDateString("ko-KR")}
+              </time>
             )}
           </div>
-          <div className="flex flex-1 flex-col justify-center p-5 sm:p-6">
-            <div className="flex items-center gap-3">
-              {item.category && (
-                <span className="inline-block rounded-full bg-primary/10 px-2.5 py-0.5 text-xs font-medium text-primary">
-                  {item.category}
-                </span>
-              )}
-              {item.publishedAt && (
-                <time className="text-xs text-muted">
-                  {new Date(item.publishedAt).toLocaleDateString("ko-KR")}
-                </time>
-              )}
-            </div>
-            <h3 className="mt-2 line-clamp-2 text-[length:var(--font-size-card-title)] font-bold text-foreground group-hover:text-primary transition-colors break-keep">
-              {item.title}
-            </h3>
-            {item.excerpt && (
-              <p className="mt-2 line-clamp-2 text-[length:var(--font-size-body)] text-muted break-keep">
-                {item.excerpt}
-              </p>
-            )}
-          </div>
+          <h3 className="mt-2 line-clamp-2 text-[length:var(--font-size-card-title)] font-bold text-foreground group-hover:text-primary transition-colors break-keep">
+            {item.title}
+          </h3>
+          {item.excerpt && (
+            <p className="mt-2 line-clamp-2 text-[length:var(--font-size-body)] text-muted break-keep">
+              {item.excerpt}
+            </p>
+          )}
         </div>
       </Card>
     </Link>
@@ -63,19 +48,6 @@ function PinnedCard({ item }: { item: NotionNewsItem }) {
   return (
     <Link href={`/news/${item.slug}`} className="block h-full">
       <Card className="group h-full overflow-hidden p-0">
-        <div className="aspect-[3/2] overflow-hidden bg-surface">
-          {item.thumbnail ? (
-            <img
-              src={item.thumbnail}
-              alt={item.title}
-              className="h-full w-full object-cover transition-transform duration-300 group-hover:scale-105"
-            />
-          ) : (
-            <div className="flex h-full w-full items-center justify-center text-xs text-muted">
-              No Image
-            </div>
-          )}
-        </div>
         <div className="p-3">
           {item.category && (
             <span className="inline-block rounded-full bg-primary/10 px-2 py-0.5 text-[11px] font-medium text-primary">

@@ -46,7 +46,7 @@ export default function PageHero({
                   src={imageSrc}
                   alt={imageAlt || ""}
                   fill
-                  className="object-contain"
+                  className="object-contain rounded-2xl"
                   sizes="(max-width: 1024px) 100vw, 50vw"
                 />
               </div>

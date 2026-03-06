@@ -1,4 +1,5 @@
 import type { Metadata } from "next";
+import Image from "next/image";
 import NewsFilter from "@/components/news/NewsFilter";
 import { fetchAllNews } from "@/lib/notion/client";
 
@@ -20,14 +21,18 @@ export default async function NewsPage() {
 
   return (
     <>
-      {/* 히어로 */}
-      <section className="bg-white pb-4 pt-12 lg:pt-16">
-        <div className="mx-auto max-w-5xl px-6 text-center">
-          <h1 className="text-2xl font-bold text-foreground sm:text-3xl lg:text-4xl">
-            닐리리아 소식
+      {/* Hero */}
+      <section className="relative bg-hero-bg py-8 lg:py-10 h-[250px] flex items-center overflow-hidden">
+        <div className="absolute inset-0">
+          <Image src="/images/최신소식.png" alt="" fill className="object-cover" priority />
+          <div className="absolute inset-0 bg-black/60" />
+        </div>
+        <div className="relative mx-auto max-w-7xl px-6 text-center">
+          <h1 className="text-[length:var(--font-size-page-hero)] font-bold leading-tight text-white break-keep">
+            최신 소식
           </h1>
-          <p className="mx-auto mt-3 max-w-xl text-sm text-muted sm:text-base">
-            번역 · 현지화 업계의 최신 소식과 인사이트를 만나보세요.
+          <p className="mx-auto mt-4 max-w-2xl text-[length:var(--font-size-body)] leading-relaxed text-white/80 break-keep">
+            닐리리아의 최신 소식과 번역 · 현지화 업계 인사이트를 만나보세요.
           </p>
         </div>
       </section>

@@ -15,20 +15,20 @@ export const metadata: Metadata = {
 
 const whyItems = [
   {
-    title: "AI + 전문가 하이브리드",
-    description: "AI 엔진이 초벌 번역을 수행하고, 전문 번역가가 문맥과 뉘앙스를 보정합니다.",
+    title: "AI + 360명 전문가 하이브리드",
+    description: "AI 엔진이 초벌 번역을 수행하고, 검증된 전문 번역가가 문맥과 뉘앙스를 보정합니다.",
   },
   {
-    title: "맞춤 용어집 & 번역 메모리",
-    description: "프로젝트별 TB/TM 구축으로 일관된 용어와 문체를 유지합니다.",
+    title: "1,300만+ 문장 쌍 기반 용어 일관성",
+    description: "10년간 축적한 번역 데이터와 프로젝트별 TB/TM으로 일관된 용어와 문체를 유지합니다.",
   },
   {
-    title: "빠른 납기 & 비용 효율",
+    title: "빠른 납기 · 비용 효율",
     description: "순수 인력 번역 대비 납기를 단축하면서도 전문가 수준의 품질을 확보합니다.",
   },
   {
-    title: "교정 수준 선택 가능",
-    description: "Light PE부터 Full PE까지, 프로젝트 목적에 맞는 교정 수준을 선택할 수 있습니다.",
+    title: "Light PE ~ Full PE 선택",
+    description: "프로젝트 목적에 맞는 교정 수준을 선택할 수 있습니다. 컨텐츠플라이S에서 전담 매니저가 최적 수준을 제안합니다.",
   },
 ];
 

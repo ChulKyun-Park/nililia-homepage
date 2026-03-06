@@ -16,19 +16,19 @@ export const metadata: Metadata = {
 const whyItems = [
   {
     title: "UI/UX 텍스트 현지화",
-    description: "단순 번역이 아닌, 현지 사용자에게 자연스러운 인터페이스를 구현합니다.",
+    description: "단순 번역이 아닌, 현지 사용자에게 자연스러운 인터페이스를 구현합니다. 컨텐츠플라이S 전담 매니저가 프로젝트를 관리합니다.",
   },
   {
     title: "다국어 SEO 최적화",
     description: "검색 엔진에 최적화된 메타 태그와 키워드로 글로벌 트래픽을 확보합니다.",
   },
   {
-    title: "CMS 연동 자동화",
-    description: "다양한 CMS와 연동하여 번역 워크플로우를 자동화합니다.",
+    title: "CMS 연동 · 자동화",
+    description: "다양한 CMS와 연동하여 번역 워크플로우를 자동화합니다. 업데이트 시 변경분만 신속하게 반영합니다.",
   },
   {
-    title: "RTL 언어 레이아웃 지원",
-    description: "아랍어, 히브리어 등 RTL 언어에 맞는 레이아웃 전환을 지원합니다.",
+    title: "NDA 보안 · 납기 준수",
+    description: "NDA 체결과 보안 작업 환경을 보장합니다. 설립 이래 납기 지연 0건의 이력을 유지하고 있습니다.",
   },
 ];
 

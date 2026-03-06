@@ -1,6 +1,7 @@
 export { default as SupportedLanguages } from "./SupportedLanguages";
 export { default as ServiceWhy } from "./ServiceWhy";
 export { default as ServiceProcess } from "./ServiceProcess";
+export { default as ServiceTiers } from "./ServiceTiers";
 
 export type { Language } from "./SupportedLanguages";
 export type { WhyItem } from "./ServiceWhy";

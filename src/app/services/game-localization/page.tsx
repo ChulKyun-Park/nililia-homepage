@@ -16,19 +16,19 @@ export const metadata: Metadata = {
 const whyItems = [
   {
     title: "게임 전문 번역가 매칭",
-    description: "게임 장르와 플랫폼에 맞는 전문 번역가를 배정합니다.",
+    description: "게임 장르와 플랫폼에 맞는 전문 번역가를 360명+ 인력 풀에서 배정합니다.",
   },
   {
-    title: "스토리 & 대화 현지화",
-    description: "캐릭터 성격과 세계관을 반영한 몰입감 있는 번역을 제공합니다.",
+    title: "세계관을 반영한 스토리 현지화",
+    description: "캐릭터 성격과 세계관을 반영한 몰입감 있는 번역을 제공합니다. 컨텐츠플라이S 고품질 프리미엄 등급으로 작업합니다.",
   },
   {
-    title: "인게임 에셋 현지화",
-    description: "UI 텍스트, 이미지, 폰트 등 게임 내 모든 에셋을 현지화합니다.",
+    title: "UI · 에셋 · 마케팅 통합 현지화",
+    description: "UI 텍스트, 이미지, 폰트, 마케팅 자료까지 게임 내 모든 에셋을 현지화합니다.",
   },
   {
-    title: "LQA 테스트 지원",
-    description: "실제 플레이 환경에서 번역 품질과 UI 적합성을 검증합니다.",
+    title: "LQA 테스트 · NDA 보안",
+    description: "실제 플레이 환경에서 번역 품질과 UI 적합성을 검증합니다. NDA 체결로 미공개 게임 자산을 보호합니다.",
   },
 ];
 

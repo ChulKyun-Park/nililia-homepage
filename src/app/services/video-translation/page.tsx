@@ -4,6 +4,7 @@ import {
   SupportedLanguages,
   ServiceWhy,
   ServiceProcess,
+  ServiceTiers,
 } from "@/components/sections/service-detail";
 import type { Metadata } from "next";
 
@@ -15,20 +16,20 @@ export const metadata: Metadata = {
 
 const whyItems = [
   {
-    title: "플랫폼 맞춤 자막 포맷",
-    description: "넷플릭스, 유튜브, 디즈니+ 등 주요 플랫폼의 자막 가이드라인을 준수합니다.",
+    title: "360명+ 전문 번역가 풀에서 최적의 인력 배정",
+    description: "영상 콘텐츠에 특화된 검증 번역가가 문맥과 뉘앙스를 살려 번역합니다. 언어별 인하우스 품질 책임자가 결과물을 관리합니다.",
   },
   {
-    title: "전문 번역가 + 영상 전문 감수",
-    description: "영상 콘텐츠에 특화된 번역가가 문맥과 뉘앙스를 살려 번역합니다.",
+    title: "플랫폼별 가이드라인 준수",
+    description: "넷플릭스, 유튜브, 디즈니+ 등 주요 플랫폼의 자막 규격을 숙지하고 있습니다. 타임코드 싱크와 포맷 변환까지 원스톱으로 처리합니다.",
   },
   {
-    title: "타임코드 싱크 & QC",
-    description: "음성과 자막의 정확한 싱크를 보장하는 타이밍 검수를 진행합니다.",
+    title: "1,300만+ 문장 쌍 데이터로 일관된 품질",
+    description: "10년간 축적한 번역 데이터가 용어 일관성과 문체 통일을 뒷받침합니다. 도메인별 전문 용어집(TB)을 프로젝트마다 구축합니다.",
   },
   {
-    title: "대량 에피소드 일괄 처리",
-    description: "시리즈물, 시즌 단위 대량 작업도 일관된 품질로 빠르게 처리합니다.",
+    title: "설립 이래 납기 지연 0건",
+    description: "시리즈물, 시즌 단위 대량 작업도 일정 내에 일관된 품질로 처리합니다. 실시간 대시보드로 진행 상황을 투명하게 공유합니다.",
   },
 ];
 
@@ -48,10 +49,11 @@ export default function Page() {
         label="Services"
         title="영상 번역"
         description="자막, 더빙, 보이스오버 등 모든 영상 콘텐츠의 다국어 번역 서비스를 제공합니다."
-        imageSrc="/images/services/영상번역.png"
+        imageSrc="/images/services/영상번역.jpeg"
         imageAlt="영상 번역 서비스"
       />
       <SupportedLanguages />
+      <ServiceTiers />
       <ServiceWhy
         title="영상 콘텐츠에 최적화된 번역을 경험하세요"
         items={whyItems}

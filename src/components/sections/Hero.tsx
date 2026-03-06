@@ -39,21 +39,24 @@ interface Slot {
  * Row2: 2×144+12=300 → start=(700-300)/2=200
  * Row1: 3×115+2×10=365 → start=(700-365)/2=168
  */
+/* ── Y 오프셋: 전체 카드 레이아웃을 30px 위로 ── */
+const Y_OFF = -30;
+
 const A: Slot[] = [
   // Row3 (앞, z:3, 171×200)
-  { x: 65,  y: 185, w: 171, h: 200, op: 1.0,  z: 3 },
-  { x: 247, y: 190, w: 171, h: 200, op: 1.0,  z: 3 },
-  { x: 429, y: 183, w: 171, h: 200, op: 0.90, z: 3 },
+  { x: 65,  y: 155 + Y_OFF, w: 171, h: 200, op: 1.0,  z: 3 },
+  { x: 247, y: 160 + Y_OFF, w: 171, h: 200, op: 1.0,  z: 3 },
+  { x: 429, y: 153 + Y_OFF, w: 171, h: 200, op: 0.90, z: 3 },
   // Row2 (중, z:2, 137×160)
-  { x: 190, y: 78,  w: 137, h: 160, op: 0.70, z: 2 },
-  { x: 338, y: 83,  w: 137, h: 160, op: 0.65, z: 2 },
+  { x: 190, y: 48 + Y_OFF,  w: 137, h: 160, op: 0.70, z: 2 },
+  { x: 338, y: 53 + Y_OFF,  w: 137, h: 160, op: 0.65, z: 2 },
   // Row1 (뒤, z:1, 109×127)
-  { x: 160, y: -17, w: 109, h: 127, op: 0.40, z: 1 },
-  { x: 278, y: -13, w: 109, h: 127, op: 0.45, z: 1 },
-  { x: 397, y: -17, w: 109, h: 127, op: 0.35, z: 1 },
+  { x: 160, y: -47 + Y_OFF, w: 109, h: 127, op: 0.40, z: 1 },
+  { x: 278, y: -43 + Y_OFF, w: 109, h: 127, op: 0.45, z: 1 },
+  { x: 397, y: -47 + Y_OFF, w: 109, h: 127, op: 0.35, z: 1 },
   // 숨김 (위에서 대기)
-  { x: 219, y: -171, w: 109, h: 127, op: 0, z: 0 },
-  { x: 337, y: -171, w: 109, h: 127, op: 0, z: 0 },
+  { x: 219, y: -201 + Y_OFF, w: 109, h: 127, op: 0, z: 0 },
+  { x: 337, y: -201 + Y_OFF, w: 109, h: 127, op: 0, z: 0 },
 ];
 
 const B: Slot[] = [
@@ -62,32 +65,32 @@ const B: Slot[] = [
   { x: 247, y: STAGE_H + 50, w: 171, h: 200, op: 0, z: 0 },
   { x: 429, y: STAGE_H + 50, w: 171, h: 200, op: 0, z: 0 },
   // 카드3,4 → Row3
-  { x: 156, y: 185, w: 171, h: 200, op: 1.0, z: 3 },
-  { x: 338, y: 190, w: 171, h: 200, op: 1.0, z: 3 },
+  { x: 156, y: 155 + Y_OFF, w: 171, h: 200, op: 1.0, z: 3 },
+  { x: 338, y: 160 + Y_OFF, w: 171, h: 200, op: 1.0, z: 3 },
   // 카드5,6,7 → Row2
-  { x: 116, y: 78,  w: 137, h: 160, op: 0.70, z: 2 },
-  { x: 264, y: 83,  w: 137, h: 160, op: 0.70, z: 2 },
-  { x: 412, y: 78,  w: 137, h: 160, op: 0.60, z: 2 },
+  { x: 116, y: 48 + Y_OFF,  w: 137, h: 160, op: 0.70, z: 2 },
+  { x: 264, y: 53 + Y_OFF,  w: 137, h: 160, op: 0.70, z: 2 },
+  { x: 412, y: 48 + Y_OFF,  w: 137, h: 160, op: 0.60, z: 2 },
   // 카드8,9 → Row1
-  { x: 219, y: -17, w: 109, h: 127, op: 0.40, z: 1 },
-  { x: 337, y: -13, w: 109, h: 127, op: 0.45, z: 1 },
+  { x: 219, y: -47 + Y_OFF, w: 109, h: 127, op: 0.40, z: 1 },
+  { x: 337, y: -43 + Y_OFF, w: 109, h: 127, op: 0.45, z: 1 },
 ];
 
 const C: Slot[] = [
   // 카드0,1,2 → Row1 (위에서 재진입)
-  { x: 160, y: -17, w: 109, h: 127, op: 0.40, z: 1 },
-  { x: 278, y: -13, w: 109, h: 127, op: 0.45, z: 1 },
-  { x: 397, y: -17, w: 109, h: 127, op: 0.35, z: 1 },
+  { x: 160, y: -47 + Y_OFF, w: 109, h: 127, op: 0.40, z: 1 },
+  { x: 278, y: -43 + Y_OFF, w: 109, h: 127, op: 0.45, z: 1 },
+  { x: 397, y: -47 + Y_OFF, w: 109, h: 127, op: 0.35, z: 1 },
   // 카드3,4 → 아래로 퇴장
   { x: 156, y: STAGE_H + 50, w: 171, h: 200, op: 0, z: 0 },
   { x: 338, y: STAGE_H + 50, w: 171, h: 200, op: 0, z: 0 },
   // 카드5,6,7 → Row3
-  { x: 65,  y: 185, w: 171, h: 200, op: 1.0,  z: 3 },
-  { x: 247, y: 190, w: 171, h: 200, op: 1.0,  z: 3 },
-  { x: 429, y: 183, w: 171, h: 200, op: 0.90, z: 3 },
+  { x: 65,  y: 155 + Y_OFF, w: 171, h: 200, op: 1.0,  z: 3 },
+  { x: 247, y: 160 + Y_OFF, w: 171, h: 200, op: 1.0,  z: 3 },
+  { x: 429, y: 153 + Y_OFF, w: 171, h: 200, op: 0.90, z: 3 },
   // 카드8,9 → Row2
-  { x: 190, y: 78,  w: 137, h: 160, op: 0.70, z: 2 },
-  { x: 338, y: 83,  w: 137, h: 160, op: 0.65, z: 2 },
+  { x: 190, y: 48 + Y_OFF,  w: 137, h: 160, op: 0.70, z: 2 },
+  { x: 338, y: 53 + Y_OFF,  w: 137, h: 160, op: 0.65, z: 2 },
 ];
 
 /* 컨베이어: 기준 크기 */
@@ -159,7 +162,7 @@ function CardAnimation() {
         /* Phase6: 한 줄 정렬 */
         const t = easeInOutCubic(cl((f - T5) / (T6 - T5)));
         const cx = i * (CW + CG);
-        const cy = (STAGE_H - CH) / 2;
+        const cy = (STAGE_H - CH) / 2 + Y_OFF;
         x = lerp(c.x, cx, t); y = lerp(c.y, cy, t);
         w = lerp(c.w, CW, t); h = lerp(c.h, CH, t);
         op = lerp(c.op, 1, t); z = 10;
@@ -170,7 +173,7 @@ function CardAnimation() {
         const total = N * (CW + CG);
         let cx = i * (CW + CG) - scroll.current;
         while (cx < -CW - 20) cx += total;
-        x = cx; y = (STAGE_H - CH) / 2; w = CW; h = CH; z = 10;
+        x = cx; y = (STAGE_H - CH) / 2 + Y_OFF; w = CW; h = CH; z = 10;
         /* 프레임 끝선에서 자연스럽게 잘리도록:
            overflow:hidden + 블러 오버레이가 클리핑 담당.
            opacity는 완전히 화면 밖인 카드만 숨김. */
@@ -188,7 +191,7 @@ function CardAnimation() {
         }
         const t = easeInOutCubic(cl((f - T7) / (CYCLE - T7)));
         x = lerp(snapX.current[i], a.x, t);
-        y = lerp((STAGE_H - CH) / 2, a.y, t);
+        y = lerp((STAGE_H - CH) / 2 + Y_OFF, a.y, t);
         w = lerp(CW, a.w, t); h = lerp(CH, a.h, t);
         op = lerp(1, a.op, t);
         z = a.z; // 즉시 목표 z — lerp하면 카드끼리 z 교차→깜빡임

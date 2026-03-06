@@ -1,6 +1,6 @@
 "use client";
 
-import { useState, useCallback } from "react";
+import { useState, useCallback, useEffect } from "react";
 import { X } from "lucide-react";
 
 const COUNTRY_CODES = [
@@ -109,6 +109,16 @@ export default function BrochureModal({ open, onClose }: BrochureModalProps) {
     },
     [name, email, countryCode, phone, privacyConsent, handleClose],
   );
+
+  // Lock body scroll when modal is open
+  useEffect(() => {
+    if (open) {
+      document.body.style.overflow = "hidden";
+    }
+    return () => {
+      document.body.style.overflow = "";
+    };
+  }, [open]);
 
   if (!open) return null;
 

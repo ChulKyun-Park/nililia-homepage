@@ -30,7 +30,7 @@ export default async function NewsDetailPage({ params }: Props) {
     <>
       {/* 상단 네비게이션 */}
       <div className="bg-hero-bg">
-        <div className="mx-auto max-w-7xl px-6">
+        <div className="mx-auto max-w-5xl px-6">
           <div className="py-4">
             <Link
               href="/news"
@@ -45,7 +45,7 @@ export default async function NewsDetailPage({ params }: Props) {
 
       {/* 히어로: 썸네일 + 메타 */}
       <section className="bg-hero-bg pb-12">
-        <div className="mx-auto max-w-7xl px-6">
+        <div className="mx-auto max-w-5xl px-6">
             {/* 메타 정보 */}
             <div className="flex flex-wrap items-center gap-3 mb-4">
               {item.categories.length > 0 && item.categories.map((cat) => (
@@ -96,8 +96,8 @@ export default async function NewsDetailPage({ params }: Props) {
       </section>
 
       {/* 본문 */}
-      <section className="py-16">
-        <div className="mx-auto max-w-7xl px-6 overflow-x-hidden">
+      <section className="pt-10 pb-16">
+        <div className="mx-auto max-w-5xl px-6 overflow-x-hidden">
             {blocks.length > 0 ? (
               <BlockRenderer blocks={blocks} />
             ) : (

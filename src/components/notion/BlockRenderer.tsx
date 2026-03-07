@@ -69,12 +69,71 @@ function getBlockLanguage(block: NotionBlock): string {
   return (data?.language as string) ?? "";
 }
 
+/** 연속된 리스트 아이템을 그룹으로 묶기 */
+type BlockGroup =
+  | { kind: "single"; block: NotionBlock }
+  | { kind: "bulleted_list"; blocks: NotionBlock[] }
+  | { kind: "numbered_list"; blocks: NotionBlock[] };
+
+function groupBlocks(blocks: NotionBlock[]): BlockGroup[] {
+  const groups: BlockGroup[] = [];
+
+  for (const block of blocks) {
+    if (block.type === "bulleted_list_item") {
+      const last = groups[groups.length - 1];
+      if (last?.kind === "bulleted_list") {
+        last.blocks.push(block);
+      } else {
+        groups.push({ kind: "bulleted_list", blocks: [block] });
+      }
+    } else if (block.type === "numbered_list_item") {
+      const last = groups[groups.length - 1];
+      if (last?.kind === "numbered_list") {
+        last.blocks.push(block);
+      } else {
+        groups.push({ kind: "numbered_list", blocks: [block] });
+      }
+    } else {
+      groups.push({ kind: "single", block });
+    }
+  }
+
+  return groups;
+}
+
 export default function BlockRenderer({ blocks }: { blocks: NotionBlock[] }) {
   if (!blocks || blocks.length === 0) return null;
 
+  const groups = groupBlocks(blocks);
+
   return (
     <div className="notion-content space-y-4">
-      {blocks.map((block) => {
+      {groups.map((group, gi) => {
+        if (group.kind === "bulleted_list") {
+          return (
+            <ul key={`bl-${gi}`} className="ml-6 list-disc space-y-1.5">
+              {group.blocks.map((block) => (
+                <li key={block.id} className="text-[length:var(--font-size-body)] text-foreground break-keep">
+                  {renderRichText(getBlockRichText(block))}
+                </li>
+              ))}
+            </ul>
+          );
+        }
+
+        if (group.kind === "numbered_list") {
+          return (
+            <ol key={`nl-${gi}`} className="ml-6 list-decimal space-y-1.5">
+              {group.blocks.map((block) => (
+                <li key={block.id} className="text-[length:var(--font-size-body)] text-foreground break-keep">
+                  {renderRichText(getBlockRichText(block))}
+                </li>
+              ))}
+            </ol>
+          );
+        }
+
+        const block = group.block;
         switch (block.type) {
           case "paragraph":
             return (
@@ -102,20 +161,6 @@ export default function BlockRenderer({ blocks }: { blocks: NotionBlock[] }) {
               <h4 key={block.id} className="mt-4 mb-2 text-lg font-semibold text-foreground break-keep">
                 {renderRichText(getBlockRichText(block))}
               </h4>
-            );
-
-          case "bulleted_list_item":
-            return (
-              <li key={block.id} className="ml-6 list-disc text-[length:var(--font-size-body)] text-foreground break-keep">
-                {renderRichText(getBlockRichText(block))}
-              </li>
-            );
-
-          case "numbered_list_item":
-            return (
-              <li key={block.id} className="ml-6 list-decimal text-[length:var(--font-size-body)] text-foreground break-keep">
-                {renderRichText(getBlockRichText(block))}
-              </li>
             );
 
           case "quote":

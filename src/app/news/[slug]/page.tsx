@@ -102,7 +102,7 @@ export default async function NewsDetailPage({ params }: Props) {
               <BlockRenderer blocks={blocks} />
             ) : (
               item.excerpt && (
-                <p className="text-[length:var(--font-size-body)] leading-relaxed text-foreground break-keep">
+                <p className="text-base leading-relaxed text-foreground break-keep">
                   {item.excerpt}
                 </p>
               )

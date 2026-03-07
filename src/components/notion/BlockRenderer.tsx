@@ -113,7 +113,7 @@ export default function BlockRenderer({ blocks }: { blocks: NotionBlock[] }) {
           return (
             <ul key={`bl-${gi}`} className="ml-6 list-disc space-y-1.5">
               {group.blocks.map((block) => (
-                <li key={block.id} className="text-[length:var(--font-size-body)] text-foreground break-keep">
+                <li key={block.id} className="text-base text-foreground break-keep">
                   {renderRichText(getBlockRichText(block))}
                 </li>
               ))}
@@ -125,7 +125,7 @@ export default function BlockRenderer({ blocks }: { blocks: NotionBlock[] }) {
           return (
             <ol key={`nl-${gi}`} className="ml-6 list-decimal space-y-1.5">
               {group.blocks.map((block) => (
-                <li key={block.id} className="text-[length:var(--font-size-body)] text-foreground break-keep">
+                <li key={block.id} className="text-base text-foreground break-keep">
                   {renderRichText(getBlockRichText(block))}
                 </li>
               ))}
@@ -137,7 +137,7 @@ export default function BlockRenderer({ blocks }: { blocks: NotionBlock[] }) {
         switch (block.type) {
           case "paragraph":
             return (
-              <p key={block.id} className="text-[length:var(--font-size-body)] leading-relaxed text-foreground break-keep">
+              <p key={block.id} className="text-base leading-relaxed text-foreground break-keep">
                 {renderRichText(getBlockRichText(block))}
               </p>
             );
@@ -182,7 +182,7 @@ export default function BlockRenderer({ blocks }: { blocks: NotionBlock[] }) {
                 className="flex gap-3 rounded-xl bg-primary/5 p-4"
               >
                 <span className="text-xl">{emoji}</span>
-                <div className="text-[length:var(--font-size-body)] text-foreground break-keep">
+                <div className="text-base text-foreground break-keep">
                   {renderRichText(getBlockRichText(block))}
                 </div>
               </div>

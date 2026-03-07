@@ -48,11 +48,11 @@ export default async function NewsDetailPage({ params }: Props) {
         <div className="mx-auto max-w-7xl px-6">
             {/* 메타 정보 */}
             <div className="flex flex-wrap items-center gap-3 mb-4">
-              {item.category && (
-                <span className="inline-block rounded-full bg-primary/10 px-3 py-1 text-xs font-medium text-primary">
-                  {item.category}
+              {item.categories.length > 0 && item.categories.map((cat) => (
+                <span key={cat} className="inline-block rounded-full bg-primary/10 px-3 py-1 text-xs font-medium text-primary">
+                  {cat}
                 </span>
-              )}
+              ))}
               {item.publishedAt && (
                 <time className="text-sm text-muted">
                   {new Date(item.publishedAt).toLocaleDateString("ko-KR")}

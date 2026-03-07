@@ -47,10 +47,14 @@ function NewsListItem({ item }: { item: NotionNewsItem }) {
     >
       {/* 왼쪽: 텍스트 */}
       <div className="flex-1 min-w-0">
-        {item.category && (
-          <span className="text-xs font-medium text-primary">
-            {item.category}
-          </span>
+        {item.categories.length > 0 && (
+          <div className="flex flex-wrap gap-1">
+            {item.categories.map((cat) => (
+              <span key={cat} className="text-xs font-medium text-primary">
+                {cat}
+              </span>
+            ))}
+          </div>
         )}
         <h3 className="mt-1 line-clamp-2 text-base font-bold text-foreground group-hover:text-primary transition-colors break-keep sm:text-lg">
           {item.title}
@@ -168,7 +172,7 @@ export default function NewsFilter({ news }: { news: NotionNewsItem[] }) {
   // 카테고리를 Notion 데이터에서 동적 생성 — "전체" + 실제 사용된 카테고리만
   const categories = useMemo(() => {
     const uniqueCats = [
-      ...new Set(news.map((n) => n.category).filter(Boolean)),
+      ...new Set(news.flatMap((n) => n.categories).filter(Boolean)),
     ];
     return ["전체", ...uniqueCats];
   }, [news]);
@@ -178,7 +182,7 @@ export default function NewsFilter({ news }: { news: NotionNewsItem[] }) {
     let result = news;
     if (activeCategory !== "전체") {
       result = result.filter((n) =>
-        matchCategory(n.category, activeCategory),
+        n.categories.some((cat) => matchCategory(cat, activeCategory)),
       );
     }
     if (searchQuery.trim()) {

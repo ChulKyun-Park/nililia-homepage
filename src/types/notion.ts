@@ -5,7 +5,7 @@ export type NotionNewsItem = {
   thumbnail: string | null;
   publishedAt: string;  // Date
   slug: string;
-  category: string;     // Category (select)
+  categories: string[]; // Category (multi_select)
   author: string;       // Author (rich_text)
   pinned: boolean;      // Pinned (checkbox)
   tags: string[];       // Tags (multi_select)

@@ -129,30 +129,40 @@ export default async function NewsDetailPage({ params }: Props) {
         <div className="mx-auto max-w-3xl px-6 py-8">
           {/* 이전/다음 글 */}
           {(prevItem || nextItem) && (
-            <div className="divide-y divide-border border-y border-border">
-              {prevItem && (
+            <div className="flex items-center border-y border-border">
+              {/* 이전 글 — 좌측 */}
+              {prevItem ? (
                 <Link
                   href={`/news/${prevItem.slug}`}
-                  className="group flex items-center gap-3 py-4 transition-colors"
+                  className="group flex flex-1 items-center gap-2 py-5 pr-4 transition-colors"
                 >
-                  <ChevronLeft className="h-4 w-4 flex-shrink-0 text-muted transition-colors group-hover:text-primary" />
-                  <span className="text-xs text-muted flex-shrink-0 w-12">이전 글</span>
+                  <ChevronLeft className="h-4 w-4 flex-shrink-0 text-primary" />
+                  <span className="text-sm text-primary flex-shrink-0">이전</span>
                   <p className="line-clamp-1 text-sm text-foreground transition-colors group-hover:text-primary break-keep">
                     {prevItem.title}
                   </p>
                 </Link>
+              ) : (
+                <div className="flex-1" />
               )}
-              {nextItem && (
+
+              {/* 구분선 */}
+              <div className="h-6 w-px bg-border flex-shrink-0" />
+
+              {/* 다음 글 — 우측 */}
+              {nextItem ? (
                 <Link
                   href={`/news/${nextItem.slug}`}
-                  className="group flex items-center gap-3 py-4 transition-colors"
+                  className="group flex flex-1 items-center justify-end gap-2 py-5 pl-4 transition-colors text-right"
                 >
-                  <ChevronRight className="h-4 w-4 flex-shrink-0 text-muted transition-colors group-hover:text-primary" />
-                  <span className="text-xs text-muted flex-shrink-0 w-12">다음 글</span>
                   <p className="line-clamp-1 text-sm text-foreground transition-colors group-hover:text-primary break-keep">
                     {nextItem.title}
                   </p>
+                  <span className="text-sm text-primary flex-shrink-0">다음</span>
+                  <ChevronRight className="h-4 w-4 flex-shrink-0 text-primary" />
                 </Link>
+              ) : (
+                <div className="flex-1" />
               )}
             </div>
           )}

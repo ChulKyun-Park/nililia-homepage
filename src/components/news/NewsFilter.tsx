@@ -17,7 +17,7 @@ function matchCategory(itemCat: string, tabCat: string): boolean {
 function BestCard({ item }: { item: NotionNewsItem }) {
   return (
     <Link href={`/news/${item.slug}`} className="group block">
-      <div className="relative aspect-[4/3] overflow-hidden rounded-2xl bg-surface">
+      <div className="relative aspect-[4/3] overflow-hidden rounded-xl bg-surface">
         {item.thumbnail ? (
           <Image
             src={item.thumbnail}
@@ -27,11 +27,11 @@ function BestCard({ item }: { item: NotionNewsItem }) {
           />
         ) : (
           <div className="flex h-full items-center justify-center bg-gradient-to-br from-primary/10 to-primary/5">
-            <span className="text-4xl font-bold text-primary/20">N</span>
+            <span className="text-2xl font-bold text-primary/20">N</span>
           </div>
         )}
       </div>
-      <p className="mt-3 line-clamp-2 text-sm font-semibold text-foreground group-hover:text-primary transition-colors break-keep leading-snug">
+      <p className="mt-2 line-clamp-2 text-xs font-semibold text-foreground group-hover:text-primary transition-colors break-keep leading-snug sm:text-sm">
         {item.title}
       </p>
     </Link>
@@ -163,9 +163,9 @@ export default function NewsFilter({ news }: { news: NotionNewsItem[] }) {
   const [searchQuery, setSearchQuery] = useState("");
   const listSectionRef = useRef<HTMLElement>(null);
 
-  // Pinned 항목 분리 (최대 3개 — Best 섹션)
+  // Pinned 항목 분리 (최대 5개 — Best 섹션)
   const pinnedItems = useMemo(
-    () => news.filter((n) => n.pinned).slice(0, 3),
+    () => news.filter((n) => n.pinned).slice(0, 5),
     [news],
   );
 
@@ -227,7 +227,7 @@ export default function NewsFilter({ news }: { news: NotionNewsItem[] }) {
             <h2 className="text-xl font-bold text-foreground sm:text-2xl">
               Best
             </h2>
-            <div className="mt-6 grid grid-cols-1 gap-6 sm:grid-cols-2 lg:grid-cols-3">
+            <div className="mt-6 grid grid-cols-2 gap-4 sm:grid-cols-3 lg:grid-cols-5">
               {pinnedItems.map((item) => (
                 <BestCard key={item.id} item={item} />
               ))}

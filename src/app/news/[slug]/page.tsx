@@ -1,8 +1,8 @@
 import type { Metadata } from "next";
 import { notFound } from "next/navigation";
 import Link from "next/link";
-import { ArrowLeft } from "lucide-react";
-import { fetchNewsBySlug, fetchPageBlocks } from "@/lib/notion/client";
+import { ArrowLeft, ChevronLeft, ChevronRight } from "lucide-react";
+import { fetchNewsBySlug, fetchAllNews, fetchPageBlocks } from "@/lib/notion/client";
 import BlockRenderer from "@/components/notion/BlockRenderer";
 
 export const revalidate = 60;
@@ -25,6 +25,12 @@ export default async function NewsDetailPage({ params }: Props) {
   if (!item) notFound();
 
   const blocks = await fetchPageBlocks(item.id);
+
+  // 이전/다음 글 찾기
+  const allNews = await fetchAllNews();
+  const currentIndex = allNews.findIndex((n) => n.slug === slug);
+  const prevItem = currentIndex < allNews.length - 1 ? allNews[currentIndex + 1] : null;
+  const nextItem = currentIndex > 0 ? allNews[currentIndex - 1] : null;
 
   return (
     <>
@@ -109,6 +115,62 @@ export default async function NewsDetailPage({ params }: Props) {
             )}
         </div>
       </section>
+
+      {/* 이전/다음 글 네비게이션 */}
+      {(prevItem || nextItem) && (
+        <section className="border-t border-border">
+          <div className="mx-auto max-w-5xl px-6 py-10">
+            <div className="grid grid-cols-1 gap-4 sm:grid-cols-2">
+              {/* 이전 글 (오래된 글) */}
+              {prevItem ? (
+                <Link
+                  href={`/news/${prevItem.slug}`}
+                  className="group flex items-start gap-3 rounded-xl border border-border p-5 transition-colors hover:border-primary/30 hover:bg-surface"
+                >
+                  <ChevronLeft className="mt-0.5 h-5 w-5 flex-shrink-0 text-muted transition-colors group-hover:text-primary" />
+                  <div className="min-w-0">
+                    <span className="text-xs text-muted">이전 글</span>
+                    <p className="mt-1 line-clamp-2 text-sm font-medium text-foreground transition-colors group-hover:text-primary break-keep">
+                      {prevItem.title}
+                    </p>
+                  </div>
+                </Link>
+              ) : (
+                <div />
+              )}
+
+              {/* 다음 글 (최신 글) */}
+              {nextItem ? (
+                <Link
+                  href={`/news/${nextItem.slug}`}
+                  className="group flex items-start gap-3 rounded-xl border border-border p-5 transition-colors hover:border-primary/30 hover:bg-surface sm:flex-row-reverse sm:text-right"
+                >
+                  <ChevronRight className="mt-0.5 h-5 w-5 flex-shrink-0 text-muted transition-colors group-hover:text-primary" />
+                  <div className="min-w-0">
+                    <span className="text-xs text-muted">다음 글</span>
+                    <p className="mt-1 line-clamp-2 text-sm font-medium text-foreground transition-colors group-hover:text-primary break-keep">
+                      {nextItem.title}
+                    </p>
+                  </div>
+                </Link>
+              ) : (
+                <div />
+              )}
+            </div>
+
+            {/* 목록 버튼 */}
+            <div className="mt-8 flex justify-center">
+              <Link
+                href="/news"
+                className="inline-flex items-center gap-2 rounded-lg border border-border px-6 py-2.5 text-sm font-medium text-muted transition-colors hover:border-primary hover:text-primary"
+              >
+                <ArrowLeft className="h-4 w-4" />
+                소식 목록
+              </Link>
+            </div>
+          </div>
+        </section>
+      )}
     </>
   );
 }

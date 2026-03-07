@@ -136,7 +136,7 @@ function mapNewsPage(page: NotionPage): NotionNewsItem {
     thumbnail: getFileThumbnail(props.Thumbnail?.files),
     publishedAt: getDate(props.Date?.date),
     slug: getRichText(props.Slug?.rich_text) || page.id,
-    category: getSelect(props.Category?.select),
+    categories: getMultiSelect(props.Category?.multi_select),
     author: getRichText(props.Author?.rich_text),
     pinned: getCheckbox(props.Pinned?.checkbox),
     tags: getMultiSelect(props.Tags?.multi_select),
